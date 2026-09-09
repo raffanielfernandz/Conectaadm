@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Conecta ADM - Dashboard</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #0b0f14;
+      color: #fff;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #111820;
+      border-bottom: 1px solid #26313d;
+      padding: 18px 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .logo span {
+      color: #4da3ff;
+    }
+
+    button {
+      border: none;
+      border-radius: 8px;
+      padding: 10px 16px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    #logout {
+      background: #252f3a;
+      color: white;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .welcome {
+      margin-bottom: 30px;
+    }
+
+    .welcome h1 {
+      font-size: 30px;
+      margin-bottom: 8px;
+    }
+
+    .welcome p {
+      color: #9ba8b5;
+    }
+
+    .card {
+      background: #111820;
+      border: 1px solid #26313d;
+      border-radius: 14px;
+      padding: 25px;
+      margin-bottom: 20px;
+    }
+
+    .card h2 {
+      margin-bottom: 20px;
+    }
+
+    .info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 15px;
+    }
+
+    .info-item {
+      background: #0b0f14;
+      border-radius: 10px;
+      padding: 15px;
+    }
+
+    .info-item strong {
+      display: block;
+      color: #4da3ff;
+      margin-bottom: 6px;
+      font-size: 13px;
+    }
+
+    .info-item span {
+      color: #ddd;
+      word-break: break-word;
+    }
+
+    #loading {
+      text-align: center;
+      color: #9ba8b5;
+      padding: 50px 20px;
+    }
+
+    #content {
+      display: none;
+    }
+
+    .logout-area {
+      margin-top: 25px;
+      text-align: center;
+    }
+
+    #logout2 {
+      background: #e74c3c;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">
+      Conecta <span>ADM</span>
+    </div>
+
+    <button id="logout">Sair</button>
+  </header>
+
+  <main>
+
+    <div id="loading">
+      Carregando seu perfil...
+    </div>
+
+    <div id="content">
+
+      <section class="welcome">
+        <h1>Olá, <span id="name">usuário</span>! 👋</h1>
+        <p>Bem-vindo ao seu painel do Conecta ADM.</p>
+      </section>
+
+      <section class="card">
+        <h2>Meu perfil</h2>
+
+        <div class="info">
+
+          <div class="info-item">
+            <strong>Nome</strong>
+            <span id="profile-name">-</span>
+          </div>
+
+          <div class="info-item">
+            <strong>E-mail</strong>
+            <span id="profile-email">-</span>
+          </div>
+
+          <div class="info-item">
+            <strong>Tipo de perfil</strong>
+            <span id="profile-type">-</span>
+          </div>
+
+          <div class="info-item">
+            <strong>Telefone</strong>
+            <span id="profile-phone">-</span>
+          </div>
+
+          <div class="info-item">
+            <strong>Estado</strong>
+            <span id="profile-state">-</span>
+          </div>
+
+          <div class="info-item">
+            <strong>Cidade</strong>
+            <span id="profile-city">-</span>
+          </div>
+
+        </div>
+      </section>
+
+      <div class="logout-area">
+        <button id="logout2">Sair da conta</button>
+      </div>
+
+    </div>
+
+  </main>
+
+  <script>
+
+    const { createClient } = supabase;
+
+    const client = createClient(
+      window.SUPABASE_URL,
+      window.SUPABASE_PUBLISHABLE_KEY
+    );
+
+
+    async function carregarDashboard() {
+
+      const {
+        data: { user },
+        error: userError
+      } = await client.auth.getUser();
+
+
+      if (userError || !user) {
+
+        window.location.href = "index.html";
+
+        return;
+      }
+
+
+      const { data: profile, error: profileError } =
+        await client
+          .from("profiles")
+          .select("*")
+          .eq("id", user.id)
+          .single();
+
+
+      if (profileError) {
+
+        console.error(profileError);
+
+        document.getElementById("loading").innerHTML =
+          "Não foi possível carregar seu perfil.";
+
+        return;
+      }
+
+
+      document.getElementById("name").textContent =
+        profile.full_name || "usuário";
+
+      document.getElementById("profile-name").textContent =
+        profile.full_name || "-";
+
+      document.getElementById("profile-email").textContent =
+        profile.email || user.email || "-";
+
+      document.getElementById("profile-type").textContent =
+        profile.profile_type || "-";
+
+      document.getElementById("profile-phone").textContent =
+        profile.phone || "-";
+
+      document.getElementById("profile-state").textContent =
+        profile.state || "-";
+
+      document.getElementById("profile-city").textContent =
+        profile.city || "-";
+
+
+      document.getElementById("loading").style.display = "none";
+
+      document.getElementById("content").style.display = "block";
+    }
+
+
+    async function sair() {
+
+      await client.auth.signOut();
+
+      window.location.href = "index.html";
+    }
+
+
+    document
+      .getElementById("logout")
+      .addEventListener("click", sair);
+
+    document
+      .getElementById("logout2")
+      .addEventListener("click", sair);
+
+
+    carregarDashboard();
+
+  </script>
+
+</body>
+</html>
