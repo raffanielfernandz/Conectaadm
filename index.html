@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Conecta ADM | Conectando talentos e oportunidades</title>
 
 <style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
+
+/* =========================
+   VARIÁVEIS
+========================= */
 
 :root{
   --bg:#070b14;
@@ -19,12 +20,25 @@
   --card:#0d1525;
   --card2:#111c30;
   --line:#1c2b46;
+
   --blue:#5d8cff;
   --blue2:#3d6fe8;
   --purple:#8b5cf6;
+
   --text:#f5f7ff;
   --muted:#9aa8bd;
   --muted2:#6f7e95;
+}
+
+
+/* =========================
+   RESET
+========================= */
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
 
 html{
@@ -32,14 +46,12 @@ html{
 }
 
 body{
-  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  font-family:Arial, Helvetica, sans-serif;
   background:
-    radial-gradient(circle at 15% 10%,rgba(61,111,232,.10),transparent 28%),
-    radial-gradient(circle at 85% 20%,rgba(139,92,246,.08),transparent 25%),
+    radial-gradient(circle at 50% -10%,rgba(61,111,232,.12),transparent 35%),
     var(--bg);
   color:var(--text);
-  line-height:1.5;
-  overflow-x:hidden;
+  line-height:1.6;
 }
 
 body.menu-open{
@@ -47,8 +59,8 @@ body.menu-open{
 }
 
 a{
-  text-decoration:none;
   color:inherit;
+  text-decoration:none;
 }
 
 button{
@@ -56,9 +68,10 @@ button{
 }
 
 .container{
-  width:min(1160px,92%);
+  width:min(1120px,92%);
   margin:auto;
 }
+
 
 /* =========================
    HEADER
@@ -67,14 +80,17 @@ button{
 header{
   position:sticky;
   top:0;
-  z-index:100;
+  z-index:900;
+
   background:rgba(7,11,20,.78);
-  backdrop-filter:blur(18px);
-  border-bottom:1px solid rgba(255,255,255,.06);
+  backdrop-filter:blur(14px);
+
+  border-bottom:1px solid rgba(255,255,255,.05);
 }
 
 nav{
-  height:74px;
+  min-height:76px;
+
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -82,7 +98,7 @@ nav{
 
 .logo{
   font-size:1.35rem;
-  font-weight:850;
+  font-weight:900;
   letter-spacing:-.7px;
 }
 
@@ -90,65 +106,67 @@ nav{
   color:var(--blue);
 }
 
-.nav-actions{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
 
-/* HAMBURGER */
+/* =========================
+   MENU BUTTON
+========================= */
 
 .menu-button{
-  width:45px;
-  height:45px;
-  border:1px solid #253754;
-  border-radius:11px;
-  background:#0d1626;
+  width:44px;
+  height:44px;
+
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
   gap:5px;
+
+  border:1px solid #273853;
+  border-radius:11px;
+
+  background:rgba(255,255,255,.025);
+
   cursor:pointer;
-  transition:.25s;
+
+  transition:.2s;
 }
 
 .menu-button:hover{
-  border-color:#4c73d5;
-  background:#111d31;
+  border-color:#4775e8;
+  background:rgba(93,140,255,.08);
 }
 
 .menu-button span{
+  display:block;
+
   width:19px;
   height:2px;
-  border-radius:3px;
+
+  border-radius:5px;
+
   background:#dce5f7;
-  transition:.25s;
+
+  transition:.2s;
 }
 
-.menu-button.active span:nth-child(1){
-  transform:translateY(7px) rotate(45deg);
-}
 
-.menu-button.active span:nth-child(2){
-  opacity:0;
-}
-
-.menu-button.active span:nth-child(3){
-  transform:translateY(-7px) rotate(-45deg);
-}
-
-/* MENU */
+/* =========================
+   MENU LATERAL
+========================= */
 
 .menu-overlay{
   position:fixed;
   inset:0;
-  z-index:90;
+
   background:rgba(0,0,0,.55);
-  backdrop-filter:blur(5px);
+  backdrop-filter:blur(3px);
+
   opacity:0;
   visibility:hidden;
-  transition:.3s;
+
+  transition:.25s;
+
+  z-index:998;
 }
 
 .menu-overlay.active{
@@ -158,18 +176,35 @@ nav{
 
 .side-menu{
   position:fixed;
-  z-index:110;
+
   top:0;
   right:0;
-  width:min(410px,88%);
+
+  width:min(370px,88vw);
   height:100vh;
-  padding:28px;
+
   background:
-    radial-gradient(circle at 90% 10%,rgba(93,140,255,.12),transparent 30%),
-    #090f1b;
-  border-left:1px solid #1d2c46;
-  transform:translateX(100%);
-  transition:.35s cubic-bezier(.22,.61,.36,1);
+    radial-gradient(
+      circle at 80% 10%,
+      rgba(93,140,255,.10),
+      transparent 28%
+    ),
+    #0a111e;
+
+  border-left:1px solid #1d2d48;
+
+  box-shadow:-25px 0 70px rgba(0,0,0,.45);
+
+  transform:translateX(105%);
+
+  transition:transform .3s ease;
+
+  z-index:999;
+
+  padding:24px;
+
+  display:flex;
+  flex-direction:column;
 }
 
 .side-menu.active{
@@ -178,14 +213,18 @@ nav{
 
 .menu-head{
   display:flex;
-  justify-content:space-between;
   align-items:center;
-  margin-bottom:55px;
+  justify-content:space-between;
+
+  padding-bottom:22px;
+
+  border-bottom:1px solid #1a2942;
 }
 
 .menu-title{
   font-size:1.25rem;
-  font-weight:800;
+  font-weight:850;
+  letter-spacing:-.6px;
 }
 
 .menu-title span{
@@ -193,1140 +232,1061 @@ nav{
 }
 
 .menu-close{
-  width:38px;
-  height:38px;
-  border:1px solid #263854;
-  border-radius:9px;
-  background:#0d1626;
-  color:white;
-  font-size:1.2rem;
+  width:40px;
+  height:40px;
+
+  display:grid;
+  place-items:center;
+
+  border:1px solid #273853;
+  border-radius:10px;
+
+  background:rgba(255,255,255,.025);
+
+  color:#dce5f7;
+
+  font-size:1.6rem;
+
   cursor:pointer;
+
+  transition:.2s;
+}
+
+.menu-close:hover{
+  border-color:#4775e8;
+  color:#fff;
 }
 
 .menu-links{
   display:flex;
   flex-direction:column;
-  gap:7px;
+  gap:5px;
+
+  padding-top:22px;
 }
 
 .menu-links a{
-  padding:16px 15px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+
+  padding:14px 13px;
+
   border-radius:11px;
+
   color:#aab7ca;
-  font-size:1rem;
+
+  font-size:.92rem;
   font-weight:650;
+
   transition:.2s;
 }
 
 .menu-links a:hover{
   color:#fff;
-  background:#111d30;
-  transform:translateX(4px);
+
+  background:rgba(93,140,255,.08);
+
+  transform:translateX(3px);
 }
 
-.menu-links .menu-highlight{
+.menu-divider{
+  height:1px;
+
+  background:#1a2942;
+
+  margin:18px 0;
+}
+
+.menu-links .menu-login{
+  border:1px solid #273853;
+
+  justify-content:center;
+
+  color:#dce5f7;
+}
+
+.menu-links .menu-register{
+  justify-content:center;
+
+  background:linear-gradient(
+    135deg,
+    #5d8cff,
+    #4775e8
+  );
+
+  border:1px solid #4775e8;
+
   color:#fff;
-  background:linear-gradient(135deg,#315dc5,#3f5fbd);
-  margin-top:12px;
+
+  box-shadow:
+    0 10px 30px rgba(61,111,232,.15);
 }
 
-.menu-bottom{
-  position:absolute;
-  bottom:35px;
-  left:28px;
-  right:28px;
-  border-top:1px solid #1a2940;
-  padding-top:22px;
+.menu-links .menu-register:hover{
+  background:linear-gradient(
+    135deg,
+    #6f9cff,
+    #527ff0
+  );
 }
 
-.menu-bottom p{
-  color:#64748b;
-  font-size:.78rem;
-  line-height:1.6;
+.menu-footer{
+  margin-top:auto;
+
+  padding-top:20px;
+
+  border-top:1px solid #1a2942;
 }
+
+.menu-footer span{
+  display:block;
+
+  font-size:.82rem;
+  font-weight:750;
+
+  color:#71829b;
+
+  margin-bottom:5px;
+}
+
+.menu-footer small{
+  color:#56657b;
+
+  font-size:.72rem;
+
+  line-height:1.5;
+}
+
 
 /* =========================
-   BUTTONS
+   BOTÕES
 ========================= */
 
 .btn{
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  min-height:46px;
-  padding:0 20px;
-  border-radius:11px;
-  border:1px solid #4775e8;
-  background:linear-gradient(135deg,#5d8cff,#4775e8);
-  color:#fff;
+
+  padding:13px 21px;
+
+  border-radius:10px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--blue),
+      var(--blue2)
+    );
+
+  color:white;
+
   font-weight:750;
-  font-size:.9rem;
+
+  border:1px solid #4775e8;
+
+  box-shadow:
+    0 12px 30px rgba(61,111,232,.18);
+
   transition:.2s;
-  cursor:pointer;
-  box-shadow:0 10px 30px rgba(61,111,232,.18);
 }
 
 .btn:hover{
   transform:translateY(-2px);
   filter:brightness(1.08);
-  box-shadow:0 14px 35px rgba(61,111,232,.25);
 }
 
 .btn.secondary{
-  background:rgba(255,255,255,.025);
-  border-color:#273853;
-  color:#dce5f7;
+  background:transparent;
+  border:1px solid #263853;
   box-shadow:none;
 }
+
+.btn.secondary:hover{
+  background:rgba(255,255,255,.04);
+}
+
 
 /* =========================
    HERO
 ========================= */
 
 .hero{
-  padding:100px 0 85px;
+  padding:100px 0 90px;
+
   position:relative;
+  overflow:hidden;
+}
+
+.hero::before{
+  content:"";
+
+  position:absolute;
+
+  width:500px;
+  height:500px;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(93,140,255,.12),
+      transparent 65%
+    );
+
+  top:-200px;
+  left:50%;
+
+  transform:translateX(-50%);
+
+  pointer-events:none;
 }
 
 .hero-grid{
   display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:60px;
+
+  grid-template-columns:
+    1.1fr .9fr;
+
+  gap:70px;
+
   align-items:center;
+
+  position:relative;
+  z-index:1;
 }
 
 .eyebrow{
   display:inline-flex;
-  align-items:center;
-  gap:8px;
+
   padding:7px 11px;
-  border:1px solid rgba(93,140,255,.2);
-  background:rgba(93,140,255,.07);
+
+  border:1px solid #263853;
+
   border-radius:999px;
-  color:#91adff;
-  font-size:.74rem;
-  font-weight:800;
-  letter-spacing:1.2px;
-  text-transform:uppercase;
-  margin-bottom:22px;
+
+  color:#8fa6cf;
+
+  background:rgba(255,255,255,.025);
+
+  font-size:.78rem;
+
+  font-weight:700;
+
+  margin-bottom:20px;
 }
 
-.eyebrow:before{
-  content:"";
-  width:6px;
-  height:6px;
-  border-radius:50%;
-  background:#6f9cff;
-  box-shadow:0 0 12px #6f9cff;
+.hero h1{
+  font-size:clamp(2.7rem,6vw,5rem);
+
+  line-height:1.02;
+
+  letter-spacing:-3px;
+
+  max-width:700px;
+
+  margin-bottom:24px;
 }
 
-h1{
-  font-size:clamp(3rem,5.5vw,5.2rem);
-  line-height:.98;
-  letter-spacing:-4px;
-  max-width:680px;
-  margin-bottom:25px;
+.hero h1 span{
+  color:var(--blue);
 }
 
-h1 span{
-  background:linear-gradient(90deg,#6f9cff,#9a7bff);
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
-}
+.hero p{
+  max-width:620px;
 
-.hero-description{
-  max-width:610px;
   color:var(--muted);
-  font-size:1.08rem;
-  line-height:1.75;
+
+  font-size:1.05rem;
+
+  line-height:1.8;
+
   margin-bottom:30px;
 }
 
-.actions{
+.hero-actions{
   display:flex;
   flex-wrap:wrap;
+
   gap:12px;
 }
 
-.hero-note{
-  display:flex;
-  align-items:center;
-  gap:9px;
-  color:#718097;
-  font-size:.78rem;
-  margin-top:18px;
-}
 
-.hero-note span{
-  color:#7fa3ff;
-}
+/* =========================
+   HERO VISUAL
+========================= */
 
-/* HERO IMAGE */
+.hero-visual{
+  min-height:390px;
 
-.hero-image-wrap{
   position:relative;
-  min-height:500px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+
+  display:grid;
+  place-items:center;
 }
 
-.hero-image{
-  width:470px;
-  height:490px;
-  object-fit:cover;
-  border-radius:28px;
-  border:1px solid #294572;
-  opacity:.88;
-  box-shadow:
-    0 35px 90px rgba(0,0,0,.5),
-    0 0 80px rgba(61,111,232,.12);
-  filter:saturate(.8) contrast(1.05);
-}
+.visual-card{
+  width:min(100%,430px);
 
-.hero-image-overlay{
-  position:absolute;
-  inset:0;
-  border-radius:28px;
   background:
-    linear-gradient(180deg,rgba(7,11,20,.05),rgba(7,11,20,.55)),
-    linear-gradient(90deg,rgba(7,11,20,.25),transparent);
-  pointer-events:none;
+    linear-gradient(
+      145deg,
+      rgba(17,28,48,.96),
+      rgba(10,17,30,.96)
+    );
+
+  border:1px solid #203452;
+
+  border-radius:22px;
+
+  padding:25px;
+
+  box-shadow:
+    0 30px 80px rgba(0,0,0,.35);
+
+  position:relative;
 }
 
-.hero-floating{
+.visual-top{
+  display:flex;
+
+  align-items:center;
+  justify-content:space-between;
+
+  margin-bottom:25px;
+}
+
+.visual-title{
+  font-size:.82rem;
+
+  color:#7f91ac;
+
+  font-weight:700;
+}
+
+.status{
+  width:9px;
+  height:9px;
+
+  border-radius:50%;
+
+  background:#5d8cff;
+
+  box-shadow:
+    0 0 15px rgba(93,140,255,.8);
+}
+
+.visual-line{
+  height:10px;
+
+  border-radius:10px;
+
+  background:#1c2c47;
+
+  margin-bottom:13px;
+}
+
+.visual-line.short{
+  width:60%;
+}
+
+.visual-line.medium{
+  width:78%;
+}
+
+.visual-boxes{
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:10px;
+
+  margin-top:25px;
+}
+
+.visual-box{
+  height:85px;
+
+  border-radius:12px;
+
+  border:1px solid #1c2d48;
+
+  background:
+    rgba(255,255,255,.025);
+}
+
+.float-card{
   position:absolute;
-  z-index:3;
-  padding:14px 17px;
-  border:1px solid #315cc2;
+
+  padding:14px 16px;
+
+  background:#101b2e;
+
+  border:1px solid #273c60;
+
   border-radius:13px;
-  background:rgba(16,28,48,.94);
-  box-shadow:0 18px 45px rgba(0,0,0,.4);
-  backdrop-filter:blur(10px);
+
+  box-shadow:
+    0 20px 50px rgba(0,0,0,.3);
+
+  font-size:.8rem;
+
+  color:#b8c6dc;
 }
 
-.hero-floating b{
-  display:block;
-  font-size:10px;
-  margin-bottom:2px;
+.float-one{
+  top:25px;
+  right:-15px;
 }
 
-.hero-floating small{
-  color:#7e91b1;
-  font-size:8px;
+.float-two{
+  bottom:25px;
+  left:-25px;
 }
 
-.hero-float-one{
-  top:55px;
-  left:-5px;
-}
-
-.hero-float-two{
-  top:145px;
-  right:-10px;
-}
-
-.hero-float-three{
-  bottom:65px;
-  left:5px;
-}
-
-.hero-float-four{
-  bottom:30px;
-  right:0;
-}
 
 /* =========================
    TRUST
 ========================= */
 
 .trust{
-  padding:10px 0 70px;
+  padding:25px 0;
+
+  border-top:1px solid #142238;
+  border-bottom:1px solid #142238;
+
+  background:rgba(255,255,255,.012);
 }
 
 .trust-inner{
-  border-top:1px solid #18253a;
-  border-bottom:1px solid #18253a;
-  padding:25px 0;
   display:flex;
-  justify-content:space-between;
+
   align-items:center;
+  justify-content:space-between;
+
   gap:20px;
+
+  flex-wrap:wrap;
 }
 
-.trust-label{
-  color:#66758c;
-  font-size:.75rem;
-  text-transform:uppercase;
-  letter-spacing:1.5px;
-  font-weight:750;
+.trust span{
+  color:#65758e;
+
+  font-size:.8rem;
+
+  font-weight:700;
 }
 
-.trust-items{
-  display:flex;
-  gap:35px;
-  color:#7c8aa1;
-  font-size:.86rem;
-  font-weight:650;
-}
 
 /* =========================
-   SECTIONS
+   SEÇÕES
 ========================= */
 
 section{
-  padding:90px 0;
+  padding:100px 0;
 }
 
 .section-head{
   max-width:700px;
-  margin-bottom:42px;
+
+  margin-bottom:45px;
 }
 
 .section-label{
-  color:#7195ff;
-  font-size:.74rem;
-  text-transform:uppercase;
-  letter-spacing:1.6px;
-  font-weight:800;
-  margin-bottom:10px;
-}
+  color:var(--blue);
 
-.section-head h2{
-  font-size:clamp(2rem,4vw,3rem);
-  line-height:1.08;
-  letter-spacing:-2px;
-  margin-bottom:13px;
-}
-
-.section-head p{
-  color:var(--muted);
-  font-size:1rem;
-  line-height:1.7;
-}
-
-/* =========================
-   CONNECTION IMAGE
-========================= */
-
-.connection-section{
-  padding-top:30px;
-}
-
-.connection-visual{
-  position:relative;
-  height:410px;
-  border:1px solid #1b2c48;
-  border-radius:25px;
-  overflow:hidden;
-  background:#0a111d;
-}
-
-.connection-image{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  opacity:.42;
-  filter:saturate(.65);
-}
-
-.connection-overlay{
-  position:absolute;
-  inset:0;
-  background:
-    linear-gradient(90deg,#08101c 0%,rgba(8,16,28,.75) 35%,rgba(8,16,28,.28) 70%,#08101c 100%),
-    linear-gradient(0deg,#08101c,transparent 45%,#08101c);
-}
-
-.connection-content{
-  position:absolute;
-  left:50px;
-  top:50%;
-  transform:translateY(-50%);
-  max-width:520px;
-}
-
-.connection-content h2{
-  font-size:clamp(2rem,4vw,3rem);
-  letter-spacing:-2px;
-  margin-bottom:15px;
-}
-
-.connection-content p{
-  color:#9aa8bd;
-  line-height:1.7;
-}
-
-.connection-badges{
-  display:flex;
-  gap:10px;
-  margin-top:24px;
-  flex-wrap:wrap;
-}
-
-.badge{
-  padding:8px 12px;
-  border-radius:999px;
-  border:1px solid #29446e;
-  background:rgba(12,24,43,.75);
-  color:#a9b9d2;
   font-size:.75rem;
+
+  font-weight:800;
+
+  text-transform:uppercase;
+
+  letter-spacing:1.5px;
+
+  margin-bottom:12px;
 }
 
+.section-head h2,
+.differential h2{
+  font-size:clamp(2rem,4vw,3rem);
+
+  line-height:1.1;
+
+  letter-spacing:-1.7px;
+
+  margin-bottom:17px;
+}
+
+.section-head p,
+.differential p{
+  color:var(--muted);
+
+  line-height:1.8;
+}
+
+
 /* =========================
-   PUBLIC
+   PÚBLICO
 ========================= */
 
 .audience-grid{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:16px;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:18px;
 }
 
-.audience{
-  padding:28px;
-  min-height:270px;
-  border:1px solid #1a2942;
-  border-radius:18px;
+.audience-card{
+  padding:30px;
+
   background:
-    linear-gradient(145deg,rgba(17,28,48,.95),rgba(10,17,29,.95));
+    linear-gradient(
+      145deg,
+      rgba(17,28,48,.9),
+      rgba(13,21,37,.9)
+    );
+
+  border:1px solid #1c2b46;
+
+  border-radius:18px;
+
   transition:.25s;
-  position:relative;
-  overflow:hidden;
 }
 
-.audience:hover{
+.audience-card:hover{
   transform:translateY(-5px);
-  border-color:#3159a8;
+
+  border-color:#31518a;
+
+  box-shadow:
+    0 20px 50px rgba(0,0,0,.18);
 }
 
-.audience-image{
-  width:100%;
-  height:115px;
-  object-fit:cover;
-  border-radius:11px;
-  margin-bottom:18px;
-  opacity:.72;
+.audience-icon{
+  width:48px;
+  height:48px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:13px;
+
+  background:rgba(93,140,255,.08);
+
+  border:1px solid #263c62;
+
+  margin-bottom:20px;
+
+  font-size:1.3rem;
 }
 
-.audience h3{
+.audience-card h3{
+  margin-bottom:10px;
+
   font-size:1.15rem;
-  margin-bottom:9px;
 }
 
-.audience p{
-  color:#8997ac;
+.audience-card p{
+  color:var(--muted);
+
   font-size:.9rem;
-  line-height:1.65;
+
+  line-height:1.7;
 }
+
 
 /* =========================
-   FEATURES
+   PLATAFORMA
 ========================= */
 
 .features{
-  background:rgba(11,17,30,.5);
-  border-top:1px solid rgba(255,255,255,.03);
-  border-bottom:1px solid rgba(255,255,255,.03);
+  background:var(--bg2);
+
+  border-top:1px solid #101c30;
+  border-bottom:1px solid #101c30;
 }
 
 .features-grid{
   display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:13px;
+
+  grid-template-columns:
+    repeat(2,1fr);
+
+  gap:18px;
 }
 
 .feature{
-  padding:24px;
-  border:1px solid #192840;
-  border-radius:16px;
-  background:#0c1422;
-  transition:.2s;
-}
+  padding:28px;
 
-.feature:hover{
-  border-color:#2b4e91;
-  transform:translateY(-3px);
+  border:1px solid #1b2b46;
+
+  border-radius:17px;
+
+  background:
+    rgba(255,255,255,.015);
 }
 
 .feature-number{
-  color:#5f86ef;
+  color:var(--blue);
+
   font-size:.75rem;
+
   font-weight:800;
-  margin-bottom:35px;
+
+  margin-bottom:15px;
 }
 
 .feature h3{
-  font-size:1rem;
-  margin-bottom:8px;
+  margin-bottom:10px;
 }
 
 .feature p{
-  color:#8290a6;
-  font-size:.86rem;
-  line-height:1.6;
+  color:var(--muted);
+
+  font-size:.9rem;
+
+  line-height:1.7;
 }
+
 
 /* =========================
-   PLATFORM PREVIEW
-========================= */
-
-.preview-grid{
-  display:grid;
-  grid-template-columns:1.1fr .9fr;
-  gap:18px;
-  align-items:stretch;
-}
-
-.preview-main,
-.preview-small{
-  border:1px solid #1b2c48;
-  border-radius:20px;
-  overflow:hidden;
-  background:#0c1422;
-}
-
-.preview-main{
-  min-height:430px;
-}
-
-.preview-main img{
-  width:100%;
-  height:100%;
-  min-height:430px;
-  object-fit:cover;
-  opacity:.78;
-}
-
-.preview-side{
-  display:grid;
-  grid-template-rows:1fr 1fr;
-  gap:18px;
-}
-
-.preview-small{
-  position:relative;
-  min-height:205px;
-}
-
-.preview-small img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  opacity:.6;
-}
-
-.preview-caption{
-  position:absolute;
-  left:20px;
-  right:20px;
-  bottom:18px;
-  padding:12px 14px;
-  border-radius:11px;
-  border:1px solid rgba(70,103,165,.55);
-  background:rgba(7,13,23,.83);
-  backdrop-filter:blur(8px);
-}
-
-.preview-caption strong{
-  display:block;
-  font-size:.85rem;
-}
-
-.preview-caption span{
-  display:block;
-  color:#75849c;
-  font-size:.73rem;
-  margin-top:2px;
-}
-
-/* =========================
-   HOW
+   COMO FUNCIONA
 ========================= */
 
 .how-grid{
   display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:0;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:18px;
 }
 
-.how-step{
-  padding:28px 25px;
+.how-card{
   position:relative;
+
+  padding:30px;
+
+  border-radius:18px;
+
+  background:#0d1525;
+
+  border:1px solid #1c2b46;
 }
 
-.how-step:not(:last-child):after{
-  content:"";
-  position:absolute;
-  top:48px;
-  right:0;
-  width:1px;
-  height:65px;
-  background:#203250;
-}
+.how-number{
+  font-size:2rem;
 
-.step-number{
-  width:38px;
-  height:38px;
-  display:grid;
-  place-items:center;
-  border-radius:11px;
-  background:#102353;
-  border:1px solid #2c55a5;
-  color:#8facff;
-  font-weight:800;
-  font-size:.85rem;
+  font-weight:900;
+
+  color:#31476c;
+
   margin-bottom:20px;
 }
 
-.how-step h3{
-  margin-bottom:8px;
-  font-size:1rem;
+.how-card h3{
+  margin-bottom:10px;
 }
 
-.how-step p{
-  color:#7e8da5;
-  font-size:.86rem;
-  line-height:1.55;
+.how-card p{
+  color:var(--muted);
+
+  font-size:.9rem;
+
+  line-height:1.7;
 }
+
 
 /* =========================
-   ABOUT
-========================= */
-
-.about-box{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:50px;
-  padding:55px;
-  border:1px solid #213656;
-  border-radius:23px;
-  background:
-    radial-gradient(circle at 90% 20%,rgba(93,140,255,.1),transparent 28%),
-    #0c1525;
-}
-
-.about-box h2{
-  font-size:clamp(2rem,4vw,2.8rem);
-  letter-spacing:-2px;
-  line-height:1.1;
-  margin-bottom:16px;
-}
-
-.about-box p{
-  color:#909eb3;
-  line-height:1.75;
-}
-
-.about-list{
-  display:flex;
-  flex-direction:column;
-  gap:13px;
-}
-
-.about-item{
-  padding:17px;
-  border:1px solid #1b2b45;
-  border-radius:12px;
-  background:#0a1220;
-}
-
-.about-item strong{
-  display:block;
-  font-size:.88rem;
-  margin-bottom:3px;
-}
-
-.about-item span{
-  color:#728198;
-  font-size:.78rem;
-}
-
-/* =========================
-   DIFFERENTIAL
+   DIFERENCIAL
 ========================= */
 
 .differential{
   display:grid;
-  grid-template-columns:.9fr 1.1fr;
-  gap:65px;
+
+  grid-template-columns:
+    .9fr 1.1fr;
+
+  gap:60px;
+
   align-items:center;
-}
 
-.differential-text h2{
-  font-size:clamp(2rem,4vw,3rem);
-  letter-spacing:-2px;
-  line-height:1.08;
-  margin-bottom:18px;
-}
+  padding:55px;
 
-.differential-text p{
-  color:var(--muted);
-  line-height:1.75;
+  border:1px solid #1c2b46;
+
+  border-radius:24px;
+
+  background:
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(93,140,255,.07),
+      transparent 35%
+    ),
+    #0b1322;
 }
 
 .benefits{
   display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
+
+  grid-template-columns:
+    repeat(2,1fr);
+
+  gap:13px;
 }
 
 .benefit{
-  padding:21px;
-  border:1px solid #1a2942;
-  border-radius:15px;
-  background:#0d1524;
+  padding:20px;
+
+  border-radius:14px;
+
+  border:1px solid #1c2b46;
+
+  background:rgba(255,255,255,.02);
 }
 
 .benefit strong{
   display:block;
-  margin-bottom:5px;
-  font-size:.94rem;
+
+  margin-bottom:6px;
+
+  font-size:.9rem;
 }
 
 .benefit span{
-  color:#7d8ca3;
-  font-size:.82rem;
+  color:var(--muted2);
+
+  font-size:.78rem;
+
+  line-height:1.5;
 }
+
 
 /* =========================
-   ROADMAP
+   SOBRE O PROJETO
 ========================= */
 
-.roadmap{
-  background:rgba(11,17,30,.45);
-  border-top:1px solid rgba(255,255,255,.03);
-  border-bottom:1px solid rgba(255,255,255,.03);
-}
-
-.roadmap-grid{
+.project-box{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:15px;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap:18px;
 }
 
-.roadmap-card{
-  padding:26px;
-  border:1px solid #1b2b44;
-  border-radius:17px;
-  background:#0d1524;
+.project-card{
+  padding:32px;
+
+  border:1px solid #1c2b46;
+
+  border-radius:18px;
+
+  background:#0d1525;
 }
 
-.roadmap-status{
-  display:inline-block;
-  padding:5px 9px;
-  border-radius:999px;
-  font-size:.68rem;
-  font-weight:800;
-  margin-bottom:20px;
+.project-card h3{
+  margin-bottom:12px;
 }
 
-.status-done{
-  background:rgba(55,190,125,.1);
-  color:#65d8a1;
-  border:1px solid rgba(55,190,125,.2);
+.project-card p{
+  color:var(--muted);
+
+  font-size:.9rem;
+
+  line-height:1.8;
 }
 
-.status-progress{
-  background:rgba(93,140,255,.1);
-  color:#87a8ff;
-  border:1px solid rgba(93,140,255,.2);
+.project-list{
+  display:flex;
+
+  flex-direction:column;
+
+  gap:13px;
+
+  margin-top:20px;
 }
 
-.status-next{
-  background:rgba(139,92,246,.1);
-  color:#b49bff;
-  border:1px solid rgba(139,92,246,.2);
+.project-list div{
+  display:flex;
+
+  align-items:flex-start;
+
+  gap:10px;
+
+  color:#b6c3d7;
+
+  font-size:.88rem;
 }
 
-.roadmap-card h3{
-  margin-bottom:10px;
+.project-list span{
+  color:var(--blue);
 }
 
-.roadmap-card p{
-  color:#7e8da4;
-  font-size:.84rem;
-  line-height:1.6;
+
+/* =========================
+   SEGURANÇA
+========================= */
+
+.security-section{
+  background:var(--bg2);
+
+  border-top:1px solid #101c30;
+  border-bottom:1px solid #101c30;
 }
 
-.roadmap-card ul{
-  list-style:none;
-  margin-top:16px;
-}
-
-.roadmap-card li{
-  color:#a0adc0;
-  font-size:.8rem;
-  margin-bottom:8px;
-}
-
-.roadmap-card li:before{
-  content:"✓";
-  color:#6f9cff;
-  margin-right:8px;
-}
 
 /* =========================
    CTA
 ========================= */
 
 .cta-section{
-  padding-top:70px;
+  padding:100px 0;
 }
 
 .cta{
-  position:relative;
-  overflow:hidden;
-  padding:65px 60px;
-  border:1px solid #2b4f99;
-  border-radius:24px;
-  background:
-    radial-gradient(circle at 85% 20%,rgba(139,92,246,.15),transparent 28%),
-    radial-gradient(circle at 15% 80%,rgba(61,111,232,.15),transparent 30%),
-    linear-gradient(120deg,#0d1930,#0b111d);
   text-align:center;
+
+  padding:70px 30px;
+
+  border-radius:25px;
+
+  border:1px solid #25395d;
+
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(93,140,255,.13),
+      transparent 50%
+    ),
+    #0b1322;
 }
 
 .cta h2{
   font-size:clamp(2rem,4vw,3rem);
-  letter-spacing:-2px;
-  margin-bottom:12px;
+
+  letter-spacing:-1.5px;
+
+  margin-bottom:15px;
 }
 
 .cta p{
+  color:var(--muted);
+
   max-width:600px;
-  margin:0 auto 27px;
-  color:#9aa8bd;
+
+  margin:0 auto 25px;
+
+  line-height:1.7;
 }
 
-.cta .actions{
-  justify-content:center;
-}
 
 /* =========================
    FOOTER
 ========================= */
 
 footer{
-  margin-top:90px;
-  border-top:1px solid #172338;
-  padding:45px 0 30px;
+  padding:40px 0;
+
+  border-top:1px solid #142238;
+
+  color:#66768e;
+
+  font-size:.78rem;
 }
 
-.footer-top{
+.footer-inner{
   display:flex;
+
   justify-content:space-between;
-  gap:30px;
-  padding-bottom:35px;
-}
 
-.footer-brand{
-  max-width:320px;
-}
-
-.footer-brand p{
-  color:#6f7d93;
-  font-size:.83rem;
-  line-height:1.6;
-  margin-top:12px;
-}
-
-.footer-links{
-  display:flex;
-  gap:60px;
-}
-
-.footer-column h4{
-  font-size:.8rem;
-  margin-bottom:14px;
-}
-
-.footer-column a{
-  display:block;
-  color:#68778e;
-  font-size:.8rem;
-  margin-bottom:8px;
-}
-
-.footer-column a:hover{
-  color:#fff;
-}
-
-.footer-bottom{
-  border-top:1px solid #162238;
-  padding-top:22px;
-  color:#58667b;
-  font-size:.75rem;
-  display:flex;
-  justify-content:space-between;
   gap:20px;
+
+  flex-wrap:wrap;
 }
 
-/* =========================
-   ANIMAÇÕES
-========================= */
+.footer-logo{
+  font-weight:850;
 
-.reveal{
-  opacity:0;
-  transform:translateY(25px);
-  transition:
-    opacity .7s ease,
-    transform .7s ease;
+  color:#9baac0;
 }
 
-.reveal.show{
-  opacity:1;
-  transform:translateY(0);
+.footer-logo span{
+  color:var(--blue);
 }
 
-.float-animation{
-  animation:float 4s ease-in-out infinite;
-}
-
-.float-animation.delay{
-  animation-delay:1.2s;
-}
-
-@keyframes float{
-  0%,100%{
-    transform:translateY(0);
-  }
-  50%{
-    transform:translateY(-9px);
-  }
-}
 
 /* =========================
    RESPONSIVO
 ========================= */
 
-@media(max-width:950px){
+@media(max-width:900px){
+
+  .hero-grid{
+    grid-template-columns:1fr;
+
+    gap:45px;
+  }
 
   .hero{
     padding-top:75px;
   }
 
-  .hero-grid{
+  .hero-visual{
+    min-height:320px;
+  }
+
+  .audience-grid,
+  .how-grid{
     grid-template-columns:1fr;
   }
 
-  .hero-image-wrap{
-    max-width:650px;
-    width:100%;
-    margin:auto;
-  }
-
   .features-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .how-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .how-step:not(:last-child):after{
-    display:none;
+    grid-template-columns:1fr;
   }
 
   .differential{
     grid-template-columns:1fr;
+
+    padding:35px;
   }
 
-  .about-box{
+  .project-box{
     grid-template-columns:1fr;
   }
 
-  .roadmap-grid{
-    grid-template-columns:1fr;
-  }
 }
 
-@media(max-width:700px){
 
-  nav{
-    height:68px;
+@media(max-width:650px){
+
+  section{
+    padding:75px 0;
   }
 
-  .hero{
-    padding:65px 0 50px;
-  }
-
-  h1{
-    letter-spacing:-2.7px;
-  }
-
-  .hero-description{
-    font-size:.97rem;
-  }
-
-  .hero-image-wrap{
-    min-height:400px;
-  }
-
-  .hero-image{
-    width:100%;
-    height:390px;
-  }
-
-  .hero-float-one{
-    left:-5px;
-  }
-
-  .hero-float-two{
-    right:-5px;
+  .hero h1{
+    letter-spacing:-2px;
   }
 
   .trust-inner{
-    flex-direction:column;
-    align-items:flex-start;
+    justify-content:center;
+
+    text-align:center;
   }
 
-  .trust-items{
-    flex-wrap:wrap;
-    gap:15px 25px;
-  }
-
-  section{
-    padding:65px 0;
-  }
-
-  .audience-grid,
-  .features-grid,
-  .how-grid,
   .benefits{
     grid-template-columns:1fr;
   }
 
-  .preview-grid{
-    grid-template-columns:1fr;
+  .differential{
+    padding:28px;
   }
 
-  .preview-side{
-    grid-template-columns:1fr 1fr;
-    grid-template-rows:1fr;
+  .float-one{
+    right:0;
   }
 
-  .preview-small{
-    min-height:180px;
+  .float-two{
+    left:0;
   }
 
-  .connection-visual{
-    height:450px;
-  }
-
-  .connection-content{
-    left:25px;
-    right:25px;
-  }
-
-  .about-box{
-    padding:35px 25px;
-  }
-
-  .cta{
-    padding:45px 25px;
-  }
-
-  .footer-top,
-  .footer-bottom{
-    flex-direction:column;
-  }
-
-  .footer-links{
-    gap:35px;
-  }
 }
 
-@media(max-width:480px){
 
-  .logo{
-    font-size:1.15rem;
+@media(max-width:450px){
+
+  .container{
+    width:90%;
   }
 
-  .menu-button{
-    width:42px;
-    height:42px;
+  .hero{
+    padding:60px 0;
   }
 
-  .hero-image{
-    height:350px;
+  .hero h1{
+    font-size:2.55rem;
   }
 
-  .hero-image-wrap{
-    min-height:370px;
-  }
-
-  .hero-floating{
-    padding:10px 12px;
-  }
-
-  .hero-floating b{
-    font-size:9px;
-  }
-
-  .hero-floating small{
-    font-size:7px;
-  }
-
-  .hero-float-one{
-    top:25px;
-  }
-
-  .hero-float-two{
-    top:100px;
-  }
-
-  .hero-float-three{
-    bottom:45px;
-  }
-
-  .hero-float-four{
-    bottom:15px;
-  }
-
-  .connection-visual{
-    height:480px;
-  }
-
-  .connection-content{
-    top:45%;
-  }
-
-  .preview-side{
-    grid-template-columns:1fr;
-  }
-
-  .preview-small{
-    min-height:190px;
-  }
-
-  .actions{
+  .hero-actions{
     flex-direction:column;
   }
 
-  .actions .btn{
+  .hero-actions .btn{
     width:100%;
   }
 
-  .footer-links{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:25px;
+  .visual-card{
+    padding:20px;
   }
+
+  .side-menu{
+    width:92vw;
+  }
+
+  .cta{
+    padding:50px 20px;
+  }
+
 }
+
 </style>
+
 </head>
+
 
 <body>
 
+
 <!-- =========================
-     MENU
+     HEADER
 ========================= -->
 
-<div class="menu-overlay" id="menuOverlay"></div>
+<header>
 
-<aside class="side-menu" id="sideMenu">
+  <div class="container">
+
+    <nav>
+
+      <a class="logo" href="index.html">
+        Conecta <span>ADM</span>
+      </a>
+
+      <button
+        class="menu-button"
+        id="menuButton"
+        aria-label="Abrir menu"
+        type="button"
+      >
+
+        <span></span>
+        <span></span>
+        <span></span>
+
+      </button>
+
+    </nav>
+
+  </div>
+
+</header>
+
+
+<!-- =========================
+     MENU LATERAL
+========================= -->
+
+<div
+  class="menu-overlay"
+  id="menuOverlay"
+></div>
+
+
+<aside
+  class="side-menu"
+  id="sideMenu"
+>
 
   <div class="menu-head">
 
@@ -1334,11 +1294,17 @@ footer{
       Conecta <span>ADM</span>
     </div>
 
-    <button class="menu-close" id="menuClose">
+    <button
+      class="menu-close"
+      id="menuClose"
+      aria-label="Fechar menu"
+      type="button"
+    >
       ×
     </button>
 
   </div>
+
 
   <div class="menu-links">
 
@@ -1346,220 +1312,147 @@ footer{
       🏠 Início
     </a>
 
-    <a href="#estudantes">
-  🎓 Para estudantes
-</a>
+    <a href="#publico">
+      🎓 Área do estudante
+    </a>
 
-<a href="#empresas">
-  🏢 Para empresas
-</a>
+    <a href="#publico">
+      🏢 Área da empresa
+    </a>
 
-<a href="#instituicoes">
-  🏫 Para instituições
-</a>
+    <a href="#projeto">
+      💡 Sobre o projeto
+    </a>
 
-<a href="#projeto">
-  💡 Sobre o projeto
-</a>
+    <a href="#seguranca">
+      🔐 Segurança
+    </a>
 
-<a href="#seguranca">
-  🔒 Segurança
-</a>
+    <div class="menu-divider"></div>
 
-<div class="menu-divider"></div>
+    <a
+      href="login.html"
+      class="menu-login"
+    >
+      🔑 Entrar
+    </a>
 
-<a href="login.html" class="menu-login">
-  🔑 Entrar
-</a>
+    <a
+      href="cadastro.html"
+      class="menu-register"
+    >
+      ✨ Criar conta
+    </a>
 
-<a href="cadastro.html" class="menu-register">
-  ✨ Criar conta
-</a>
+  </div>
 
-</div>
 
-<div class="menu-footer">
-  <span>Conecta ADM</span>
-  <small>Conectando pessoas, oportunidades e instituições.</small>
-</div>
+  <div class="menu-footer">
+
+    <span>Conecta ADM</span>
+
+    <small>
+      Conectando estudantes, empresas e instituições.
+    </small>
+
+  </div>
 
 </aside>
 
-<!-- HERO -->
-<section class="hero" id="inicio">
 
-  <div class="hero-content">
+<!-- =========================
+     HERO
+========================= -->
 
-    <div class="hero-badge">
-      🚀 Uma nova forma de conectar oportunidades
-    </div>
+<main>
 
-    <h1>
-      Conectando pessoas<br>
-      <span>ao futuro.</span>
-    </h1>
+<section class="hero">
 
-    <p>
-      O Conecta ADM aproxima estudantes, empresas e instituições
-      em um único ambiente, facilitando oportunidades,
-      conexões e desenvolvimento profissional.
-    </p>
+  <div class="container">
 
-    <div class="hero-buttons">
+    <div class="hero-grid">
 
-      <a href="cadastro.html" class="btn-primary">
-        Criar minha conta →
-      </a>
-
-      <a href="#como-funciona" class="btn-secondary">
-        Conhecer a plataforma
-      </a>
-
-    </div>
-
-    <div class="hero-stats">
 
       <div>
-        <strong>3</strong>
-        <span>públicos conectados</span>
+
+        <div class="eyebrow">
+          Uma nova forma de conectar oportunidades
+        </div>
+
+        <h1>
+          Conectando
+          <span>talentos</span>
+          e oportunidades.
+        </h1>
+
+        <p>
+          O Conecta ADM aproxima estudantes, empresas e instituições
+          em um único ambiente, facilitando conexões e criando novas
+          possibilidades para o futuro profissional.
+        </p>
+
+        <div class="hero-actions">
+
+          <a
+            href="cadastro.html"
+            class="btn"
+          >
+            Criar minha conta
+          </a>
+
+          <a
+            href="#como"
+            class="btn secondary"
+          >
+            Como funciona
+          </a>
+
+        </div>
+
       </div>
 
-      <div>
-        <strong>1</strong>
-        <span>plataforma</span>
-      </div>
 
-      <div>
-        <strong>∞</strong>
-        <span>possibilidades</span>
-      </div>
+      <div class="hero-visual">
 
-    </div>
+        <div class="visual-card">
 
-  </div>
+          <div class="visual-top">
 
-  <div class="hero-visual">
+            <div class="visual-title">
+              CONECTA ADM
+            </div>
 
-    <div class="hero-glow"></div>
+            <div class="status"></div>
 
-    <div class="hero-image">
-
-      <img
-        src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1200&q=85"
-        alt="Pessoas trabalhando juntas"
-      >
-
-    </div>
-
-    <div class="floating-card card-one">
-      <span class="card-icon">🎓</span>
-      <div>
-        <strong>Estudantes</strong>
-        <small>Encontre oportunidades</small>
-      </div>
-    </div>
-
-    <div class="floating-card card-two">
-      <span class="card-icon">🏢</span>
-      <div>
-        <strong>Empresas</strong>
-        <small>Encontre talentos</small>
-      </div>
-    </div>
-
-    <div class="floating-card card-three">
-      <span class="card-icon">🤝</span>
-      <div>
-        <strong>Conexões</strong>
-        <small>Construa seu futuro</small>
-      </div>
-    </div>
-
-  </div>
-
-</section>
+          </div>
 
 
-<!-- TRUST -->
-<section class="trust-section">
+          <div class="visual-line"></div>
 
-  <div class="trust-item">
-    <span>✓</span>
-    Cadastro simples
-  </div>
+          <div class="visual-line medium"></div>
 
-  <div class="trust-item">
-    <span>✓</span>
-    Ambiente seguro
-  </div>
-
-  <div class="trust-item">
-    <span>✓</span>
-    Perfis personalizados
-  </div>
-
-  <div class="trust-item">
-    <span>✓</span>
-    Oportunidades em um só lugar
-  </div>
-
-</section>
+          <div class="visual-line short"></div>
 
 
-<!-- CONEXÃO -->
-<section class="connection-section">
+          <div class="visual-boxes">
 
-  <div class="connection-image">
+            <div class="visual-box"></div>
+            <div class="visual-box"></div>
+            <div class="visual-box"></div>
 
-    <img
-      src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1200&q=85"
-      alt="Equipe colaborando"
-    >
+          </div>
 
-    <div class="image-badge">
-      <strong>Conexão</strong>
-      <span>que gera oportunidades</span>
-    </div>
+        </div>
 
-  </div>
 
-  <div class="connection-content">
+        <div class="float-card float-one">
+          🎓 Estudantes
+        </div>
 
-    <span class="section-label">O ECOSSISTEMA</span>
+        <div class="float-card float-two">
+          🏢 Empresas
+        </div>
 
-    <h2>
-      Tudo começa com uma
-      <span>conexão.</span>
-    </h2>
-
-    <p>
-      O mercado está cheio de oportunidades, mas encontrar
-      as pessoas certas nem sempre é fácil.
-    </p>
-
-    <p>
-      O Conecta ADM foi pensado para aproximar quem está
-      começando sua carreira de quem pode abrir novas portas.
-    </p>
-
-    <div class="connection-list">
-
-      <div>
-        <span>01</span>
-        <strong>Descubra</strong>
-        <p>Encontre oportunidades compatíveis com seu perfil.</p>
-      </div>
-
-      <div>
-        <span>02</span>
-        <strong>Conecte</strong>
-        <p>Crie conexões com empresas e instituições.</p>
-      </div>
-
-      <div>
-        <span>03</span>
-        <strong>Desenvolva</strong>
-        <p>Construa experiência e prepare-se para o mercado.</p>
       </div>
 
     </div>
@@ -1569,124 +1462,125 @@ footer{
 </section>
 
 
-<!-- ESTUDANTES -->
-<section class="audience-section" id="estudantes">
+<!-- =========================
+     TRUST
+========================= -->
 
-  <div class="section-heading">
+<div class="trust">
 
-    <span class="section-label">PARA ESTUDANTES</span>
+  <div class="container">
 
-    <h2>
-      Seu próximo passo
-      <span>começa aqui.</span>
-    </h2>
+    <div class="trust-inner">
 
-    <p>
-      Crie seu perfil, mostre suas habilidades e descubra
-      oportunidades que combinam com seus objetivos.
-    </p>
+      <span>
+        UMA PLATAFORMA EM CONSTRUÇÃO
+      </span>
+
+      <span>
+        ESTUDANTES
+      </span>
+
+      <span>
+        EMPRESAS
+      </span>
+
+      <span>
+        INSTITUIÇÕES
+      </span>
+
+      <span>
+        OPORTUNIDADES
+      </span>
+
+    </div>
 
   </div>
 
-  <div class="audience-grid">
+</div>
 
-    <div class="audience-card">
 
-      <div class="audience-image">
+<!-- =========================
+     PÚBLICO
+========================= -->
 
-        <img
-          src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=900&q=85"
-          alt="Estudantes"
-        >
+<section id="publico">
 
+  <div class="container">
+
+    <div class="section-head">
+
+      <div class="section-label">
+        Para quem é
       </div>
 
-      <div class="audience-content">
+      <h2>
+        Um espaço pensado para diferentes lados da conexão.
+      </h2>
 
-        <span>🎓 ESTUDANTES</span>
+      <p>
+        O Conecta ADM foi pensado para aproximar quem busca
+        oportunidades de quem possui oportunidades para oferecer.
+      </p>
+
+    </div>
+
+
+    <div class="audience-grid">
+
+
+      <div class="audience-card">
+
+        <div class="audience-icon">
+          🎓
+        </div>
 
         <h3>
-          Transforme seu potencial em oportunidades.
+          Estudantes
         </h3>
 
         <p>
-          Apresente suas habilidades, interesses e objetivos
-          para encontrar experiências que realmente façam sentido.
+          Encontre oportunidades, desenvolva seu perfil profissional
+          e esteja mais próximo de empresas e instituições.
         </p>
 
-        <a href="cadastro.html">
-          Criar perfil →
-        </a>
-
       </div>
 
-    </div>
 
+      <div class="audience-card">
 
-    <!-- EMPRESAS -->
-    <div class="audience-card" id="empresas">
-
-      <div class="audience-image">
-
-        <img
-          src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=900&q=85"
-          alt="Equipe de empresa"
-        >
-
-      </div>
-
-      <div class="audience-content">
-
-        <span>🏢 EMPRESAS</span>
+        <div class="audience-icon">
+          🏢
+        </div>
 
         <h3>
-          Encontre pessoas que podem fazer a diferença.
+          Empresas
         </h3>
 
         <p>
-          Encontre novos talentos e conecte sua empresa
-          com estudantes e profissionais em desenvolvimento.
+          Encontre novos talentos e tenha um ambiente para apresentar
+          oportunidades para estudantes e profissionais.
         </p>
 
-        <a href="cadastro.html">
-          Encontrar talentos →
-        </a>
-
       </div>
 
-    </div>
 
+      <div class="audience-card">
 
-    <!-- INSTITUIÇÕES -->
-    <div class="audience-card" id="instituicoes">
-
-      <div class="audience-image">
-
-        <img
-          src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=900&q=85"
-          alt="Instituição de ensino"
-        >
-
-      </div>
-
-      <div class="audience-content">
-
-        <span>🏫 INSTITUIÇÕES</span>
+        <div class="audience-icon">
+          🏫
+        </div>
 
         <h3>
-          Fortaleça a ponte entre educação e mercado.
+          Instituições
         </h3>
 
         <p>
-          Aproximamos instituições, estudantes e empresas
-          para criar novas possibilidades de desenvolvimento.
+          Conecte sua instituição a estudantes, empresas e novas
+          possibilidades de desenvolvimento.
         </p>
 
-        <a href="cadastro.html">
-          Participar →
-        </a>
-
       </div>
+
 
     </div>
 
@@ -1695,602 +1589,18 @@ footer{
 </section>
 
 
-<!-- FUNCIONALIDADES -->
-<section class="features-section" id="como-funciona">
+<!-- =========================
+     PLATAFORMA
+========================= -->
 
-  <div class="section-heading centered">
+<section
+  class="features"
+  id="solucao"
+>
 
-    <span class="section-label">A PLATAFORMA</span>
+  <div class="container">
 
-    <h2>
-      Feita para simplificar
-      <span>conexões.</span>
-    </h2>
+    <div class="section-head">
 
-    <p>
-      Uma experiência pensada para que cada pessoa encontre
-      exatamente o que precisa.
-    </p>
-
-  </div>
-
-  <div class="features-grid">
-
-    <div class="feature-card">
-
-      <div class="feature-number">01</div>
-
-      <div class="feature-icon">👤</div>
-
-      <h3>Perfil personalizado</h3>
-
-      <p>
-        Crie um perfil com suas informações, habilidades,
-        interesses e objetivos.
-      </p>
-
-    </div>
-
-    <div class="feature-card">
-
-      <div class="feature-number">02</div>
-
-      <div class="feature-icon">🔎</div>
-
-      <h3>Busca de oportunidades</h3>
-
-      <p>
-        Encontre oportunidades de acordo com seu perfil
-        e seus interesses.
-      </p>
-
-    </div>
-
-    <div class="feature-card">
-
-      <div class="feature-number">03</div>
-
-      <div class="feature-icon">🤝</div>
-
-      <h3>Conexões</h3>
-
-      <p>
-        Aproximamos estudantes, empresas e instituições
-        em um único ambiente.
-      </p>
-
-    </div>
-
-    <div class="feature-card">
-
-      <div class="feature-number">04</div>
-
-      <div class="feature-icon">🔐</div>
-
-      <h3>Segurança</h3>
-
-      <p>
-        Seus dados e sua conta são protegidos por uma
-        estrutura moderna de autenticação.
-      </p>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- PREVIEW -->
-<section class="preview-section">
-
-  <div class="preview-content">
-
-    <span class="section-label">EXPERIÊNCIA</span>
-
-    <h2>
-      Uma plataforma pensada
-      <span>para pessoas.</span>
-    </h2>
-
-    <p>
-      Do primeiro cadastro até uma nova oportunidade,
-      queremos tornar cada etapa simples e intuitiva.
-    </p>
-
-    <div class="preview-checks">
-
-      <div>✓ Interface simples</div>
-      <div>✓ Navegação intuitiva</div>
-      <div>✓ Perfis completos</div>
-      <div>✓ Experiência responsiva</div>
-
-    </div>
-
-    <a href="cadastro.html" class="btn-primary">
-      Começar agora →
-    </a>
-
-  </div>
-
-  <div class="preview-gallery">
-
-    <div class="preview-main">
-
-      <img
-        src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1000&q=85"
-        alt="Dashboard e análise"
-      >
-
-    </div>
-
-    <div class="preview-small">
-
-      <img
-        src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=700&q=85"
-        alt="Equipe trabalhando"
-      >
-
-    </div>
-
-    <div class="preview-small">
-
-      <img
-        src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=700&q=85"
-        alt="Pessoa trabalhando"
-      >
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- COMO FUNCIONA -->
-<section class="steps-section">
-
-  <div class="section-heading centered">
-
-    <span class="section-label">COMO FUNCIONA</span>
-
-    <h2>
-      Simples para começar.
-      <span>Grande para crescer.</span>
-    </h2>
-
-  </div>
-
-  <div class="steps">
-
-    <div class="step">
-
-      <div class="step-number">01</div>
-
-      <h3>Crie sua conta</h3>
-
-      <p>
-        Escolha seu tipo de perfil e faça seu cadastro.
-      </p>
-
-    </div>
-
-    <div class="step-line"></div>
-
-    <div class="step">
-
-      <div class="step-number">02</div>
-
-      <h3>Monte seu perfil</h3>
-
-      <p>
-        Adicione suas informações, habilidades e objetivos.
-      </p>
-
-    </div>
-
-    <div class="step-line"></div>
-
-    <div class="step">
-
-      <div class="step-number">03</div>
-
-      <h3>Explore</h3>
-
-      <p>
-        Descubra pessoas, empresas e oportunidades.
-      </p>
-
-    </div>
-
-    <div class="step-line"></div>
-
-    <div class="step">
-
-      <div class="step-number">04</div>
-
-      <h3>Conecte-se</h3>
-
-      <p>
-        Dê o próximo passo na sua jornada.
-      </p>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- PROJETO -->
-<section class="project-section" id="projeto">
-
-  <div class="project-content">
-
-    <span class="section-label">SOBRE O PROJETO</span>
-
-    <h2>
-      O Conecta ADM está
-      <span>em construção.</span>
-    </h2>
-
-    <p>
-      O projeto está sendo desenvolvido para criar um
-      ambiente completo de conexão entre educação,
-      estudantes e mercado de trabalho.
-    </p>
-
-    <p>
-      Algumas funcionalidades já estão funcionando,
-      enquanto outras estão sendo desenvolvidas.
-    </p>
-
-  </div>
-
-  <div class="roadmap">
-
-    <div class="roadmap-column completed">
-
-      <div class="roadmap-status">
-        ✓ CONCLUÍDO
-      </div>
-
-      <h3>Base da plataforma</h3>
-
-      <ul>
-
-        <li>Homepage</li>
-        <li>Cadastro de usuários</li>
-        <li>Login</li>
-        <li>Confirmação de e-mail</li>
-        <li>Banco de dados</li>
-        <li>Dashboard</li>
-
-      </ul>
-
-    </div>
-
-
-    <div class="roadmap-column developing">
-
-      <div class="roadmap-status">
-        ◐ EM DESENVOLVIMENTO
-      </div>
-
-      <h3>Funcionalidades principais</h3>
-
-      <ul>
-
-        <li>Perfis de estudantes</li>
-        <li>Perfis de empresas</li>
-        <li>Perfis de instituições</li>
-        <li>Publicação de oportunidades</li>
-        <li>Pesquisa e filtros</li>
-
-      </ul>
-
-    </div>
-
-
-    <div class="roadmap-column next">
-
-      <div class="roadmap-status">
-        → PRÓXIMOS PASSOS
-      </div>
-
-      <h3>Expansão da plataforma</h3>
-
-      <ul>
-
-        <li>Candidaturas</li>
-        <li>Networking</li>
-        <li>Mentorias</li>
-        <li>Eventos</li>
-        <li>Projetos e experiências</li>
-
-      </ul>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- SEGURANÇA -->
-<section class="security-section" id="seguranca">
-
-  <div class="security-icon">
-    🔐
-  </div>
-
-  <div class="security-content">
-
-    <span class="section-label">SEGURANÇA</span>
-
-    <h2>
-      Seus dados merecem
-      <span>proteção.</span>
-    </h2>
-
-    <p>
-      O Conecta ADM utiliza autenticação e armazenamento
-      estruturado para manter as informações dos usuários
-      organizadas e protegidas.
-    </p>
-
-    <div class="security-items">
-
-      <div>
-        <strong>🔑 Autenticação</strong>
-        <span>Controle seguro de acesso às contas.</span>
-      </div>
-
-      <div>
-        <strong>🛡️ Banco protegido</strong>
-        <span>Dados armazenados em uma estrutura dedicada.</span>
-      </div>
-
-      <div>
-        <strong>👤 Controle de acesso</strong>
-        <span>Cada usuário acessa seu próprio perfil.</span>
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- CTA -->
-<section class="cta-section">
-
-  <div class="cta-glow"></div>
-
-  <span class="section-label">PRONTO PARA COMEÇAR?</span>
-
-  <h2>
-    Seu próximo passo
-    <span>pode começar hoje.</span>
-  </h2>
-
-  <p>
-    Crie sua conta e faça parte do Conecta ADM.
-  </p>
-
-  <div class="cta-buttons">
-
-    <a href="cadastro.html" class="btn-primary">
-      Criar minha conta →
-    </a>
-
-    <a href="login.html" class="btn-secondary">
-      Já tenho uma conta
-    </a>
-
-  </div>
-
-</section>
-
-
-<!-- FOOTER -->
-<footer class="footer">
-
-  <div class="footer-main">
-
-    <div class="footer-brand">
-
-      <div class="logo">
-        Conecta <span>ADM</span>
-      </div>
-
-      <p>
-        Conectando pessoas, oportunidades
-        e instituições.
-      </p>
-
-    </div>
-
-
-    <div class="footer-column">
-
-      <h4>Plataforma</h4>
-
-      <a href="#estudantes">Estudantes</a>
-      <a href="#empresas">Empresas</a>
-      <a href="#instituicoes">Instituições</a>
-      <a href="#como-funciona">Como funciona</a>
-
-    </div>
-
-
-    <div class="footer-column">
-
-      <h4>Projeto</h4>
-
-      <a href="#projeto">Sobre o projeto</a>
-      <a href="#seguranca">Segurança</a>
-
-    </div>
-
-
-    <div class="footer-column">
-
-      <h4>Acesso</h4>
-
-      <a href="login.html">Entrar</a>
-      <a href="cadastro.html">Criar conta</a>
-
-    </div>
-
-  </div>
-
-
-  <div class="footer-bottom">
-
-    <span>
-      © 2026 Conecta ADM. Todos os direitos reservados.
-    </span>
-
-    <span>
-      Projeto em desenvolvimento.
-    </span>
-
-  </div>
-
-</footer>
-
-
-<!-- JAVASCRIPT -->
-<script>
-
-const menuButton = document.getElementById("menuButton");
-const menuClose = document.getElementById("menuClose");
-const sideMenu = document.getElementById("sideMenu");
-const menuOverlay = document.getElementById("menuOverlay");
-
-
-function openMenu() {
-
-  sideMenu.classList.add("active");
-  menuOverlay.classList.add("active");
-
-  document.body.classList.add("menu-open");
-
-}
-
-
-function closeMenu() {
-
-  sideMenu.classList.remove("active");
-  menuOverlay.classList.remove("active");
-
-  document.body.classList.remove("menu-open");
-
-}
-
-
-if (menuButton) {
-  menuButton.addEventListener("click", openMenu);
-}
-
-
-if (menuClose) {
-  menuClose.addEventListener("click", closeMenu);
-}
-
-
-if (menuOverlay) {
-  menuOverlay.addEventListener("click", closeMenu);
-}
-
-
-document.querySelectorAll(".menu-links a").forEach(link => {
-
-  link.addEventListener("click", closeMenu);
-
-});
-
-
-/* ESC fecha o menu */
-
-document.addEventListener("keydown", event => {
-
-  if (event.key === "Escape") {
-    closeMenu();
-  }
-
-});
-
-
-/* ANIMAÇÕES AO ROLAR */
-
-const revealElements = document.querySelectorAll(
-  ".audience-card, .feature-card, .step, .roadmap-column, .security-section, .preview-content, .preview-gallery, .connection-content, .connection-image"
-);
-
-
-const observer = new IntersectionObserver(
-
-  entries => {
-
-    entries.forEach(entry => {
-
-      if (entry.isIntersecting) {
-
-        entry.target.classList.add("revealed");
-
-        observer.unobserve(entry.target);
-
-      }
-
-    });
-
-  },
-
-  {
-    threshold: 0.12
-  }
-
-);
-
-
-revealElements.forEach(element => {
-
-  element.classList.add("reveal");
-
-  observer.observe(element);
-
-});
-
-
-/* ANIMAÇÃO DOS CARDS FLUTUANTES */
-
-const floatingCards =
-  document.querySelectorAll(".floating-card");
-
-
-floatingCards.forEach((card, index) => {
-
-  card.style.animationDelay =
-    `${index * 0.8}s`;
-
-});
-
-
-/* EVITA QUE O MENU ABRA COM SCROLL TRAVADO */
-
-window.addEventListener("resize", () => {
-
-  if (window.innerWidth > 900) {
-    closeMenu();
-  }
-
-});
-
-</script>
-
-</body>
-
-</html>
+      <div class="section-label">
+        A plataf
