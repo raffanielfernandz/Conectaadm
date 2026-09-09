@@ -1,1 +1,738 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro • Conecta ADM</title>
 
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #080d17;
+      --card: #0d1422;
+      --line: #263854;
+      --blue: #5d8cff;
+      --text: #f4f7ff;
+      --muted: #aab4c7;
+      --danger: #ff6b6b;
+      --success: #57d68d;
+    }
+
+    body {
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      padding: 30px 16px;
+    }
+
+    .container {
+      width: min(760px, 100%);
+      margin: auto;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 25px;
+    }
+
+    .logo {
+      color: white;
+      text-decoration: none;
+      font-size: 1.35rem;
+      font-weight: 800;
+    }
+
+    .logo span {
+      color: var(--blue);
+    }
+
+    .back {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .95rem;
+    }
+
+    .back:hover {
+      color: white;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 28px;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      line-height: 1.5;
+      margin-bottom: 28px;
+    }
+
+    .section {
+      margin-top: 28px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,.08);
+    }
+
+    .section h2 {
+      font-size: 1.15rem;
+      margin-bottom: 18px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      margin-bottom: 16px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-size: .9rem;
+      font-weight: 600;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 13px 14px;
+      border-radius: 10px;
+      border: 1px solid #30435f;
+      background: #09111e;
+      color: white;
+      outline: none;
+      font: inherit;
+    }
+
+    textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--blue);
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: #66748b;
+    }
+
+    small {
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    .profile-section {
+      display: none;
+    }
+
+    .profile-section.active {
+      display: block;
+    }
+
+    .button {
+      width: 100%;
+      border: 0;
+      border-radius: 10px;
+      padding: 14px;
+      background: var(--blue);
+      color: white;
+      font-weight: 800;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .button:hover {
+      filter: brightness(1.08);
+    }
+
+    .button:disabled {
+      opacity: .6;
+      cursor: not-allowed;
+    }
+
+    .message {
+      display: none;
+      margin-top: 18px;
+      padding: 13px;
+      border-radius: 10px;
+      line-height: 1.45;
+    }
+
+    .message.error {
+      display: block;
+      color: #ffdede;
+      background: rgba(255, 107, 107, .1);
+      border: 1px solid rgba(255, 107, 107, .35);
+    }
+
+    .message.success {
+      display: block;
+      color: #d9ffe9;
+      background: rgba(87, 214, 141, .1);
+      border: 1px solid rgba(87, 214, 141, .35);
+    }
+
+    .login-link {
+      text-align: center;
+      color: var(--muted);
+      margin-top: 20px;
+    }
+
+    .login-link a {
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 20px 12px;
+      }
+
+      .card {
+        padding: 20px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .field.full {
+        grid-column: auto;
+      }
+
+      h1 {
+        font-size: 1.65rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <header>
+    <a class="logo" href="index.html">
+      Conecta<span>ADM</span>
+    </a>
+
+    <a class="back" href="index.html">← Voltar</a>
+  </header>
+
+  <div class="card">
+
+    <h1>Criar seu perfil</h1>
+
+    <p class="subtitle">
+      Faça seu cadastro no Conecta ADM e encontre oportunidades,
+      empresas, instituições e conexões profissionais.
+    </p>
+
+    <form id="signupForm">
+
+      <!-- DADOS BÁSICOS -->
+      <div class="section" style="margin-top:0; padding-top:0; border-top:0;">
+        <h2>Dados básicos</h2>
+
+        <div class="grid">
+
+          <div class="field full">
+            <label for="name">Nome completo</label>
+            <input
+              id="name"
+              type="text"
+              placeholder="Digite seu nome completo"
+              required
+            >
+          </div>
+
+          <div class="field">
+            <label for="email">E-mail</label>
+            <input
+              id="email"
+              type="email"
+              placeholder="seu@email.com"
+              required
+            >
+          </div>
+
+          <div class="field">
+            <label for="phone">Telefone</label>
+            <input
+              id="phone"
+              type="tel"
+              placeholder="(11) 99999-9999"
+            >
+          </div>
+
+          <div class="field">
+            <label for="state">Estado</label>
+            <input
+              id="state"
+              type="text"
+              placeholder="Ex.: SP"
+            >
+          </div>
+
+          <div class="field">
+            <label for="city">Cidade</label>
+            <input
+              id="city"
+              type="text"
+              placeholder="Sua cidade"
+            >
+          </div>
+
+          <div class="field full">
+            <label for="type">Tipo de perfil</label>
+
+            <select id="type" required>
+              <option value="">Selecione uma opção</option>
+              <option value="estudante">Estudante</option>
+<option value="empresa">Empresa</option>
+<option value="escola">Escola / Instituição</option>
+</select>
+</div>
+</div>
+</div>
+
+<!-- ESTUDANTE -->
+<div id="studentSection" class="profile-section section">
+
+<h2>Perfil de estudante</h2>
+
+<div class="grid">
+
+<div class="field full">
+<label for="school_name">Escola / Faculdade</label>
+<input id="school_name" type="text" placeholder="Nome da instituição">
+</div>
+
+<div class="field">
+<label for="course">Curso</label>
+<input id="course" type="text" placeholder="Ex.: Administração">
+</div>
+
+<div class="field">
+<label for="study_level">Nível de estudo</label>
+<select id="study_level">
+<option value="">Selecione</option>
+<option value="ensino_medio">Ensino médio</option>
+<option value="tecnico">Técnico</option>
+<option value="graduacao">Graduação</option>
+<option value="pos_graduacao">Pós-graduação</option>
+<option value="mestrado">Mestrado</option>
+<option value="doutorado">Doutorado</option>
+</select>
+</div>
+
+<div class="field">
+<label for="study_year">Ano / semestre</label>
+<input id="study_year" type="text" placeholder="Ex.: 3º semestre">
+</div>
+
+<div class="field">
+<label for="interests">Interesses</label>
+<input id="interests" type="text" placeholder="Ex.: Marketing, RH, Finanças">
+<small>Separe por vírgulas.</small>
+</div>
+
+<div class="field">
+<label for="opportunity_type">Oportunidades</label>
+<input id="opportunity_type" type="text" placeholder="Ex.: estágio, emprego">
+<small>Separe por vírgulas.</small>
+</div>
+
+<div class="field full">
+<label for="skills">Habilidades</label>
+<input id="skills" type="text" placeholder="Ex.: Excel, liderança, comunicação">
+<small>Separe por vírgulas.</small>
+</div>
+
+<div class="field">
+<label for="student_linkedin">LinkedIn</label>
+<input id="student_linkedin" type="url" placeholder="https://linkedin.com/in/...">
+</div>
+
+<div class="field">
+<label for="portfolio_url">Portfólio</label>
+<input id="portfolio_url" type="url" placeholder="https://...">
+</div>
+
+</div>
+</div>
+
+<!-- EMPRESA -->
+<div id="companySection" class="profile-section section">
+
+<h2>Perfil da empresa</h2>
+
+<div class="grid">
+
+<div class="field full">
+<label for="company_name">Nome da empresa</label>
+<input id="company_name" type="text" placeholder="Nome da empresa">
+</div>
+
+<div class="field">
+<label for="cnpj">CNPJ</label>
+<input id="cnpj" type="text" placeholder="00.000.000/0001-00">
+</div>
+
+<div class="field">
+<label for="segment">Segmento</label>
+<input id="segment" type="text" placeholder="Ex.: Tecnologia">
+</div>
+
+<div class="field">
+<label for="company_size">Tamanho da empresa</label>
+<select id="company_size">
+<option value="">Selecione</option>
+<option value="micro">Microempresa</option>
+<option value="pequena">Pequena</option>
+<option value="media">Média</option>
+<option value="grande">Grande</option>
+</select>
+</div>
+
+<div class="field">
+<label for="hiring_areas">Áreas de contratação</label>
+<input id="hiring_areas" type="text" placeholder="Ex.: RH, Financeiro, Marketing">
+<small>Separe por vírgulas.</small>
+</div>
+
+<div class="field full">
+<label for="company_description">Descrição da empresa</label>
+<textarea id="company_description" placeholder="Conte um pouco sobre a empresa..."></textarea>
+</div>
+
+<div class="field">
+<label for="company_website">Site</label>
+<input id="company_website" type="url" placeholder="https://...">
+</div>
+
+<div class="field">
+<label for="company_linkedin">LinkedIn</label>
+<input id="company_linkedin" type="url" placeholder="https://linkedin.com/company/...">
+</div>
+
+</div>
+</div>
+
+<!-- INSTITUIÇÃO -->
+<div id="institutionSection" class="profile-section section">
+
+<h2>Perfil da escola / instituição</h2>
+
+<div class="grid">
+
+<div class="field full">
+<label for="institution_name">Nome da instituição</label>
+<input id="institution_name" type="text" placeholder="Nome da instituição">
+</div>
+
+<div class="field">
+<label for="institution_type">Tipo de instituição</label>
+<select id="institution_type">
+<option value="">Selecione</option>
+<option value="escola">Escola</option>
+<option value="faculdade">Faculdade</option>
+<option value="universidade">Universidade</option>
+<option value="curso_tecnico">Curso técnico</option>
+<option value="outro">Outro</option>
+</select>
+</div>
+
+<div class="field">
+<label for="responsible_name">Nome do responsável</label>
+<input id="responsible_name" type="text" placeholder="Nome do responsável">
+</div>
+
+<div class="field full">
+<label for="institutional_email">E-mail institucional</label>
+<input id="institutional_email" type="email" placeholder="contato@instituicao.com">
+</div>
+
+<div class="field full">
+<label for="institution_website">Site</label>
+<input id="institution_website" type="url" placeholder="https://...">
+</div>
+
+<div class="field full">
+<label for="institution_description">Descrição</label>
+<textarea id="institution_description" placeholder="Conte um pouco sobre a instituição..."></textarea>
+</div>
+
+</div>
+</div>
+
+<button id="submitButton" class="button" type="submit">
+Criar minha conta
+</button>
+
+<div id="message" class="message"></div>
+
+</form>
+
+<p class="login-link">
+Já possui uma conta?
+<a href="login.html">Entrar</a>
+</p>
+
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+
+<script>
+
+const { createClient } = supabase;
+
+const client = createClient(
+window.SUPABASE_URL,
+window.SUPABASE_PUBLISHABLE_KEY
+);
+
+const typeSelect = document.getElementById("type");
+
+const studentSection = document.getElementById("studentSection");
+const companySection = document.getElementById("companySection");
+const institutionSection = document.getElementById("institutionSection");
+
+const form = document.getElementById("signupForm");
+const button = document.getElementById("submitButton");
+const message = document.getElementById("message");
+
+function arr(value) {
+return value
+.split(",")
+.map(item => item.trim())
+.filter(Boolean);
+}
+
+function toggleProfile() {
+
+studentSection.classList.remove("active");
+companySection.classList.remove("active");
+institutionSection.classList.remove("active");
+
+if (typeSelect.value === "estudante") {
+studentSection.classList.add("active");
+}
+
+if (typeSelect.value === "empresa") {
+companySection.classList.add("active");
+}
+
+if (typeSelect.value === "escola") {
+institutionSection.classList.add("active");
+}
+
+}
+
+typeSelect.addEventListener("change", toggleProfile);
+
+function showMessage(text, type) {
+message.textContent = text;
+message.className = "message " + type;
+}
+
+form.addEventListener("submit", async function(event) {
+
+event.preventDefault();
+
+button.disabled = true;
+button.textContent = "Criando conta...";
+
+message.className = "message";
+message.textContent = "";
+
+const type = typeSelect.value;
+
+const metadata = {
+
+full_name: document.getElementById("name").value.trim(),
+
+phone: document.getElementById("phone").value.trim(),
+
+state: document.getElementById("state").value.trim(),
+
+city: document.getElementById("city").value.trim(),
+
+tipo_de_perfil: type
+
+};
+
+if (type === "estudante") {
+
+metadata.school_name =
+document.getElementById("school_name").value.trim();
+
+metadata.course =
+document.getElementById("course").value.trim();
+
+metadata.study_level =
+document.getElementById("study_level").value;
+
+metadata.study_year =
+document.getElementById("study_year").value.trim();
+
+metadata.interests =
+arr(document.getElementById("interests").value);
+
+metadata.opportunity_type =
+arr(document.getElementById("opportunity_type").value);
+
+metadata.skills =
+arr(document.getElementById("skills").value);
+
+metadata.linkedin_url =
+document.getElementById("student_linkedin").value.trim();
+
+metadata.portfolio_url =
+document.getElementById("portfolio_url").value.trim();
+
+}
+
+if (type === "empresa") {
+
+metadata.company_name =
+document.getElementById("company_name").value.trim();
+
+metadata.cnpj =
+document.getElementById("cnpj").value.trim();
+
+metadata.segment =
+document.getElementById("segment").value.trim();
+
+metadata.company_size =
+document.getElementById("company_size").value;
+
+metadata.hiring_areas =
+arr(document.getElementById("hiring_areas").value);
+
+metadata.company_description =
+document.getElementById("company_description").value.trim();
+
+metadata.website_url =
+document.getElementById("company_website").value.trim();
+
+metadata.linkedin_url =
+document.getElementById("company_linkedin").value.trim();
+
+}
+
+if (type === "escola") {
+
+metadata.institution_name =
+document.getElementById("institution_name").value.trim();
+
+metadata.institution_type =
+document.getElementById("institution_type").value;
+
+metadata.responsible_name =
+document.getElementById("responsible_name").value.trim();
+
+metadata.institutional_email =
+document.getElementById("institutional_email").value.trim();
+
+metadata.website_url =
+document.getElementById("institution_website").value.trim();
+
+metadata.description =
+document.getElementById("institution_description").value.trim();
+
+}
+
+const email = document.getElementById("email").value.trim();
+const password = document.getElementById("password").value;
+
+try {
+
+const { data, error } = await client.auth.signUp({
+
+email: email,
+
+password: password,
+
+options: {
+data: metadata,
+
+emailRedirectTo:
+new URL("dashboard.html", window.location.href).href
+}
+
+});
+
+if (error) {
+throw error;
+}
+
+if (data.session) {
+
+window.location.href = "dashboard.html";
+
+} else {
+
+showMessage(
+"Cadastro realizado! Verifique seu e-mail para confirmar a conta antes de entrar.",
+"success"
+);
+
+button.disabled = false;
+button.textContent = "Criar minha conta";
+
+}
+
+} catch (error) {
+
+console.error(error);
+
+showMessage(
+"Não foi possível criar a conta: " + error.message,
+"error"
+);
+
+button.disabled = false;
+button.textContent = "Criar minha conta";
+
+}
+
+});
+
+</script>
+
+</body>
+</html>
