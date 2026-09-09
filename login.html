@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Conecta ADM - Login</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #0b0f14;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .logo {
+      text-align: center;
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 25px;
+    }
+
+    .logo span {
+      color: #4da3ff;
+    }
+
+    .card {
+      background: #111820;
+      border: 1px solid #26313d;
+      border-radius: 15px;
+      padding: 30px;
+    }
+
+    h1 {
+      font-size: 25px;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: #9ba8b5;
+      margin-bottom: 25px;
+    }
+
+    .field {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 14px;
+    }
+
+    input {
+      width: 100%;
+      padding: 13px;
+      border-radius: 8px;
+      border: 1px solid #344150;
+      background: #0b0f14;
+      color: white;
+      font-size: 15px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #4da3ff;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background: #4da3ff;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    #message {
+      margin-top: 18px;
+      text-align: center;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .register {
+      margin-top: 22px;
+      text-align: center;
+      color: #9ba8b5;
+      font-size: 14px;
+    }
+
+    .register a {
+      color: #4da3ff;
+      text-decoration: none;
+    }
+
+    .forgot {
+      display: block;
+      text-align: right;
+      margin-top: -8px;
+      margin-bottom: 20px;
+      color: #4da3ff;
+      font-size: 13px;
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="logo">
+      Conecta <span>ADM</span>
+    </div>
+
+    <div class="card">
+
+      <h1>Entrar</h1>
+
+      <p class="subtitle">
+        Entre na sua conta do Conecta ADM.
+      </p>
+
+      <form id="loginForm">
+
+        <div class="field">
+          <label for="email">E-mail</label>
+
+          <input
+            id="email"
+            type="email"
+            placeholder="seu@email.com"
+            required
+          >
+        </div>
+
+        <div class="field">
+          <label for="password">Senha</label>
+
+          <input
+            id="password"
+            type="password"
+            placeholder="Sua senha"
+            required
+          >
+        </div>
+
+        <a href="#" class="forgot" id="forgotPassword">
+          Esqueci minha senha
+        </a>
+
+        <button type="submit" id="loginButton">
+          Entrar
+        </button>
+
+      </form>
+
+      <div id="message"></div>
+
+      <div class="register">
+        Ainda não tem uma conta?
+        <a href="cadastro.html">Criar conta</a>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+
+    const { createClient } = supabase;
+
+    const client = createClient(
+      window.SUPABASE_URL,
+      window.SUPABASE_PUBLISHABLE_KEY
+    );
+
+
+    const form = document.getElementById("loginForm");
+    const button = document.getElementById("loginButton");
+    const message = document.getElementById("message");
+
+
+    form.addEventListener("submit", async function(event) {
+
+      event.preventDefault();
+
+      const email =
+        document.getElementById("email").value.trim();
+
+      const password =
+        document.getElementById("password").value;
+
+
+      button.disabled = true;
+      button.textContent = "Entrando...";
+      message.textContent = "";
+
+
+      const { data, error } =
+        await client.auth.signInWithPassword({
+          email: email,
+          password: password
+        });
+
+
+      if (error) {
+
+        message.textContent =
+          "Não foi possível entrar: " + error.message;
+
+        button.disabled = false;
+        button.textContent = "Entrar";
+
+        return;
+      }
+
+
+      if (data.session) {
+
+        window.location.href = "dashboard.html";
+
+      }
+
+    });
+
+
+    document
+      .getElementById("forgotPassword")
+      .addEventListener("click", async function(event) {
+
+        event.preventDefault();
+
+        const email =
+          document.getElementById("email").value.trim();
+
+
+        if (!email) {
+
+          message.textContent =
+            "Digite seu e-mail primeiro.";
+
+          return;
+        }
+
+
+        const { error } =
+          await client.auth.resetPasswordForEmail(email, {
+            redirectTo:
+              new URL("login.html", window.location.href).href
+          });
+
+
+        if (error) {
+
+          message.textContent =
+            "Não foi possível enviar o e-mail: " +
+            error.message;
+
+          return;
+        }
+
+
+        message.textContent =
+          "Enviamos um e-mail para redefinir sua senha.";
+
+      });
+
+  </script>
+
+</body>
+</html>
