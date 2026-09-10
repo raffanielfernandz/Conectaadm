@@ -203,7 +203,7 @@
     ========================= */
 
     .welcome {
-      margin-bottom: 34px;
+      margin-bottom: 28px;
     }
 
     .welcome h1 {
@@ -226,82 +226,6 @@
       font-size: 16px;
 
       max-width: 650px;
-    }
-
-
-    /* =========================
-       QUICK CARDS
-    ========================= */
-
-    .quick-grid {
-      display: grid;
-
-      grid-template-columns:
-        repeat(3, 1fr);
-
-      gap: 18px;
-
-      margin-bottom: 34px;
-    }
-
-    .quick-card {
-      background:
-        linear-gradient(
-          145deg,
-          rgba(17,28,48,.9),
-          rgba(13,21,37,.9)
-        );
-
-      border: 1px solid var(--line);
-
-      border-radius: 16px;
-
-      padding: 22px;
-
-      transition: .2s;
-    }
-
-    .quick-card:hover {
-      transform: translateY(-3px);
-
-      border-color: #2c4370;
-
-      box-shadow:
-        0 15px 35px rgba(0,0,0,.18);
-    }
-
-    .quick-icon {
-      width: 42px;
-      height: 42px;
-
-      border-radius: 11px;
-
-      display: flex;
-
-      align-items: center;
-      justify-content: center;
-
-      background: rgba(93,140,255,.10);
-
-      border: 1px solid rgba(93,140,255,.18);
-
-      color: var(--blue);
-
-      font-size: 18px;
-
-      margin-bottom: 15px;
-    }
-
-    .quick-card h3 {
-      font-size: 17px;
-
-      margin-bottom: 6px;
-    }
-
-    .quick-card p {
-      color: var(--muted);
-
-      font-size: 14px;
     }
 
 
@@ -372,14 +296,33 @@
       pointer-events: none;
     }
 
+
+    /* =========================
+       PROFILE HEADER
+    ========================= */
+
+    .profile-header {
+      display: flex;
+
+      align-items: flex-start;
+
+      justify-content: space-between;
+
+      gap: 20px;
+
+      margin-bottom: 26px;
+
+      position: relative;
+
+      z-index: 1;
+    }
+
     .profile-top {
       display: flex;
 
       align-items: center;
 
       gap: 18px;
-
-      margin-bottom: 26px;
     }
 
     .avatar {
@@ -428,6 +371,48 @@
 
 
     /* =========================
+       EDIT BUTTON
+    ========================= */
+
+    .edit-profile-button {
+      display: inline-flex;
+
+      align-items: center;
+      justify-content: center;
+
+      gap: 7px;
+
+      padding: 10px 14px;
+
+      border-radius: 9px;
+
+      background: rgba(93,140,255,.08);
+
+      border: 1px solid rgba(93,140,255,.25);
+
+      color: #dce5f7;
+
+      font-size: 13px;
+
+      font-weight: 700;
+
+      cursor: pointer;
+
+      transition: .2s;
+
+      white-space: nowrap;
+    }
+
+    .edit-profile-button:hover {
+      background: rgba(93,140,255,.14);
+
+      border-color: #4775e8;
+
+      transform: translateY(-1px);
+    }
+
+
+    /* =========================
        PROFILE DATA
     ========================= */
 
@@ -438,6 +423,10 @@
         repeat(2, 1fr);
 
       gap: 14px;
+
+      position: relative;
+
+      z-index: 1;
     }
 
     .info-box {
@@ -655,10 +644,6 @@
 
     @media (max-width: 800px) {
 
-      .quick-grid {
-        grid-template-columns: 1fr;
-      }
-
       .development-grid {
         grid-template-columns: 1fr;
       }
@@ -689,12 +674,22 @@
         height: 33px;
       }
 
+      .welcome {
+        margin-bottom: 24px;
+      }
+
       .welcome h1 {
         font-size: 31px;
       }
 
       .profile-card {
         padding: 20px;
+      }
+
+      .profile-header {
+        flex-direction: column;
+
+        gap: 18px;
       }
 
       .profile-top {
@@ -712,6 +707,10 @@
 
       .profile-name {
         font-size: 19px;
+      }
+
+      .edit-profile-button {
+        width: 100%;
       }
 
       .profile-info {
@@ -996,68 +995,6 @@
           </section>
 
 
-          <!-- QUICK CARDS -->
-
-          <section class="quick-grid">
-
-
-            <div class="quick-card">
-
-              <div class="quick-icon">
-                👤
-              </div>
-
-              <h3>
-                Meu perfil
-              </h3>
-
-              <p>
-                Consulte suas informações
-                cadastradas na plataforma.
-              </p>
-
-            </div>
-
-
-            <div class="quick-card">
-
-              <div class="quick-icon">
-                💼
-              </div>
-
-              <h3>
-                Oportunidades
-              </h3>
-
-              <p>
-                Em breve você poderá encontrar
-                oportunidades profissionais.
-              </p>
-
-            </div>
-
-
-            <div class="quick-card">
-
-              <div class="quick-icon">
-                🚀
-              </div>
-
-              <h3>
-                Desenvolvimento
-              </h3>
-
-              <p>
-                Acompanhe conteúdos e recursos
-                para sua evolução profissional.
-              </p>
-
-            </div>
-
-
-          </section>
-
-
 
           <!-- PROFILE -->
 
@@ -1070,7 +1007,7 @@
               </h2>
 
               <p>
-                Confira as informações da sua conta.
+                Confira e atualize as informações da sua conta.
               </p>
 
             </div>
@@ -1079,31 +1016,45 @@
             <div class="profile-card">
 
 
-              <div class="profile-top">
+              <div class="profile-header">
 
 
-                <div class="avatar">
+                <div class="profile-top">
 
-                  ${escapeHTML(firstLetter)}
+                  <div class="avatar">
+
+                    ${escapeHTML(firstLetter)}
+
+                  </div>
+
+
+                  <div>
+
+                    <div class="profile-name">
+
+                      ${escapeHTML(fullName)}
+
+                    </div>
+
+                    <div class="profile-email">
+
+                      ${escapeHTML(email)}
+
+                    </div>
+
+                  </div>
 
                 </div>
 
 
-                <div>
+                <a
+                  href="editar-perfil.html"
+                  class="edit-profile-button"
+                >
 
-                  <div class="profile-name">
+                  ✏️ Editar perfil
 
-                    ${escapeHTML(fullName)}
-
-                  </div>
-
-                  <div class="profile-email">
-
-                    ${escapeHTML(email)}
-
-                  </div>
-
-                </div>
+                </a>
 
 
               </div>
@@ -1219,7 +1170,7 @@
               </div>
 
 
-              
+
               <div class="development-card">
 
                 <div class="development-icon">
@@ -1313,7 +1264,7 @@
         `;
 
 
-        /*
+                /*
           Ativa o segundo botão de logout.
         */
 
