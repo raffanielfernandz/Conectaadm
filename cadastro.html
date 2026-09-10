@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Cadastro • Conecta ADM</title>
 
   <style>
@@ -32,7 +33,7 @@
     }
 
     .container {
-      width: min(760px, 100%);
+      width: min(620px, 100%);
       margin: auto;
     }
 
@@ -68,7 +69,7 @@
       background: var(--card);
       border: 1px solid var(--line);
       border-radius: 18px;
-      padding: 28px;
+      padding: 30px;
     }
 
     h1 {
@@ -86,6 +87,12 @@
       margin-top: 28px;
       padding-top: 24px;
       border-top: 1px solid rgba(255,255,255,.08);
+    }
+
+    .section:first-of-type {
+      margin-top: 0;
+      padding-top: 0;
+      border-top: 0;
     }
 
     .section h2 {
@@ -116,8 +123,7 @@
     }
 
     input,
-    select,
-    textarea {
+    select {
       width: 100%;
       padding: 13px 14px;
       border-radius: 10px;
@@ -128,25 +134,26 @@
       font: inherit;
     }
 
-    textarea {
-      min-height: 110px;
-      resize: vertical;
-    }
-
     input:focus,
-    select:focus,
-    textarea:focus {
+    select:focus {
       border-color: var(--blue);
     }
 
-    input::placeholder,
-    textarea::placeholder {
+    input::placeholder {
       color: #66748b;
     }
 
     small {
       color: var(--muted);
       line-height: 1.4;
+    }
+
+    .password-info {
+      margin-top: -4px;
+      margin-bottom: 16px;
+      color: var(--muted);
+      font-size: .82rem;
+      line-height: 1.45;
     }
 
     .profile-section {
@@ -214,6 +221,7 @@
     }
 
     @media (max-width: 600px) {
+
       body {
         padding: 20px 12px;
       }
@@ -243,505 +251,624 @@
 <div class="container">
 
   <header>
+
     <a class="logo" href="index.html">
       Conecta<span>ADM</span>
     </a>
 
-    <a class="back" href="index.html">← Voltar</a>
+    <a class="back" href="index.html">
+      ← Voltar
+    </a>
+
   </header>
 
   <div class="card">
 
-    <h1>Criar seu perfil</h1>
+    <h1>Criar sua conta</h1>
 
     <p class="subtitle">
-      Faça seu cadastro no Conecta ADM e encontre oportunidades,
-      empresas, instituições e conexões profissionais.
+      Crie sua conta no Conecta ADM e faça parte da nossa rede.
+      Você poderá completar seu perfil depois.
     </p>
 
     <form id="signupForm">
 
-      <!-- DADOS BÁSICOS -->
-      <div class="section" style="margin-top:0; padding-top:0; border-top:0;">
-        <h2>Dados básicos</h2>
+      <!-- DADOS DA CONTA -->
+
+      <div class="section">
+
+        <h2>Dados da conta</h2>
 
         <div class="grid">
 
           <div class="field full">
-            <label for="name">Nome completo</label>
+
+            <label for="name">
+              Nome completo
+            </label>
+
             <input
               id="name"
               type="text"
               placeholder="Digite seu nome completo"
               required
             >
+
           </div>
 
-          <div class="field">
-            <label for="email">E-mail</label>
+
+          <div class="field full">
+
+            <label for="email">
+              E-mail
+            </label>
+
             <input
               id="email"
               type="email"
               placeholder="seu@email.com"
               required
             >
-          </div>
-          
-          <div class="field">
-  <label for="password">Senha</label>
-  <input
-    id="password"
-    type="password"
-    placeholder="Crie uma senha"
-    minlength="6"
-    required
-  >
+
           </div>
 
+
           <div class="field">
-            <label for="phone">Telefone</label>
+
+            <label for="password">
+              Senha
+            </label>
+
             <input
-              id="phone"
-              type="tel"
-              placeholder="(11) 99999-9999"
+              id="password"
+              type="password"
+              placeholder="Crie uma senha"
+              minlength="8"
+              required
             >
+
           </div>
 
+
           <div class="field">
-            <label for="state">Estado</label>
+
+            <label for="confirmPassword">
+              Confirmar senha
+            </label>
+
             <input
-              id="state"
+              id="confirmPassword"
+              type="password"
+              placeholder="Digite a senha novamente"
+              minlength="8"
+              required
+            >
+
+          </div>
+
+        </div>
+
+        <p class="password-info">
+          Use pelo menos 8 caracteres. Você pode usar letras,
+          números e símbolos.
+        </p>
+
+      </div>
+
+
+      <!-- TIPO DE PERFIL -->
+
+      <div class="section">
+
+        <h2>Tipo de perfil</h2>
+
+        <div class="field">
+
+          <label for="type">
+            Como você vai usar o Conecta ADM?
+          </label>
+
+          <select id="type" required>
+
+            <option value="">
+              Selecione uma opção
+            </option>
+
+            <option value="estudante">
+              Estudante
+            </option>
+
+            <option value="empresa">
+              Empresa
+            </option>
+
+            <option value="escola">
+              Escola / Instituição
+            </option>
+
+          </select>
+
+        </div>
+
+      </div>
+
+
+      <!-- ESTUDANTE -->
+
+      <div id="studentSection" class="profile-section section">
+
+        <h2>Perfil de estudante</h2>
+
+        <div class="field">
+
+          <label for="school_name">
+            Escola / Faculdade
+          </label>
+
+          <input
+            id="school_name"
+            type="text"
+            placeholder="Nome da instituição"
+          >
+
+        </div>
+
+      </div>
+
+
+      <!-- EMPRESA -->
+
+      <div id="companySection" class="profile-section section">
+
+        <h2>Perfil da empresa</h2>
+
+        <div class="grid">
+
+          <div class="field">
+
+            <label for="company_name">
+              Nome da empresa
+            </label>
+
+            <input
+              id="company_name"
               type="text"
-              placeholder="Ex.: SP"
+              placeholder="Nome da empresa"
             >
+
           </div>
+
 
           <div class="field">
-            <label for="city">Cidade</label>
+
+            <label for="segment">
+              Segmento
+            </label>
+
             <input
-              id="city"
+              id="segment"
               type="text"
-              placeholder="Sua cidade"
+              placeholder="Ex.: Tecnologia"
             >
+
           </div>
 
-          <div class="field full">
-            <label for="type">Tipo de perfil</label>
+        </div>
 
-            <select id="type" required>
-              <option value="">Selecione uma opção</option>
-              <option value="estudante">Estudante</option>
-<option value="empresa">Empresa</option>
-<option value="escola">Escola / Instituição</option>
-</select>
-</div>
-</div>
-</div>
+      </div>
 
-<!-- ESTUDANTE -->
-<div id="studentSection" class="profile-section section">
 
-<h2>Perfil de estudante</h2>
+      <!-- INSTITUIÇÃO -->
 
-<div class="grid">
+      <div id="institutionSection" class="profile-section section">
 
-<div class="field full">
-<label for="school_name">Escola / Faculdade</label>
-<input id="school_name" type="text" placeholder="Nome da instituição">
-</div>
+        <h2>Perfil da escola / instituição</h2>
 
-<div class="field">
-<label for="course">Curso</label>
-<input id="course" type="text" placeholder="Ex.: Administração">
-</div>
+        <div class="grid">
 
-<div class="field">
-<label for="study_level">Nível de estudo</label>
-<select id="study_level">
-<option value="">Selecione</option>
-<option value="ensino_medio">Ensino médio</option>
-<option value="tecnico">Técnico</option>
-<option value="graduacao">Graduação</option>
-<option value="pos_graduacao">Pós-graduação</option>
-<option value="mestrado">Mestrado</option>
-<option value="doutorado">Doutorado</option>
-</select>
-</div>
+          <div class="field">
 
-<div class="field">
-<label for="study_year">Ano / semestre</label>
-<input id="study_year" type="text" placeholder="Ex.: 3º semestre">
-</div>
+            <label for="institution_name">
+              Nome da instituição
+            </label>
 
-<div class="field">
-<label for="interests">Interesses</label>
-<input id="interests" type="text" placeholder="Ex.: Marketing, RH, Finanças">
-<small>Separe por vírgulas.</small>
-</div>
+            <input
+              id="institution_name"
+              type="text"
+              placeholder="Nome da instituição"
+            >
 
-<div class="field">
-<label for="opportunity_type">Oportunidades</label>
-<input id="opportunity_type" type="text" placeholder="Ex.: estágio, emprego">
-<small>Separe por vírgulas.</small>
-</div>
+          </div>
 
-<div class="field full">
-<label for="skills">Habilidades</label>
-<input id="skills" type="text" placeholder="Ex.: Excel, liderança, comunicação">
-<small>Separe por vírgulas.</small>
-</div>
 
-<div class="field">
-<label for="student_linkedin">LinkedIn</label>
-<input id="student_linkedin" type="url" placeholder="https://linkedin.com/in/...">
-</div>
+          <div class="field">
 
-<div class="field">
-<label for="portfolio_url">Portfólio</label>
-<input id="portfolio_url" type="url" placeholder="https://...">
-</div>
+            <label for="institution_type">
+              Tipo de instituição
+            </label>
 
-</div>
-</div>
+            <select id="institution_type">
 
-<!-- EMPRESA -->
-<div id="companySection" class="profile-section section">
+              <option value="">
+                Selecione
+              </option>
 
-<h2>Perfil da empresa</h2>
+              <option value="escola">
+                Escola
+              </option>
 
-<div class="grid">
+              <option value="faculdade">
+                Faculdade
+              </option>
 
-<div class="field full">
-<label for="company_name">Nome da empresa</label>
-<input id="company_name" type="text" placeholder="Nome da empresa">
-</div>
+              <option value="universidade">
+                Universidade
+              </option>
 
-<div class="field">
-<label for="cnpj">CNPJ</label>
-<input id="cnpj" type="text" placeholder="00.000.000/0001-00">
-</div>
+              <option value="curso_tecnico">
+                Curso técnico
+              </option>
 
-<div class="field">
-<label for="segment">Segmento</label>
-<input id="segment" type="text" placeholder="Ex.: Tecnologia">
-</div>
+              <option value="outro">
+                Outro
+              </option>
 
-<div class="field">
-<label for="company_size">Tamanho da empresa</label>
-<select id="company_size">
-<option value="">Selecione</option>
-<option value="micro">Microempresa</option>
-<option value="pequena">Pequena</option>
-<option value="media">Média</option>
-<option value="grande">Grande</option>
-</select>
-</div>
+            </select>
 
-<div class="field">
-<label for="hiring_areas">Áreas de contratação</label>
-<input id="hiring_areas" type="text" placeholder="Ex.: RH, Financeiro, Marketing">
-<small>Separe por vírgulas.</small>
-</div>
+          </div>
 
-<div class="field full">
-<label for="company_description">Descrição da empresa</label>
-<textarea id="company_description" placeholder="Conte um pouco sobre a empresa..."></textarea>
-</div>
+        </div>
 
-<div class="field">
-<label for="company_website">Site</label>
-<input id="company_website" type="url" placeholder="https://...">
-</div>
+      </div>
 
-<div class="field">
-<label for="company_linkedin">LinkedIn</label>
-<input id="company_linkedin" type="url" placeholder="https://linkedin.com/company/...">
-</div>
+
+      <button
+        id="submitButton"
+        class="button"
+        type="submit"
+      >
+        Criar minha conta
+      </button>
+
+
+      <div id="message" class="message"></div>
+
+    </form>
+
+
+    <p class="login-link">
+
+      Já possui uma conta?
+
+      <a href="login.html">
+        Entrar
+      </a>
+
+    </p>
+
+  </div>
 
 </div>
-</div>
 
-<!-- INSTITUIÇÃO -->
-<div id="institutionSection" class="profile-section section">
 
-<h2>Perfil da escola / instituição</h2>
-
-<div class="grid">
-
-<div class="field full">
-<label for="institution_name">Nome da instituição</label>
-<input id="institution_name" type="text" placeholder="Nome da instituição">
-</div>
-
-<div class="field">
-<label for="institution_type">Tipo de instituição</label>
-<select id="institution_type">
-<option value="">Selecione</option>
-<option value="escola">Escola</option>
-<option value="faculdade">Faculdade</option>
-<option value="universidade">Universidade</option>
-<option value="curso_tecnico">Curso técnico</option>
-<option value="outro">Outro</option>
-</select>
-</div>
-
-<div class="field">
-<label for="responsible_name">Nome do responsável</label>
-<input id="responsible_name" type="text" placeholder="Nome do responsável">
-</div>
-
-<div class="field full">
-<label for="institutional_email">E-mail institucional</label>
-<input id="institutional_email" type="email" placeholder="contato@instituicao.com">
-</div>
-
-<div class="field full">
-<label for="institution_website">Site</label>
-<input id="institution_website" type="url" placeholder="https://...">
-</div>
-
-<div class="field full">
-<label for="institution_description">Descrição</label>
-<textarea id="institution_description" placeholder="Conte um pouco sobre a instituição..."></textarea>
-</div>
-
-</div>
-</div>
-
-<button id="submitButton" class="button" type="submit">
-Criar minha conta
-</button>
-
-<div id="message" class="message"></div>
-
-</form>
-
-<p class="login-link">
-Já possui uma conta?
-<a href="login.html">Entrar</a>
-</p>
-
-</div>
-</div>
+<!-- SUPABASE -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script src="supabase-config.js"></script>
+
 
 <script>
 
 const { createClient } = supabase;
 
 const client = createClient(
-window.SUPABASE_URL,
-window.SUPABASE_PUBLISHABLE_KEY
+  window.SUPABASE_URL,
+  window.SUPABASE_PUBLISHABLE_KEY
 );
 
-const typeSelect = document.getElementById("type");
 
-const studentSection = document.getElementById("studentSection");
-const companySection = document.getElementById("companySection");
-const institutionSection = document.getElementById("institutionSection");
+const typeSelect =
+  document.getElementById("type");
 
-const form = document.getElementById("signupForm");
-const button = document.getElementById("submitButton");
-const message = document.getElementById("message");
+const studentSection =
+  document.getElementById("studentSection");
 
-function arr(value) {
-return value
-.split(",")
-.map(item => item.trim())
-.filter(Boolean);
-}
+const companySection =
+  document.getElementById("companySection");
+
+const institutionSection =
+  document.getElementById("institutionSection");
+
+const form =
+  document.getElementById("signupForm");
+
+const button =
+  document.getElementById("submitButton");
+
+const message =
+  document.getElementById("message");
+
+
+/* MOSTRAR PERFIL */
 
 function toggleProfile() {
 
-studentSection.classList.remove("active");
-companySection.classList.remove("active");
-institutionSection.classList.remove("active");
+  studentSection.classList.remove("active");
 
-if (typeSelect.value === "estudante") {
-studentSection.classList.add("active");
+  companySection.classList.remove("active");
+
+  institutionSection.classList.remove("active");
+
+
+  if (typeSelect.value === "estudante") {
+
+    studentSection.classList.add("active");
+
+  }
+
+
+  if (typeSelect.value === "empresa") {
+
+    companySection.classList.add("active");
+
+  }
+
+
+  if (typeSelect.value === "escola") {
+
+    institutionSection.classList.add("active");
+
+  }
+
 }
 
-if (typeSelect.value === "empresa") {
-companySection.classList.add("active");
-}
 
-if (typeSelect.value === "escola") {
-institutionSection.classList.add("active");
-}
+typeSelect.addEventListener(
+  "change",
+  toggleProfile
+);
 
-}
 
-typeSelect.addEventListener("change", toggleProfile);
+/* MENSAGEM */
 
 function showMessage(text, type) {
-message.textContent = text;
-message.className = "message " + type;
-}
 
-form.addEventListener("submit", async function(event) {
+  message.textContent = text;
 
-event.preventDefault();
-
-button.disabled = true;
-button.textContent = "Criando conta...";
-
-message.className = "message";
-message.textContent = "";
-
-const type = typeSelect.value;
-
-const metadata = {
-
-full_name: document.getElementById("name").value.trim(),
-
-phone: document.getElementById("phone").value.trim(),
-
-state: document.getElementById("state").value.trim(),
-
-city: document.getElementById("city").value.trim(),
-
-tipo_de_perfil: type
-
-};
-
-if (type === "estudante") {
-
-metadata.school_name =
-document.getElementById("school_name").value.trim();
-
-metadata.course =
-document.getElementById("course").value.trim();
-
-metadata.study_level =
-document.getElementById("study_level").value;
-
-metadata.study_year =
-document.getElementById("study_year").value.trim();
-
-metadata.interests =
-arr(document.getElementById("interests").value);
-
-metadata.opportunity_type =
-arr(document.getElementById("opportunity_type").value);
-
-metadata.skills =
-arr(document.getElementById("skills").value);
-
-metadata.linkedin_url =
-document.getElementById("student_linkedin").value.trim();
-
-metadata.portfolio_url =
-document.getElementById("portfolio_url").value.trim();
+  message.className =
+    "message " + type;
 
 }
 
-if (type === "empresa") {
 
-metadata.company_name =
-document.getElementById("company_name").value.trim();
+/* CADASTRO */
 
-metadata.cnpj =
-document.getElementById("cnpj").value.trim();
+form.addEventListener(
+  "submit",
+  async function(event) {
 
-metadata.segment =
-document.getElementById("segment").value.trim();
+    event.preventDefault();
 
-metadata.company_size =
-document.getElementById("company_size").value;
 
-metadata.hiring_areas =
-arr(document.getElementById("hiring_areas").value);
+    button.disabled = true;
 
-metadata.company_description =
-document.getElementById("company_description").value.trim();
+    button.textContent =
+      "Criando conta...";
 
-metadata.website_url =
-document.getElementById("company_website").value.trim();
+    message.className =
+      "message";
 
-metadata.linkedin_url =
-document.getElementById("company_linkedin").value.trim();
+    message.textContent = "";
 
-}
 
-if (type === "escola") {
+    const name =
+      document.getElementById("name")
+      .value
+      .trim();
 
-metadata.institution_name =
-document.getElementById("institution_name").value.trim();
 
-metadata.institution_type =
-document.getElementById("institution_type").value;
+    const email =
+      document.getElementById("email")
+      .value
+      .trim();
 
-metadata.responsible_name =
-document.getElementById("responsible_name").value.trim();
 
-metadata.institutional_email =
-document.getElementById("institutional_email").value.trim();
+    const password =
+      document.getElementById("password")
+      .value;
 
-metadata.website_url =
-document.getElementById("institution_website").value.trim();
 
-metadata.description =
-document.getElementById("institution_description").value.trim();
+    const confirmPassword =
+      document.getElementById("confirmPassword")
+      .value;
 
-}
 
-const email = document.getElementById("email").value.trim();
-const password = document.getElementById("password").value;
+    const type =
+      typeSelect.value;
 
-try {
 
-const { data, error } = await client.auth.signUp({
+    /* VERIFICAR SENHAS */
 
-email: email,
+    if (password !== confirmPassword) {
 
-password: password,
+      showMessage(
+        "As senhas não coincidem.",
+        "error"
+      );
 
-options: {
-data: metadata,
+      button.disabled = false;
 
-emailRedirectTo:
-new URL("dashboard.html", window.location.href).href
-}
+      button.textContent =
+        "Criar minha conta";
 
-});
+      return;
 
-if (error) {
-throw error;
-}
+    }
 
-if (data.session) {
 
-window.location.href = "dashboard.html";
+    /* VERIFICAR TAMANHO */
 
-} else {
+    if (password.length < 8) {
 
-showMessage(
-"Cadastro realizado! Verifique seu e-mail para confirmar a conta antes de entrar.",
-"success"
+      showMessage(
+        "A senha precisa ter pelo menos 8 caracteres.",
+        "error"
+      );
+
+      button.disabled = false;
+
+      button.textContent =
+        "Criar minha conta";
+
+      return;
+
+    }
+
+
+    /* METADADOS BÁSICOS */
+
+    const metadata = {
+
+      full_name: name,
+
+      tipo_de_perfil: type
+
+    };
+
+
+    /* ESTUDANTE */
+
+    if (type === "estudante") {
+
+      metadata.school_name =
+        document
+          .getElementById("school_name")
+          .value
+          .trim();
+
+    }
+
+
+    /* EMPRESA */
+
+    if (type === "empresa") {
+
+      metadata.company_name =
+        document
+          .getElementById("company_name")
+          .value
+          .trim();
+
+
+      metadata.segment =
+        document
+          .getElementById("segment")
+          .value
+          .trim();
+
+    }
+
+
+    /* INSTITUIÇÃO */
+
+    if (type === "escola") {
+
+      metadata.institution_name =
+        document
+          .getElementById("institution_name")
+          .value
+          .trim();
+
+
+      metadata.institution_type =
+        document
+          .getElementById("institution_type")
+          .value;
+
+    }
+
+
+    try {
+
+      const {
+        data,
+        error
+      } = await client.auth.signUp({
+
+        email: email,
+
+        password: password,
+
+        options: {
+
+          data: metadata,
+
+          emailRedirectTo:
+            new URL(
+              "dashboard.html",
+              window.location.href
+            ).href
+
+        }
+
+      });
+
+
+      if (error) {
+
+        throw error;
+
+      }
+
+
+      /* SE JÁ ENTROU */
+
+      if (data.session) {
+
+        window.location.href =
+          "dashboard.html";
+
+        return;
+
+      }
+
+
+      /* CONFIRMAÇÃO DE E-MAIL */
+
+      showMessage(
+        "Cadastro realizado! Verifique seu e-mail para confirmar a conta antes de entrar.",
+        "success"
+      );
+
+
+      button.disabled = false;
+
+      button.textContent =
+        "Criar minha conta";
+
+
+    } catch (error) {
+
+      console.error(error);
+
+
+      showMessage(
+        "Não foi possível criar a conta: " +
+        error.message,
+        "error"
+      );
+
+
+      button.disabled = false;
+
+      button.textContent =
+        "Criar minha conta";
+
+    }
+
+  }
 );
-
-button.disabled = false;
-button.textContent = "Criar minha conta";
-
-}
-
-} catch (error) {
-
-console.error(error);
-
-showMessage(
-"Não foi possível criar a conta: " + error.message,
-"error"
-);
-
-button.disabled = false;
-button.textContent = "Criar minha conta";
-
-}
-
-});
 
 </script>
 
