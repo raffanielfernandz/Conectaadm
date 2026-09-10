@@ -2,52 +2,50 @@
 <html lang="pt-BR">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Dashboard | Conecta ADM</title>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Dashboard • Conecta ADM</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script src="supabase-config.js"></script>
+
 
   <style>
 
-    /* =========================
-       PALETA CONECTA ADM
-    ========================= */
+    :root{
+      --bg:#070b14;
+      --bg2:#0b1120;
+      --card:#0d1525;
+      --card2:#111c30;
+      --line:#1c2b46;
 
-    :root {
-      --bg: #070b14;
-      --bg2: #0b1120;
+      --blue:#5d8cff;
+      --blue2:#3d6fe8;
+      --purple:#8b5cf6;
 
-      --card: #0d1525;
-      --card2: #111c30;
-
-      --line: #1c2b46;
-
-      --blue: #5d8cff;
-      --blue2: #3d6fe8;
-      --purple: #8b5cf6;
-
-      --text: #f5f7ff;
-      --muted: #9aa8bd;
-      --muted2: #6f7e95;
+      --text:#f5f7ff;
+      --muted:#9aa8bd;
+      --muted2:#6f7e95;
     }
 
 
-    /* =========================
-       RESET
-    ========================= */
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
 
-    body {
-      font-family: Arial, Helvetica, sans-serif;
+    body{
+
+      font-family:Arial,Helvetica,sans-serif;
 
       background:
         radial-gradient(
@@ -57,204 +55,128 @@
         ),
         var(--bg);
 
-      color: var(--text);
+      color:var(--text);
 
-      min-height: 100vh;
+      min-height:100vh;
 
-      line-height: 1.6;
-    }
+      line-height:1.6;
 
-    button,
-    a {
-      font-family: inherit;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
     }
 
 
-    /* =========================
-       HEADER
-    ========================= */
+    header{
 
-    header {
-      position: sticky;
-      top: 0;
+      position:sticky;
 
-      z-index: 900;
+      top:0;
 
-      height: 72px;
+      z-index:900;
 
-      background: rgba(7,11,20,.78);
+      background:rgba(7,11,20,.78);
 
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+      backdrop-filter:blur(14px);
 
-      border-bottom: 1px solid rgba(255,255,255,.05);
-    }
+      border-bottom:1px solid rgba(255,255,255,.05);
 
-    .header-content {
-      max-width: 1200px;
-
-      height: 100%;
-
-      margin: auto;
-
-      padding: 0 24px;
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: space-between;
     }
 
 
-    /* =========================
-       LOGO
-    ========================= */
+    .header-inner{
 
-    .logo {
-      display: flex;
+      width:min(1100px,92%);
 
-      align-items: center;
+      height:70px;
 
-      gap: 10px;
+      margin:auto;
 
-      font-size: 20px;
+      display:flex;
 
-      font-weight: 800;
+      align-items:center;
 
-      letter-spacing: -.4px;
-    }
+      justify-content:space-between;
 
-    .logo-icon {
-      width: 36px;
-      height: 36px;
-
-      border-radius: 10px;
-
-      display: flex;
-
-      align-items: center;
-      justify-content: center;
-
-      background:
-        linear-gradient(
-          135deg,
-          var(--blue),
-          var(--blue2)
-        );
-
-      box-shadow:
-        0 8px 25px rgba(61,111,232,.22);
-
-      font-size: 17px;
-      font-weight: 900;
     }
 
 
-    /* =========================
-       HEADER BUTTON
-    ========================= */
+    .logo{
 
-    .logout-top {
-      padding: 9px 16px;
+      color:white;
 
-      border-radius: 9px;
+      text-decoration:none;
 
-      border: 1px solid #273853;
+      font-size:22px;
 
-      background: rgba(255,255,255,.025);
+      font-weight:800;
 
-      color: #dce5f7;
-
-      cursor: pointer;
-
-      transition: .2s;
-    }
-
-    .logout-top:hover {
-      border-color: #4775e8;
-
-      background: rgba(93,140,255,.08);
-
-      transform: translateY(-1px);
     }
 
 
-    /* =========================
-       MAIN
-    ========================= */
+    .logout-top{
 
-    main {
-      max-width: 1200px;
+      border:1px solid #263853;
 
-      margin: auto;
+      background:transparent;
 
-      padding: 50px 24px 70px;
+      color:#dce5f7;
+
+      padding:9px 14px;
+
+      border-radius:9px;
+
+      font-weight:700;
+
+      cursor:pointer;
+
+      transition:.2s;
+
     }
 
 
-    /* =========================
-       WELCOME
-    ========================= */
+    .logout-top:hover{
 
-    .welcome {
-      margin-bottom: 28px;
-    }
+      border-color:#4775e8;
 
-    .welcome h1 {
-      font-size: clamp(30px, 5vw, 44px);
+      background:rgba(93,140,255,.08);
 
-      line-height: 1.1;
-
-      margin-bottom: 10px;
-
-      letter-spacing: -.8px;
-    }
-
-    .welcome h1 span {
-      color: var(--blue);
-    }
-
-    .welcome p {
-      color: var(--muted);
-
-      font-size: 16px;
-
-      max-width: 650px;
     }
 
 
-    /* =========================
-       SECTION TITLE
-    ========================= */
+    main{
 
-    .section-title {
-      margin-bottom: 18px;
-    }
+      width:min(1100px,92%);
 
-    .section-title h2 {
-      font-size: 23px;
+      margin:40px auto 70px;
 
-      margin-bottom: 5px;
-    }
-
-    .section-title p {
-      color: var(--muted2);
-
-      font-size: 14px;
     }
 
 
-    /* =========================
-       PROFILE CARD
-    ========================= */
+    .welcome{
 
-    .profile-card {
+      margin-bottom:28px;
+
+    }
+
+
+    .welcome h1{
+
+      font-size:30px;
+
+      margin-bottom:5px;
+
+    }
+
+
+    .welcome p{
+
+      color:var(--muted);
+
+      font-size:15px;
+
+    }
+
+
+    .profile-card{
+
       background:
         linear-gradient(
           145deg,
@@ -262,486 +184,436 @@
           rgba(10,17,30,.96)
         );
 
-      border: 1px solid var(--line);
+      border:1px solid #203452;
 
-      border-radius: 18px;
+      border-radius:18px;
 
-      padding: 26px;
+      padding:25px;
 
-      margin-bottom: 42px;
+      box-shadow:
+        0 20px 60px rgba(0,0,0,.25);
 
-      position: relative;
+      margin-bottom:35px;
 
-      overflow: hidden;
-    }
-
-    .profile-card::before {
-      content: "";
-
-      position: absolute;
-
-      width: 300px;
-      height: 300px;
-
-      top: -180px;
-      right: -120px;
-
-      background:
-        radial-gradient(
-          circle,
-          rgba(93,140,255,.10),
-          transparent 65%
-        );
-
-      pointer-events: none;
     }
 
 
-    /* =========================
-       PROFILE HEADER
-    ========================= */
+    .profile-header{
 
-    .profile-header {
-      display: flex;
+      display:flex;
 
-      align-items: flex-start;
+      align-items:center;
 
-      justify-content: space-between;
+      justify-content:space-between;
 
-      gap: 20px;
+      gap:15px;
 
-      margin-bottom: 26px;
+      margin-bottom:25px;
 
-      position: relative;
-
-      z-index: 1;
     }
 
-    .profile-top {
-      display: flex;
 
-      align-items: center;
+    .profile-header h2{
 
-      gap: 18px;
+      font-size:21px;
+
     }
 
-    .avatar {
-      width: 70px;
-      height: 70px;
 
-      border-radius: 18px;
+    .edit-profile-button{
 
-      display: flex;
+      display:inline-flex;
 
-      align-items: center;
-      justify-content: center;
+      align-items:center;
+
+      justify-content:center;
+
+      padding:9px 13px;
+
+      border-radius:9px;
+
+      border:1px solid #263853;
+
+      background:rgba(255,255,255,.025);
+
+      color:#dce5f7;
+
+      text-decoration:none;
+
+      font-size:13px;
+
+      font-weight:700;
+
+      transition:.2s;
+
+      white-space:nowrap;
+
+    }
+
+
+    .edit-profile-button:hover{
+
+      border-color:#4775e8;
+
+      background:rgba(93,140,255,.08);
+
+    }
+
+
+    .profile-main{
+
+      display:flex;
+
+      align-items:center;
+
+      gap:18px;
+
+      margin-bottom:25px;
+
+    }
+
+
+    .avatar{
+
+      width:64px;
+
+      height:64px;
+
+      flex-shrink:0;
+
+      border-radius:50%;
+
+      display:flex;
+
+      align-items:center;
+
+      justify-content:center;
 
       background:
         linear-gradient(
           135deg,
           var(--blue),
-          var(--blue2)
+          var(--purple)
         );
 
-      color: white;
+      color:white;
 
-      font-size: 28px;
+      font-size:22px;
 
-      font-weight: 800;
+      font-weight:800;
 
-      flex-shrink: 0;
-
-      box-shadow:
-        0 12px 30px rgba(61,111,232,.18);
-    }
-
-    .profile-name {
-      font-size: 23px;
-
-      font-weight: 750;
-
-      margin-bottom: 3px;
-    }
-
-    .profile-email {
-      color: var(--muted);
-
-      font-size: 14px;
     }
 
 
-    /* =========================
-       EDIT BUTTON
-    ========================= */
+    .profile-name{
 
-    .edit-profile-button {
-      display: inline-flex;
+      font-size:19px;
 
-      align-items: center;
-      justify-content: center;
+      font-weight:800;
 
-      gap: 7px;
+      margin-bottom:2px;
 
-      padding: 10px 14px;
-
-      border-radius: 9px;
-
-      background: rgba(93,140,255,.08);
-
-      border: 1px solid rgba(93,140,255,.25);
-
-      color: #dce5f7;
-
-      font-size: 13px;
-
-      font-weight: 700;
-
-      cursor: pointer;
-
-      transition: .2s;
-
-      white-space: nowrap;
-    }
-
-    .edit-profile-button:hover {
-      background: rgba(93,140,255,.14);
-
-      border-color: #4775e8;
-
-      transform: translateY(-1px);
     }
 
 
-    /* =========================
-       PROFILE DATA
-    ========================= */
+    .profile-email{
 
-    .profile-info {
-      display: grid;
+      color:var(--muted);
+
+      font-size:14px;
+
+      word-break:break-word;
+
+    }
+
+
+    .profile-grid{
+
+      display:grid;
 
       grid-template-columns:
-        repeat(2, 1fr);
+        repeat(2,minmax(0,1fr));
 
-      gap: 14px;
+      gap:12px;
 
-      position: relative;
-
-      z-index: 1;
-    }
-
-    .info-box {
-      background: rgba(7,11,20,.45);
-
-      border: 1px solid #1b2b46;
-
-      border-radius: 12px;
-
-      padding: 15px;
-    }
-
-    .info-label {
-      display: block;
-
-      color: var(--muted2);
-
-      font-size: 12px;
-
-      margin-bottom: 4px;
-
-      text-transform: uppercase;
-
-      letter-spacing: .5px;
-    }
-
-    .info-value {
-      color: var(--text);
-
-      font-size: 15px;
-
-      font-weight: 600;
-
-      word-break: break-word;
     }
 
 
-    /* =========================
-       DEVELOPMENT CARDS
-    ========================= */
+    .info-box{
 
-    .development-grid {
-      display: grid;
+      background:
+        rgba(255,255,255,.025);
+
+      border:1px solid #1c2b46;
+
+      border-radius:12px;
+
+      padding:15px;
+
+      min-width:0;
+
+    }
+
+
+    .info-label{
+
+      color:var(--muted2);
+
+      font-size:12px;
+
+      font-weight:700;
+
+      text-transform:uppercase;
+
+      letter-spacing:.4px;
+
+      margin-bottom:4px;
+
+    }
+
+
+    .info-value{
+
+      color:#edf2ff;
+
+      font-size:14px;
+
+      font-weight:700;
+
+      word-break:break-word;
+
+    }
+
+
+    .coming-title{
+
+      font-size:21px;
+
+      margin-bottom:17px;
+
+    }
+
+
+    .coming-grid{
+
+      display:grid;
 
       grid-template-columns:
-        repeat(2, 1fr);
+        repeat(4,minmax(0,1fr));
 
-      gap: 18px;
-    }
+      gap:14px;
 
-    .development-card {
-      background: var(--card);
-
-      border: 1px solid var(--line);
-
-      border-radius: 16px;
-
-      padding: 22px;
-
-      position: relative;
-
-      overflow: hidden;
-
-      transition: .2s;
-    }
-
-    .development-card:hover {
-      transform: translateY(-2px);
-
-      border-color: #2b4270;
-    }
-
-    .development-icon {
-      width: 44px;
-      height: 44px;
-
-      border-radius: 12px;
-
-      display: flex;
-
-      align-items: center;
-      justify-content: center;
-
-      background: rgba(93,140,255,.08);
-
-      border: 1px solid rgba(93,140,255,.15);
-
-      color: var(--blue);
-
-      margin-bottom: 15px;
-
-      font-size: 19px;
-    }
-
-    .development-card h3 {
-      font-size: 17px;
-
-      margin-bottom: 7px;
-    }
-
-    .development-card p {
-      color: var(--muted);
-
-      font-size: 14px;
-
-      margin-bottom: 15px;
-    }
-
-    .status {
-      display: inline-flex;
-
-      align-items: center;
-
-      padding: 5px 9px;
-
-      border-radius: 7px;
-
-      background: rgba(93,140,255,.08);
-
-      border: 1px solid rgba(93,140,255,.14);
-
-      color: #8faeff;
-
-      font-size: 11px;
-
-      font-weight: 700;
-
-      text-transform: uppercase;
-
-      letter-spacing: .4px;
     }
 
 
-    /* =========================
-       BOTTOM LOGOUT
-    ========================= */
+    .coming-card{
 
-    .logout-area {
-      margin-top: 42px;
+      background:#0d1525;
 
-      display: flex;
+      border:1px solid #1c2b46;
 
-      justify-content: center;
-    }
+      border-radius:14px;
 
-    .logout-button {
-      display: inline-flex;
+      padding:20px;
 
-      align-items: center;
-      justify-content: center;
+      min-height:145px;
 
-      padding: 13px 21px;
-
-      border-radius: 10px;
-
-      background: transparent;
-
-      color: #dce5f7;
-
-      font-weight: 700;
-
-      border: 1px solid #263853;
-
-      cursor: pointer;
-
-      transition: .2s;
-    }
-
-    .logout-button:hover {
-      border-color: #4775e8;
-
-      background: rgba(93,140,255,.08);
-
-      transform: translateY(-2px);
     }
 
 
-    /* =========================
-       LOADING
-    ========================= */
+    .coming-card h3{
 
-    .loading {
-      text-align: center;
+      font-size:16px;
 
-      padding: 100px 20px;
+      margin-bottom:7px;
 
-      color: var(--muted);
     }
 
 
-    /* =========================
-       FOOTER
-    ========================= */
+    .coming-card p{
 
-    footer {
-      border-top: 1px solid #142238;
+      color:var(--muted);
 
-      padding: 25px 20px;
+      font-size:13px;
 
-      text-align: center;
-
-      color: #66768e;
-
-      font-size: 13px;
-    }
-
-    footer strong {
-      color: #8494ac;
     }
 
 
-    /* =========================
-       RESPONSIVE
-    ========================= */
+    .status{
 
-    @media (max-width: 800px) {
+      display:inline-block;
 
-      .development-grid {
-        grid-template-columns: 1fr;
+      margin-top:15px;
+
+      padding:5px 9px;
+
+      border-radius:7px;
+
+      background:rgba(93,140,255,.08);
+
+      border:1px solid rgba(93,140,255,.16);
+
+      color:#9db7ff;
+
+      font-size:11px;
+
+      font-weight:700;
+
+    }
+
+
+    .logout-bottom{
+
+      margin-top:35px;
+
+      width:100%;
+
+      min-height:46px;
+
+      border-radius:10px;
+
+      border:1px solid #263853;
+
+      background:transparent;
+
+      color:#dce5f7;
+
+      font-size:14px;
+
+      font-weight:750;
+
+      cursor:pointer;
+
+      transition:.2s;
+
+    }
+
+
+    .logout-bottom:hover{
+
+      border-color:#4775e8;
+
+      background:rgba(93,140,255,.08);
+
+    }
+
+
+    footer{
+
+      border-top:1px solid #142238;
+
+      padding:25px 20px;
+
+      text-align:center;
+
+      color:#66768e;
+
+      font-size:13px;
+
+    }
+
+
+    .loading{
+
+      text-align:center;
+
+      color:var(--muted);
+
+      padding:80px 20px;
+
+    }
+
+
+    @media(max-width:850px){
+
+      .coming-grid{
+
+        grid-template-columns:
+          repeat(2,minmax(0,1fr));
+
       }
 
     }
 
 
-    @media (max-width: 600px) {
+    @media(max-width:600px){
 
-      header {
-        height: 64px;
+      main{
+
+        margin-top:28px;
+
       }
 
-      .header-content {
-        padding: 0 16px;
+
+      .welcome h1{
+
+        font-size:25px;
+
       }
 
-      main {
-        padding: 35px 16px 55px;
+
+      .profile-card{
+
+        padding:19px;
+
       }
 
-      .logo {
-        font-size: 18px;
+
+      .profile-header{
+
+        align-items:flex-start;
+
       }
 
-      .logo-icon {
-        width: 33px;
-        height: 33px;
+
+      .profile-main{
+
+        align-items:flex-start;
+
       }
 
-      .welcome {
-        margin-bottom: 24px;
+
+      .profile-grid{
+
+        grid-template-columns:1fr;
+
       }
 
-      .welcome h1 {
-        font-size: 31px;
+
+      .coming-grid{
+
+        grid-template-columns:1fr;
+
       }
 
-      .profile-card {
-        padding: 20px;
-      }
 
-      .profile-header {
-        flex-direction: column;
+      .edit-profile-button{
 
-        gap: 18px;
-      }
+        font-size:12px;
 
-      .profile-top {
-        align-items: flex-start;
-      }
+        padding:8px 10px;
 
-      .avatar {
-        width: 58px;
-        height: 58px;
-
-        border-radius: 15px;
-
-        font-size: 23px;
-      }
-
-      .profile-name {
-        font-size: 19px;
-      }
-
-      .edit-profile-button {
-        width: 100%;
-      }
-
-      .profile-info {
-        grid-template-columns: 1fr;
       }
 
     }
 
   </style>
+
 </head>
 
 
 <body>
 
 
-  <!-- =========================
-       HEADER
-  ========================= -->
-
   <header>
 
-    <div class="header-content">
+    <div class="header-inner">
 
-      <a href="index.html" class="logo">
-
-        <div class="logo-icon">
-          C
-        </div>
-
-        <span>Conecta ADM</span>
-
+      <a
+        href="index.html"
+        class="logo"
+      >
+        Conecta ADM
       </a>
 
 
@@ -757,410 +629,454 @@
   </header>
 
 
-
-  <!-- =========================
-       MAIN
-  ========================= -->
-
   <main id="mainContent">
 
     <div class="loading">
-      Carregando seu painel...
+
+      Carregando seu dashboard...
+
     </div>
 
   </main>
 
 
-
-  <!-- =========================
-       FOOTER
-  ========================= -->
-
   <footer>
 
-    <strong>Conecta ADM</strong>
-
-    <br>
-
-    Conectando estudantes, empresas e instituições.
+    © 2026 Conecta ADM • Projeto acadêmico
 
   </footer>
 
 
-
-  <!-- =========================
-       SUPABASE
-  ========================= -->
-
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-  <script src="supabase-config.js"></script>
-
-
   <script>
 
-    const client = window.supabase.createClient(
-      window.SUPABASE_URL,
-      window.SUPABASE_PUBLISHABLE_KEY
-    );
 
+    const client =
+      window.supabase.createClient(
+        window.SUPABASE_URL,
+        window.SUPABASE_PUBLISHABLE_KEY
+      );
 
-    /* =========================
-       ELEMENTOS
-    ========================= */
 
     const mainContent =
-      document.getElementById("mainContent");
+      document.getElementById(
+        "mainContent"
+      );
 
-    const logoutTop =
-      document.getElementById("logoutTop");
 
-
-    /* =========================
-       LOGOUT
-    ========================= */
-
-    async function logout() {
+    async function logout(){
 
       await client.auth.signOut();
 
-      window.location.href = "index.html";
+      window.location.href =
+        "index.html";
 
     }
 
-    logoutTop.addEventListener(
-      "click",
-      logout
-    );
+
+    document
+      .getElementById("logoutTop")
+      .addEventListener(
+        "click",
+        logout
+      );
 
 
-    /* =========================
-       CARREGAR DASHBOARD
-    ========================= */
+    function formatPhone(value){
 
-    async function loadDashboard() {
+      const numbers =
+        String(value || "")
+          .replace(/\D/g,"")
+          .substring(0,11);
 
-      try {
 
-        /*
-          Verifica o usuário autenticado.
-        */
+      if(!numbers){
+
+        return "Não informado";
+
+      }
+
+
+      if(numbers.length <= 2){
+
+        return "(" + numbers;
+
+      }
+
+
+      if(numbers.length <= 7){
+
+        return "(" +
+          numbers.substring(0,2) +
+          ") " +
+          numbers.substring(2);
+
+      }
+
+
+      return "(" +
+        numbers.substring(0,2) +
+        ") " +
+        numbers.substring(2,7) +
+        "-" +
+        numbers.substring(7);
+
+    }
+
+
+    function profileTypeLabel(type){
+
+      if(type === "student"){
+
+        return "Estudante";
+
+      }
+
+
+      if(type === "empresa"){
+
+        return "Empresa";
+
+      }
+
+
+      if(
+        type === "institution" ||
+        type === "escola"
+      ){
+
+        return "Instituição";
+
+      }
+
+
+      return type || "Não informado";
+
+    }
+
+
+    function valueOrDefault(value){
+
+      if(
+        value === null ||
+        value === undefined ||
+        String(value).trim() === ""
+      ){
+
+        return "Não informado";
+
+      }
+
+
+      return escapeHTML(
+        String(value)
+      );
+
+    }
+
+
+    function createInfoBox(
+      label,
+      value
+    ){
+
+      return `
+
+        <div class="info-box">
+
+          <div class="info-label">
+            ${label}
+          </div>
+
+          <div class="info-value">
+            ${value}
+          </div>
+
+        </div>
+
+      `;
+
+    }
+
+
+    async function loadDashboard(){
+
+      try{
+
 
         const {
-          data: {
+
+          data:{
             user
+
           },
-          error: userError
-        } = await client.auth.getUser();
+
+          error:userError
+
+        } =
+          await client.auth.getUser();
 
 
-        if (userError || !user) {
+        if(
+          userError ||
+          !user
+        ){
 
-          window.location.href = "login.html";
+          window.location.href =
+            "login.html";
 
           return;
 
         }
 
-
-        /*
-          Busca os dados do perfil.
-        */
 
         const {
-          data: profile,
-          error: profileError
-        } = await client
-          .from("profiles")
-          .select("*")
-          .eq("id", user.id)
-          .single();
+
+          data:profile,
+
+          error:profileError
+
+        } =
+          await client
+
+            .from("profiles")
+
+            .select("*")
+
+            .eq("id",user.id)
+
+            .single();
 
 
-        if (profileError) {
+        if(profileError){
 
-          console.error(
-            "Erro ao buscar perfil:",
-            profileError
-          );
-
-          mainContent.innerHTML = `
-
-            <div class="loading">
-
-              <h2>
-                Não foi possível carregar seu perfil.
-              </h2>
-
-              <p style="margin-top:10px;">
-                Tente atualizar a página.
-              </p>
-
-            </div>
-
-          `;
-
-          return;
+          throw profileError;
 
         }
 
 
-        /*
-          Nome para o avatar.
-        */
+        const type =
+          profile.profile_type;
+
+
+        const typeLabel =
+          profileTypeLabel(type);
+
 
         const fullName =
-          profile?.full_name ||
-          user.email?.split("@")[0] ||
+          profile.full_name ||
+          user.user_metadata?.full_name ||
           "Usuário";
 
 
+        let profileInfos = "";
+
+
+        /*
+          Informações gerais
+        */
+
+
+        profileInfos +=
+          createInfoBox(
+            "Tipo de perfil",
+            escapeHTML(typeLabel)
+          );
+
+
+        profileInfos +=
+          createInfoBox(
+            "Telefone",
+            formatPhone(
+              profile.phone
+            )
+          );
+
+
+        profileInfos +=
+          createInfoBox(
+            "Estado",
+            valueOrDefault(
+              profile.state
+            )
+          );
+
+
+        profileInfos +=
+          createInfoBox(
+            "Cidade",
+            valueOrDefault(
+              profile.city
+            )
+          );
+
+
+        /*
+          Informações específicas
+          do tipo de perfil
+        */
+
+
+        if(type === "student"){
+
+          profileInfos +=
+            createInfoBox(
+              "Escola / Faculdade",
+              valueOrDefault(
+                profile.school
+              )
+            );
+
+        }
+
+
+        else if(type === "empresa"){
+
+          profileInfos +=
+            createInfoBox(
+              "Empresa",
+              valueOrDefault(
+                profile.company_name
+              )
+            );
+
+
+          profileInfos +=
+            createInfoBox(
+              "Segmento",
+              valueOrDefault(
+                profile.segment
+              )
+            );
+
+        }
+
+
+        else if(
+          type === "institution" ||
+          type === "escola"
+        ){
+
+          profileInfos +=
+            createInfoBox(
+              "Instituição",
+              valueOrDefault(
+                profile.institution_name
+              )
+            );
+
+
+          profileInfos +=
+            createInfoBox(
+              "Tipo de instituição",
+              valueOrDefault(
+                profile.institution_type
+              )
+            );
+
+        }
+
+
+        /*
+          Avatar
+        */
+
+
         const firstLetter =
-          fullName
+          String(fullName)
             .trim()
             .charAt(0)
             .toUpperCase();
 
 
-        /*
-          Dados do perfil.
-        */
-
-        const email =
-          profile?.email ||
-          user.email ||
-          "Não informado";
-
-
-        const profileType =
-          profile?.profile_type ||
-          "Não informado";
-
-
-        const phone =
-          profile?.phone ||
-          "Não informado";
-
-
-        const state =
-          profile?.state ||
-          "Não informado";
-
-
-        const city =
-          profile?.city ||
-          "Não informado";
-
-
-        /*
-          Traduz alguns tipos de perfil.
-        */
-
-        let typeLabel = profileType;
-
-
-        if (profileType === "student") {
-          typeLabel = "Estudante";
-        }
-
-        if (profileType === "empresa") {
-          typeLabel = "Empresa";
-        }
-
-        if (profileType === "institution") {
-          typeLabel = "Instituição";
-        }
-
-
-        /* =========================
-           HTML DO DASHBOARD
-        ========================= */
-
         mainContent.innerHTML = `
 
-          <!-- WELCOME -->
-
-          <section class="welcome">
+          <div class="welcome">
 
             <h1>
-              Olá, <span>${escapeHTML(fullName)}</span> 👋
+              Olá, ${escapeHTML(fullName)} 👋
             </h1>
 
             <p>
               Bem-vindo ao seu espaço no Conecta ADM.
-              Aqui você poderá acompanhar seu perfil,
-              oportunidades e seu desenvolvimento.
             </p>
 
-          </section>
+          </div>
 
 
+          <section class="profile-card">
 
-          <!-- PROFILE -->
-
-          <section>
-
-            <div class="section-title">
+            <div class="profile-header">
 
               <h2>
                 Meu perfil
               </h2>
 
-              <p>
-                Confira e atualize as informações da sua conta.
-              </p>
+
+              <a
+                href="editar-perfil.html"
+                class="edit-profile-button"
+              >
+                ✏️ Editar perfil
+              </a>
 
             </div>
 
 
-            <div class="profile-card">
+            <div class="profile-main">
 
-
-              <div class="profile-header">
-
-
-                <div class="profile-top">
-
-                  <div class="avatar">
-
-                    ${escapeHTML(firstLetter)}
-
-                  </div>
-
-
-                  <div>
-
-                    <div class="profile-name">
-
-                      ${escapeHTML(fullName)}
-
-                    </div>
-
-                    <div class="profile-email">
-
-                      ${escapeHTML(email)}
-
-                    </div>
-
-                  </div>
-
-                </div>
-
-
-                <a
-                  href="editar-perfil.html"
-                  class="edit-profile-button"
-                >
-
-                  ✏️ Editar perfil
-
-                </a>
-
-
+              <div class="avatar">
+                ${escapeHTML(firstLetter)}
               </div>
 
 
+              <div>
 
-              <div class="profile-info">
-
-
-                <div class="info-box">
-
-                  <span class="info-label">
-                    Tipo de perfil
-                  </span>
-
-                  <span class="info-value">
-                    ${escapeHTML(typeLabel)}
-                  </span>
-
+                <div class="profile-name">
+                  ${escapeHTML(fullName)}
                 </div>
 
 
-                <div class="info-box">
-
-                  <span class="info-label">
-                    Telefone
-                  </span>
-
-                  <span class="info-value">
-                    ${escapeHTML(phone)}
-                  </span>
-
+                <div class="profile-email">
+                  ${escapeHTML(
+                    profile.email ||
+                    user.email ||
+                    ""
+                  )}
                 </div>
-
-
-                <div class="info-box">
-
-                  <span class="info-label">
-                    Estado
-                  </span>
-
-                  <span class="info-value">
-                    ${escapeHTML(state)}
-                  </span>
-
-                </div>
-
-
-                <div class="info-box">
-
-                  <span class="info-label">
-                    Cidade
-                  </span>
-
-                  <span class="info-value">
-                    ${escapeHTML(city)}
-                  </span>
-
-                </div>
-
 
               </div>
 
+            </div>
+
+
+            <div class="profile-grid">
+
+              ${profileInfos}
 
             </div>
 
           </section>
 
 
-
-          <!-- DEVELOPMENT -->
-
           <section>
 
-
-            <div class="section-title">
-
-              <h2>
-                O que vem por aí
-              </h2>
-
-              <p>
-                Novos recursos estão sendo
-                preparados para o Conecta ADM.
-              </p>
-
-            </div>
+            <h2 class="coming-title">
+              O que vem por aí
+            </h2>
 
 
-            <div class="development-grid">
+            <div class="coming-grid">
 
 
-              <div class="development-card">
-
-                <div class="development-icon">
-                  💼
-                </div>
+              <div class="coming-card">
 
                 <h3>
                   Oportunidades
                 </h3>
 
                 <p>
-                  Encontre vagas, estágios e
-                  oportunidades alinhadas ao
-                  seu perfil.
+                  Encontre oportunidades
+                  de estágio e trabalho.
                 </p>
 
                 <span class="status">
@@ -1170,20 +1086,15 @@
               </div>
 
 
-
-              <div class="development-card">
-
-                <div class="development-icon">
-                  📚
-                </div>
+              <div class="coming-card">
 
                 <h3>
                   Conteúdos
                 </h3>
 
                 <p>
-                  Acesse conteúdos para desenvolver
-                  suas habilidades profissionais.
+                  Conteúdos para ajudar
+                  no seu desenvolvimento.
                 </p>
 
                 <span class="status">
@@ -1193,20 +1104,15 @@
               </div>
 
 
-
-              <div class="development-card">
-
-                <div class="development-icon">
-                  🤝
-                </div>
+              <div class="coming-card">
 
                 <h3>
                   Conexões
                 </h3>
 
                 <p>
-                  Conecte-se com empresas,
-                  estudantes e instituições.
+                  Conecte-se com pessoas,
+                  empresas e instituições.
                 </p>
 
                 <span class="status">
@@ -1216,20 +1122,15 @@
               </div>
 
 
-
-              <div class="development-card">
-
-                <div class="development-icon">
-                  🚀
-                </div>
+              <div class="coming-card">
 
                 <h3>
                   Desenvolvimento
                 </h3>
 
                 <p>
-                  Acompanhe sua evolução e
-                  descubra novos caminhos profissionais.
+                  Acompanhe sua evolução
+                  profissional e acadêmica.
                 </p>
 
                 <span class="status">
@@ -1242,43 +1143,36 @@
             </div>
 
 
-          </section>
-
-
-
-          <!-- LOGOUT -->
-
-          <div class="logout-area">
-
             <button
-              class="logout-button"
+              class="logout-bottom"
               id="logoutBottom"
             >
-
               Sair da conta
-
             </button>
 
-          </div>
+
+          </section>
 
         `;
 
 
-                /*
-          Ativa o segundo botão de logout.
-        */
-
         document
-          .getElementById("logoutBottom")
+          .getElementById(
+            "logoutBottom"
+          )
           .addEventListener(
             "click",
             logout
           );
 
 
-      } catch (error) {
+      }
+
+
+      catch(error){
 
         console.error(error);
+
 
         mainContent.innerHTML = `
 
@@ -1301,27 +1195,40 @@
     }
 
 
-    /* =========================
-       SEGURANÇA CONTRA HTML
-    ========================= */
-
-    function escapeHTML(value) {
+    function escapeHTML(value){
 
       return String(value)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+
+        .replace(
+          /&/g,
+          "&amp;"
+        )
+
+        .replace(
+          /</g,
+          "&lt;"
+        )
+
+        .replace(
+          />/g,
+          "&gt;"
+        )
+
+        .replace(
+          /"/g,
+          "&quot;"
+        )
+
+        .replace(
+          /'/g,
+          "&#039;"
+        );
 
     }
 
 
-    /* =========================
-       INICIAR
-    ========================= */
-
     loadDashboard();
+
 
   </script>
 
