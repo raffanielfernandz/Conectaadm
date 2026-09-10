@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Editar perfil | Conecta ADM</title>
+
+
+  <style>
+
+    /* =========================
+       PALETA CONECTA ADM
+    ========================= */
+
+    :root {
+
+      --bg: #070b14;
+      --bg2: #0b1120;
+
+      --card: #0d1525;
+      --card2: #111c30;
+
+      --line: #1c2b46;
+
+      --blue: #5d8cff;
+      --blue2: #3d6fe8;
+      --purple: #8b5cf6;
+
+      --text: #f5f7ff;
+      --muted: #9aa8bd;
+      --muted2: #6f7e95;
+
+    }
+
+
+    /* =========================
+       RESET
+    ========================= */
+
+    * {
+
+      margin: 0;
+      padding: 0;
+
+      box-sizing: border-box;
+
+    }
+
+
+    body {
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+      background:
+        radial-gradient(
+          circle at 50% -10%,
+          rgba(61,111,232,.12),
+          transparent 35%
+        ),
+        var(--bg);
+
+      color: var(--text);
+
+      min-height: 100vh;
+
+      line-height: 1.6;
+
+    }
+
+
+    button,
+    input {
+
+      font-family: inherit;
+
+    }
+
+
+    a {
+
+      text-decoration: none;
+
+      color: inherit;
+
+    }
+
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    header {
+
+      height: 72px;
+
+      background:
+        rgba(7,11,20,.78);
+
+      backdrop-filter:
+        blur(14px);
+
+      -webkit-backdrop-filter:
+        blur(14px);
+
+      border-bottom:
+        1px solid rgba(255,255,255,.05);
+
+    }
+
+
+    .header-content {
+
+      max-width: 900px;
+
+      height: 100%;
+
+      margin: auto;
+
+      padding:
+        0 24px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content:
+        space-between;
+
+    }
+
+
+    /* =========================
+       LOGO
+    ========================= */
+
+    .logo {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 10px;
+
+      font-size: 20px;
+
+      font-weight: 800;
+
+    }
+
+
+    .logo-icon {
+
+      width: 36px;
+      height: 36px;
+
+      border-radius: 10px;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--blue),
+          var(--blue2)
+        );
+
+      box-shadow:
+        0 8px 25px
+        rgba(61,111,232,.22);
+
+      font-size: 17px;
+
+      font-weight: 900;
+
+    }
+
+
+    /* =========================
+       VOLTAR
+    ========================= */
+
+    .back-button {
+
+      padding:
+        9px 15px;
+
+      border-radius: 9px;
+
+      border:
+        1px solid #273853;
+
+      background:
+        rgba(255,255,255,.025);
+
+      color:
+        #dce5f7;
+
+      cursor: pointer;
+
+      transition: .2s;
+
+    }
+
+
+    .back-button:hover {
+
+      border-color:
+        #4775e8;
+
+      background:
+        rgba(93,140,255,.08);
+
+      transform:
+        translateY(-1px);
+
+    }
+
+
+    /* =========================
+       MAIN
+    ========================= */
+
+    main {
+
+      max-width: 760px;
+
+      margin: auto;
+
+      padding:
+        55px 24px 70px;
+
+    }
+
+
+    /* =========================
+       TITLE
+    ========================= */
+
+    .page-title {
+
+      margin-bottom: 28px;
+
+    }
+
+
+    .page-title h1 {
+
+      font-size:
+        clamp(30px, 5vw, 40px);
+
+      line-height: 1.1;
+
+      margin-bottom: 10px;
+
+      letter-spacing: -.7px;
+
+    }
+
+
+    .page-title h1 span {
+
+      color:
+        var(--blue);
+
+    }
+
+
+    .page-title p {
+
+      color:
+        var(--muted);
+
+      font-size: 15px;
+
+    }
+
+
+    /* =========================
+       CARD
+    ========================= */
+
+    .form-card {
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(17,28,48,.96),
+          rgba(10,17,30,.96)
+        );
+
+      border:
+        1px solid var(--line);
+
+      border-radius: 18px;
+
+      padding: 28px;
+
+      position: relative;
+
+      overflow: hidden;
+
+      box-shadow:
+        0 20px 60px
+        rgba(0,0,0,.18);
+
+    }
+
+
+    .form-card::before {
+
+      content: "";
+
+      position: absolute;
+
+      width: 320px;
+      height: 320px;
+
+      top: -190px;
+      right: -130px;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(93,140,255,.10),
+          transparent 65%
+        );
+
+      pointer-events: none;
+
+    }
+
+
+    /* =========================
+       FORM
+    ========================= */
+
+    .form-group {
+
+      margin-bottom: 20px;
+
+      position: relative;
+
+      z-index: 1;
+
+    }
+
+
+    .form-group label {
+
+      display: block;
+
+      margin-bottom: 7px;
+
+      color:
+        #dce5f7;
+
+      font-size: 14px;
+
+      font-weight: 700;
+
+    }
+
+
+    .form-group input {
+
+      width: 100%;
+
+      padding:
+        13px 14px;
+
+      border-radius: 10px;
+
+      border:
+        1px solid #263853;
+
+      background:
+        rgba(7,11,20,.55);
+
+      color:
+        var(--text);
+
+      outline: none;
+
+      font-size: 15px;
+
+      transition: .2s;
+
+    }
+
+
+    .form-group input:focus {
+
+      border-color:
+        #4775e8;
+
+      box-shadow:
+        0 0 0 3px
+        rgba(93,140,255,.08);
+
+    }
+
+
+    .form-group input:disabled {
+
+      opacity: .55;
+
+      cursor: not-allowed;
+
+    }
+
+
+    .form-help {
+
+      margin-top: 6px;
+
+      color:
+        var(--muted2);
+
+      font-size: 12px;
+
+    }
+
+
+    /* =========================
+       ACTIONS
+    ========================= */
+
+    .actions {
+
+      display: flex;
+
+      gap: 12px;
+
+      margin-top: 28px;
+
+      position: relative;
+
+      z-index: 1;
+
+    }
+
+
+    .save-button {
+
+      flex: 1;
+
+      padding:
+        13px 20px;
+
+      border-radius: 10px;
+
+      border:
+        1px solid #4775e8;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--blue),
+          var(--blue2)
+        );
+
+      color: white;
+
+      font-size: 15px;
+
+      font-weight: 750;
+
+      cursor: pointer;
+
+      box-shadow:
+        0 12px 30px
+        rgba(61,111,232,.18);
+
+      transition: .2s;
+
+    }
+
+
+    .save-button:hover {
+
+      transform:
+        translateY(-2px);
+
+      filter:
+        brightness(1.08);
+
+    }
+
+
+    .cancel-button {
+
+      padding:
+        13px 20px;
+
+      border-radius: 10px;
+
+      border:
+        1px solid #263853;
+
+      background:
+        transparent;
+
+      color:
+        #dce5f7;
+
+      font-size: 15px;
+
+      font-weight: 700;
+
+      cursor: pointer;
+
+      transition: .2s;
+
+    }
+
+
+    .cancel-button:hover {
+
+      border-color:
+        #4775e8;
+
+      background:
+        rgba(93,140,255,.08);
+
+    }
+
+
+    /* =========================
+       MESSAGE
+    ========================= */
+
+    .message {
+
+      display: none;
+
+      margin-top: 18px;
+
+      padding:
+        12px 14px;
+
+      border-radius: 10px;
+
+      font-size: 14px;
+
+    }
+
+
+    .message.success {
+
+      display: block;
+
+      color: #b8ffd0;
+
+      background:
+        rgba(52,211,153,.08);
+
+      border:
+        1px solid rgba(52,211,153,.20);
+
+    }
+
+
+    .message.error {
+
+      display: block;
+
+      color: #ffb8b8;
+
+      background:
+        rgba(248,113,113,.08);
+
+      border:
+        1px solid rgba(248,113,113,.20);
+
+    }
+
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+
+      border-top:
+        1px solid #142238;
+
+      padding:
+        25px 20px;
+
+      text-align:
+        center;
+
+      color:
+        #66768e;
+
+      font-size:
+        13px;
+
+    }
+
+
+    footer strong {
+
+      color:
+        #8494ac;
+
+    }
+
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 600px) {
+
+      header {
+
+        height: 64px;
+
+      }
+
+
+      .header-content {
+
+        padding:
+          0 16px;
+
+      }
+
+
+      .logo {
+
+        font-size: 18px;
+
+      }
+
+
+      .logo-icon {
+
+        width: 33px;
+        height: 33px;
+
+      }
+
+
+      .back-button {
+
+        padding:
+          8px 12px;
+
+        font-size: 13px;
+
+      }
+
+
+      main {
+
+        padding:
+          35px 16px 55px;
+
+      }
+
+
+      .form-card {
+
+        padding:
+          20px;
+
+      }
+
+
+      .actions {
+
+        flex-direction:
+          column-reverse;
+
+      }
+
+
+      .save-button,
+      .cancel-button {
+
+        width: 100%;
+
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- =========================
+       HEADER
+  ========================= -->
+
+  <header>
+
+    <div class="header-content">
+
+
+      <a
+        href="dashboard.html"
+        class="logo"
+      >
+
+        <div class="logo-icon">
+          C
+        </div>
+
+        <span>
+          Conecta ADM
+        </span>
+
+      </a>
+
+
+      <a
+        href="dashboard.html"
+        class="back-button"
+      >
+
+        ← Voltar
+
+      </a>
+
+
+    </div>
+
+  </header>
+
+
+
+  <!-- =========================
+       MAIN
+  ========================= -->
+
+  <main>
+
+
+    <div class="page-title">
+
+      <h1>
+        Editar <span>perfil</span>
+      </h1>
+
+      <p>
+        Atualize suas informações básicas
+        no Conecta ADM.
+      </p>
+
+    </div>
+
+
+
+    <!-- =========================
+         FORM CARD
+    ========================= -->
+
+    <div class="form-card">
+
+
+      <!-- NOME -->
+
+      <div class="form-group">
+
+        <label for="fullName">
+          Nome completo
+        </label>
+
+        <input
+          type="text"
+          id="fullName"
+          placeholder="Seu nome completo"
+          autocomplete="name"
+        >
+
+      </div>
+
+
+
+      <!-- EMAIL -->
+
+      <div class="form-group">
+
+        <label for="email">
+          E-mail
+        </label>
+
+        <input
+          type="email"
+          id="email"
+          disabled
+        >
+
+        <div class="form-help">
+          O e-mail da conta não pode ser alterado
+          por esta página.
+        </div>
+
+      </div>
+
+
+
+      <!-- TELEFONE -->
+
+      <div class="form-group">
+
+        <label for="phone">
+          Telefone
+        </label>
+
+        <input
+          type="tel"
+          id="phone"
+          placeholder="(00) 00000-0000"
+          autocomplete="tel"
+        >
+
+      </div>
+
+
+
+      <!-- ESTADO -->
+
+      <div class="form-group">
+
+        <label for="state">
+          Estado
+        </label>
+
+        <input
+          type="text"
+          id="state"
+          placeholder="Ex.: São Paulo"
+          autocomplete="address-level1"
+        >
+
+      </div>
+
+
+
+      <!-- CIDADE -->
+
+      <div class="form-group">
+
+        <label for="city">
+          Cidade
+        </label>
+
+        <input
+          type="text"
+          id="city"
+          placeholder="Ex.: Registro"
+          autocomplete="address-level2"
+        >
+
+      </div>
+
+
+
+      <!-- AÇÕES -->
+
+      <div class="actions">
+
+        <a
+          href="dashboard.html"
+          class="cancel-button"
+        >
+          Cancelar
+        </a>
+
+
+        <button
+          type="button"
+          class="save-button"
+          id="saveButton"
+        >
+          Salvar alterações
+        </button>
+
+      </div>
+
+
+
+      <!-- MENSAGEM -->
+
+      <div
+        class="message"
+        id="message"
+      ></div>
+
+
+    </div>
+
+  </main>
+
+
+
+  <!-- =========================
+       FOOTER
+  ========================= -->
+
+  <footer>
+
+    <strong>
+      Conecta ADM
+    </strong>
+
+    <br>
+
+    Conectando estudantes,
+    empresas e instituições.
+
+  </footer>
+
+
+
+  <!-- =========================
+       SUPABASE
+  ========================= -->
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script src="supabase-config.js"></script>
+
+
+  <script>
+
+    /* =========================
+       SUPABASE
+    ========================= */
+
+    const client =
+      window.supabase.createClient(
+        window.SUPABASE_URL,
+        window.SUPABASE_PUBLISHABLE_KEY
+      );
+
+
+    /* =========================
+       ELEMENTOS
+    ========================= */
+
+    const fullNameInput =
+      document.getElementById("fullName");
+
+    const emailInput =
+      document.getElementById("email");
+
+    const phoneInput =
+      document.getElementById("phone");
+
+    const stateInput =
+      document.getElementById("state");
+
+    const cityInput =
+      document.getElementById("city");
+
+    const saveButton =
+      document.getElementById("saveButton");
+
+    const message =
+      document.getElementById("message");
+
+
+    /* =========================
+       MENSAGEM
+    ========================= */
+
+    function showMessage(
+      text,
+      type
+    ) {
+
+      message.textContent = text;
+
+      message.className =
+        "message " + type;
+
+    }
+
+
+    /* =========================
+       CARREGAR PERFIL
+    ========================= */
+
+    async function loadProfile() {
+
+      try {
+
+        const {
+          data: {
+            user
+          },
+          error: userError
+        } =
+          await client.auth.getUser();
+
+
+        if (
+          userError ||
+          !user
+        ) {
+
+          window.location.href =
+            "login.html";
+
+          return;
+
+        }
+
+
+        const {
+          data: profile,
+          error: profileError
+        } =
+          await client
+            .from("profiles")
+            .select("*")
+            .eq("id", user.id)
+            .single();
+
+
+        if (profileError) {
+
+          console.error(
+            profileError
+          );
+
+          showMessage(
+            "Não foi possível carregar seu perfil.",
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        /* =========================
+           PREENCHER CAMPOS
+        ========================= */
+
+        fullNameInput.value =
+          profile?.full_name || "";
+
+
+        emailInput.value =
+          profile?.email ||
+          user.email ||
+          "";
+
+
+        phoneInput.value =
+          profile?.phone || "";
+
+
+        stateInput.value =
+          profile?.state || "";
+
+
+        cityInput.value =
+          profile?.city || "";
+
+
+      } catch (error) {
+
+        console.error(error);
+
+        showMessage(
+          "Ocorreu um erro ao carregar seu perfil.",
+          "error"
+        );
+
+      }
+
+    }
+
+
+    /* =========================
+       SALVAR PERFIL
+    ========================= */
+
+    async function saveProfile() {
+
+      try {
+
+        saveButton.disabled =
+          true;
+
+        saveButton.textContent =
+          "Salvando...";
+
+
+        message.className =
+          "message";
+
+
+        const {
+          data: {
+            user
+          },
+          error: userError
+        } =
+          await client.auth.getUser();
+
+
+        if (
+          userError ||
+          !user
+        ) {
+
+          window.location.href =
+            "login.html";
+
+          return;
+
+        }
+
+
+        /* =========================
+           DADOS
+        ========================= */
+
+        const updatedData = {
+
+          full_name:
+            fullNameInput.value.trim(),
+
+          phone:
+            phoneInput.value.trim(),
+
+          state:
+            stateInput.value.trim(),
+
+          city:
+            cityInput.value.trim(),
+
+          updated_at:
+            new Date().toISOString()
+
+        };
+
+
+        /* =========================
+           ATUALIZAR PROFILES
+        ========================= */
+
+        const {
+          error
+        } =
+          await client
+            .from("profiles")
+            .update(updatedData)
+            .eq("id", user.id);
+
+
+        if (error) {
+
+          console.error(error);
+
+          showMessage(
+            "Não foi possível salvar as alterações.",
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        /* =========================
+           SUCESSO
+        ========================= */
+
+        showMessage(
+          "Perfil atualizado com sucesso! ✅",
+          "success"
+        );
+
+
+        /*
+          Depois de salvar,
+          voltamos para o dashboard.
+        */
+
+        setTimeout(() => {
+
+          window.location.href =
+            "dashboard.html";
+
+        }, 900);
+
+
+      } catch (error) {
+
+        console.error(error);
+
+        showMessage(
+          "Ocorreu um erro ao salvar seu perfil.",
+          "error"
+        );
+
+      } finally {
+
+        saveButton.disabled =
+          false;
+
+        saveButton.textContent =
+          "Salvar alterações";
+
+      }
+
+    }
+
+
+    /* =========================
+       EVENTO
+    ========================= */
+
+    saveButton.addEventListener(
+      "click",
+      saveProfile
+    );
+
+
+    /* =========================
+       INICIAR
+    ========================= */
+
+    loadProfile();
+
+  </script>
+
+
+</body>
+
+</html>
