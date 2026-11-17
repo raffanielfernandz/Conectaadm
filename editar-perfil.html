@@ -421,6 +421,103 @@
 
     }
 
+
+    .avatar-area{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:10px;
+      padding:8px 0 4px;
+    }
+    .avatar-preview{
+      width:148px;
+      height:148px;
+      flex:none;
+      border-radius:50%;
+      border:3px solid #4775e8;
+      background:#343b4b;
+      color:white;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      font-size:52px;
+      font-weight:700;
+      padding:0;
+      cursor:pointer;
+      box-shadow:0 8px 26px rgba(0,0,0,.28);
+    }
+    .avatar-preview img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+    .avatar-hint{
+      color:var(--muted);
+      font-size:13px;
+      text-align:center;
+    }
+    .avatar-modal{
+      position:fixed;
+      inset:0;
+      z-index:2000;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:22px;
+      background:rgba(0,0,0,.88);
+      backdrop-filter:blur(8px);
+    }
+    .avatar-modal.open{display:flex;}
+    .avatar-modal-content{
+      width:min(520px,100%);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:18px;
+    }
+    .avatar-modal-image{
+      display:block;
+      max-width:min(88vw,480px);
+      max-height:68vh;
+      width:auto;
+      height:auto;
+      object-fit:contain;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.16);
+    }
+    .avatar-modal-fallback{
+      width:min(78vw,360px);
+      aspect-ratio:1;
+      border-radius:50%;
+      background:#343b4b;
+      border:3px solid #4775e8;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:100px;
+      font-weight:700;
+    }
+    .avatar-modal-actions{
+      width:100%;
+      display:flex;
+      gap:12px;
+    }
+    .avatar-modal-actions button{min-height:48px;}
+    .avatar-close{
+      position:absolute;
+      top:18px;
+      right:20px;
+      width:44px;
+      height:44px;
+      min-height:44px;
+      flex:none;
+      border:1px solid rgba(255,255,255,.25);
+      background:rgba(255,255,255,.10);
+      box-shadow:none;
+      font-size:25px;
+    }
+
     @media(max-width:600px){
 
       main{
@@ -501,16 +598,14 @@
 
           <div class="field">
             <label>Foto de perfil</label>
-            <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
-              <div id="avatarPreview" style="width:88px;height:88px;border-radius:50%;background:#343b4b;color:white;display:flex;align-items:center;justify-content:center;font-size:34px;font-weight:700;overflow:hidden;border:2px solid #4775e8;">
+            <div class="avatar-area">
+              <button type="button" id="avatarPreview" class="avatar-preview" aria-label="Ampliar foto de perfil">
                 <span id="avatarInitial">?</span>
-                <img id="avatarImage" alt="Foto de perfil" style="width:100%;height:100%;object-fit:cover;display:none;">
-              </div>
-              <div style="flex:1;min-width:180px;">
-                <input type="file" id="avatarFile" accept="image/*" style="padding:10px;">
-                <small style="display:block;color:#9aa8bd;margin-top:7px;">Escolha uma imagem JPG, PNG ou WEBP.</small>
-              </div>
+                <img id="avatarImage" alt="Foto de perfil" style="display:none;">
+              </button>
+              <p class="avatar-hint">Toque na foto para visualizar e editar.</p>
             </div>
+            <input type="file" id="avatarFile" accept="image/*" hidden>
           </div>
 
           <div class="field">
@@ -769,6 +864,18 @@
   </main>
 
 
+
+  <div id="avatarModal" class="avatar-modal" role="dialog" aria-modal="true" aria-label="Foto de perfil">
+    <button type="button" id="closeAvatarModal" class="avatar-close" aria-label="Fechar">×</button>
+    <div class="avatar-modal-content">
+      <img id="avatarModalImage" class="avatar-modal-image" alt="Foto de perfil ampliada" style="display:none;">
+      <div id="avatarModalFallback" class="avatar-modal-fallback">?</div>
+      <div class="avatar-modal-actions">
+        <button type="button" id="editAvatarButton">Editar foto</button>
+      </div>
+    </div>
+  </div>
+
   <script>
 
     const client =
@@ -843,12 +950,19 @@
     let currentAvatarUrl = null;
 
     const avatarFileInput = document.getElementById("avatarFile");
+    const avatarPreview = document.getElementById("avatarPreview");
     const avatarImage = document.getElementById("avatarImage");
     const avatarInitial = document.getElementById("avatarInitial");
+    const avatarModal = document.getElementById("avatarModal");
+    const avatarModalImage = document.getElementById("avatarModalImage");
+    const avatarModalFallback = document.getElementById("avatarModalFallback");
+    const closeAvatarModal = document.getElementById("closeAvatarModal");
+    const editAvatarButton = document.getElementById("editAvatarButton");
 
     function updateAvatarPreview(url, name){
       const initial = (name || "?").trim().charAt(0).toUpperCase() || "?";
       avatarInitial.textContent = initial;
+      avatarModalFallback.textContent = initial;
       if(url){
         avatarImage.src = url;
         avatarImage.style.display = "block";
@@ -856,9 +970,44 @@
       }else{
         avatarImage.removeAttribute("src");
         avatarImage.style.display = "none";
-        avatarInitial.style.display = "block";
+        avatarInitial.style.display = "flex";
+      }
+      updateAvatarModal(url, initial);
+    }
+
+    function updateAvatarModal(url, initial){
+      avatarModalFallback.textContent = initial || "?";
+      if(url){
+        avatarModalImage.src = url;
+        avatarModalImage.style.display = "block";
+        avatarModalFallback.style.display = "none";
+      }else{
+        avatarModalImage.removeAttribute("src");
+        avatarModalImage.style.display = "none";
+        avatarModalFallback.style.display = "flex";
       }
     }
+
+    function openAvatarModal(){
+      updateAvatarModal(currentAvatarUrl || (avatarFileInput.files[0] ? avatarImage.src : null), avatarInitial.textContent);
+      avatarModal.classList.add("open");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeAvatarPreview(){
+      avatarModal.classList.remove("open");
+      document.body.style.overflow = "";
+    }
+
+    avatarPreview.addEventListener("click", openAvatarModal);
+    closeAvatarModal.addEventListener("click", closeAvatarPreview);
+    avatarModal.addEventListener("click", (event) => {
+      if(event.target === avatarModal) closeAvatarPreview();
+    });
+    editAvatarButton.addEventListener("click", () => avatarFileInput.click());
+    document.addEventListener("keydown", (event) => {
+      if(event.key === "Escape") closeAvatarPreview();
+    });
 
     fullNameInput.addEventListener("input", () => {
       if(!currentAvatarUrl && !avatarFileInput.files.length){
@@ -883,7 +1032,9 @@
         return;
       }
       const previewUrl = URL.createObjectURL(file);
+      currentAvatarUrl = previewUrl;
       updateAvatarPreview(previewUrl, fullNameInput.value);
+      closeAvatarPreview();
     });
 
 
