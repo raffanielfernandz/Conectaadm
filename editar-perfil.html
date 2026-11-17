@@ -504,6 +504,15 @@
       gap:12px;
     }
     .avatar-modal-actions button{min-height:48px;}
+    .avatar-modal-image{
+      width:100%;
+      height:100%;
+      max-width:none;
+      max-height:none;
+      object-fit:cover;
+      border:0;
+      border-radius:0;
+    }
     .crop-frame{
       width:min(78vw,320px);
       aspect-ratio:1;
@@ -1070,8 +1079,11 @@
     function closeAvatarPreview(){
       avatarModal.classList.remove("open");
       document.body.style.overflow = "";
-      if(cropReady && cropSource){
-        URL.revokeObjectURL(avatarImage.dataset.pendingUrl || "");
+      if(cropReady){
+        avatarFileInput.value = "";
+        cropReady = false;
+        cropSource = null;
+        updateAvatarPreview(currentAvatarUrl, fullNameInput.value);
       }
     }
 
