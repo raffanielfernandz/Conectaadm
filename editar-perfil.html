@@ -1017,6 +1017,7 @@
 
     function openAvatarModal(){
       avatarModalImage.style.display = "none";
+      avatarModalImage.removeAttribute("style");
       avatarModalFallback.style.display = currentAvatarUrl ? "none" : "flex";
       if(currentAvatarUrl){
         avatarModalImage.src = currentAvatarUrl;
