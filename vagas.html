@@ -12,8 +12,8 @@
 main{max-width:980px;margin:auto}.top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:28px;flex-wrap:wrap}
 a,.back{color:var(--accent);text-decoration:none}h1{margin:0 0 8px;font-size:28px}p{color:var(--muted);line-height:1.5}
 .panel,.job{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;margin:16px 0}
-form{display:grid;grid-template-columns:1fr 1fr;gap:12px}label{display:block;color:var(--muted);font-size:13px}input,textarea,select{width:100%;margin-top:6px;padding:12px;border-radius:8px;border:1px solid var(--line);background:#091323;color:var(--text);font:inherit}textarea{min-height:100px;resize:vertical}.wide{grid-column:1/-1}button{border:0;border-radius:8px;padding:12px 16px;background:var(--accent);color:#07101f;font-weight:bold;cursor:pointer}button:disabled{opacity:.5;cursor:wait}.job h3{margin:0 0 8px}.meta{font-size:13px;color:var(--muted)}.job-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:14px}.message{padding:12px;border-radius:8px;background:#17243a;color:var(--text);margin:12px 0}.hidden{display:none!important}
-@media(max-width:620px){body{padding:16px}form{grid-template-columns:1fr}.wide{grid-column:auto}h1{font-size:24px}}
+form{display:grid;grid-template-columns:1fr 1fr;gap:12px}label{display:block;color:var(--muted);font-size:13px}input,textarea,select{width:100%;margin-top:6px;padding:12px;border-radius:8px;border:1px solid var(--line);background:#091323;color:var(--text);font:inherit}textarea{min-height:100px;resize:vertical}.wide{grid-column:1/-1}button{border:0;border-radius:8px;padding:12px 16px;background:var(--accent);color:#07101f;font-weight:bold;cursor:pointer}button:disabled{opacity:.5;cursor:wait}.job h3{margin:0 0 8px}.meta{font-size:13px;color:var(--muted)}.job-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:14px}.message{padding:12px;border-radius:8px;background:#17243a;color:var(--text);margin:12px 0}.hidden{display:none!important}.filters{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:10px;margin:14px 0 18px;padding:16px;background:#101b2e;border:1px solid var(--line);border-radius:14px}.filters label{font-size:12px}.filters input,.filters select{min-width:0}.filter-footer{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;gap:10px}.filter-footer button{background:transparent;color:var(--accent);border:1px solid var(--line)}.filter-count{font-size:13px;color:var(--muted)}
+@media(max-width:620px){body{padding:16px}form{grid-template-columns:1fr}.wide{grid-column:auto}h1{font-size:24px}.filters{grid-template-columns:1fr 1fr}.filters .keyword{grid-column:1/-1}.filter-footer{grid-column:1/-1}}
 
 .profile-card{background:linear-gradient(145deg,#111d32,#0c1525);border:1px solid var(--line);border-radius:18px;padding:22px;margin:0 0 28px}
 .profile-top{display:flex;align-items:center;gap:18px;margin-bottom:20px}
@@ -73,7 +73,40 @@ form{display:grid;grid-template-columns:1fr 1fr;gap:12px}label{display:block;col
 <div class="wide"><button type="submit" id="publishButton">Publicar vaga</button></div>
 </form>
 </section>
-<section><h2>Vagas disponíveis</h2><div id="jobsList"></div></section>
+<section>
+<h2>Vagas disponíveis</h2>
+<div class="filters" aria-label="Filtros de oportunidades">
+  <label class="keyword">Buscar por palavra-chave
+    <input id="keywordFilter" type="search" placeholder="Cargo, empresa ou área...">
+  </label>
+  <label>Cidade
+    <select id="cityFilter"><option value="">Todas as cidades</option></select>
+  </label>
+  <label>Tipo de oportunidade
+    <select id="typeFilter">
+      <option value="">Todos os tipos</option>
+      <option value="estágio">Estágio</option>
+      <option value="jovem aprendiz">Jovem Aprendiz</option>
+      <option value="clt">Emprego (CLT)</option>
+      <option value="temporário">Temporário</option>
+      <option value="freelance">Freelance</option>
+    </select>
+  </label>
+  <label>Modalidade
+    <select id="modeFilter">
+      <option value="">Todas</option>
+      <option value="presencial">Presencial</option>
+      <option value="híbrido">Híbrido</option>
+      <option value="remoto">Remoto</option>
+    </select>
+  </label>
+  <div class="filter-footer">
+    <span id="filterCount" class="filter-count">Carregando vagas...</span>
+    <button type="button" id="clearFilters">Limpar filtros</button>
+  </div>
+</div>
+<div id="jobsList"></div>
+</section>
 </main>
 <script>
 const client = window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_PUBLISHABLE_KEY);
@@ -81,6 +114,7 @@ const messageEl = document.getElementById("message");
 const jobsList = document.getElementById("jobsList");
 let currentUser = null;
 let profileType = "";
+let allJobs = [];
 
 function showMessage(text){messageEl.textContent=text;messageEl.classList.remove("hidden")}
 function escapeHTML(value){return String(value ?? "").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))}
@@ -115,11 +149,48 @@ function renderProfile(profile){
     : '<span class="info-chip">Adicione suas informações em Editar perfil</span>';
 }
 
-async function loadJobs(){
-  const {data,error}=await client.from("jobs").select("id,created_by,title,description,location,work_mode,employment_type,salary,requirements,created_at").eq("status","active").order("created_at",{ascending:false});
-  if(error){jobsList.innerHTML="<p>Não foi possível carregar as vagas. Atualize a página e tente novamente.</p>";console.error(error);return}
-  if(!data || !data.length){jobsList.innerHTML="<p>Nenhuma vaga publicada ainda. Volte mais tarde!</p>";return}
-  jobsList.innerHTML=data.map(job=>{
+function normalizeText(value){
+  return String(value || "").normalize("NFD").replace(/[\\u0300-\\u036f]/g, "").toLowerCase().trim();
+}
+
+function populateCityFilter(){
+  const select = document.getElementById("cityFilter");
+  const selected = select.value;
+  const cities = [...new Set(allJobs.map(job => {
+    const location = String(job.location || "").trim();
+    if(!location) return "";
+    if(normalizeText(location).includes("remoto")) return "Remoto";
+    return location.split(",")[0].trim();
+  }).filter(Boolean))].sort((a,b)=>a.localeCompare(b,"pt-BR"));
+  select.innerHTML = '<option value="">Todas as cidades</option>';
+  cities.forEach(city => {
+    const option = document.createElement("option");
+    option.value = city;
+    option.textContent = city;
+    select.appendChild(option);
+  });
+  if(cities.includes(selected)) select.value = selected;
+}
+
+function renderJobs(){
+  const keyword = normalizeText(document.getElementById("keywordFilter").value);
+  const city = normalizeText(document.getElementById("cityFilter").value);
+  const type = normalizeText(document.getElementById("typeFilter").value);
+  const mode = normalizeText(document.getElementById("modeFilter").value);
+  const filtered = allJobs.filter(job => {
+    const searchable = normalizeText([job.title,job.description,job.requirements,job.location,job.employment_type,job.work_mode].join(" "));
+    const jobCity = normalizeText(String(job.location || "").toLowerCase().includes("remoto") ? "Remoto" : String(job.location || "").split(",")[0]);
+    return (!keyword || searchable.includes(keyword)) &&
+      (!city || jobCity === city) &&
+      (!type || normalizeText(job.employment_type) === type) &&
+      (!mode || normalizeText(job.work_mode) === mode);
+  });
+  document.getElementById("filterCount").textContent = filtered.length + (filtered.length === 1 ? " vaga encontrada" : " vagas encontradas");
+  if(!filtered.length){
+    jobsList.innerHTML = "<p>Nenhuma vaga encontrada com esses filtros. Tente mudar os critérios.</p>";
+    return;
+  }
+  jobsList.innerHTML=filtered.map(job=>{
     const canApply=profileType==="estudante" || profileType==="student";
     const own=job.created_by===currentUser.id;
     return `<article class="job"><h3>${escapeHTML(job.title)}</h3>
@@ -132,6 +203,13 @@ async function loadJobs(){
   }).join("");
 }
 
+async function loadJobs(){
+  const {data,error}=await client.from("jobs").select("id,created_by,title,description,location,work_mode,employment_type,salary,requirements,created_at").eq("status","active").order("created_at",{ascending:false});
+  if(error){jobsList.innerHTML="<p>Não foi possível carregar as vagas. Atualize a página e tente novamente.</p>";console.error(error);return}
+  allJobs=data || [];
+  populateCityFilter();
+  renderJobs();
+}
 async function init(){
   const {data:{session},error:sessionError}=await client.auth.getSession();
   if(sessionError || !session){showMessage("Entre na sua conta para visualizar as oportunidades.");jobsList.innerHTML='<p><a href="login.html">Ir para o login</a></p>';return}
@@ -144,6 +222,18 @@ async function init(){
   showMessage("Você está conectado. Confira as oportunidades abaixo.");
   await loadJobs();
 }
+
+
+["keywordFilter","cityFilter","typeFilter","modeFilter"].forEach(id => {
+  document.getElementById(id).addEventListener(id === "keywordFilter" ? "input" : "change", renderJobs);
+});
+document.getElementById("clearFilters").addEventListener("click", () => {
+  document.getElementById("keywordFilter").value = "";
+  document.getElementById("cityFilter").value = "";
+  document.getElementById("typeFilter").value = "";
+  document.getElementById("modeFilter").value = "";
+  renderJobs();
+});
 
 document.getElementById("jobForm").addEventListener("submit",async e=>{
   e.preventDefault();
