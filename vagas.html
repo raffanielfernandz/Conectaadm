@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oportunidades | Conecta ADM</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<style>
+:root{--bg:#080f1d;--panel:#101b2e;--line:#243550;--text:#f4f7fb;--muted:#aab7ca;--accent:#7c9cff;--green:#65d6a4}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif;padding:24px}
+main{max-width:980px;margin:auto}.top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:28px;flex-wrap:wrap}
+a,.back{color:var(--accent);text-decoration:none}h1{margin:0 0 8px;font-size:28px}p{color:var(--muted);line-height:1.5}
+.panel,.job{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;margin:16px 0}
+form{display:grid;grid-template-columns:1fr 1fr;gap:12px}label{display:block;color:var(--muted);font-size:13px}input,textarea,select{width:100%;margin-top:6px;padding:12px;border-radius:8px;border:1px solid var(--line);background:#091323;color:var(--text);font:inherit}textarea{min-height:100px;resize:vertical}.wide{grid-column:1/-1}button{border:0;border-radius:8px;padding:12px 16px;background:var(--accent);color:#07101f;font-weight:bold;cursor:pointer}button:disabled{opacity:.5;cursor:wait}.job h3{margin:0 0 8px}.meta{font-size:13px;color:var(--muted)}.job-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:14px}.message{padding:12px;border-radius:8px;background:#17243a;color:var(--text);margin:12px 0}.hidden{display:none!important}
+@media(max-width:620px){body{padding:16px}form{grid-template-columns:1fr}.wide{grid-column:auto}h1{font-size:24px}}
+</style>
+</head>
+<body>
+<main>
+<div class="top"><div><a class="back" href="dashboard.html">← Voltar ao painel</a><h1>Oportunidades</h1><p>Encontre vagas ou compartilhe uma oportunidade com estudantes.</p></div></div>
+<div id="message" class="message">Carregando oportunidades...</div>
+<section id="publishPanel" class="panel hidden">
+<h2>Publicar oportunidade</h2>
+<form id="jobForm">
+<label>Título da vaga<input name="title" required maxlength="120" placeholder="Ex.: Estágio em Administração"></label>
+<label>Localização<input name="location" maxlength="120" placeholder="Ex.: Santos, SP ou remoto"></label>
+<label>Modelo de trabalho<select name="work_mode"><option value="Presencial">Presencial</option><option value="Híbrido">Híbrido</option><option value="Remoto">Remoto</option></select></label>
+<label>Tipo de oportunidade<select name="employment_type"><option value="Estágio">Estágio</option><option value="Jovem aprendiz">Jovem aprendiz</option><option value="CLT">CLT</option><option value="Temporário">Temporário</option><option value="Freelance">Freelance</option></select></label>
+<label class="wide">Salário ou bolsa<input name="salary" maxlength="80" placeholder="Ex.: R$ 1.200 + benefícios"></label>
+<label class="wide">Descrição<textarea name="description" required maxlength="5000" placeholder="Descreva as atividades e a oportunidade."></textarea></label>
+<label class="wide">Requisitos<textarea name="requirements" maxlength="3000" placeholder="Ex.: estar cursando Administração, conhecimento em Excel..."></textarea></label>
+<div class="wide"><button type="submit" id="publishButton">Publicar vaga</button></div>
+</form>
+</section>
+<section><h2>Vagas disponíveis</h2><div id="jobsList"></div></section>
+</main>
+<script>
+const client = window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_PUBLISHABLE_KEY);
+const messageEl = document.getElementById("message");
+const jobsList = document.getElementById("jobsList");
+let currentUser = null;
+let profileType = "";
+
+function showMessage(text){messageEl.textContent=text;messageEl.classList.remove("hidden")}
+function escapeHTML(value){return String(value ?? "").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))}
+
+async function loadJobs(){
+  const {data,error}=await client.from("jobs").select("id,created_by,title,description,location,work_mode,employment_type,salary,requirements,created_at").eq("status","active").order("created_at",{ascending:false});
+  if(error){jobsList.innerHTML="<p>Não foi possível carregar as vagas. Atualize a página e tente novamente.</p>";console.error(error);return}
+  if(!data || !data.length){jobsList.innerHTML="<p>Nenhuma vaga publicada ainda. Volte mais tarde!</p>";return}
+  jobsList.innerHTML=data.map(job=>{
+    const canApply=profileType==="estudante" || profileType==="student";
+    const own=job.created_by===currentUser.id;
+    return `<article class="job"><h3>${escapeHTML(job.title)}</h3>
+      <div class="meta">${escapeHTML(job.employment_type)} · ${escapeHTML(job.work_mode)} · ${escapeHTML(job.location || "Local não informado")}</div>
+      ${job.salary ? `<p><strong>Remuneração:</strong> ${escapeHTML(job.salary)}</p>` : ""}
+      <p>${escapeHTML(job.description)}</p>
+      ${job.requirements ? `<p><strong>Requisitos:</strong> ${escapeHTML(job.requirements)}</p>` : ""}
+      <div class="job-actions">${canApply && !own ? `<button type="button" data-apply="${job.id}">Candidatar-me</button>` : ""}
+      ${own ? "<span class='meta'>Publicada por você</span>" : ""}</div></article>`;
+  }).join("");
+}
+
+async function init(){
+  const {data:{session},error:sessionError}=await client.auth.getSession();
+  if(sessionError || !session){showMessage("Entre na sua conta para visualizar as oportunidades.");jobsList.innerHTML='<p><a href="login.html">Ir para o login</a></p>';return}
+  currentUser=session.user;
+  const {data:profile,error}=await client.from("profiles").select("profile_type").eq("id",currentUser.id).maybeSingle();
+  if(error){showMessage("Não foi possível identificar seu tipo de perfil.");console.error(error);return}
+  profileType=profile?.profile_type || currentUser.user_metadata?.tipo_de_perfil || "";
+  if(profileType==="empresa" || profileType==="company") document.getElementById("publishPanel").classList.remove("hidden");
+  showMessage("Você está conectado. Confira as oportunidades abaixo.");
+  await loadJobs();
+}
+
+document.getElementById("jobForm").addEventListener("submit",async e=>{
+  e.preventDefault();
+  const button=document.getElementById("publishButton");button.disabled=true;button.textContent="Publicando...";
+  const f=new FormData(e.currentTarget);
+  const payload={created_by:currentUser.id,title:String(f.get("title")).trim(),description:String(f.get("description")).trim(),location:String(f.get("location")).trim(),work_mode:f.get("work_mode"),employment_type:f.get("employment_type"),salary:String(f.get("salary")).trim(),requirements:String(f.get("requirements")).trim(),status:"active"};
+  const {error}=await client.from("jobs").insert(payload);
+  button.disabled=false;button.textContent="Publicar vaga";
+  if(error){showMessage("Não foi possível publicar. Confira se seu perfil está cadastrado como empresa.");console.error(error);return}
+  e.currentTarget.reset();showMessage("Vaga publicada com sucesso!");await loadJobs();
+});
+
+jobsList.addEventListener("click",async e=>{
+  const button=e.target.closest("[data-apply]");if(!button)return;
+  button.disabled=true;
+  const {error}=await client.from("applications").insert({job_id:button.dataset.apply,student_id:currentUser.id});
+  if(error){showMessage(error.code==="23505"?"Você já se candidatou a esta vaga.":"Não foi possível enviar sua candidatura. Confira se seu perfil está como estudante.");console.error(error);button.disabled=false;return}
+  showMessage("Candidatura enviada com sucesso!");button.textContent="Candidatura enviada";
+});
+init();
+</script>
+</body>
+</html>
