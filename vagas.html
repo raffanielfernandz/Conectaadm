@@ -14,16 +14,50 @@ a,.back{color:var(--accent);text-decoration:none}h1{margin:0 0 8px;font-size:28p
 .panel,.job{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;margin:16px 0}
 form{display:grid;grid-template-columns:1fr 1fr;gap:12px}label{display:block;color:var(--muted);font-size:13px}input,textarea,select{width:100%;margin-top:6px;padding:12px;border-radius:8px;border:1px solid var(--line);background:#091323;color:var(--text);font:inherit}textarea{min-height:100px;resize:vertical}.wide{grid-column:1/-1}button{border:0;border-radius:8px;padding:12px 16px;background:var(--accent);color:#07101f;font-weight:bold;cursor:pointer}button:disabled{opacity:.5;cursor:wait}.job h3{margin:0 0 8px}.meta{font-size:13px;color:var(--muted)}.job-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:14px}.message{padding:12px;border-radius:8px;background:#17243a;color:var(--text);margin:12px 0}.hidden{display:none!important}
 @media(max-width:620px){body{padding:16px}form{grid-template-columns:1fr}.wide{grid-column:auto}h1{font-size:24px}}
+
+.profile-card{background:linear-gradient(145deg,#111d32,#0c1525);border:1px solid var(--line);border-radius:18px;padding:22px;margin:0 0 28px}
+.profile-top{display:flex;align-items:center;gap:18px;margin-bottom:20px}
+.avatar{width:92px;height:92px;flex:0 0 92px;border-radius:50%;overflow:hidden;background:#303b50;border:3px solid #668cff;display:grid;place-items:center;font-size:34px;font-weight:800}
+.avatar img{width:100%;height:100%;object-fit:cover;display:none}
+.profile-heading h2{margin:0 0 5px;font-size:23px;overflow-wrap:anywhere}
+.profile-heading p{margin:0;font-size:14px}
+.profile-info{display:flex;flex-wrap:wrap;gap:9px;margin:16px 0 20px}
+.info-chip{border:1px solid #2a3b59;background:#0a1425;border-radius:10px;padding:9px 12px;color:#dce6f8;font-size:14px}
+.profile-panel{border-top:1px solid #263550;padding-top:16px}
+.profile-panel h3{margin:0 0 5px;font-size:17px}
+.profile-panel p{margin:0 0 14px;font-size:14px}
+.profile-actions{display:flex;gap:10px;flex-wrap:wrap}
+.profile-actions a,.profile-actions button{display:inline-flex;align-items:center;justify-content:center;min-height:43px;padding:10px 17px;border-radius:10px;font-weight:700;font-size:14px;text-decoration:none}
+.profile-actions a{background:#668cff;color:#07101f}
+.profile-actions button{background:transparent;color:#eaf0ff;border:1px solid #405477}
+.profile-actions button:hover,.profile-actions a:hover{filter:brightness(1.12)}
+.top{margin-top:30px}
+@media(max-width:620px){.profile-card{padding:17px}.profile-top{gap:13px}.avatar{width:78px;height:78px;flex-basis:78px}.profile-heading h2{font-size:20px}.profile-actions>*{flex:1}}
+
 </style>
 </head>
 <body>
 <main>
+<section class="profile-card" aria-label="Meu perfil">
+  <div class="profile-top">
+    <div class="avatar"><span id="profileInitial">?</span><img id="profileAvatar" alt="Foto de perfil"></div>
+    <div class="profile-heading"><h2 id="profileName">Carregando perfil...</h2><p id="profileTypeLabel">Conecta ADM</p></div>
+  </div>
+  <div class="profile-info" id="profileInfo"><span class="info-chip">Carregando informações...</span></div>
+  <div class="profile-panel">
+    <h3>Seu painel</h3>
+    <p>Acompanhe suas informações e mantenha seu perfil atualizado no Conecta ADM.</p>
+    <div class="profile-actions">
+      <a href="editar-perfil.html">Editar perfil</a>
+      <button type="button" id="shareProfile">Compartilhar perfil</button>
+    </div>
+  </div>
+</section>
 <div class="top">
   <div>
     <h1>Oportunidades</h1>
     <p>Encontre vagas de emprego e estágio ou compartilhe uma oportunidade com estudantes.</p>
   </div>
-  <a class="back" href="editar-perfil.html">Meu perfil</a>
 </div>
 <div id="message" class="message">Carregando oportunidades...</div>
 <section id="publishPanel" class="panel hidden">
@@ -51,6 +85,37 @@ let profileType = "";
 function showMessage(text){messageEl.textContent=text;messageEl.classList.remove("hidden")}
 function escapeHTML(value){return String(value ?? "").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))}
 
+
+function renderProfile(profile){
+  const name = profile.full_name || currentUser.user_metadata?.full_name || "Seu perfil";
+  const initial = name.trim().charAt(0).toUpperCase() || "?";
+  document.getElementById("profileName").textContent = name;
+  document.getElementById("profileInitial").textContent = initial;
+  const avatar = document.getElementById("profileAvatar");
+  if(profile.avatar_url){
+    avatar.src = profile.avatar_url;
+    avatar.style.display = "block";
+    document.getElementById("profileInitial").style.display = "none";
+  }else{
+    avatar.style.display = "none";
+    document.getElementById("profileInitial").style.display = "block";
+  }
+  const types = {student:"Estudante",estudante:"Estudante",empresa:"Empresa",company:"Empresa",institution:"Instituição",escola:"Instituição"};
+  document.getElementById("profileTypeLabel").textContent = types[profileType] || "Membro Conecta ADM";
+  const details = [];
+  const cityState = [profile.city, profile.state].filter(Boolean).join(" - ");
+  if(cityState) details.push(cityState);
+  if(profile.school) details.push("Estuda em " + profile.school);
+  if(profile.company_name) details.push(profile.company_name);
+  if(profile.segment) details.push("Segmento: " + profile.segment);
+  if(profile.institution_name) details.push(profile.institution_name);
+  if(profile.institution_type) details.push(profile.institution_type);
+  if(profile.phone) details.push("Telefone: " + profile.phone);
+  document.getElementById("profileInfo").innerHTML = details.length
+    ? details.map(item => '<span class="info-chip">' + escapeHTML(item) + '</span>').join("")
+    : '<span class="info-chip">Adicione suas informações em Editar perfil</span>';
+}
+
 async function loadJobs(){
   const {data,error}=await client.from("jobs").select("id,created_by,title,description,location,work_mode,employment_type,salary,requirements,created_at").eq("status","active").order("created_at",{ascending:false});
   if(error){jobsList.innerHTML="<p>Não foi possível carregar as vagas. Atualize a página e tente novamente.</p>";console.error(error);return}
@@ -72,9 +137,10 @@ async function init(){
   const {data:{session},error:sessionError}=await client.auth.getSession();
   if(sessionError || !session){showMessage("Entre na sua conta para visualizar as oportunidades.");jobsList.innerHTML='<p><a href="login.html">Ir para o login</a></p>';return}
   currentUser=session.user;
-  const {data:profile,error}=await client.from("profiles").select("profile_type").eq("id",currentUser.id).maybeSingle();
+  const {data:profile,error}=await client.from("profiles").select("*").eq("id",currentUser.id).maybeSingle();
   if(error){showMessage("Não foi possível identificar seu tipo de perfil.");console.error(error);return}
   profileType=profile?.profile_type || currentUser.user_metadata?.tipo_de_perfil || "";
+  renderProfile(profile || {});
   if(profileType==="empresa" || profileType==="company") document.getElementById("publishPanel").classList.remove("hidden");
   showMessage("Você está conectado. Confira as oportunidades abaixo.");
   await loadJobs();
@@ -98,6 +164,25 @@ jobsList.addEventListener("click",async e=>{
   if(error){showMessage(error.code==="23505"?"Você já se candidatou a esta vaga.":"Não foi possível enviar sua candidatura. Confira se seu perfil está como estudante.");console.error(error);button.disabled=false;return}
   showMessage("Candidatura enviada com sucesso!");button.textContent="Candidatura enviada";
 });
+
+document.getElementById("shareProfile").addEventListener("click",async()=>{
+  const name = document.getElementById("profileName").textContent;
+  const details = Array.from(document.querySelectorAll("#profileInfo .info-chip")).map(el=>el.textContent).join(" • ");
+  const shareText = name + " | " + document.getElementById("profileTypeLabel").textContent + (details ? "\n" + details : "") + "\nPerfil no Conecta ADM";
+  try{
+    if(navigator.share){
+      await navigator.share({title:"Perfil no Conecta ADM",text:shareText});
+    }else if(navigator.clipboard && window.isSecureContext){
+      await navigator.clipboard.writeText(shareText);
+      showMessage("Informações do perfil copiadas para compartilhar.");
+    }else{
+      window.prompt("Copie as informações do seu perfil:",shareText);
+    }
+  }catch(error){
+    if(error.name!=="AbortError") showMessage("Não foi possível compartilhar agora.");
+  }
+});
+
 init();
 </script>
 </body>
