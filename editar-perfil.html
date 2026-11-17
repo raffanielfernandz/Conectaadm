@@ -513,30 +513,25 @@
       border:0;
       border-radius:0;
     }
+    .hidden{display:none!important}
     .crop-frame{
-      width:min(78vw,320px);
-      aspect-ratio:1;
-      border-radius:50%;
-      overflow:hidden;
-      position:relative;
-      border:3px solid #6d91ff;
-      background:#343b4b;
-      touch-action:none;
-      box-shadow:0 12px 38px rgba(0,0,0,.4);
+      width:min(78vw,320px);aspect-ratio:1;border-radius:50%;overflow:hidden;
+      position:relative;border:3px solid #6d91ff;background:#343b4b;
+      touch-action:none;box-shadow:0 12px 38px rgba(0,0,0,.4);
+    }
+    .crop-frame.preview-mode{
+      width:auto;height:auto;max-width:min(88vw,480px);max-height:68vh;
+      aspect-ratio:auto;border:0;border-radius:14px;overflow:visible;
+      background:transparent;box-shadow:none;touch-action:auto;
     }
     .crop-image{
-      position:absolute;
-      inset:0;
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      transform-origin:center;
-      user-select:none;
-      -webkit-user-drag:none;
-      pointer-events:none;
+      position:absolute;user-select:none;-webkit-user-drag:none;pointer-events:none;
     }
-    .zoom-control{width:min(78vw,320px);color:#dce5f7;font-size:14px}
-    .zoom-control input{margin-top:8px;padding:0;accent-color:#668cff}
+    .avatar-modal-image{
+      display:block;max-width:min(88vw,480px);max-height:68vh;width:auto;height:auto;
+      object-fit:contain;border-radius:14px;border:1px solid rgba(255,255,255,.16);
+    }
+    .crop-frame.preview-mode .avatar-modal-image{max-width:min(88vw,480px);max-height:68vh}
     .remove-avatar-button{background:#351820;border:1px solid #85404c;box-shadow:none;color:#ffdce1}
     .avatar-modal-actions button{font-size:13px;padding:10px 8px}
     .avatar-close{
@@ -908,9 +903,6 @@
         <div id="avatarModalFallback" class="avatar-modal-fallback">?</div>
       </div>
       <p class="avatar-hint" id="cropHint">Arraste a foto para escolher o enquadramento.</p>
-      <label class="zoom-control">Zoom
-        <input type="range" id="avatarZoom" min="1" max="3" step="0.01" value="1">
-      </label>
       <div class="avatar-modal-actions">
         <button type="button" id="editAvatarButton">Trocar foto</button>
         <button type="button" id="removeAvatarButton" class="remove-avatar-button">Excluir foto</button>
@@ -1004,7 +996,6 @@
     const removeAvatarButton = document.getElementById("removeAvatarButton");
     const applyCropButton = document.getElementById("applyCropButton");
     const cropFrame = document.getElementById("cropFrame");
-    const avatarZoom = document.getElementById("avatarZoom");
     let cropSource = null;
     let cropPanX = 0, cropPanY = 0, dragStartX = 0, dragStartY = 0;
     let draggingCrop = false, cropReady = false, removeAvatar = false;
@@ -1033,12 +1024,12 @@
         avatarModalImage.className = "avatar-modal-image";
       }
       cropFrame.classList.remove("cropping");
+      cropFrame.classList.add("preview-mode");
       document.getElementById("cropHint").textContent = currentAvatarUrl
         ? "Sua foto atual. Você pode trocar ou excluir."
         : "Você ainda não adicionou uma foto.";
       applyCropButton.classList.add("hidden");
-      avatarZoom.parentElement.classList.add("hidden");
-      removeAvatarButton.classList.toggle("hidden", !currentAvatarUrl && !cropReady);
+      removeAvatarButton.classList.toggle("hidden", !currentAvatarUrl);
       avatarModal.classList.add("open");
       document.body.style.overflow = "hidden";
     }
@@ -1050,20 +1041,19 @@
         img.onload = () => {
           cropSource = img;
           cropPanX = 0; cropPanY = 0;
-          avatarZoom.value = "1";
           avatarModalImage.src = reader.result;
           avatarModalImage.className = "crop-image";
           avatarModalImage.style.display = "block";
           avatarModalFallback.style.display = "none";
+          cropFrame.classList.remove("preview-mode");
           cropFrame.classList.add("cropping");
-          document.getElementById("cropHint").textContent = "Arraste a foto dentro do círculo e ajuste o zoom.";
-          avatarZoom.parentElement.classList.remove("hidden");
+          document.getElementById("cropHint").textContent = "Arraste a foto livremente dentro do círculo para escolher o corte.";
           applyCropButton.classList.remove("hidden");
           removeAvatarButton.classList.add("hidden");
           cropReady = true;
           avatarModal.classList.add("open");
           document.body.style.overflow = "hidden";
-          updateCropTransform();
+          requestAnimationFrame(updateCropTransform);
         };
         img.onerror = () => showMessage("Não foi possível abrir essa imagem.", "error");
         img.src = reader.result;
@@ -1072,12 +1062,25 @@
     }
 
     function updateCropTransform(){
-      const z = Number(avatarZoom.value);
-      avatarModalImage.style.transform = "translate(" + cropPanX + "px," + cropPanY + "px) scale(" + z + ")";
+      if(!cropSource) return;
+      const frameSize = cropFrame.clientWidth;
+      const scale = Math.max(frameSize / cropSource.naturalWidth, frameSize / cropSource.naturalHeight);
+      const imageWidth = cropSource.naturalWidth * scale;
+      const imageHeight = cropSource.naturalHeight * scale;
+      const limitX = Math.max(0, (imageWidth - frameSize) / 2);
+      const limitY = Math.max(0, (imageHeight - frameSize) / 2);
+      cropPanX = Math.max(-limitX, Math.min(limitX, cropPanX));
+      cropPanY = Math.max(-limitY, Math.min(limitY, cropPanY));
+      Object.assign(avatarModalImage.style,{
+        width:imageWidth+"px",height:imageHeight+"px",maxWidth:"none",maxHeight:"none",
+        left:"50%",top:"50%",
+        transform:"translate(calc(-50% + "+cropPanX+"px), calc(-50% + "+cropPanY+"px))"
+      });
     }
 
     function closeAvatarPreview(){
       avatarModal.classList.remove("open");
+      cropFrame.classList.remove("preview-mode","cropping");
       document.body.style.overflow = "";
       if(cropReady){
         avatarFileInput.value = "";
@@ -1096,7 +1099,6 @@
     document.addEventListener("keydown", (event) => {
       if(event.key === "Escape") closeAvatarPreview();
     });
-    avatarZoom.addEventListener("input", updateCropTransform);
 
     cropFrame.addEventListener("pointerdown", event => {
       if(!cropReady) return;
@@ -1109,9 +1111,6 @@
       if(!draggingCrop) return;
       cropPanX = event.clientX - dragStartX;
       cropPanY = event.clientY - dragStartY;
-      const limit = cropFrame.clientWidth * (Number(avatarZoom.value) - 1) / 2 + cropFrame.clientWidth * .35;
-      cropPanX = Math.max(-limit, Math.min(limit, cropPanX));
-      cropPanY = Math.max(-limit, Math.min(limit, cropPanY));
       updateCropTransform();
     });
     cropFrame.addEventListener("pointerup", () => draggingCrop = false);
@@ -1120,9 +1119,7 @@
     applyCropButton.addEventListener("click", () => {
       if(!cropSource) return;
       const size = 512, frameSize = cropFrame.clientWidth;
-      const zoom = Number(avatarZoom.value);
-      const baseScale = Math.max(size / cropSource.naturalWidth, size / cropSource.naturalHeight);
-      const scale = baseScale * zoom;
+      const scale = Math.max(size / cropSource.naturalWidth, size / cropSource.naturalHeight);
       const canvas = document.createElement("canvas");
       canvas.width = size; canvas.height = size;
       const ctx = canvas.getContext("2d");
