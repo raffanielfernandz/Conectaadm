@@ -110,7 +110,6 @@ function renderProfile(profile){
   if(profile.segment) details.push("Segmento: " + profile.segment);
   if(profile.institution_name) details.push(profile.institution_name);
   if(profile.institution_type) details.push(profile.institution_type);
-  if(profile.phone) details.push("Telefone: " + profile.phone);
   document.getElementById("profileInfo").innerHTML = details.length
     ? details.map(item => '<span class="info-chip">' + escapeHTML(item) + '</span>').join("")
     : '<span class="info-chip">Adicione suas informações em Editar perfil</span>';
