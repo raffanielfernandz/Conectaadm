@@ -111,6 +111,53 @@ button:hover,.external-link:hover{filter:brightness(1.1);transform:translateY(-1
 .job-source{color:#7f91ad;font-size:10px}
 @media(max-width:480px){.job-image-wrap{height:145px}.job-content{padding:16px}.job-facts{grid-template-columns:1fr 1fr}.job-description p{font-size:12px}}
 
+
+/* Layout inspirado na referência visual enviada */
+.profile-card{display:none!important}
+.site-header{max-width:1180px;margin:0 auto;padding:22px 28px;display:flex;align-items:center;justify-content:space-between;gap:22px}
+.brand{font-size:22px;font-weight:850;letter-spacing:-.7px;color:#f4f7fb;text-decoration:none}
+.brand span{color:#6f95ff}
+.site-header nav{display:flex;align-items:center;gap:30px}
+.site-header nav a{color:#aebbd0;text-decoration:none;font-size:13px;font-weight:700}
+.site-header nav a.active{color:#6f95ff;position:relative}
+.site-header nav a.active:after{content:"";position:absolute;left:0;right:0;bottom:-17px;height:2px;background:#6f95ff}
+.site-header nav .login-link{border:1px solid #527bd0;border-radius:12px;padding:11px 21px;color:#8eaeff}
+.hero-banner{max-width:1180px;min-height:360px;margin:0 auto 30px;padding:54px 42px;display:flex;align-items:center;border:1px solid #1e3558;border-radius:0 0 18px 18px;background:linear-gradient(90deg,rgba(5,13,27,.98) 0%,rgba(5,13,27,.88) 42%,rgba(5,13,27,.12) 100%),url("https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1600&q=85") center/cover}
+.hero-copy{max-width:510px}
+.eyebrow{display:inline-block;padding:8px 13px;border:1px solid #2d4773;border-radius:30px;color:#9bb7ff;background:rgba(10,25,49,.65);font-size:11px;font-weight:800;letter-spacing:.5px;margin-bottom:17px}
+.hero-banner h1{font-size:clamp(34px,5vw,48px);line-height:1.03;letter-spacing:-1.5px;margin:0}
+.hero-banner h1 strong{color:#5685ff}
+.hero-banner p{max-width:380px;font-size:16px;line-height:1.45;margin:15px 0 0;color:#c1cce0}
+.search-row{max-width:1180px;margin:0 auto 20px;display:flex;gap:16px;align-items:center}
+.main-search{height:58px;flex:1;display:flex;align-items:center;gap:14px;padding:0 20px;border:1px solid #263c5e;border-radius:17px;background:#0c1729}
+.main-search>span{font-size:26px;color:#8eaeff}
+.main-search input{margin:0;padding:0;border:0!important;box-shadow:none!important;background:transparent;font-size:14px}
+.toggle-filters{height:58px;padding:0 24px;border:1px solid #456bb1;background:#0c1729;color:#9bb7ff;border-radius:16px;display:flex;align-items:center;gap:10px}
+.filters{max-width:1180px;margin:0 auto 20px}
+.filters.collapsed{display:none}
+#jobsList{max-width:1180px;display:flex;flex-direction:column;gap:17px}
+.job{display:grid;grid-template-columns:160px minmax(0,1fr);padding:10px;gap:20px;min-height:220px;border-radius:19px;background:linear-gradient(110deg,#101d33,#0c1729)}
+.job:before{display:none}
+.job-image-wrap{height:100%;min-height:198px;border-radius:13px;overflow:hidden}
+.job-content{padding:7px 8px 7px 0;display:grid;grid-template-columns:minmax(0,1fr) auto;align-content:center;column-gap:18px}
+.job-tags{grid-column:1/-1;margin-bottom:7px}
+.job-tag{padding:5px 10px;font-size:10px}
+.job h3{grid-column:1/-1;font-size:17px;margin:0 0 6px}
+.job .job-company{grid-column:1/-1;font-size:12px}
+.job-facts{display:flex;flex-direction:column;gap:4px;margin-top:10px}
+.job-facts span{padding:0;border:0;background:transparent;display:flex;flex-direction:row;gap:7px;font-size:12px}
+.job-facts b{display:none}
+.job-description{display:none}
+.job-actions{grid-column:2;grid-row:4;align-self:end;min-width:130px;padding:0;margin:0}
+.job-actions .external-link,.job-actions button{min-height:42px;padding:10px 13px;font-size:12px}
+.job-source{grid-column:1/-1;margin-top:8px}
+.job-content .job-source{grid-column:1/-1}
+.bottom-promo{max-width:1180px;margin:38px auto 10px;padding:25px 30px;display:flex;align-items:center;justify-content:space-between;gap:20px;border:1px solid #2c4e87;border-radius:18px;background:linear-gradient(90deg,rgba(8,20,42,.97),rgba(8,20,42,.68)),url("https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1300&q=80") center/cover}
+.bottom-promo h2{margin:0 0 5px;font-size:18px}.bottom-promo p{margin:0;font-size:13px}
+.bottom-promo a{padding:12px 18px;border:1px solid #36568c;border-radius:12px;color:#dce7ff;text-decoration:none;font-size:12px;font-weight:800;white-space:nowrap}
+@media(max-width:760px){.site-header{padding:18px 22px}.site-header nav{gap:16px}.hero-banner{min-height:330px;padding:35px 25px;border-radius:0 0 14px 14px;background-position:58% center}.hero-banner h1{font-size:37px}.search-row{padding:0 4px}.job{grid-template-columns:130px minmax(0,1fr);gap:13px}.job-image-wrap{min-height:190px}.job-content{grid-template-columns:minmax(0,1fr)}.job-actions{grid-column:1;grid-row:auto;min-width:0;margin-top:10px}.job-facts{grid-column:1}.bottom-promo{margin-top:28px}}
+@media(max-width:480px){main{padding:0 14px 40px}.site-header{padding:17px 15px}.brand{font-size:18px}.site-header nav{gap:12px}.site-header nav a{font-size:11px}.site-header nav a.active:after{bottom:-14px}.site-header nav .login-link{padding:9px 12px}.hero-banner{min-height:310px;margin-bottom:23px;padding:28px 20px;background-position:61% center}.hero-banner h1{font-size:34px}.hero-banner p{font-size:13px;max-width:270px}.eyebrow{font-size:9px}.search-row{gap:8px;margin-bottom:13px}.main-search{height:53px;padding:0 13px;gap:8px}.main-search input{font-size:11px}.toggle-filters{height:53px;padding:0 13px;font-size:11px}.job{grid-template-columns:105px minmax(0,1fr);gap:11px;padding:8px;min-height:175px}.job-image-wrap{min-height:168px;height:100%}.job-content{padding:4px 3px 4px 0}.job h3{font-size:13px;line-height:1.3}.job .job-company{font-size:10px;line-height:1.35}.job-tags{gap:5px;margin-bottom:6px}.job-tag{font-size:9px;padding:4px 7px}.job-facts{margin-top:7px}.job-facts span{font-size:10px;line-height:1.3}.job-actions{margin-top:8px}.job-actions .external-link,.job-actions button{min-height:35px;font-size:10px;padding:8px 6px}.job-source{font-size:9px}.bottom-promo{padding:18px 15px;gap:10px}.bottom-promo h2{font-size:14px}.bottom-promo p{font-size:10px}.bottom-promo a{padding:10px;font-size:10px}}
+
 </style>
 </head>
 <body>
@@ -130,10 +177,15 @@ button:hover,.external-link:hover{filter:brightness(1.1);transform:translateY(-1
     </div>
   </div>
 </section>
-<div class="top">
-  <div>
-    <h1>Oportunidades</h1>
-    <p>Encontre vagas de emprego e estágio ou compartilhe uma oportunidade com estudantes.</p>
+<header class="site-header">
+  <a class="brand" href="index.html">Conecta <span>ADM</span></a>
+  <nav><a href="index.html">Início</a><a class="active" href="vagas.html">Vagas</a><a href="index.html#sobre">Sobre</a><a class="login-link" href="login.html">Entrar</a></nav>
+</header>
+<div class="hero-banner">
+  <div class="hero-copy">
+    <span class="eyebrow">OPORTUNIDADES PARA VOCÊ</span>
+    <h1>Encontre a vaga<br>ideal para o seu<br><strong>futuro</strong></h1>
+    <p>Conecte-se com empresas e dê o próximo passo na sua carreira.</p>
   </div>
 </div>
 <div id="message" class="message hidden"></div>
@@ -151,7 +203,11 @@ button:hover,.external-link:hover{filter:brightness(1.1);transform:translateY(-1
 </form>
 </section>
 <section>
-<div class="filters" aria-label="Filtros de oportunidades">
+<div class="search-row">
+  <div class="main-search"><span aria-hidden="true">⌕</span><input id="mainKeyword" type="search" placeholder="Buscar por cargo, empresa ou área..."></div>
+  <button type="button" id="toggleFilters" class="toggle-filters">☷ <span>Filtros</span></button>
+</div>
+<div class="filters collapsed" aria-label="Filtros de oportunidades">
   <label class="keyword">Buscar por palavra-chave
     <input id="keywordFilter" type="search" placeholder="Cargo, empresa ou área...">
   </label>
@@ -182,6 +238,7 @@ button:hover,.external-link:hover{filter:brightness(1.1);transform:translateY(-1
   </div>
 </div>
 <div id="jobsList"></div>
+<div class="bottom-promo"><div><h2>Prepare-se para o mercado</h2><p>A Conecta ADM conecta você às melhores oportunidades da sua região.</p></div><a href="index.html#sobre">Saiba mais →</a></div>
 </section>
 </main>
 <script>
@@ -368,6 +425,15 @@ async function init(){
   await loadJobs();
 }
 
+
+
+document.getElementById("mainKeyword").addEventListener("input", e => {
+  document.getElementById("keywordFilter").value = e.target.value;
+  renderJobs();
+});
+document.getElementById("toggleFilters").addEventListener("click", () => {
+  document.querySelector(".filters").classList.toggle("collapsed");
+});
 
 ["keywordFilter","cityFilter","typeFilter","modeFilter"].forEach(id => {
   document.getElementById(id).addEventListener(id === "keywordFilter" ? "input" : "change", renderJobs);
