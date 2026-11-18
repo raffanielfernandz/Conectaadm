@@ -122,6 +122,10 @@ button:hover,.external-link:hover{filter:brightness(1.1);transform:translateY(-1
 .site-header nav a.active{color:#6f95ff;position:relative}
 .site-header nav a.active:after{content:"";position:absolute;left:0;right:0;bottom:-17px;height:2px;background:#6f95ff}
 .site-header nav .login-link{border:1px solid #527bd0;border-radius:12px;padding:11px 21px;color:#8eaeff}
+.site-header nav .profile-avatar-link{width:46px;height:46px;flex:0 0 46px;padding:2px;border:2px solid #638cff;border-radius:50%;background:#263957;display:grid;place-items:center;overflow:hidden;color:#fff;font-size:18px;font-weight:800;text-decoration:none}
+.profile-avatar-link img{width:100%;height:100%;display:none;object-fit:cover;border-radius:50%}
+.profile-avatar-link:hover{box-shadow:0 0 0 4px rgba(99,140,255,.16);transform:translateY(-1px)}
+
 .hero-banner{max-width:1180px;min-height:360px;margin:0 auto 30px;padding:54px 42px;display:flex;align-items:center;border:1px solid #1e3558;border-radius:0 0 18px 18px;background:linear-gradient(90deg,rgba(5,13,27,.98) 0%,rgba(5,13,27,.88) 42%,rgba(5,13,27,.12) 100%),url("https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1600&q=85") center/cover}
 .hero-copy{max-width:510px}
 .eyebrow{display:inline-block;padding:8px 13px;border:1px solid #2d4773;border-radius:30px;color:#9bb7ff;background:rgba(10,25,49,.65);font-size:11px;font-weight:800;letter-spacing:.5px;margin-bottom:17px}
@@ -189,7 +193,7 @@ main{max-width:1120px;padding:0 28px 60px}
 .job-source{display:none}
 .bottom-promo{display:flex;align-items:center;justify-content:space-between;gap:18px;margin:46px 0 0;padding:27px 32px;border:1px solid #31518a;border-radius:18px;background:linear-gradient(90deg,rgba(9,20,40,.96),rgba(9,20,40,.7)),url("https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1200&q=80") center/cover}
 .bottom-promo h2{margin:0 0 6px;font-size:18px}.bottom-promo p{margin:0;font-size:13px}.bottom-promo a{padding:12px 17px;border:1px solid #4569ad;border-radius:12px;color:#e1eaff;text-decoration:none;font-size:12px;font-weight:800;white-space:nowrap}
-@media(max-width:700px){.site-header{height:64px;padding:0 18px}.brand{font-size:17px}.site-header nav{gap:14px}.site-header nav a{font-size:11px}.site-header nav .login-link{padding:8px 12px}main{padding:0 16px 42px}.hero-banner{min-height:260px;height:260px;margin:0 -16px 22px;padding:34px 22px;background-position:58% center}.hero-banner h1{font-size:37px}.hero-banner p{max-width:280px;font-size:14px}.search-row{gap:9px}.main-search,.toggle-filters{height:54px}.main-search{padding:0 13px}.main-search input{font-size:12px}.toggle-filters{padding:0 15px;font-size:12px}.filters{grid-template-columns:1fr 1fr;padding:14px}.filters label:last-of-type{grid-column:1/-1}.job.job-horizontal{grid-template-columns:112px minmax(0,1fr);gap:12px;min-height:175px;padding:8px}.job-horizontal .job-image-wrap{min-height:158px}.job-horizontal .job-content{padding:5px 3px 5px 0}.job-horizontal h3{font-size:14px}.job-horizontal .job-company,.job-location{font-size:11px}.job-bottom{align-items:flex-start;flex-direction:column;gap:9px;padding-top:9px}.job-requirement{font-size:10px}.job-horizontal .job-actions{width:100%}.job-horizontal .job-actions .external-link,.job-horizontal .job-actions button{width:100%;justify-content:center;min-height:37px;padding:9px;font-size:11px}.bottom-promo{margin-top:30px;padding:20px;align-items:flex-start;flex-direction:column}}
+@media(max-width:700px){.site-header{height:64px;padding:0 18px}.brand{font-size:17px}.site-header nav{gap:14px}.site-header nav a{font-size:11px}.site-header nav .login-link{padding:8px 12px}.site-header nav .profile-avatar-link{width:40px;height:40px;flex-basis:40px}main{padding:0 16px 42px}.hero-banner{min-height:260px;height:260px;margin:0 -16px 22px;padding:34px 22px;background-position:58% center}.hero-banner h1{font-size:37px}.hero-banner p{max-width:280px;font-size:14px}.search-row{gap:9px}.main-search,.toggle-filters{height:54px}.main-search{padding:0 13px}.main-search input{font-size:12px}.toggle-filters{padding:0 15px;font-size:12px}.filters{grid-template-columns:1fr 1fr;padding:14px}.filters label:last-of-type{grid-column:1/-1}.job.job-horizontal{grid-template-columns:112px minmax(0,1fr);gap:12px;min-height:175px;padding:8px}.job-horizontal .job-image-wrap{min-height:158px}.job-horizontal .job-content{padding:5px 3px 5px 0}.job-horizontal h3{font-size:14px}.job-horizontal .job-company,.job-location{font-size:11px}.job-bottom{align-items:flex-start;flex-direction:column;gap:9px;padding-top:9px}.job-requirement{font-size:10px}.job-horizontal .job-actions{width:100%}.job-horizontal .job-actions .external-link,.job-horizontal .job-actions button{width:100%;justify-content:center;min-height:37px;padding:9px;font-size:11px}.bottom-promo{margin-top:30px;padding:20px;align-items:flex-start;flex-direction:column}}
 @media(max-width:390px){.site-header nav{gap:9px}.site-header nav a{font-size:10px}.brand{font-size:15px}.hero-banner h1{font-size:33px}.job.job-horizontal{grid-template-columns:96px minmax(0,1fr)}.job-horizontal .job-image-wrap{min-height:150px}}
 
 </style>
@@ -197,7 +201,7 @@ main{max-width:1120px;padding:0 28px 60px}
 <body>
 <header class="site-header">
   <a class="brand" href="index.html">Conecta <span>ADM</span></a>
-  <nav><a href="index.html">Início</a><a class="active" href="vagas.html">Vagas</a><a href="index.html#sobre">Sobre</a><a class="login-link" href="login.html">Entrar</a></nav>
+  <nav><a href="index.html">Início</a><a class="active" href="vagas.html">Vagas</a><a href="index.html#sobre">Sobre</a><a class="profile-avatar-link" id="profileAvatarLink" href="editar-perfil.html" aria-label="Editar meu perfil" title="Editar perfil"><span id="profileAvatarInitial">?</span><img id="profileAvatarImage" alt="Minha foto de perfil"></a></nav>
 </header>
 <main>
 
@@ -437,6 +441,16 @@ async function init(){
   const {data:profile,error}=await client.from("profiles").select("*").eq("id",currentUser.id).maybeSingle();
   if(error){showMessage("Não foi possível identificar seu tipo de perfil.");console.error(error);return}
   profileType=profile?.profile_type || currentUser.user_metadata?.tipo_de_perfil || "";
+
+  const avatarInitial=document.getElementById("profileAvatarInitial");
+  const avatarImage=document.getElementById("profileAvatarImage");
+  const avatarName=(profile?.full_name || currentUser.user_metadata?.full_name || currentUser.email || "Perfil").trim();
+  avatarInitial.textContent=avatarName.charAt(0).toUpperCase() || "?";
+  if(profile?.avatar_url){
+    avatarImage.onload=()=>{avatarImage.style.display="block";avatarInitial.style.display="none";};
+    avatarImage.onerror=()=>{avatarImage.style.display="none";avatarInitial.style.display="grid";};
+    avatarImage.src=profile.avatar_url;
+  }
 
   if(profileType==="empresa" || profileType==="company") document.getElementById("publishPanel").classList.remove("hidden");
   await loadJobs();
