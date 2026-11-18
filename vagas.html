@@ -34,6 +34,59 @@ form{display:grid;grid-template-columns:1fr 1fr;gap:12px}label{display:block;col
 .top{margin-top:30px}
 @media(max-width:620px){.profile-card{padding:17px}.profile-top{gap:13px}.avatar{width:78px;height:78px;flex-basis:78px}.profile-heading h2{font-size:20px}.profile-actions>*{flex:1}}
 
+
+/* VISUAL DAS OPORTUNIDADES */
+:root{--bg:#080f1d;--panel:#101b2e;--line:#243550;--text:#f4f7fb;--muted:#aab7ca;--accent:#6f95ff;--green:#65d6a4}
+body{padding:0;font-family:"Manrope","DM Sans",Arial,sans-serif;background:radial-gradient(ellipse at 80% 0%,rgba(47,83,153,.16),transparent 38%),var(--bg)}
+main{max-width:1120px;padding:34px 28px 70px}
+.profile-card{padding:18px 21px;margin:0 0 38px;border-radius:18px;background:linear-gradient(120deg,#111f36,#0c1525);box-shadow:0 14px 35px rgba(0,0,0,.14)}
+.profile-top{margin-bottom:12px}
+.avatar{width:68px;height:68px;flex-basis:68px;border-width:2px}
+.profile-heading h2{font-size:19px}
+.profile-info{margin:10px 0 13px}
+.info-chip{font-size:12px;padding:7px 10px}
+.profile-panel{display:flex;align-items:center;justify-content:space-between;gap:18px;padding-top:13px}
+.profile-panel h3{font-size:15px}
+.profile-panel p{margin:0;font-size:12px}
+.profile-actions{flex-shrink:0}
+.profile-actions a,.profile-actions button{min-height:38px;padding:8px 13px;font-size:12px}
+.top{margin:0 0 22px;padding:30px 28px;border:1px solid #253b5d;border-radius:20px;background:linear-gradient(105deg,rgba(10,19,35,.97),rgba(13,29,54,.86)),url("https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1500&q=85") center/cover}
+.top:before{content:"OPORTUNIDADES EM REGISTRO E REGIÃO";display:block;margin-bottom:11px;color:#8eaeff;font-size:11px;font-weight:800;letter-spacing:1.4px}
+.top h1{font:800 clamp(29px,5vw,42px)/1.1 "Manrope","DM Sans",Arial,sans-serif;letter-spacing:-1.3px}
+.top p{max-width:600px;margin:9px 0 0;font-size:14px}
+#message{padding:13px 16px;border:1px solid #2a4268;border-radius:12px;background:#14233b;font-size:13px}
+.panel{padding:22px;border-radius:18px;background:linear-gradient(145deg,#111e33,#0d1728);box-shadow:0 12px 30px rgba(0,0,0,.12)}
+#publishPanel h2{font:750 20px "Manrope",Arial,sans-serif;margin:0 0 17px}
+form{gap:15px}
+label{font-size:12px;font-weight:700;color:#b8c6dc}
+input,textarea,select{padding:13px 14px;border-radius:11px;border-color:#2b3e5d;background:#091323;font-size:14px;outline:none;transition:border-color .18s,box-shadow .18s}
+input:focus,textarea:focus,select:focus{border-color:#6f95ff;box-shadow:0 0 0 3px rgba(111,149,255,.13)}
+button,.external-link{border-radius:11px;padding:12px 17px;background:linear-gradient(110deg,#6f95ff,#4776e8);color:#07101f;font-size:13px;font-weight:800;transition:filter .2s,transform .2s}
+button:hover,.external-link:hover{filter:brightness(1.1);transform:translateY(-1px)}
+.filters{grid-template-columns:2fr 1fr 1fr 1fr;gap:13px;margin:0 0 22px;padding:20px;border-radius:18px;background:linear-gradient(145deg,#111e33,#0d1728);box-shadow:0 12px 30px rgba(0,0,0,.12)}
+.filters label{font-size:12px;font-weight:700}
+.filters input,.filters select{margin-top:8px}
+.filter-footer{padding-top:5px}
+.filter-count{font-size:12px;font-weight:700}
+.filter-footer button{padding:10px 14px;border-radius:10px;background:transparent;color:#91adff;border-color:#344a70}
+#jobsList{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.job{position:relative;display:flex;flex-direction:column;align-items:flex-start;min-width:0;margin:0;padding:21px;border:1px solid #263c5e;border-radius:17px;background:linear-gradient(145deg,#132139,#0d1728);box-shadow:0 12px 28px rgba(0,0,0,.12);transition:transform .2s,border-color .2s}
+.job:hover{transform:translateY(-3px);border-color:#527bd0}
+.job:before{content:"";position:absolute;top:0;left:21px;right:21px;height:2px;border-radius:0 0 3px 3px;background:linear-gradient(90deg,#6f95ff,transparent)}
+.job h3{font:750 18px/1.3 "Manrope","DM Sans",Arial,sans-serif;margin:4px 0 7px;overflow-wrap:anywhere}
+.job .meta{font-size:12px;line-height:1.6}
+.job .meta strong{color:#dce7ff;font-size:13px}
+.job>p{font-size:13px;line-height:1.65;margin:11px 0 0;color:#b3c0d3}
+.job>p strong{color:#e4ebf8}
+.job-actions{margin-top:auto;padding-top:17px}
+.job-actions .external-link{display:inline-flex;align-items:center;gap:9px}
+.job-actions .external-link:after{content:"↗";font-size:15px}
+.job-actions button{background:#6f95ff}
+#jobsList>p{grid-column:1/-1;padding:20px;border:1px dashed #304768;border-radius:14px;background:#101b2e}
+#jobsList>p a{color:#91adff;font-weight:700}
+@media(max-width:760px){main{padding:22px 18px 55px}.filters{grid-template-columns:1fr 1fr}.filters .keyword{grid-column:1/-1}#jobsList{grid-template-columns:1fr}.top{padding:25px 21px}.profile-panel{align-items:flex-start;flex-direction:column}.profile-actions{width:100%}.profile-actions>*{flex:1}}
+@media(max-width:480px){main{padding:16px 14px 45px}.profile-card{padding:15px;margin-bottom:25px}.profile-top{gap:11px}.avatar{width:58px;height:58px;flex-basis:58px}.profile-heading h2{font-size:16px}.profile-heading p{font-size:12px}.profile-info{gap:6px}.info-chip{font-size:11px}.top{padding:22px 17px;border-radius:16px}.top h1{font-size:30px}.top p{font-size:13px}.filters{padding:15px;gap:10px}.filters input,.filters select{padding:11px 10px;font-size:12px}.filter-footer{align-items:flex-start;flex-direction:column}.filter-footer button{width:100%}.job{padding:18px}.job h3{font-size:17px}.job-actions,.job-actions .external-link{width:100%;justify-content:center}}
+
 </style>
 </head>
 <body>
