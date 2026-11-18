@@ -1317,6 +1317,85 @@ h1,h2,h3,.logo,.menu-title{font-family:"Manrope","DM Sans",sans-serif}
 @media(max-width:900px){.discovery-panel{grid-template-columns:1fr}.discovery-image{height:220px}}
 @media(max-width:450px){.side-menu{width:min(300px,80vw);padding:18px}.menu-links a{font-size:.82rem;padding:10px 11px}.discovery-panel{padding:19px;margin-top:30px}.discovery-image{height:185px}.audience-photo{height:145px}.hero-visual-photo{min-height:330px}}
 
+
+/* HOME ATUALIZADA */
+.nav-links{display:flex;align-items:center;gap:27px;font-size:.88rem;font-weight:650;color:#aab7ca}
+.nav-links a{transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:#6f98ff}
+.nav-links .nav-cta{padding:10px 18px;border:1px solid #4777ee;border-radius:999px;color:#7ea3ff;background:rgba(40,77,150,.08)}
+.side-menu{width:min(265px,72vw);padding:18px}
+.menu-head{padding-bottom:14px}
+.menu-title{font-size:1.05rem}
+.menu-close{width:34px;height:34px;font-size:1.25rem}
+.menu-links{padding-top:14px;gap:4px}
+.menu-links a{padding:10px 9px;font-size:.84rem;gap:11px}
+.menu-icon{width:34px;height:34px;display:grid;place-items:center;flex:0 0 34px;border:1px solid #263b5d;border-radius:10px;background:rgba(93,140,255,.08)}
+.menu-icon svg{width:18px;height:18px;fill:none;stroke:#8eacff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.menu-links .menu-login,.menu-links .menu-register{padding:11px 12px}
+.home-hero{position:relative;overflow:hidden;min-height:510px;padding:105px 0 82px;background:#080f1d}
+.home-hero-bg{position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,11,20,.98) 0%,rgba(7,11,20,.88) 44%,rgba(7,11,20,.3) 100%),linear-gradient(0deg,#080f1d 0%,transparent 45%),url("https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1800&q=90") center 48%/cover no-repeat;opacity:.9}
+.home-hero:after{content:"";position:absolute;inset:auto 0 0;height:1px;background:linear-gradient(90deg,transparent,#29416a,transparent)}
+.home-hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:35px}
+.home-copy{max-width:630px}
+.home-eyebrow{display:inline-flex;align-items:center;gap:9px;padding:7px 12px;border:1px solid #31466a;border-radius:999px;background:rgba(9,18,34,.72);color:#b8c8e6;font-size:.78rem;font-weight:650;margin-bottom:22px}
+.eyebrow-dot{width:8px;height:8px;border-radius:50%;background:#6390ff;box-shadow:0 0 12px #6390ff}
+.home-copy h1{font:800 clamp(2.7rem,5.4vw,4.5rem)/1.04 "Manrope","DM Sans",sans-serif;letter-spacing:-2.7px;margin:0 0 22px;max-width:650px}
+.home-copy h1 span{color:#6390ff}
+.home-copy p{color:#b0bdd1;font-size:1.05rem;line-height:1.7;max-width:490px;margin-bottom:27px}
+.home-copy .hero-actions{gap:12px}
+.home-copy .btn{border-radius:999px;padding:13px 21px;font-size:.88rem}
+.hero-visual-card{height:330px;position:relative;display:grid;place-items:center}
+.hero-visual-orbit{position:absolute;width:280px;height:230px;border:1px solid rgba(79,133,255,.8);border-radius:48%;transform:rotate(-28deg);box-shadow:0 0 45px rgba(51,108,230,.14)}
+.hero-briefcase{width:170px;height:170px;display:grid;place-items:center;border:1px solid #456db5;border-radius:22px;background:linear-gradient(145deg,rgba(31,67,130,.86),rgba(11,25,49,.9));box-shadow:0 25px 65px rgba(0,0,0,.4),inset 0 1px rgba(255,255,255,.12);transform:rotate(-7deg)}
+.hero-briefcase svg{width:76px;height:76px;fill:none;stroke:#b9d0ff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 12px rgba(93,140,255,.5))}
+.hero-visual-lines{position:absolute;top:calc(50% + 58px);left:50%;transform:translateX(-50%) rotate(-7deg);width:105px}
+.hero-visual-lines i{display:block;height:8px;border-radius:9px;background:#527dd5;margin-top:9px;opacity:.75}
+.hero-visual-lines i:last-child{width:68%}
+.featured-section{padding:48px 0 68px}
+.featured-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:25px}
+.featured-heading h2,.about-strip h2{font:800 clamp(1.7rem,3.3vw,2.2rem)/1.15 "Manrope",sans-serif;letter-spacing:-1px;margin:4px 0 5px}
+.featured-heading p{color:var(--muted);font-size:.92rem}
+.text-link{display:inline-flex;align-items:center;gap:10px;white-space:nowrap;padding:10px 14px;border:1px solid #2b4166;border-radius:999px;color:#b9c9e5;font-size:.8rem;font-weight:700}
+.text-link:hover{border-color:#5b86e8;color:#fff}
+.featured-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.featured-job{height:245px;position:relative;overflow:hidden;display:flex;align-items:flex-end;border:1px solid #29416a;border-radius:17px;background:#101b2e;isolation:isolate;transition:transform .22s,border-color .22s}
+.featured-job:hover{transform:translateY(-4px);border-color:#6390ff}
+.featured-job>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform .45s}
+.featured-job:hover>img{transform:scale(1.04)}
+.job-image-shade{position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,rgba(5,11,22,.97) 0%,rgba(5,11,22,.68) 48%,rgba(5,11,22,.06) 100%)}
+.job-content{display:flex;flex-direction:column;align-items:flex-start;padding:20px;gap:3px}
+.job-type{font-size:.67rem;letter-spacing:1px;text-transform:uppercase;color:#91b1ff;font-weight:800;margin-bottom:3px}
+.job-content strong{font:750 1.12rem "Manrope",sans-serif;color:#f5f7ff}
+.job-company{color:#c1cce0;font-size:.86rem}
+.job-location{color:#aebbd0;font-size:.76rem;margin-top:3px}
+.job-location span{font-size:.6rem;color:#9db8ff;margin-right:4px}
+.job-tag{margin-top:11px;padding:5px 11px;border:1px solid rgba(74,123,230,.45);border-radius:999px;background:rgba(22,53,108,.65);color:#8fb0ff;font-size:.7rem;font-weight:750}
+.job-open{position:absolute;right:16px;bottom:17px;width:36px;height:36px;display:grid;place-items:center;border:1px solid #587bb8;border-radius:50%;background:rgba(15,34,67,.78);color:#d8e5ff;font-size:1.15rem}
+.featured-note{margin-top:13px;color:#71819a;font-size:.73rem}
+.benefits-section{padding:35px 0 65px}
+.benefits-heading{margin-bottom:22px}
+.benefit-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+.benefit-tile{padding:23px 18px 20px;text-align:center;border:1px solid #203452;border-radius:16px;background:linear-gradient(145deg,#101d32,#0b1424);transition:transform .2s,border-color .2s}
+.benefit-tile:hover{transform:translateY(-4px);border-color:#4269ad}
+.benefit-icon{width:42px;height:42px;display:grid;place-items:center;margin:0 auto 11px;color:#6390ff}
+.benefit-icon svg{width:34px;height:34px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.benefit-tile h3{font:750 .95rem "Manrope",sans-serif;margin-bottom:7px}
+.benefit-tile p{font-size:.78rem;color:#a6b4ca;line-height:1.55}
+.city-cta-section{padding:0 0 65px}
+.city-cta{min-height:160px;padding:28px 35px;display:flex;align-items:center;justify-content:space-between;gap:25px;overflow:hidden;border:1px solid #34558b;border-radius:18px;background:linear-gradient(90deg,rgba(7,15,30,.97),rgba(7,15,30,.78) 52%,rgba(7,15,30,.35)),url("https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1600&q=85") center 48%/cover no-repeat}
+.city-cta .section-label{margin:0}
+.city-cta h2{font:800 1.65rem "Manrope",sans-serif;margin:5px 0}
+.city-cta p{color:#c1cde0;font-size:.9rem}
+.city-cta-button{display:inline-flex;align-items:center;gap:12px;white-space:nowrap;padding:13px 21px;border-radius:999px;background:#f3f6fc;color:#101a2b;font-weight:800;font-size:.82rem}
+.about-strip{padding:55px 0;border-top:1px solid #15243a;background:#0a1220}
+.about-strip-inner{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.about-strip p,.security-anchor p{color:var(--muted);line-height:1.75;font-size:.9rem}
+.security-anchor{padding:18px 0;background:#080f1d}
+.security-anchor p{font-size:.75rem}
+@media(max-width:800px){.home-hero{padding:75px 0 55px}.home-hero-inner{grid-template-columns:1fr;gap:5px}.home-copy{max-width:580px}.hero-visual-card{height:230px;margin-top:0}.hero-visual-orbit{width:220px;height:175px}.hero-briefcase{width:125px;height:125px}.hero-briefcase svg{width:58px;height:58px}.featured-job{height:225px}}
+@media(max-width:600px){.side-menu{width:min(255px,74vw);padding:16px}.menu-links a{font-size:.8rem;padding:9px 8px}.menu-icon{width:31px;height:31px;flex-basis:31px}.menu-icon svg{width:16px;height:16px}.nav-links{gap:10px;font-size:.7rem}.nav-links .nav-cta{padding:7px 10px}.menu-button{width:34px;height:34px}.menu-button span{width:15px}.home-hero{padding:60px 0 40px}.home-copy h1{font-size:2.65rem;letter-spacing:-1.8px}.home-copy p{font-size:.92rem}.hero-visual-card{height:185px}.hero-visual-orbit{width:175px;height:140px}.hero-briefcase{width:100px;height:100px;border-radius:17px}.hero-briefcase svg{width:46px;height:46px}.featured-section{padding:38px 0 48px}.featured-heading{align-items:flex-start;flex-direction:column;gap:13px}.featured-grid{grid-template-columns:1fr;gap:13px}.featured-job{height:210px}.benefit-grid{grid-template-columns:1fr;gap:11px}.benefit-tile{display:grid;grid-template-columns:48px 1fr;column-gap:12px;text-align:left;padding:17px}.benefit-icon{grid-row:1/3;margin:0}.benefit-tile h3{align-self:end}.benefit-tile p{align-self:start}.city-cta{min-height:185px;padding:22px;align-items:flex-start;flex-direction:column;justify-content:center}.city-cta-button{padding:11px 17px}.about-strip-inner{grid-template-columns:1fr;gap:13px}.about-strip{padding:40px 0}}
+@media(max-width:380px){.nav-links{gap:7px;font-size:.66rem}.nav-links .nav-cta{padding:6px 8px}.logo{font-size:1.05rem}.menu-button{width:31px;height:31px}}
+
 </style>
 
 </head>
@@ -1340,11 +1419,10 @@ h1,h2,h3,.logo,.menu-title{font-family:"Manrope","DM Sans",sans-serif}
       </a>
 
       <div class="nav-links">
-        <a href="#publico">Para quem é</a>
-        <a href="#solucao">A plataforma</a>
-        <a href="#como">Como funciona</a>
-        <a href="login.html">Entrar</a>
-        <a href="cadastro.html" class="nav-cta">Criar conta</a>
+        <a href="index.html" class="active">Início</a>
+        <a href="vagas.html">Vagas</a>
+        <a href="#sobre">Sobre</a>
+        <a href="login.html" class="nav-cta">Entrar</a>
       </div>
 
       <button
@@ -1403,40 +1481,29 @@ h1,h2,h3,.logo,.menu-title{font-family:"Manrope","DM Sans",sans-serif}
   <div class="menu-links">
 
     <a href="index.html">
-      Início
+      <span class="menu-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/></svg></span>
+      <span>Início</span>
     </a>
 
-    <a href="#publico">
-      Área do estudante
+    <a href="vagas.html">
+      <span class="menu-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18M10 12v2h4v-2"/></svg></span>
+      <span>Oportunidades</span>
     </a>
 
-    <a href="#publico">
-      Área da empresa
-    </a>
-
-    <a href="#projeto">
-      Sobre o projeto
+    <a href="#sobre">
+      <span class="menu-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/><path d="M8 7h8M8 11h8"/></svg></span>
+      <span>Sobre o projeto</span>
     </a>
 
     <a href="#seguranca">
-      Segurança
+      <span class="menu-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"/><path d="m9 12 2 2 4-4"/></svg></span>
+      <span>Segurança</span>
     </a>
 
     <div class="menu-divider"></div>
 
-    <a
-      href="login.html"
-      class="menu-login"
-    >
-      Entrar
-    </a>
-
-    <a
-      href="cadastro.html"
-      class="menu-register"
-    >
-      Criar conta
-    </a>
+    <a href="login.html" class="menu-login">Entrar</a>
+    <a href="cadastro.html" class="menu-register">Criar conta</a>
 
   </div>
 
@@ -1460,771 +1527,125 @@ h1,h2,h3,.logo,.menu-title{font-family:"Manrope","DM Sans",sans-serif}
 
 <main>
 
-<section class="hero">
-
-  <div class="container">
-
-    <div class="hero-grid">
-
-
-      <div>
-
-        <div class="eyebrow">
-          Uma nova forma de conectar oportunidades
-        </div>
-
-        <h1>
-          Conectando
-          <span>talentos</span>
-          e oportunidades.
-        </h1>
-
-        <p>
-          O Conecta ADM aproxima estudantes, empresas e instituições
-          em um único ambiente, facilitando conexões e criando novas
-          possibilidades para o futuro profissional.
-        </p>
-
+  <section class="home-hero">
+    <div class="home-hero-bg" aria-hidden="true"></div>
+    <div class="container home-hero-inner">
+      <div class="home-copy">
+        <span class="home-eyebrow"><span class="eyebrow-dot"></span> Seu futuro começa aqui</span>
+        <h1>Conecte-se com novas <span>oportunidades</span></h1>
+        <p>Encontre vagas de emprego e estágio em Registro e região, de forma simples e rápida.</p>
         <div class="hero-actions">
-
-          <a
-            href="cadastro.html"
-            class="btn"
-          >
-            Criar minha conta
-          </a>
-
-          <a
-            href="#como"
-            class="btn secondary"
-          >
-            Como funciona
-          </a>
-
-        </div>
-
-      </div>
-
-
-      <div class="hero-visual hero-visual-photo">
-        <img class="hero-photo" src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=85" alt="Mesa de trabalho com computador e materiais de estudo">
-        <div class="hero-photo-shade"></div>
-        <div class="product-preview">
-          <div class="preview-head">
-            <div>
-              <span class="preview-kicker">CONECTA ADM</span>
-              <h3>Oportunidades em um só lugar</h3>
-            </div>
-            <span class="preview-dot"></span>
-          </div>
-          <div class="preview-search"><span>⌕</span> Buscar estágio, jovem aprendiz...</div>
-          <div class="preview-label">OPORTUNIDADES EM DESTAQUE</div>
-          <div class="preview-job">
-            <div class="job-mark">A</div>
-            <div class="job-info"><strong>Assistente administrativo</strong><span>Estágio · Registro, SP</span></div>
-            <span class="job-arrow">↗</span>
-          </div>
-          <div class="preview-job">
-            <div class="job-mark job-mark-light">J</div>
-            <div class="job-info"><strong>Jovem aprendiz</strong><span>Administrativo · Região</span></div>
-            <span class="job-arrow">↗</span>
-          </div>
-          <div class="preview-bottom"><span>Estudantes</span><span>Empresas</span><span>Instituições</span></div>
-        </div>
-        <div class="preview-note">Conexões que aproximam o próximo passo.</div>
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =========================
-     TRUST
-========================= -->
-
-<div class="trust">
-
-  <div class="container">
-
-    <div class="trust-inner">
-
-      <span>
-        UMA PLATAFORMA EM CONSTRUÇÃO
-      </span>
-
-      <span>
-        ESTUDANTES
-      </span>
-
-      <span>
-        EMPRESAS
-      </span>
-
-      <span>
-        INSTITUIÇÕES
-      </span>
-
-      <span>
-        OPORTUNIDADES
-      </span>
-
-    </div>
-
-  </div>
-
-</div>
-
-
-<!-- =========================
-     PÚBLICO
-========================= -->
-
-<section id="publico">
-
-  <div class="container">
-
-    <div class="section-head">
-
-      <div class="section-label">
-        Para quem é
-      </div>
-
-      <h2>
-        Um espaço pensado para diferentes lados da conexão.
-      </h2>
-
-      <p>
-        O Conecta ADM foi pensado para aproximar quem busca
-        oportunidades de quem possui oportunidades para oferecer.
-      </p>
-
-    </div>
-
-
-    <div class="audience-grid">
-
-
-      <div class="audience-card">
-
-        <div class="audience-photo"><img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=900&q=85" alt="Estudantes trabalhando juntos"></div>
-
-        <h3>
-          Estudantes
-        </h3>
-
-        <p>
-          Encontre oportunidades, desenvolva seu perfil profissional
-          e esteja mais próximo de empresas e instituições.
-        </p>
-
-      </div>
-
-
-      <div class="audience-card">
-
-        <div class="audience-photo"><img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=85" alt="Ambiente profissional de uma empresa"></div>
-
-        <h3>
-          Empresas
-        </h3>
-
-        <p>
-          Encontre novos talentos e tenha um ambiente para apresentar
-          oportunidades para estudantes e profissionais.
-        </p>
-
-      </div>
-
-
-      <div class="audience-card">
-
-        <div class="audience-photo"><img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=900&q=85" alt="Estudantes em ambiente de aprendizagem"></div>
-
-        <h3>
-          Instituições
-        </h3>
-
-        <p>
-          Conecte sua instituição a estudantes, empresas e novas
-          possibilidades de desenvolvimento.
-        </p>
-
-      </div>
-
-
-    </div>
-
-    <div class="discovery-panel" id="discovery">
-      <div class="discovery-copy">
-        <span class="section-label">Explore a experiência</span>
-        <h3>Um caminho para cada objetivo.</h3>
-        <p id="discoveryText">Para estudantes: encontre oportunidades, organize seu perfil e dê os próximos passos na carreira.</p>
-        <div class="discovery-tabs" role="group" aria-label="Escolha um perfil">
-          <button class="discovery-tab active" type="button" data-profile="student">Estudante</button>
-          <button class="discovery-tab" type="button" data-profile="company">Empresa</button>
-          <button class="discovery-tab" type="button" data-profile="institution">Instituição</button>
+          <a href="vagas.html" class="btn">Explorar vagas <span aria-hidden="true">→</span></a>
+          <a href="#sobre" class="btn secondary">Saiba mais</a>
         </div>
       </div>
-      <div class="discovery-image">
-        <img id="discoveryImage" src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1000&q=85" alt="Pessoas colaborando em um projeto">
-        <span class="image-caption" id="discoveryCaption">Conecte-se a novas possibilidades</span>
+      <div class="hero-visual-card" aria-label="Ilustração de oportunidades profissionais">
+        <div class="hero-visual-orbit"></div>
+        <div class="hero-briefcase">
+          <svg viewBox="0 0 64 64" aria-hidden="true"><rect x="8" y="19" width="48" height="35" rx="6"/><path d="M22 19v-6a4 4 0 0 1 4-4h12a4 4 0 0 1 4 4v6M8 32h48M27 32v5h10v-5"/></svg>
+        </div>
+        <div class="hero-visual-lines"><i></i><i></i></div>
       </div>
     </div>
+  </section>
 
-  </div>
-
-</section>
-
-
-<!-- =========================
-     PLATAFORMA
-========================= -->
-
-<section
-  class="features"
-  id="solucao"
->
-
-  <div class="container">
-
-    <div class="section-head">
-
-      <div class="section-label">
-        A plataforma
-      </div>
-
-      <h2>
-        Tudo começa com uma conexão.
-      </h2>
-
-      <p>
-        A proposta é criar uma experiência simples, organizada e
-        acessível para aproximar pessoas e oportunidades.
-      </p>
-
-    </div>
-
-
-    <div class="features-grid">
-
-
-      <div class="feature">
-
-        <div class="feature-number">
-          
+  <section class="featured-section" id="vagas-destaque">
+    <div class="container">
+      <div class="featured-heading">
+        <div>
+          <span class="section-label">Oportunidades</span>
+          <h2>Vagas em destaque</h2>
+          <p>Algumas oportunidades disponíveis em Registro para você começar.</p>
         </div>
-
-        <h3>
-          Perfis personalizados
-        </h3>
-
-        <p>
-          Cada usuário poderá apresentar suas informações de acordo
-          com seu objetivo dentro da plataforma.
-        </p>
-
+        <a class="text-link" href="vagas.html">Ver todas as vagas <span aria-hidden="true">→</span></a>
       </div>
 
-
-      <div class="feature">
-
-        <div class="feature-number">
-          
-        </div>
-
-        <h3>
-          Oportunidades
-        </h3>
-
-        <p>
-          Um ambiente pensado para facilitar a descoberta de novas
-          oportunidades profissionais e acadêmicas.
-        </p>
-
-      </div>
-
-
-      <div class="feature">
-
-        <div class="feature-number">
-          
-        </div>
-
-        <h3>
-          Conexões
-        </h3>
-
-        <p>
-          Aproximar estudantes, empresas e instituições é o centro
-          da proposta do Conecta ADM.
-        </p>
-
-      </div>
-
-
-      <div class="feature">
-
-        <div class="feature-number">
-          
-        </div>
-
-        <h3>
-          Evolução constante
-        </h3>
-
-        <p>
-          A plataforma continuará recebendo novas funcionalidades
-          conforme o projeto avançar.
-        </p>
-
-      </div>
-
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =========================
-     COMO FUNCIONA
-========================= -->
-
-<section id="como">
-
-  <div class="container">
-
-    <div class="section-head">
-
-      <div class="section-label">
-        Como funciona
-      </div>
-
-      <h2>
-        Simples para começar.
-      </h2>
-
-      <p>
-        A ideia é que qualquer pessoa consiga entender rapidamente
-        como participar da plataforma.
-      </p>
-
-    </div>
-
-
-    <div class="how-grid">
-
-
-      <div class="how-card">
-
-        <div class="how-number">
-          01
-        </div>
-
-        <h3>
-          Crie sua conta
-        </h3>
-
-        <p>
-          Escolha seu tipo de perfil e cadastre suas informações
-          dentro da plataforma.
-        </p>
-
-      </div>
-
-
-      <div class="how-card">
-
-        <div class="how-number">
-          02
-        </div>
-
-        <h3>
-          Complete seu perfil
-        </h3>
-
-        <p>
-          Adicione informações que ajudam outras pessoas e
-          organizações a conhecerem você.
-        </p>
-
-      </div>
-
-
-      <div class="how-card">
-
-        <div class="how-number">
-          03
-        </div>
-
-        <h3>
-          Encontre conexões
-        </h3>
-
-        <p>
-          Explore oportunidades e descubra novas possibilidades
-          dentro do ecossistema Conecta ADM.
-        </p>
-
-      </div>
-
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =========================
-     DIFERENCIAL
-========================= -->
-
-<section>
-
-  <div class="container">
-
-    <div class="differential">
-
-
-      <div class="differential-text">
-
-        <div class="section-label">
-          Nosso diferencial
-        </div>
-
-        <h2>
-          Uma plataforma construída pensando nas conexões.
-        </h2>
-
-        <p>
-          Mais do que apresentar oportunidades, o objetivo é criar
-          um ambiente onde estudantes, empresas e instituições
-          possam estar mais próximos.
-        </p>
-
-      </div>
-
-
-      <div class="benefits">
-
-
-        <div class="benefit">
-
-          <strong>
-            01 Foco nos estudantes
-          </strong>
-
-          <span>
-            Facilitar o acesso a novas oportunidades.
+      <div class="featured-grid">
+        <a class="featured-job featured-job-apprentice" href="vagas.html">
+          <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1000&q=85" alt="Jovem profissional em ambiente de trabalho">
+          <span class="job-image-shade"></span>
+          <span class="job-content">
+            <span class="job-type">Jovem aprendiz</span>
+            <strong>Jovem Aprendiz</strong>
+            <span class="job-company">Grupo Águia Branca</span>
+            <span class="job-location"><span aria-hidden="true">●</span> Registro - SP</span>
+            <span class="job-tag">Aprendiz</span>
           </span>
+          <span class="job-open" aria-hidden="true">→</span>
+        </a>
 
-        </div>
-
-
-        <div class="benefit">
-
-          <strong>
-            02 Aproximação empresarial
-          </strong>
-
-          <span>
-            Criar novas possibilidades para empresas encontrarem talentos.
+        <a class="featured-job featured-job-intern" href="vagas.html">
+          <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1000&q=85" alt="Ambiente de escritório para trabalho administrativo">
+          <span class="job-image-shade"></span>
+          <span class="job-content">
+            <span class="job-type">Estágio</span>
+            <strong>Estágio na área administrativa</strong>
+            <span class="job-company">IEREG / UNISA</span>
+            <span class="job-location"><span aria-hidden="true">●</span> Registro - SP</span>
+            <span class="job-tag">Estágio</span>
           </span>
-
-        </div>
-
-
-        <div class="benefit">
-
-          <strong>
-            Conexões
-          </strong>
-
-          <span>
-            Aproximar diferentes participantes do ecossistema.
-          </span>
-
-        </div>
-
-
-        <div class="benefit">
-
-          <strong>
-            Evolução
-          </strong>
-
-          <span>
-            O projeto continuará recebendo novas funcionalidades.
-          </span>
-
-        </div>
-
-
+          <span class="job-open" aria-hidden="true">→</span>
+        </a>
       </div>
-
+      <p class="featured-note">As vagas e os links de candidatura são conferidos na página de oportunidades. A disponibilidade pode mudar.</p>
     </div>
+  </section>
 
-  </div>
-
-</section>
-
-
-<!-- =========================
-     SOBRE O PROJETO
-========================= -->
-
-<section id="projeto">
-
-  <div class="container">
-
-    <div class="section-head">
-
-      <div class="section-label">
-        Sobre o projeto
+  <section class="benefits-section" id="sobre">
+    <div class="container">
+      <div class="featured-heading benefits-heading">
+        <div>
+          <span class="section-label">Conecta ADM</span>
+          <h2>Por que usar o Conecta ADM?</h2>
+          <p>Tudo o que você precisa para dar o próximo passo na sua carreira.</p>
+        </div>
       </div>
-
-      <h2>
-        Construindo novas conexões para o futuro.
-      </h2>
-
-      <p>
-        O Conecta ADM está sendo desenvolvido para aproximar
-        estudantes, empresas e instituições em um mesmo ambiente.
-      </p>
-
+      <div class="benefit-grid">
+        <article class="benefit-tile">
+          <span class="benefit-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="7.3"/><path d="m16.2 16.2 5 5"/></svg></span>
+          <h3>Busca inteligente</h3>
+          <p>Encontre vagas por cidade, área e tipo de oportunidade.</p>
+        </article>
+        <article class="benefit-tile">
+          <span class="benefit-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m13 2-9 12h7l-1 8 10-13h-7z"/></svg></span>
+          <h3>Acesso rápido</h3>
+          <p>Consulte oportunidades e acesse a candidatura em poucos cliques.</p>
+        </article>
+        <article class="benefit-tile">
+          <span class="benefit-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 20h18M6 16l4-5 4 3 5-8"/><path d="M14 6h5v5"/></svg></span>
+          <h3>Seu futuro em foco</h3>
+          <p>Descubra novas experiências e dê espaço para seu crescimento.</p>
+        </article>
+      </div>
     </div>
+  </section>
 
-
-    <div class="project-box">
-
-
-      <div class="project-card">
-
-        <h3>
-          O que já existe
-        </h3>
-
-        <p>
-          A estrutura inicial da plataforma já está sendo construída,
-          incluindo sistema de contas, autenticação e diferentes
-          tipos de perfil.
-        </p>
-
-
-        <div class="project-list">
-
-          <div>
-            <span>✓</span>
-            Sistema de cadastro
-          </div>
-
-          <div>
-            <span>✓</span>
-            Login de usuários
-          </div>
-
-          <div>
-            <span>✓</span>
-            Autenticação
-          </div>
-
-          <div>
-            <span>✓</span>
-            Estrutura de perfis
-          </div>
-
+  <section class="city-cta-section">
+    <div class="container">
+      <div class="city-cta">
+        <div>
+          <span class="section-label">Seu próximo passo</span>
+          <h2>Não perca tempo!</h2>
+          <p>Explore oportunidades em Registro e região.</p>
         </div>
-
+        <a href="vagas.html" class="city-cta-button">Ver vagas <span aria-hidden="true">→</span></a>
       </div>
-
-
-      <div class="project-card">
-
-        <h3>
-          O que ainda vem pela frente
-        </h3>
-
-        <p>
-          O projeto está em evolução e novas funcionalidades serão
-          adicionadas gradualmente para transformar a ideia em uma
-          plataforma cada vez mais completa.
-        </p>
-
-
-        <div class="project-list">
-
-          <div>
-            <span>→</span>
-            Área completa do estudante
-          </div>
-
-          <div>
-            <span>→</span>
-            Área completa da empresa
-          </div>
-
-          <div>
-            <span>→</span>
-            Sistema de oportunidades
-          </div>
-
-          <div>
-            <span>→</span>
-            Novas ferramentas de conexão
-          </div>
-
-        </div>
-
-      </div>
-
-
     </div>
+  </section>
 
-  </div>
-
-</section>
-
-
-<!-- =========================
-     SEGURANÇA
-========================= -->
-
-<section
-  id="seguranca"
-  class="security-section"
->
-
-  <div class="container">
-
-    <div class="differential">
-
-
-      <div class="differential-text">
-
-        <div class="section-label">
-          Segurança
-        </div>
-
-        <h2>
-          Seus dados merecem proteção.
-        </h2>
-
-        <p>
-          O Conecta ADM utiliza autenticação e uma estrutura de
-          armazenamento dedicada para organizar o acesso às contas
-          e proteger as informações dos usuários.
-        </p>
-
+  <section class="about-strip" id="projeto">
+    <div class="container about-strip-inner">
+      <div>
+        <span class="section-label">Sobre o projeto</span>
+        <h2>Uma plataforma, várias possibilidades.</h2>
       </div>
-
-
-      <div class="benefits">
-
-
-        <div class="benefit">
-
-          <strong>
-            Autenticação
-          </strong>
-
-          <span>
-            Controle de acesso às contas.
-          </span>
-
-        </div>
-
-
-        <div class="benefit">
-
-          <strong>
-            Proteção de dados
-          </strong>
-
-          <span>
-            Informações armazenadas em estrutura dedicada.
-          </span>
-
-        </div>
-
-
-        <div class="benefit">
-
-          <strong>
-            Acesso individual
-          </strong>
-
-          <span>
-            Cada usuário acessa seu próprio perfil.
-          </span>
-
-        </div>
-
-
-        <div class="benefit">
-
-          <strong>
-            Evolução contínua
-          </strong>
-
-          <span>
-            Novas camadas de segurança serão adicionadas conforme
-            a plataforma evoluir.
-          </span>
-
-        </div>
-
-
-      </div>
-
+      <p>O Conecta ADM aproxima estudantes, empresas e instituições, facilitando o acesso a oportunidades e novas conexões profissionais.</p>
     </div>
+  </section>
 
-  </div>
-
-</section>
-
-
-<!-- =========================
-     CTA
-========================= -->
-
-<section
-  class="cta-section"
-  id="cadastro"
->
-
-  <div class="container">
-
-    <div class="cta">
-
-      <div class="section-label">
-        Faça parte
-      </div>
-
-      <h2>
-        Sua próxima conexão pode começar aqui.
-      </h2>
-
-      <p>
-        Crie sua conta e acompanhe a evolução do Conecta ADM.
-      </p>
-
-      <a
-        href="cadastro.html"
-        class="btn"
-      >
-        Criar conta
-      </a>
-
-    </div>
-
-  </div>
-
-</section>
+  <section class="security-anchor" id="seguranca" aria-label="Segurança da plataforma">
+    <div class="container"><p>O Conecta ADM utiliza autenticação e controle de acesso para proteger as contas e organizar as informações dos usuários.</p></div>
+  </section>
 
 </main>
 
