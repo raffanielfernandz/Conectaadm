@@ -1398,6 +1398,15 @@ h1,h2,h3,.logo,.menu-title{font-family:"Manrope","DM Sans",sans-serif}
 
 </style>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<style>
+.home-profile-link{width:42px;height:42px;flex:0 0 42px;padding:2px;border:2px solid #638cff;border-radius:50%;background:#263957;display:grid;place-items:center;overflow:hidden;color:#fff;font-size:15px;font-weight:800}
+.home-profile-link img{width:100%;height:100%;display:none;object-fit:cover;border-radius:50%}
+.home-profile-link:hover{box-shadow:0 0 0 4px rgba(99,140,255,.16)}
+.nav-links [hidden],.menu-links [hidden]{display:none!important}
+@media(max-width:650px){.home-profile-link{width:34px;height:34px;flex-basis:34px}.nav-links{gap:12px}}
+</style>
 </head>
 
 
@@ -1418,9 +1427,11 @@ h1,h2,h3,.logo,.menu-title{font-family:"Manrope","DM Sans",sans-serif}
         Conecta <span>ADM</span>
       </a>
 
-      <div class="nav-links">
+      <div class="nav-links" id="homeNavLinks">
         <a href="index.html" class="active">Início</a>
-        <a href="login.html" class="nav-cta">Entrar</a>
+        <a href="vagas.html" id="homeJobsLink" hidden>Vagas</a>
+        <a href="login.html" class="nav-cta" id="homeLoginLink">Entrar</a>
+        <a href="editar-perfil.html" class="home-profile-link" id="homeProfileLink" aria-label="Meu perfil" title="Meu perfil" hidden><span id="homeProfileInitial">?</span><img id="homeProfileImage" alt="Foto do perfil"></a>
       </div>
 
       <button
@@ -1500,8 +1511,10 @@ h1,h2,h3,.logo,.menu-title{font-family:"Manrope","DM Sans",sans-serif}
 
     <div class="menu-divider"></div>
 
-    <a href="login.html" class="menu-login">Entrar</a>
-    <a href="cadastro.html" class="menu-register">Criar conta</a>
+    <a href="vagas.html" id="sideJobsLink" hidden>Oportunidades</a>
+    <a href="editar-perfil.html" id="sideProfileLink" hidden>Meu perfil</a>
+    <a href="login.html" class="menu-login" id="sideLoginLink">Entrar</a>
+    <a href="cadastro.html" class="menu-register" id="sideRegisterLink">Criar conta</a>
 
   </div>
 
@@ -1794,5 +1807,39 @@ document.querySelectorAll(".discovery-tab").forEach(button => {
 </script>
 
 
+<script>
+(async function updateHomeNavigation(){
+  try{
+    const client=window.supabase.createClient(window.SUPABASE_URL,window.SUPABASE_PUBLISHABLE_KEY);
+    const {data:{session}}=await client.auth.getSession();
+    const loggedIn=!!session;
+    const login=document.getElementById("homeLoginLink");
+    const jobs=document.getElementById("homeJobsLink");
+    const avatar=document.getElementById("homeProfileLink");
+    const sideJobs=document.getElementById("sideJobsLink");
+    const sideProfile=document.getElementById("sideProfileLink");
+    const sideLogin=document.getElementById("sideLoginLink");
+    const sideRegister=document.getElementById("sideRegisterLink");
+    if(!loggedIn)return;
+    login.hidden=true;
+    jobs.hidden=false;
+    avatar.hidden=false;
+    sideJobs.hidden=false;
+    sideProfile.hidden=false;
+    sideLogin.hidden=true;
+    sideRegister.hidden=true;
+    const {data:profile}=await client.from("profiles").select("full_name,avatar_url").eq("id",session.user.id).maybeSingle();
+    const displayName=(profile?.full_name||session.user.user_metadata?.full_name||session.user.email||"Perfil").trim();
+    const initial=document.getElementById("homeProfileInitial");
+    const image=document.getElementById("homeProfileImage");
+    initial.textContent=displayName.charAt(0).toUpperCase()||"?";
+    if(profile?.avatar_url){
+      image.onload=()=>{image.style.display="block";initial.style.display="none";};
+      image.onerror=()=>{image.style.display="none";initial.style.display="grid";};
+      image.src=profile.avatar_url;
+    }
+  }catch(error){console.error("Não foi possível atualizar o cabeçalho:",error);}
+})();
+</script>
 </body>
 </html>
