@@ -1409,6 +1409,27 @@ h1,h2,h3,.logo,.menu-title{font-family:"Manrope","DM Sans",sans-serif}
 .nav-links [hidden],.menu-links [hidden]{display:none!important}
 @media(max-width:650px){.home-profile-link{width:34px;height:34px;flex-basis:34px}.nav-links{gap:12px}}
 </style>
+<style id="shared-header-sizing">
+header .container{width:100%;max-width:1180px;padding:0 28px;box-sizing:border-box}
+header nav{min-height:76px;height:76px;display:flex;align-items:center;gap:16px}
+header .logo{font-size:22px;line-height:1;font-weight:850;letter-spacing:-.7px;white-space:nowrap}
+header .nav-links{margin-left:auto;display:flex;align-items:center;justify-content:flex-end;gap:clamp(10px,2vw,22px);font-size:13px;white-space:nowrap}
+header .home-profile-link{width:42px;height:42px;flex:0 0 42px}
+header .menu-button{width:42px;height:42px;flex:0 0 42px;margin-left:8px;border-radius:11px}
+header .menu-button span{width:18px}
+@media(max-width:600px){
+ header .container{padding:0 18px} header nav{gap:9px} header .logo{font-size:21px}
+ header .nav-links{gap:10px;font-size:12px}
+ header .home-profile-link{width:40px;height:40px;flex-basis:40px}
+ header .menu-button{width:40px;height:40px;flex-basis:40px;margin-left:5px}
+}
+@media(max-width:380px){
+ header .container{padding:0 13px} header nav{gap:7px} header .logo{font-size:19px}
+ header .nav-links{gap:7px;font-size:11px}
+ header .home-profile-link{width:36px;height:36px;flex-basis:36px}
+ header .menu-button{width:36px;height:36px;flex-basis:36px;margin-left:3px}
+}
+</style>
 </head>
 
 
