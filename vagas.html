@@ -234,6 +234,7 @@ main{max-width:1120px;padding:0 28px 60px}
  .site-header .jobs-menu-button{width:36px;height:36px;flex-basis:36px;margin-left:3px}
 }
 </style>
+<style id="menu-close-x-fix">.jobs-menu-head button{display:flex!important;align-items:center!important;justify-content:center!important;padding:0!important;line-height:1!important;font-family:Arial,sans-serif!important;font-size:25px!important;font-weight:400!important;text-align:center!important;transform:none!important}</style>
 </head>
 <body>
 <header class="site-header">
@@ -372,6 +373,33 @@ const localExternalJobs = [
     source_url: "https://vagas.solides.com.br/vaga/945489",
     source_name: "Sólides"
   }
+,
+  {
+    id: "ext-bbl-aprendiz",
+    title: "Jovem Aprendiz - BBL Engenharia",
+    company_name: "#VemSerBBL#",
+    description: "Apoio às rotinas administrativas, organização e digitalização de documentos, atualização de planilhas e sistemas internos, além de suporte ao atendimento e aos controles do departamento.",
+    requirements: "Estar matriculado e frequentando a escola, quando aplicável. Conhecimentos básicos de informática, Word e Excel, organização, boa comunicação e interesse em aprender.",
+    location: "Registro, SP",
+    work_mode: "Presencial",
+    employment_type: "Jovem Aprendiz",
+    salary: "Não informado",
+    source_url: "https://bbl.gupy.io/job/eyJqb2JJZCI6MTI3OTIwODIsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
+    source_name: "Gupy / BBL Engenharia"
+  },
+  {
+    id: "ext-hospital-aux-admin",
+    title: "Auxiliar Administrativo - Hospital Regional",
+    company_name: "Instituto de Responsabilidade Social Sírio-Libanês",
+    description: "Apoio administrativo às áreas da unidade, organização de arquivos e agendas, atendimento telefônico e presencial, preparação de planilhas e controles e registro de informações em sistemas.",
+    requirements: "Ensino médio completo. Vaga presencial em escala 12x36 no período diurno. Consulte a página oficial para confirmar os detalhes e a disponibilidade.",
+    location: "Registro, SP",
+    work_mode: "Presencial",
+    employment_type: "CLT",
+    salary: "Não informado",
+    source_url: "https://irssl.gupy.io/job/eyJqb2JJZCI6MTI2ODgwOTMsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
+    source_name: "Gupy / Hospital Regional"
+  }
 ];
 
 function showMessage(text){messageEl.textContent=text;messageEl.classList.remove("hidden")}
@@ -458,6 +486,10 @@ function renderJobs(){
       ? "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1100&q=85"
       : job.id==="ext-iereg-estagio"
       ? "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1100&q=85"
+      : job.id==="ext-bbl-aprendiz"
+      ? "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1100&q=85"
+      : job.id==="ext-hospital-aux-admin"
+      ? "https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=1100&q=85"
       : kind.includes("aprendiz")
       ? "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1100&q=85"
       : kind.includes("estagio")
