@@ -115,6 +115,50 @@ let currentUser = null;
 let profileType = "";
 let allJobs = [];
 
+// Vagas externas da região verificadas em 17/11/2026.
+// A candidatura é concluída no site de origem.
+const localExternalJobs = [
+  {
+    id: "ext-menegazzo-aprendiz",
+    title: "Jovem Aprendiz - Menegazzo Litoral",
+    company_name: "DISTRIBUIDORA MENEGAZZO LTDA",
+    description: "Apoio administrativo e operacional nas áreas de Logística, RH e Financeiro. Atividades incluem organização de documentos, atendimento telefônico, atualização de controles e apoio a projetos.",
+    requirements: "Ter entre 16 e 21 anos. Turnos informados: 08h às 14h ou 12h às 18h. Inscrições informadas até 30/11/2026.",
+    location: "Registro, SP",
+    work_mode: "Presencial",
+    employment_type: "Jovem Aprendiz",
+    salary: "",
+    source_url: "https://www.netvagas.com.br/empresa/anuncios/a2662085/jovem-aprendiz-menegazzo-litoral-registro-sp/",
+    source_name: "Netvagas / Sólides"
+  },
+  {
+    id: "ext-aguia-aprendiz",
+    title: "Jovem Aprendiz - Registro/SP",
+    company_name: "Divisão Comércio do Grupo Águia Branca",
+    description: "Atendimento telefônico e presencial, organização de documentos, apoio em relatórios, planilhas e apresentações, além de controle de materiais.",
+    requirements: "Estar matriculado e frequentando a escola, caso não tenha concluído o ensino médio. Conhecimentos básicos de informática, boa comunicação, proatividade e responsabilidade. Horário informado: segunda a sexta, das 08h às 12h.",
+    location: "Registro, SP",
+    work_mode: "Presencial",
+    employment_type: "Jovem Aprendiz",
+    salary: "",
+    source_url: "https://grupoaguiabranca.empregare.com/pt-br/vaga-jovem-aprendiz-registro-sp_188480",
+    source_name: "Empregare"
+  },
+  {
+    id: "ext-iereg-estagio",
+    title: "Estágio na área administrativa - UNISA",
+    company_name: "IEREG - Instituto Educar LTDA",
+    description: "Estágio na área administrativa, com uso básico de redes sociais, Excel e Word. A vaga informa disponibilidade para os períodos da tarde e noite.",
+    requirements: "Ensino médio. Boa comunicação e conhecimentos básicos de redes sociais, Excel e Word. Anúncio publicado em 28/10/2026; confirme a disponibilidade no site de candidatura.",
+    location: "Registro, SP",
+    work_mode: "Presencial",
+    employment_type: "Estágio",
+    salary: "Não informado",
+    source_url: "https://vagas.solides.com.br/vaga/945489",
+    source_name: "Sólides"
+  }
+];
+
 function showMessage(text){messageEl.textContent=text;messageEl.classList.remove("hidden")}
 function escapeHTML(value){return String(value ?? "").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))}
 
@@ -177,7 +221,7 @@ function renderJobs(){
   const type = normalizeText(document.getElementById("typeFilter").value);
   const mode = normalizeText(document.getElementById("modeFilter").value);
   const filtered = allJobs.filter(job => {
-    const searchable = normalizeText([job.title,job.description,job.requirements,job.location,job.employment_type,job.work_mode].join(" "));
+    const searchable = normalizeText([job.title,job.company_name,job.description,job.requirements,job.location,job.employment_type,job.work_mode].join(" "));
     const jobCity = normalizeText(String(job.location || "").toLowerCase().includes("remoto") ? "Remoto" : String(job.location || "").split(",")[0]);
     return (!keyword || searchable.includes(keyword)) &&
       (!city || jobCity === city) &&
@@ -205,7 +249,7 @@ function renderJobs(){
 async function loadJobs(){
   const {data,error}=await client.from("jobs").select("id,created_by,title,description,location,work_mode,employment_type,salary,requirements,created_at,company_name,source_url,source_name,expires_at").eq("status","active").order("created_at",{ascending:false});
   if(error){jobsList.innerHTML="<p>Não foi possível carregar as vagas. Atualize a página e tente novamente.</p>";console.error(error);return}
-  const today = new Date().toISOString().slice(0,10);\n  allJobs=(data || []).filter(job => !job.expires_at || job.expires_at >= today);
+  const today = new Date().toISOString().slice(0,10);\n  allJobs=[...localExternalJobs, ...(data || []).filter(job => !job.expires_at || job.expires_at >= today)];
   populateCityFilter();
   renderJobs();
 }
