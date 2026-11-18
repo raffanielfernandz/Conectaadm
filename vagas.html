@@ -214,6 +214,26 @@ main{max-width:1120px;padding:0 28px 60px}
 @media(max-width:390px){.site-header nav{gap:9px}.site-header nav a{font-size:10px}.brand{font-size:15px}.hero-banner h1{font-size:33px}.job.job-horizontal{grid-template-columns:96px minmax(0,1fr)}.job-horizontal .job-image-wrap{min-height:150px}}
 
 </style>
+<style id="shared-header-sizing">
+.site-header{width:100%;max-width:1180px;height:76px;min-height:76px;padding:0 28px;box-sizing:border-box;margin:0 auto;display:flex;align-items:center;gap:16px}
+.site-header .brand{font-size:22px;line-height:1;font-weight:850;letter-spacing:-.7px;white-space:nowrap}
+.site-header nav{margin-left:auto;display:flex;align-items:center;justify-content:flex-end;gap:clamp(10px,2vw,22px);white-space:nowrap}
+.site-header nav a{font-size:13px}
+.site-header nav .profile-avatar-link{width:42px;height:42px;flex:0 0 42px}
+.site-header .jobs-menu-button{width:42px;height:42px;flex:0 0 42px;margin-left:8px;border-radius:11px}
+@media(max-width:600px){
+ .site-header{padding:0 18px;gap:9px} .site-header .brand{font-size:21px}
+ .site-header nav{gap:10px} .site-header nav a{font-size:12px}
+ .site-header nav .profile-avatar-link{width:40px;height:40px;flex-basis:40px}
+ .site-header .jobs-menu-button{width:40px;height:40px;flex-basis:40px;margin-left:5px}
+}
+@media(max-width:380px){
+ .site-header{padding:0 13px;gap:7px} .site-header .brand{font-size:19px}
+ .site-header nav{gap:7px} .site-header nav a{font-size:11px}
+ .site-header nav .profile-avatar-link{width:36px;height:36px;flex-basis:36px}
+ .site-header .jobs-menu-button{width:36px;height:36px;flex-basis:36px;margin-left:3px}
+}
+</style>
 </head>
 <body>
 <header class="site-header">
