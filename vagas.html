@@ -59,7 +59,7 @@ form{display:grid;grid-template-columns:1fr 1fr;gap:12px}label{display:block;col
     <p>Encontre vagas de emprego e estágio ou compartilhe uma oportunidade com estudantes.</p>
   </div>
 </div>
-<div id="message" class="message">Carregando oportunidades...</div>
+<div id="message" class="message hidden"></div>
 <section id="publishPanel" class="panel hidden">
 <h2>Publicar oportunidade</h2>
 <form id="jobForm">
@@ -74,7 +74,6 @@ form{display:grid;grid-template-columns:1fr 1fr;gap:12px}label{display:block;col
 </form>
 </section>
 <section>
-<h2>Vagas disponíveis</h2>
 <div class="filters" aria-label="Filtros de oportunidades">
   <label class="keyword">Buscar por palavra-chave
     <input id="keywordFilter" type="search" placeholder="Cargo, empresa ou área...">
@@ -219,7 +218,6 @@ async function init(){
   profileType=profile?.profile_type || currentUser.user_metadata?.tipo_de_perfil || "";
   renderProfile(profile || {});
   if(profileType==="empresa" || profileType==="company") document.getElementById("publishPanel").classList.remove("hidden");
-  showMessage("Você está conectado. Confira as oportunidades abaixo.");
   await loadJobs();
 }
 
