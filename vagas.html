@@ -87,6 +87,30 @@ button:hover,.external-link:hover{filter:brightness(1.1);transform:translateY(-1
 @media(max-width:760px){main{padding:22px 18px 55px}.filters{grid-template-columns:1fr 1fr}.filters .keyword{grid-column:1/-1}#jobsList{grid-template-columns:1fr}.top{padding:25px 21px}.profile-panel{align-items:flex-start;flex-direction:column}.profile-actions{width:100%}.profile-actions>*{flex:1}}
 @media(max-width:480px){main{padding:16px 14px 45px}.profile-card{padding:15px;margin-bottom:25px}.profile-top{gap:11px}.avatar{width:58px;height:58px;flex-basis:58px}.profile-heading h2{font-size:16px}.profile-heading p{font-size:12px}.profile-info{gap:6px}.info-chip{font-size:11px}.top{padding:22px 17px;border-radius:16px}.top h1{font-size:30px}.top p{font-size:13px}.filters{padding:15px;gap:10px}.filters input,.filters select{padding:11px 10px;font-size:12px}.filter-footer{align-items:flex-start;flex-direction:column}.filter-footer button{width:100%}.job{padding:18px}.job h3{font-size:17px}.job-actions,.job-actions .external-link{width:100%;justify-content:center}}
 
+
+/* CARDS PADRONIZADOS COM IMAGENS */
+#jobsList{align-items:stretch}
+.job{padding:0;overflow:hidden;display:flex;flex-direction:column;gap:0}
+.job:before{z-index:2;left:0;right:0}
+.job-image-wrap{height:155px;overflow:hidden;background:#17243a}
+.job-image{display:block;width:100%;height:100%;object-fit:cover;transition:transform .35s}
+.job:hover .job-image{transform:scale(1.035)}
+.job-content{display:flex;flex:1;flex-direction:column;padding:19px}
+.job-tags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:10px}
+.job-tag{display:inline-flex;align-items:center;border:1px solid rgba(111,149,255,.3);border-radius:30px;padding:5px 10px;background:rgba(74,115,210,.18);color:#a9c0ff;font-size:11px;font-weight:800}
+.job-tag.secondary{background:rgba(255,255,255,.04);border-color:#31415d;color:#c1ccdc}
+.job .job-company{margin:0;color:#dce7ff;font-size:13px;font-weight:700}
+.job-facts{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:15px}
+.job-facts span{display:flex;flex-direction:column;gap:3px;padding:10px;border:1px solid #263956;border-radius:10px;background:rgba(5,13,26,.32);color:#c4d0e2;font-size:12px}
+.job-facts b,.job-description>b{color:#8faeff;font-size:10px;text-transform:uppercase;letter-spacing:.7px}
+.job-description{margin-top:14px}
+.job-description p{margin:4px 0 0;color:#b3c0d3;font-size:12px;line-height:1.65}
+.job-description.requirements{padding-top:12px;border-top:1px solid rgba(100,130,180,.18)}
+.job-actions{display:flex;flex-direction:column;align-items:stretch;gap:9px;margin-top:auto;padding-top:17px}
+.job-actions .external-link,.job-actions button{justify-content:center;text-align:center;width:100%;min-height:44px}
+.job-source{color:#7f91ad;font-size:10px}
+@media(max-width:480px){.job-image-wrap{height:145px}.job-content{padding:16px}.job-facts{grid-template-columns:1fr 1fr}.job-description p{font-size:12px}}
+
 </style>
 </head>
 <body>
@@ -289,13 +313,38 @@ function renderJobs(){
   jobsList.innerHTML=filtered.map(job=>{
     const canApply=profileType==="estudante" || profileType==="student";
     const own=job.created_by===currentUser.id;
-    return `<article class="job"><h3>${escapeHTML(job.title)}</h3>
-      ${job.company_name ? `<p class="meta"><strong>${escapeHTML(job.company_name)}</strong></p>` : ""}\n      <div class="meta">${escapeHTML(job.employment_type)} · ${escapeHTML(job.work_mode)} · ${escapeHTML(job.location || "Local não informado")}</div>
-      ${job.salary ? `<p><strong>Remuneração:</strong> ${escapeHTML(job.salary)}</p>` : ""}
-      <p>${escapeHTML(job.description)}</p>
-      ${job.requirements ? `<p><strong>Requisitos:</strong> ${escapeHTML(job.requirements)}</p>` : ""}
-      <div class="job-actions">${job.source_url ? `<a class="external-link" href="${escapeHTML(job.source_url)}" target="_blank" rel="noopener noreferrer">Ver vaga e candidatar-se</a>` : (canApply && !own ? `<button type="button" data-apply="${job.id}">Candidatar-me</button>` : "")}
-      ${own ? "<span class='meta'>Publicada por você</span>" : ""}</div></article>`;
+    const kind=normalizeText(job.employment_type);
+    const image = job.id==="ext-menegazzo-aprendiz"
+      ? "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1100&q=85"
+      : job.id==="ext-aguia-aprendiz"
+      ? "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1100&q=85"
+      : job.id==="ext-iereg-estagio"
+      ? "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1100&q=85"
+      : kind.includes("aprendiz")
+      ? "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1100&q=85"
+      : kind.includes("estagio")
+      ? "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1100&q=85"
+      : "https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1100&q=85";
+    const company=job.company_name || "Empresa anunciante";
+    const requirements=job.requirements || "Consulte os requisitos no anúncio da empresa.";
+    const action=job.source_url
+      ? `<a class="external-link" href="${escapeHTML(job.source_url)}" target="_blank" rel="noopener noreferrer">Ver vaga e candidatar-se</a>`
+      : (canApply && !own ? `<button type="button" data-apply="${escapeHTML(job.id)}">Candidatar-me</button>` : "");
+    return `<article class="job">
+      <div class="job-image-wrap"><img class="job-image" src="${image}" alt="Imagem ilustrativa relacionada à oportunidade de ${escapeHTML(job.employment_type || "trabalho")}" loading="lazy"></div>
+      <div class="job-content">
+        <div class="job-tags"><span class="job-tag">${escapeHTML(job.employment_type || "Oportunidade")}</span><span class="job-tag secondary">${escapeHTML(job.work_mode || "Modalidade não informada")}</span></div>
+        <h3>${escapeHTML(job.title)}</h3>
+        <p class="job-company">${escapeHTML(company)}</p>
+        <div class="job-facts">
+          <span><b>Local</b>${escapeHTML(job.location || "Não informado")}</span>
+          <span><b>Remuneração</b>${escapeHTML(job.salary || "Não informada")}</span>
+        </div>
+        <div class="job-description"><b>Sobre a vaga</b><p>${escapeHTML(job.description || "Consulte os detalhes no anúncio da empresa.")}</p></div>
+        <div class="job-description requirements"><b>Requisitos</b><p>${escapeHTML(requirements)}</p></div>
+        <div class="job-actions">${action}${own ? "<span class='meta'>Publicada por você</span>" : ""}${job.source_name ? `<span class="job-source">Fonte: ${escapeHTML(job.source_name)}</span>` : ""}</div>
+      </div>
+    </article>`;
   }).join("");
 }
 
