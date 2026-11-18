@@ -117,7 +117,23 @@ button:hover,.external-link:hover{filter:brightness(1.1);transform:translateY(-1
 .site-header{width:100%;max-width:1180px;height:76px;box-sizing:border-box;margin:0 auto;padding:0 28px;display:flex;align-items:center;justify-content:space-between;gap:22px}
 .brand{font-size:22px;font-weight:850;letter-spacing:-.7px;color:#f4f7fb;text-decoration:none}
 .brand span{color:#6f95ff}
+.site-header{display:flex;align-items:center;justify-content:space-between;gap:18px}
 .site-header nav{display:flex;align-items:center;gap:30px}
+.jobs-menu-button{width:42px;height:42px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;border:1px solid #273853;border-radius:11px;background:#0c1729;cursor:pointer}
+.jobs-menu-button span{width:18px;height:2px;border-radius:4px;background:#dce5f7}
+.jobs-menu-overlay{position:fixed;inset:0;background:rgba(0,0,0,.58);backdrop-filter:blur(3px);opacity:0;visibility:hidden;transition:.22s;z-index:998}
+.jobs-menu-overlay.active{opacity:1;visibility:visible}
+.jobs-side-menu{position:fixed;z-index:999;right:0;top:0;width:min(320px,86vw);height:100vh;padding:22px;background:#0a111e;border-left:1px solid #1d2d48;box-shadow:-20px 0 60px rgba(0,0,0,.4);transform:translateX(105%);transition:transform .25s;display:flex;flex-direction:column}
+.jobs-side-menu.active{transform:translateX(0)}
+.jobs-menu-head{display:flex;align-items:center;justify-content:space-between;padding-bottom:18px;border-bottom:1px solid #1a2942;font-size:20px}
+.jobs-menu-head strong span{color:#6390ff}
+.jobs-menu-head button{width:36px;height:36px;border:1px solid #273853;border-radius:9px;background:transparent;color:#dce5f7;font-size:24px}
+.jobs-menu-links{display:flex;flex-direction:column;gap:6px;padding-top:18px}
+.jobs-menu-links a,.jobs-menu-links button{padding:12px;border-radius:10px;color:#b9c6da;text-decoration:none;font:600 14px inherit;text-align:left;background:transparent;border:0}
+.jobs-menu-links a:hover{background:rgba(93,140,255,.09);color:#fff}
+.jobs-menu-links button{margin-top:12px;border:1px solid #513448;color:#f0a9b8;cursor:pointer}
+.jobs-menu-links [hidden]{display:none!important}
+
 .site-header nav a{color:#aebbd0;text-decoration:none;font-size:13px;font-weight:700}
 .site-header nav a.active{color:#6f95ff;position:relative}
 .site-header nav a.active:after{content:"";position:absolute;left:0;right:0;bottom:-17px;height:2px;background:#6f95ff}
@@ -203,7 +219,17 @@ main{max-width:1120px;padding:0 28px 60px}
 <header class="site-header">
   <a class="brand" href="index.html">Conecta <span>ADM</span></a>
   <nav><a href="index.html">Início</a><a class="active" href="vagas.html" id="jobsNavLink" hidden>Vagas</a><a class="login-link" href="login.html" id="jobsLoginLink">Entrar</a><a class="profile-avatar-link" id="profileAvatarLink" href="editar-perfil.html" aria-label="Editar meu perfil" title="Meu perfil" hidden><span id="profileAvatarInitial">?</span><img id="profileAvatarImage" alt="Minha foto de perfil"></a></nav>
+  <button class="jobs-menu-button" id="jobsMenuButton" type="button" aria-label="Abrir menu" aria-controls="jobsSideMenu" aria-expanded="false"><span></span><span></span><span></span></button>
 </header>
+<div class="jobs-menu-overlay" id="jobsMenuOverlay"></div>
+<aside class="jobs-side-menu" id="jobsSideMenu" aria-label="Menu principal">
+  <div class="jobs-menu-head"><strong>Conecta <span>ADM</span></strong><button type="button" id="jobsMenuClose" aria-label="Fechar menu">×</button></div>
+  <nav class="jobs-menu-links">
+    <a href="index.html">Início</a><a href="vagas.html">Oportunidades</a><a href="index.html#sobre">Sobre o projeto</a><a href="editar-perfil.html" id="jobsSideProfile" hidden>Meu perfil</a>
+    <a href="login.html" id="jobsSideLogin">Entrar</a><a href="cadastro.html" id="jobsSideRegister">Criar conta</a>
+    <button type="button" id="jobsSideLogout" hidden>Sair da conta</button>
+  </nav>
+</aside>
 <main>
 
 <div class="hero-banner">
@@ -276,6 +302,16 @@ let allJobs = [];
 
 // Vagas externas da região verificadas em 17/11/2026.
 // A candidatura é concluída no site de origem.
+const jobsMenuButton=document.getElementById("jobsMenuButton");
+const jobsSideMenu=document.getElementById("jobsSideMenu");
+const jobsMenuOverlay=document.getElementById("jobsMenuOverlay");
+function closeJobsMenu(){jobsSideMenu.classList.remove("active");jobsMenuOverlay.classList.remove("active");jobsMenuButton.setAttribute("aria-expanded","false");}
+jobsMenuButton.addEventListener("click",()=>{jobsSideMenu.classList.add("active");jobsMenuOverlay.classList.add("active");jobsMenuButton.setAttribute("aria-expanded","true");});
+document.getElementById("jobsMenuClose").addEventListener("click",closeJobsMenu);
+jobsMenuOverlay.addEventListener("click",closeJobsMenu);
+jobsSideMenu.querySelectorAll("a").forEach(a=>a.addEventListener("click",closeJobsMenu));
+document.getElementById("jobsSideLogout").addEventListener("click",async()=>{const button=document.getElementById("jobsSideLogout");button.disabled=true;button.textContent="Saindo...";const {error}=await client.auth.signOut();if(error){button.disabled=false;button.textContent="Sair da conta";showMessage("Não foi possível sair da conta. Tente novamente.");return;}window.location.replace("index.html");});
+
 const localExternalJobs = [
   {
     id: "ext-menegazzo-aprendiz",
@@ -469,29 +505,30 @@ async function init(){
   }
 
   if(profileType==="empresa" || profileType==="company") document.getElementById("publishPanel").classList.remove("hidden");
+  document.getElementById("jobsSideProfile").hidden=false;
+  document.getElementById("jobsSideLogin").hidden=true;
+  document.getElementById("jobsSideRegister").hidden=true;
+  document.getElementById("jobsSideLogout").hidden=false;
   await loadJobs();
 }
 
 
 
-document.getElementById("mainKeyword").addEventListener("input", e => {
-  document.getElementById("keywordFilter").value = e.target.value;
-  renderJobs();
+const filtersPanel=document.querySelector(".filters");
+const mainKeyword=document.getElementById("mainKeyword");
+const keywordFilter=document.getElementById("keywordFilter");
+document.getElementById("toggleFilters").addEventListener("click",()=>{
+  const isCollapsed=filtersPanel.classList.toggle("collapsed");
+  document.getElementById("toggleFilters").setAttribute("aria-expanded",String(!isCollapsed));
 });
-document.getElementById("toggleFilters").addEventListener("click", () => {
-  document.querySelector(".filters").classList.toggle("collapsed");
-});
-
-["cityFilter","typeFilter","modeFilter"].forEach(id => {
-  document.getElementById(id).addEventListener(id === "keywordFilter" ? "input" : "change", renderJobs);
-});
-document.getElementById("mainKeyword").addEventListener("input", renderJobs);
-document.getElementById("toggleFilters").addEventListener("click", () => document.querySelector(".filters").classList.toggle("collapsed"));
-document.getElementById("clearFilters").addEventListener("click", () => {
-  document.getElementById("mainKeyword").value = "";
-  document.getElementById("cityFilter").value = "";
-  document.getElementById("typeFilter").value = "";
-  document.getElementById("modeFilter").value = "";
+mainKeyword.addEventListener("input",()=>{keywordFilter.value=mainKeyword.value;renderJobs();});
+keywordFilter.addEventListener("input",()=>{mainKeyword.value=keywordFilter.value;renderJobs();});
+["cityFilter","typeFilter","modeFilter"].forEach(id=>document.getElementById(id).addEventListener("change",renderJobs));
+document.getElementById("clearFilters").addEventListener("click",()=>{
+  mainKeyword.value="";keywordFilter.value="";
+  document.getElementById("cityFilter").value="";
+  document.getElementById("typeFilter").value="";
+  document.getElementById("modeFilter").value="";
   renderJobs();
 });
 
