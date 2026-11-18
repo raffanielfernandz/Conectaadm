@@ -168,6 +168,7 @@ body{padding:0;background:#080f1d;font-family:Manrope,"DM Sans",Arial,sans-serif
 .site-header{height:76px;display:flex;align-items:center;justify-content:space-between;padding:0 max(24px,calc((100% - 1120px)/2));background:#080f1d;border-bottom:1px solid rgba(68,100,155,.18)}
 .brand{font-size:21px;font-weight:850;color:#f5f7fc;text-decoration:none}.brand span{color:#628dff}
 .site-header nav{display:flex;align-items:center;gap:28px}.site-header nav a{color:#aab7cc;text-decoration:none;font-size:13px;font-weight:700;padding:10px 0}.site-header nav a.active{color:#6e98ff;border-bottom:0}.site-header nav a.active:after{bottom:-10px}.site-header nav .login-link{padding:10px 19px;border:1px solid #4569ad;border-radius:12px;color:#82a5ff}
+.site-header nav [hidden]{display:none!important}
 main{max-width:1120px;padding:0 28px 60px}
 .hero-banner{min-height:320px;height:320px;box-sizing:border-box;margin:0 -28px 28px;padding:45px 48px;display:flex;align-items:center;background:linear-gradient(90deg,rgba(5,12,25,.98),rgba(5,12,25,.82) 43%,rgba(5,12,25,.1)),url("https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1500&q=85") center/cover}
 .hero-copy{max-width:440px}.eyebrow{display:inline-block;padding:9px 14px;border:1px solid #2b4777;border-radius:30px;background:rgba(15,30,57,.8);color:#91b0ff;font-size:12px;font-weight:800}
@@ -201,7 +202,7 @@ main{max-width:1120px;padding:0 28px 60px}
 <body>
 <header class="site-header">
   <a class="brand" href="index.html">Conecta <span>ADM</span></a>
-  <nav><a href="index.html">Início</a><a class="active" href="vagas.html">Vagas</a><a href="index.html#sobre">Sobre</a><a class="profile-avatar-link" id="profileAvatarLink" href="editar-perfil.html" aria-label="Editar meu perfil" title="Editar perfil"><span id="profileAvatarInitial">?</span><img id="profileAvatarImage" alt="Minha foto de perfil"></a></nav>
+  <nav><a href="index.html">Início</a><a class="active" href="vagas.html" id="jobsNavLink" hidden>Vagas</a><a class="login-link" href="login.html" id="jobsLoginLink">Entrar</a><a class="profile-avatar-link" id="profileAvatarLink" href="editar-perfil.html" aria-label="Editar meu perfil" title="Meu perfil" hidden><span id="profileAvatarInitial">?</span><img id="profileAvatarImage" alt="Minha foto de perfil"></a></nav>
 </header>
 <main>
 
@@ -436,7 +437,22 @@ async function loadJobs(){
 }
 async function init(){
   const {data:{session},error:sessionError}=await client.auth.getSession();
-  if(sessionError || !session){showMessage("Entre na sua conta para visualizar as oportunidades.");jobsList.innerHTML='<p><a href="login.html">Ir para o login</a></p>';return}
+  const loginLink=document.getElementById("jobsLoginLink");
+  const jobsLink=document.getElementById("jobsNavLink");
+  const avatarLink=document.getElementById("profileAvatarLink");
+  if(session){
+    loginLink.hidden=true;
+    jobsLink.hidden=false;
+    avatarLink.hidden=false;
+  }else{
+    loginLink.hidden=false;
+    jobsLink.hidden=true;
+    avatarLink.hidden=true;
+    showMessage("Entre na sua conta para visualizar as oportunidades.");
+    jobsList.innerHTML='<p><a href="login.html">Ir para o login</a></p>';
+    return;
+  }
+  if(sessionError){showMessage("Não foi possível verificar sua sessão. Atualize a página.");return}
   currentUser=session.user;
   const {data:profile,error}=await client.from("profiles").select("*").eq("id",currentUser.id).maybeSingle();
   if(error){showMessage("Não foi possível identificar seu tipo de perfil.");console.error(error);return}
