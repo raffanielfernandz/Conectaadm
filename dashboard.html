@@ -3,17 +3,78 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Conecta ADM</title>
+  <title>Meu painel | Conecta ADM</title>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="supabase-config.js"></script>
+  <style>
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100vh;background:#080f1d;color:#f4f7fb;font-family:Inter,Arial,sans-serif}
+    a{color:inherit;text-decoration:none}
+    header{height:76px;border-bottom:1px solid #1b2b45;background:#080f1d;display:flex;align-items:center;justify-content:space-between;padding:0 max(24px,calc((100% - 1120px)/2))}
+    .brand{font-size:22px;font-weight:850;letter-spacing:-.7px}.brand span{color:#6f95ff}
+    .avatar{width:44px;height:44px;border:2px solid #638cff;border-radius:50%;display:grid;place-items:center;overflow:hidden;background:#263957;font-weight:800}
+    .avatar img{width:100%;height:100%;object-fit:cover;display:none}
+    main{width:min(960px,92%);margin:54px auto}
+    .welcome{padding:34px;border:1px solid #263b5d;border-radius:24px;background:linear-gradient(135deg,#14223a,#0c1729)}
+    .eyebrow{color:#91adff;font-size:12px;font-weight:800;letter-spacing:1px}
+    h1{font-size:clamp(28px,5vw,40px);margin:12px 0 8px;letter-spacing:-1px}
+    .muted{color:#aebbd0;line-height:1.6}
+    .actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:26px}
+    .action{padding:22px;border:1px solid #2a4064;border-radius:17px;background:#0b1628;transition:.2s}
+    .action:hover{border-color:#648cff;transform:translateY(-2px)}
+    .action strong{display:block;font-size:18px;margin-bottom:7px}
+    .action span{font-size:14px;color:#aebbd0;line-height:1.5}
+    .primary{display:inline-flex;margin-top:24px;padding:14px 22px;border-radius:12px;background:linear-gradient(110deg,#648cff,#416fe6);color:#071225;font-weight:800}
+    .logout{border:0;background:none;color:#9eb5ed;font:inherit;cursor:pointer}
+    #status{color:#aebbd0}
+    @media(max-width:600px){header{height:76px;padding:0 18px}.brand{font-size:19px}main{margin:30px auto}.welcome{padding:24px}.actions{grid-template-columns:1fr}}
+  </style>
 </head>
-<body style="background:#080f1d;color:#f4f7fb;font-family:Arial,sans-serif;display:grid;place-items:center;min-height:100vh">
-  <p>Carregando oportunidades...</p>
+<body>
+  <header>
+    <a class="brand" href="index.html">Conecta <span>ADM</span></a>
+    <div style="display:flex;align-items:center;gap:16px">
+      <a class="avatar" id="avatar" href="editar-perfil.html" aria-label="Editar perfil"><span id="initial">?</span><img id="avatarImage" alt="Foto do perfil"></a>
+      <button class="logout" id="logout">Sair</button>
+    </div>
+  </header>
+  <main>
+    <section class="welcome">
+      <span class="eyebrow">ÁREA DO USUÁRIO</span>
+      <h1>Bem-vindo(a), <span id="userName">...</span></h1>
+      <p class="muted" id="profileType">Estamos preparando seu espaço no Conecta ADM.</p>
+      <div class="actions">
+        <a class="action" href="editar-perfil.html"><strong>Meu perfil</strong><span>Atualize seus dados, foto e informações profissionais.</span></a>
+        <a class="action" href="vagas.html"><strong>Explorar oportunidades</strong><span>Encontre vagas de emprego e estágio em Registro e região.</span></a>
+      </div>
+      <a class="primary" href="vagas.html">Ver oportunidades</a>
+      <p id="status" role="status"></p>
+    </section>
+  </main>
   <script>
-    const client = window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_PUBLISHABLE_KEY);
-    client.auth.getSession().then(({data}) => {
-      window.location.replace(data.session ? "vagas.html" : "login.html");
+    const client=window.supabase.createClient(window.SUPABASE_URL,window.SUPABASE_PUBLISHABLE_KEY);
+    async function loadPanel(){
+      const {data:{session}}=await client.auth.getSession();
+      if(!session){window.location.replace("login.html");return;}
+      const {data:profile}=await client.from("profiles").select("*").eq("id",session.user.id).maybeSingle();
+      const name=(profile?.full_name||session.user.user_metadata?.full_name||session.user.email||"usuário").trim();
+      document.getElementById("userName").textContent=name.split(" ")[0];
+      document.getElementById("initial").textContent=name.charAt(0).toUpperCase();
+      const type=profile?.profile_type||"";
+      const labels={student:"Estudante",estudante:"Estudante",company:"Empresa",empresa:"Empresa",institution:"Instituição",escola:"Instituição"};
+      document.getElementById("profileType").textContent=(labels[type]||"Sua conta")+" • Gerencie seu perfil e encontre novas oportunidades.";
+      if(profile?.avatar_url){
+        const img=document.getElementById("avatarImage");
+        img.onload=()=>{img.style.display="block";document.getElementById("initial").style.display="none";};
+        img.onerror=()=>{img.style.display="none";document.getElementById("initial").style.display="grid";};
+        img.src=profile.avatar_url;
+      }
+    }
+    document.getElementById("logout").addEventListener("click",async()=>{
+      await client.auth.signOut();
+      window.location.replace("index.html");
     });
+    loadPanel();
   </script>
 </body>
 </html>
