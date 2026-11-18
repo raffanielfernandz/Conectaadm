@@ -5,6 +5,9 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
 
 <title>Conecta ADM | Conectando talentos e oportunidades</title>
 
@@ -46,7 +49,7 @@ html{
 }
 
 body{
-  font-family:Arial, Helvetica, sans-serif;
+  font-family:"DM Sans",Arial,sans-serif;
   background:
     radial-gradient(circle at 50% -10%,rgba(61,111,232,.12),transparent 35%),
     var(--bg);
@@ -1268,6 +1271,52 @@ footer{
 @media(max-width:900px){.nav-links{display:none}.hero-visual{min-height:370px}.product-preview{transform:none}}
 @media(max-width:450px){.hero{padding-top:52px}.hero h1{font-size:2.55rem}.preview-note{left:0;bottom:0;font-size:.68rem}.product-preview{padding:19px}.preview-bottom{font-size:.59rem}}
 
+
+/* NOVA IDENTIDADE VISUAL */
+:root{--blue:#6390ff;--blue2:#4777ee}
+body{font-family:"DM Sans",Arial,sans-serif;letter-spacing:-.12px}
+h1,h2,h3,.logo,.menu-title{font-family:"Manrope","DM Sans",sans-serif}
+.side-menu{width:min(320px,82vw);padding:20px}
+.menu-head{padding-bottom:16px}
+.menu-title{font-size:1.12rem}
+.menu-close{width:36px;height:36px;font-size:1.35rem}
+.menu-links{padding-top:15px;gap:3px}
+.menu-links a{padding:11px 12px;font-size:.86rem;gap:9px;border-radius:9px}
+.menu-divider{margin:12px 0}
+.menu-footer{padding-top:15px}
+.menu-footer span{font-size:.75rem}
+.menu-footer small{font-size:.68rem}
+.menu-button{width:40px;height:40px;border-radius:10px}
+.menu-button span{width:17px}
+.logo{font-size:1.23rem}
+.hero-visual-photo{overflow:hidden;border:1px solid #263b5d;border-radius:24px;background:#0d1729;isolation:isolate}
+.hero-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.56;filter:saturate(.65)}
+.hero-photo-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,11,20,.12),rgba(7,11,20,.72)),linear-gradient(0deg,rgba(7,11,20,.8),transparent 65%);z-index:0}
+.hero-visual-photo .product-preview{z-index:1;background:rgba(10,18,32,.86);backdrop-filter:blur(12px)}
+.hero-visual-photo .preview-note{z-index:2}
+.audience-card{padding:0 0 25px;overflow:hidden}
+.audience-card h3,.audience-card p{margin-left:25px;margin-right:25px}
+.audience-card h3{margin-top:23px}
+.audience-photo{height:165px;overflow:hidden;position:relative}
+.audience-photo:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(7,11,20,.42),transparent 70%)}
+.audience-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
+.audience-card:hover .audience-photo img{transform:scale(1.055)}
+.audience-icon{display:none}
+.discovery-panel{display:grid;grid-template-columns:.9fr 1.1fr;gap:30px;align-items:center;margin-top:48px;padding:26px;border:1px solid #243653;border-radius:20px;background:linear-gradient(130deg,#101d32,#0b1322)}
+.discovery-copy h3{font:800 clamp(1.5rem,3vw,2rem) "Manrope",sans-serif;line-height:1.2;margin:7px 0 12px}
+.discovery-copy p{color:var(--muted);font-size:.92rem;line-height:1.75;min-height:78px}
+.discovery-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.discovery-tab{border:1px solid #2b3d5b;background:transparent;color:#aebbd0;padding:9px 12px;border-radius:9px;font:600 .78rem "DM Sans",sans-serif;cursor:pointer;transition:.2s}
+.discovery-tab:hover,.discovery-tab.active{background:#1b3156;border-color:#527de0;color:#fff}
+.discovery-image{height:245px;position:relative;border-radius:14px;overflow:hidden}
+.discovery-image img{width:100%;height:100%;object-fit:cover;display:block;transition:opacity .2s}
+.image-caption{position:absolute;left:15px;right:15px;bottom:14px;padding:10px 12px;border:1px solid rgba(255,255,255,.18);border-radius:9px;background:rgba(7,11,20,.72);backdrop-filter:blur(8px);font-size:.78rem;font-weight:700}
+.feature,.how-card,.benefit,.project-card{transition:transform .22s,border-color .22s,background .22s}
+.feature:hover,.how-card:hover,.benefit:hover,.project-card:hover{transform:translateY(-4px);border-color:#35558b;background-color:#101d32}
+.btn:focus-visible,.menu-button:focus-visible,.discovery-tab:focus-visible,.menu-links a:focus-visible{outline:2px solid #9bb8ff;outline-offset:3px}
+@media(max-width:900px){.discovery-panel{grid-template-columns:1fr}.discovery-image{height:220px}}
+@media(max-width:450px){.side-menu{width:min(300px,80vw);padding:18px}.menu-links a{font-size:.82rem;padding:10px 11px}.discovery-panel{padding:19px;margin-top:30px}.discovery-image{height:185px}.audience-photo{height:145px}.hero-visual-photo{min-height:330px}}
+
 </style>
 
 </head>
@@ -1354,23 +1403,23 @@ footer{
   <div class="menu-links">
 
     <a href="index.html">
-      🏠 Início
+      Início
     </a>
 
     <a href="#publico">
-      🎓 Área do estudante
+      Área do estudante
     </a>
 
     <a href="#publico">
-      🏢 Área da empresa
+      Área da empresa
     </a>
 
     <a href="#projeto">
-      💡 Sobre o projeto
+      Sobre o projeto
     </a>
 
     <a href="#seguranca">
-      🔐 Segurança
+      Segurança
     </a>
 
     <div class="menu-divider"></div>
@@ -1379,14 +1428,14 @@ footer{
       href="login.html"
       class="menu-login"
     >
-      🔑 Entrar
+      Entrar
     </a>
 
     <a
       href="cadastro.html"
       class="menu-register"
     >
-      ✨ Criar conta
+      Criar conta
     </a>
 
   </div>
@@ -1457,7 +1506,9 @@ footer{
       </div>
 
 
-      <div class="hero-visual">
+      <div class="hero-visual hero-visual-photo">
+        <img class="hero-photo" src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=85" alt="Mesa de trabalho com computador e materiais de estudo">
+        <div class="hero-photo-shade"></div>
         <div class="product-preview">
           <div class="preview-head">
             <div>
@@ -1558,9 +1609,7 @@ footer{
 
       <div class="audience-card">
 
-        <div class="audience-icon">
-          🎓
-        </div>
+        <div class="audience-photo"><img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=900&q=85" alt="Estudantes trabalhando juntos"></div>
 
         <h3>
           Estudantes
@@ -1576,9 +1625,7 @@ footer{
 
       <div class="audience-card">
 
-        <div class="audience-icon">
-          🏢
-        </div>
+        <div class="audience-photo"><img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=85" alt="Ambiente profissional de uma empresa"></div>
 
         <h3>
           Empresas
@@ -1594,9 +1641,7 @@ footer{
 
       <div class="audience-card">
 
-        <div class="audience-icon">
-          🏫
-        </div>
+        <div class="audience-photo"><img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=900&q=85" alt="Estudantes em ambiente de aprendizagem"></div>
 
         <h3>
           Instituições
@@ -1610,6 +1655,23 @@ footer{
       </div>
 
 
+    </div>
+
+    <div class="discovery-panel" id="discovery">
+      <div class="discovery-copy">
+        <span class="section-label">Explore a experiência</span>
+        <h3>Um caminho para cada objetivo.</h3>
+        <p id="discoveryText">Para estudantes: encontre oportunidades, organize seu perfil e dê os próximos passos na carreira.</p>
+        <div class="discovery-tabs" role="group" aria-label="Escolha um perfil">
+          <button class="discovery-tab active" type="button" data-profile="student">Estudante</button>
+          <button class="discovery-tab" type="button" data-profile="company">Empresa</button>
+          <button class="discovery-tab" type="button" data-profile="institution">Instituição</button>
+        </div>
+      </div>
+      <div class="discovery-image">
+        <img id="discoveryImage" src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1000&q=85" alt="Pessoas colaborando em um projeto">
+        <span class="image-caption" id="discoveryCaption">Conecte-se a novas possibilidades</span>
+      </div>
     </div>
 
   </div>
@@ -1854,7 +1916,7 @@ footer{
         <div class="benefit">
 
           <strong>
-            🎓 Foco nos estudantes
+            01 Foco nos estudantes
           </strong>
 
           <span>
@@ -1867,7 +1929,7 @@ footer{
         <div class="benefit">
 
           <strong>
-            🏢 Aproximação empresarial
+            02 Aproximação empresarial
           </strong>
 
           <span>
@@ -1880,7 +1942,7 @@ footer{
         <div class="benefit">
 
           <strong>
-            🤝 Conexões
+            Conexões
           </strong>
 
           <span>
@@ -1893,7 +1955,7 @@ footer{
         <div class="benefit">
 
           <strong>
-            🚀 Evolução
+            Evolução
           </strong>
 
           <span>
@@ -2067,7 +2129,7 @@ footer{
         <div class="benefit">
 
           <strong>
-            🔐 Autenticação
+            Autenticação
           </strong>
 
           <span>
@@ -2080,7 +2142,7 @@ footer{
         <div class="benefit">
 
           <strong>
-            🛡️ Proteção de dados
+            Proteção de dados
           </strong>
 
           <span>
@@ -2093,7 +2155,7 @@ footer{
         <div class="benefit">
 
           <strong>
-            👤 Acesso individual
+            Acesso individual
           </strong>
 
           <span>
@@ -2106,7 +2168,7 @@ footer{
         <div class="benefit">
 
           <strong>
-            🚀 Evolução contínua
+            Evolução contínua
           </strong>
 
           <span>
@@ -2275,6 +2337,40 @@ document.addEventListener(
 
   }
 );
+
+const discoveryProfiles = {
+  student: {
+    text: "Para estudantes: encontre oportunidades, organize seu perfil e dê os próximos passos na carreira.",
+    image: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1000&q=85",
+    alt: "Estudantes trabalhando juntos",
+    caption: "Conecte-se a novas possibilidades"
+  },
+  company: {
+    text: "Para empresas: apresente oportunidades e aproxime sua organização de novos talentos.",
+    image: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1000&q=85",
+    alt: "Ambiente profissional de uma empresa",
+    caption: "Encontre pessoas para crescer junto"
+  },
+  institution: {
+    text: "Para instituições: fortaleça a ligação entre formação, estudantes e o mercado de trabalho.",
+    image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1000&q=85",
+    alt: "Estudantes em ambiente de aprendizagem",
+    caption: "Aproxime educação e oportunidades"
+  }
+};
+document.querySelectorAll(".discovery-tab").forEach(button => {
+  button.addEventListener("click", () => {
+    const profile = discoveryProfiles[button.dataset.profile];
+    if (!profile) return;
+    document.querySelectorAll(".discovery-tab").forEach(tab => tab.classList.toggle("active", tab === button));
+    document.getElementById("discoveryText").textContent = profile.text;
+    const image = document.getElementById("discoveryImage");
+    image.src = profile.image;
+    image.alt = profile.alt;
+    document.getElementById("discoveryCaption").textContent = profile.caption;
+  });
+});
+
 
 </script>
 
