@@ -324,6 +324,18 @@ body.page-enter{animation:pageEnter .22s ease-out}
  },{passive:true});
 })();
 </script>
+<style id="shared-header-final">
+.site-header{width:100%!important;max-width:none!important;height:76px!important;min-height:76px!important;margin:0!important;padding:0 clamp(16px,4vw,32px)!important;box-sizing:border-box!important;display:flex!important;align-items:center!important;gap:18px!important;background:#080f1d!important}
+.site-header .brand{font-family:"Manrope","DM Sans",Arial,sans-serif!important;font-size:22px!important;line-height:1!important;font-weight:850!important;letter-spacing:-.7px!important;white-space:nowrap!important}
+.site-header nav.header-nav{margin-left:auto!important;display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:clamp(12px,2vw,22px)!important;white-space:nowrap!important}
+.site-header nav.header-nav a{font-size:13px!important;font-weight:700!important;padding:10px 0!important}
+.site-header nav.header-nav .profile-avatar-link{width:42px!important;height:42px!important;flex:0 0 42px!important;padding:2px!important;border:2px solid #638cff!important;border-radius:50%!important;display:grid!important;place-items:center!important;overflow:hidden!important}
+.site-header nav.header-nav .profile-avatar-link img{width:100%!important;height:100%!important;object-fit:cover!important;border-radius:50%!important}
+.site-header .shared-menu-button,.jobs-menu-button.shared-menu-button{width:42px!important;height:42px!important;flex:0 0 42px!important;margin-left:4px!important;border-radius:11px!important}
+.site-header nav.header-nav [hidden],.site-header [hidden]{display:none!important}
+@media(max-width:600px){.site-header{padding:0 16px!important;gap:9px!important}.site-header .brand{font-size:21px!important}.site-header nav.header-nav{gap:10px!important}.site-header nav.header-nav a{font-size:12px!important}.site-header nav.header-nav .profile-avatar-link{width:40px!important;height:40px!important;flex-basis:40px!important}.site-header .shared-menu-button,.jobs-menu-button.shared-menu-button{width:40px!important;height:40px!important;flex-basis:40px!important;margin-left:4px!important}}
+@media(max-width:380px){.site-header{padding:0 12px!important;gap:7px!important}.site-header .brand{font-size:19px!important}.site-header nav.header-nav{gap:7px!important}.site-header nav.header-nav a{font-size:11px!important}.site-header nav.header-nav .profile-avatar-link{width:36px!important;height:36px!important;flex-basis:36px!important}.site-header .shared-menu-button,.jobs-menu-button.shared-menu-button{width:36px!important;height:36px!important;flex-basis:36px!important;margin-left:3px!important}}
+</style>
 </head>
 <body>
 <header class="site-header">
