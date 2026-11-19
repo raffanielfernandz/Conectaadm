@@ -562,10 +562,7 @@
 
 const { createClient } = supabase;
 
-const client = createClient(
-  window.SUPABASE_URL,
-  window.SUPABASE_PUBLISHABLE_KEY
-);
+const client = window.getSupabaseClient();
 
 
 const typeSelect =
