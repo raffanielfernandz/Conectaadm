@@ -58,25 +58,47 @@
         const {data:{session},error:sessionError}=await client.auth.getSession();
         if(sessionError) throw sessionError;
         if(!session){window.location.replace("login.html");return;}
-        const {data:profile,error:profileError}=await client.from("profiles").select("*").eq("id",session.user.id).maybeSingle();
-        if(profileError) throw profileError;
-      const name=(profile?.full_name||session.user.user_metadata?.full_name||session.user.email||"usuário").trim();
-      document.getElementById("userName").textContent=name.split(" ")[0];
-      document.getElementById("initial").textContent=name.charAt(0).toUpperCase();
-      const rawType=profile?.profile_type||session.user.user_metadata?.tipo_de_perfil||"";
-      const type=String(rawType).trim().toLowerCase();
-      const labels={student:"Estudante",estudante:"Estudante",company:"Empresa",empresa:"Empresa",institution:"Instituição",escola:"Instituição"};
-      document.getElementById("profileType").textContent=(labels[type]||"Sua conta")+" • Gerencie seu perfil e encontre novas oportunidades.";
-      if(profile?.avatar_url){
-        const img=document.getElementById("avatarImage");
-        const initial=document.getElementById("initial");
-        img.onload=()=>{img.style.display="block";initial.style.display="none";};
-        img.onerror=()=>{img.removeAttribute("src");img.style.display="none";initial.style.display="grid";};
-        img.src=profile.avatar_url;
-      }
-      } catch(error) {
+
+        const user=session.user;
+        const metadata=user.user_metadata||{};
+        let profile=null;
+        let profileError=null;
+
+        try{
+          const result=await client.from("profiles").select("*").eq("id",user.id).maybeSingle();
+          profile=result.data;
+          profileError=result.error;
+        }catch(error){
+          profileError=error;
+        }
+
+        // Keep the panel usable even if the profiles table is unavailable.
+        const name=(profile?.full_name||metadata.full_name||metadata.name||user.email||"usuário").trim();
+        document.getElementById("userName").textContent=name.split(" ")[0];
+        document.getElementById("initial").textContent=name.charAt(0).toUpperCase();
+
+        const rawType=profile?.profile_type||metadata.tipo_de_perfil||metadata.profile_type||"";
+        const type=String(rawType).trim().toLowerCase();
+        const labels={student:"Estudante",estudante:"Estudante",company:"Empresa",empresa:"Empresa",institution:"Instituição",escola:"Instituição"};
+        document.getElementById("profileType").textContent=(labels[type]||"Sua conta")+" • Gerencie seu perfil e encontre novas oportunidades.";
+
+        if(profile?.avatar_url){
+          const img=document.getElementById("avatarImage");
+          const initial=document.getElementById("initial");
+          img.onload=()=>{img.style.display="block";initial.style.display="none";};
+          img.onerror=()=>{img.removeAttribute("src");img.style.display="none";initial.style.display="grid";};
+          img.src=profile.avatar_url;
+        }
+
+        if(profileError){
+          console.error("Erro ao consultar perfil:",profileError);
+          document.getElementById("status").textContent="Sua sessão está ativa, mas os dados do perfil não puderam ser carregados. Você ainda pode explorar as oportunidades.";
+        }else if(!profile){
+          document.getElementById("status").textContent="Sua sessão está ativa. Seu perfil ainda não foi encontrado; você pode completar seus dados em Meu perfil.";
+        }
+      }catch(error){
         console.error("Erro ao carregar painel:",error);
-        document.getElementById("status").textContent="Não foi possível carregar seu perfil. Atualize a página.";
+        document.getElementById("status").textContent="Não foi possível verificar sua sessão. Atualize a página ou entre novamente.";
       }
     }
     document.getElementById("logout").addEventListener("click",async()=>{
