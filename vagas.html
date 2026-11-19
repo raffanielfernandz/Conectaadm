@@ -556,9 +556,17 @@ async function init(){
     return;
   }
   currentUser=session.user;
-  const {data:profile,error}=await client.from("profiles").select("*").eq("id",currentUser.id).maybeSingle();
-  if(error){showMessage("Não foi possível identificar seu tipo de perfil.");console.error(error);return}
-  profileType=profile?.profile_type || currentUser.user_metadata?.tipo_de_perfil || "";
+  currentUser=session.user;
+
+  // Perfil é auxiliar: falha na consulta não deve impedir as vagas de aparecerem.
+  let profile=null;
+  const {data:profileData,error:profileError}=await client.from("profiles").select("*").eq("id",currentUser.id).maybeSingle();
+  if(profileError){
+    console.warn("Não foi possível carregar o perfil; continuando com as vagas:",profileError);
+  }else{
+    profile=profileData;
+  }
+  profileType=profile?.profile_type || currentUser.user_metadata?.tipo_de_perfil || currentUser.user_metadata?.profile_type || "";
 
   const avatarInitial=document.getElementById("profileAvatarInitial");
   const avatarImage=document.getElementById("profileAvatarImage");
