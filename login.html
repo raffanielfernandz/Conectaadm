@@ -903,17 +903,14 @@
         message.textContent = "";
 
 
-        const { data, error } =
-          await client.auth.signInWithPassword({
+        try {
+          const { data, error } =
+            await client.auth.signInWithPassword({
+              email: email,
+              password: password
+            });
 
-            email: email,
-
-            password: password
-
-          });
-
-
-        if (error) {
+          if (error) {
 
           message.textContent =
             "Não foi possível entrar: " +
@@ -924,18 +921,22 @@
 
           button.textContent = "Entrar";
 
-          return;
+            return;
+          }
 
+          if (data.session) {
+            window.location.href = "dashboard.html";
+          } else {
+            message.textContent = "Login realizado, mas não foi possível iniciar a sessão. Tente novamente.";
+            button.disabled = false;
+            button.textContent = "Entrar";
+          }
+        } catch (error) {
+          console.error(error);
+          message.textContent = "Erro de conexão. Verifique sua internet e tente novamente.";
+          button.disabled = false;
+          button.textContent = "Entrar";
         }
-
-
-        if (data.session) {
-
-          window.location.href =
-            "dashboard.html";
-
-        }
-
       }
     );
 
@@ -970,38 +971,26 @@
           }
 
 
-          const { error } =
-            await client.auth.resetPasswordForEmail(
+          try {
+            const { error } =
+              await client.auth.resetPasswordForEmail(email, {
+                redirectTo: new URL("login.html", window.location.href).href
+              });
 
-              email,
-
-              {
-
-                redirectTo:
-                  new URL(
-                    "login.html",
-                    window.location.href
-                  ).href
-
-              }
-
-            );
-
-
-          if (error) {
+            if (error) {
 
             message.textContent =
               "Não foi possível enviar o e-mail: " +
               error.message;
 
-            return;
+              return;
+            }
 
+            message.textContent = "Enviamos um e-mail para redefinir sua senha.";
+          } catch (error) {
+            console.error(error);
+            message.textContent = "Erro de conexão. Tente novamente.";
           }
-
-
-          message.textContent =
-            "Enviamos um e-mail para redefinir sua senha.";
-
         }
       );
 
