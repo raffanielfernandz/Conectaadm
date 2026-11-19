@@ -54,9 +54,11 @@
   <script>
     const client=window.getSupabaseClient();
     async function loadPanel(){
-      const {data:{session}}=await client.auth.getSession();
-      if(!session){window.location.replace("login.html");return;}
-      const {data:profile}=await client.from("profiles").select("*").eq("id",session.user.id).maybeSingle();
+      try {
+        const {data:{session},error:sessionError}=await client.auth.getSession();
+        if(sessionError || !session){window.location.replace("login.html");return;}
+        const {data:profile,error:profileError}=await client.from("profiles").select("*").eq("id",session.user.id).maybeSingle();
+        if(profileError) throw profileError;
       const name=(profile?.full_name||session.user.user_metadata?.full_name||session.user.email||"usuário").trim();
       document.getElementById("userName").textContent=name.split(" ")[0];
       document.getElementById("initial").textContent=name.charAt(0).toUpperCase();
@@ -65,13 +67,19 @@
       document.getElementById("profileType").textContent=(labels[type]||"Sua conta")+" • Gerencie seu perfil e encontre novas oportunidades.";
       if(profile?.avatar_url){
         const img=document.getElementById("avatarImage");
-        img.onload=()=>{img.style.display="block";document.getElementById("initial").style.display="none";};
-        img.onerror=()=>{img.style.display="none";document.getElementById("initial").style.display="grid";};
+        const initial=document.getElementById("initial");
+        img.onload=()=>{img.style.display="block";initial.style.display="none";};
+        img.onerror=()=>{img.removeAttribute("src");img.style.display="none";initial.style.display="grid";};
         img.src=profile.avatar_url;
+      }
+      } catch(error) {
+        console.error("Erro ao carregar painel:",error);
+        document.getElementById("status").textContent="Não foi possível carregar seu perfil. Atualize a página.";
       }
     }
     document.getElementById("logout").addEventListener("click",async()=>{
-      await client.auth.signOut();
+      const {error}=await client.auth.signOut();
+      if(error){document.getElementById("status").textContent="Não foi possível sair. Tente novamente.";return;}
       window.location.replace("index.html");
     });
     loadPanel();
