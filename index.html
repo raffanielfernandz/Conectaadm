@@ -1849,9 +1849,16 @@ document.querySelectorAll(".discovery-tab").forEach(button => {
     sideLogout.addEventListener("click",async()=>{
       sideLogout.disabled=true;
       sideLogout.textContent="Saindo...";
-      const {error}=await client.auth.signOut();
-      if(error){sideLogout.disabled=false;sideLogout.textContent="Sair da conta";alert("Não foi possível sair da conta. Tente novamente.");return;}
-      window.location.replace("index.html");
+      try{
+        const {error}=await client.auth.signOut();
+        if(error) throw error;
+        window.location.replace("index.html");
+      }catch(error){
+        console.error("Erro ao encerrar sessão:",error);
+        sideLogout.disabled=false;
+        sideLogout.textContent="Sair da conta";
+        alert("Não foi possível sair da conta. Tente novamente.");
+      }
     });
     const {data:profile}=await client.from("profiles").select("full_name,avatar_url").eq("id",session.user.id).maybeSingle();
     const displayName=(profile?.full_name||session.user.user_metadata?.full_name||session.user.email||"Perfil").trim();
