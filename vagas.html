@@ -527,7 +527,12 @@ function renderJobs(){
 async function loadJobs(){
   const {data,error}=await client.from("jobs").select("id,created_by,title,description,location,work_mode,employment_type,salary,requirements,created_at,expires_at").eq("status","active").order("created_at",{ascending:false});
   if(error){jobsList.innerHTML="<p>Não foi possível carregar as vagas. Atualize a página e tente novamente.</p>";console.error(error);return}
-  const today = new Date().toISOString().slice(0,10);
+  const now = new Date();
+  const today = [
+    now.getFullYear(),
+    String(now.getMonth() + 1).padStart(2, "0"),
+    String(now.getDate()).padStart(2, "0")
+  ].join("-");
   allJobs=[...localExternalJobs, ...(data || []).filter(job => !job.expires_at || job.expires_at >= today)];
   populateCityFilter();
   renderJobs();
