@@ -214,54 +214,23 @@ main{max-width:1120px;padding:0 28px 60px}
 @media(max-width:390px){.site-header nav{gap:9px}.site-header nav a{font-size:10px}.brand{font-size:15px}.hero-banner h1{font-size:33px}.job.job-horizontal{grid-template-columns:96px minmax(0,1fr)}.job-horizontal .job-image-wrap{min-height:150px}}
 
 </style>
-<style id="shared-header-sizing">
-.site-header{width:100%;max-width:1180px;height:76px;min-height:76px;padding:0 28px;box-sizing:border-box;margin:0 auto;display:flex;align-items:center;gap:16px}
-.site-header .brand{font-size:22px;line-height:1;font-weight:850;letter-spacing:-.7px;white-space:nowrap}
-.site-header nav{margin-left:auto;display:flex;align-items:center;justify-content:flex-end;gap:clamp(10px,2vw,22px);white-space:nowrap}
-.site-header nav a{font-size:13px}
-.site-header nav .profile-avatar-link{width:42px;height:42px;flex:0 0 42px}
-.site-header .jobs-menu-button{width:42px;height:42px;flex:0 0 42px;margin-left:8px;border-radius:11px}
-@media(max-width:600px){
- .site-header{padding:0 18px;gap:9px} .site-header .brand{font-size:21px}
- .site-header nav{gap:10px} .site-header nav a{font-size:12px}
- .site-header nav .profile-avatar-link{width:40px;height:40px;flex-basis:40px}
- .site-header .jobs-menu-button{width:40px;height:40px;flex-basis:40px;margin-left:5px}
-}
-@media(max-width:380px){
- .site-header{padding:0 13px;gap:7px} .site-header .brand{font-size:19px}
- .site-header nav{gap:7px} .site-header nav a{font-size:11px}
- .site-header nav .profile-avatar-link{width:36px;height:36px;flex-basis:36px}
- .site-header .jobs-menu-button{width:36px;height:36px;flex-basis:36px;margin-left:3px}
-}
-</style>
+
 <style id="menu-close-x-fix">.jobs-menu-head button{display:flex!important;align-items:center!important;justify-content:center!important;padding:0!important;line-height:1!important;font-family:Arial,sans-serif!important;font-size:25px!important;font-weight:400!important;text-align:center!important;transform:none!important}</style>
 
-<style id="header-consistency-fix">
-.site-header{width:100%;max-width:1180px;height:76px;min-height:76px;padding:0 28px;box-sizing:border-box;margin:0 auto;display:flex;align-items:center;gap:16px}
-.site-header .brand{font-size:22px;line-height:1;font-weight:850;letter-spacing:-.7px;white-space:nowrap}
+
+<style id="header-final-fix">
+.site-header{width:100%;max-width:1180px;height:76px;min-height:76px;padding:0 28px;box-sizing:border-box;margin:0 auto;display:flex;align-items:center;gap:18px}
+.site-header .brand{font-family:"Manrope","DM Sans",Arial,sans-serif;font-size:22px;line-height:1;font-weight:850;letter-spacing:-.7px;white-space:nowrap}
 .site-header nav{margin-left:auto;display:flex;align-items:center;justify-content:flex-end;gap:clamp(10px,2vw,22px);white-space:nowrap}
 .site-header nav a{font-size:13px;position:relative}
 .site-header nav a.active{color:#6f95ff}
-.site-header nav a.active:after{content:"";position:absolute;left:0;right:0;bottom:-16px;height:2px;background:#6f95ff;border-radius:2px}
+.site-header nav a.active:after{content:"";position:absolute;left:0;right:0;bottom:-14px;height:2px;background:#6f95ff;border-radius:2px;animation:underlineArrive .24s ease-out both}
 .site-header nav .profile-avatar-link{width:42px;height:42px;flex:0 0 42px}
 .site-header .jobs-menu-button{width:42px;height:42px;flex:0 0 42px;margin-left:8px;border-radius:11px}
 .site-header nav [hidden]{display:none!important}
-@media(max-width:600px){
- .site-header{padding:0 18px;gap:9px}
- .site-header .brand{font-size:21px}
- .site-header nav{gap:10px}
- .site-header nav a{font-size:12px}
- .site-header nav .profile-avatar-link{width:40px;height:40px;flex-basis:40px}
- .site-header .jobs-menu-button{width:40px;height:40px;flex-basis:40px;margin-left:5px}
-}
-@media(max-width:380px){
- .site-header{padding:0 13px;gap:7px}
- .site-header .brand{font-size:19px}
- .site-header nav{gap:7px}
- .site-header nav a{font-size:11px}
- .site-header nav .profile-avatar-link{width:36px;height:36px;flex-basis:36px}
- .site-header .jobs-menu-button{width:36px;height:36px;flex-basis:36px;margin-left:3px}
-}
+@keyframes underlineArrive{from{opacity:0;transform:translateX(var(--underline-shift,0))}to{opacity:1;transform:translateX(0)}}
+@media(max-width:600px){.site-header{padding:0 18px;gap:9px}.site-header .brand{font-size:21px}.site-header nav{gap:10px}.site-header nav a{font-size:12px}.site-header nav .profile-avatar-link{width:40px;height:40px;flex-basis:40px}.site-header .jobs-menu-button{width:40px;height:40px;flex-basis:40px;margin-left:5px}}
+@media(max-width:380px){.site-header{padding:0 13px;gap:7px}.site-header .brand{font-size:19px}.site-header nav{gap:7px}.site-header nav a{font-size:11px}.site-header nav .profile-avatar-link{width:36px;height:36px;flex-basis:36px}.site-header .jobs-menu-button{width:36px;height:36px;flex-basis:36px;margin-left:3px}}
 </style>
 </head>
 <body>
@@ -652,29 +621,26 @@ document.getElementById("shareProfile")?.addEventListener("click",async()=>{
 init();
 </script>
 
+
 <script id="page-swipe-navigation">
 (function(){
-  const isJobsPage = /(^|\/)vagas\.html(?:$|[?#])/.test(location.pathname + location.search + location.hash);
-  let startX=0, startY=0, startTarget=null;
-  document.addEventListener("touchstart",function(event){
-    if(event.touches.length!==1)return;
-    startX=event.touches[0].clientX;
-    startY=event.touches[0].clientY;
-    startTarget=event.target;
-  },{passive:true});
-  document.addEventListener("touchend",function(event){
-    if(!startTarget || event.changedTouches.length!==1)return;
-    if(document.body.classList.contains("menu-open") ||
-       document.getElementById("sideMenu")?.classList.contains("active") ||
-       document.getElementById("jobsSideMenu")?.classList.contains("active")) return;
-    if(startTarget.closest("a,button,input,textarea,select,label,[contenteditable='true'],.filters"))return;
-    const dx=event.changedTouches[0].clientX-startX;
-    const dy=event.changedTouches[0].clientY-startY;
-    if(Math.abs(dx)<95 || Math.abs(dy)>70 || Math.abs(dx)<Math.abs(dy)*1.35)return;
-    if(!isJobsPage && dx<0) location.href="vagas.html";
-    else if(isJobsPage && dx>0) location.href="index.html";
-    startTarget=null;
-  },{passive:true});
+ const isJobs=/vagas\.html$/.test(location.pathname);
+ const direction=sessionStorage.getItem("conecta-swipe-direction");
+ sessionStorage.removeItem("conecta-swipe-direction");
+ const active=document.querySelector("header .nav-links a.active, .site-header nav a.active");
+ if(active&&direction)active.style.setProperty("--underline-shift",direction==="left"?"18px":"-18px");
+ let x=0,y=0,target=null;
+ document.addEventListener("touchstart",e=>{if(e.touches.length!==1)return;x=e.touches[0].clientX;y=e.touches[0].clientY;target=e.target;},{passive:true});
+ document.addEventListener("touchend",e=>{
+  if(!target||e.changedTouches.length!==1)return;
+  if(document.body.classList.contains("menu-open")||document.getElementById("sideMenu")?.classList.contains("active")||document.getElementById("jobsSideMenu")?.classList.contains("active"))return;
+  if(target.closest("a,button,input,textarea,select,label,[contenteditable='true'],.filters"))return;
+  const dx=e.changedTouches[0].clientX-x,dy=e.changedTouches[0].clientY-y;
+  if(Math.abs(dx)<80||Math.abs(dy)>65||Math.abs(dx)<Math.abs(dy)*1.3)return;
+  if(!isJobs&&dx<0){sessionStorage.setItem("conecta-swipe-direction","left");location.href="vagas.html";}
+  else if(isJobs&&dx>0){sessionStorage.setItem("conecta-swipe-direction","right");location.href="index.html";}
+  target=null;
+ },{passive:true});
 })();
 </script>
 </body>
