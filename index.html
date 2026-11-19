@@ -1860,7 +1860,7 @@ document.querySelectorAll(".discovery-tab").forEach(button => {
     initial.textContent=displayName.charAt(0).toUpperCase()||"?";
     if(profile?.avatar_url){
       image.onload=()=>{image.style.display="block";initial.style.display="none";};
-      image.onerror=()=>{image.style.display="none";initial.style.display="grid";};
+      image.onerror=()=>{image.removeAttribute("src");image.style.display="none";initial.style.display="grid";};
       image.src=profile.avatar_url;
     }
   }catch(error){console.error("Não foi possível atualizar o cabeçalho:",error);}
