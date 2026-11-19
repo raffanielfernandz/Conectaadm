@@ -331,7 +331,7 @@ jobsMenuButton.addEventListener("click",()=>{jobsSideMenu.classList.add("active"
 document.getElementById("jobsMenuClose").addEventListener("click",closeJobsMenu);
 jobsMenuOverlay.addEventListener("click",closeJobsMenu);
 jobsSideMenu.querySelectorAll("a").forEach(a=>a.addEventListener("click",closeJobsMenu));
-document.getElementById("jobsSideLogout").addEventListener("click",async()=>{const button=document.getElementById("jobsSideLogout");button.disabled=true;button.textContent="Saindo...";const {error}=await client.auth.signOut();if(error){button.disabled=false;button.textContent="Sair da conta";showMessage("Não foi possível sair da conta. Tente novamente.");return;}window.location.replace("index.html");});
+document.getElementById("jobsSideLogout").addEventListener("click",async()=>{const button=document.getElementById("jobsSideLogout");button.disabled=true;button.textContent="Saindo...";try{const {error}=await client.auth.signOut();if(error)throw error;window.location.replace("index.html");}catch(error){console.error("Erro ao encerrar sessão:",error);button.disabled=false;button.textContent="Sair da conta";showMessage("Não foi possível sair da conta. Tente novamente.");}});
 
 const localExternalJobs = [
   {
