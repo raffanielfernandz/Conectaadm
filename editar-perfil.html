@@ -1323,7 +1323,7 @@
 
 
         profileType =
-          profile.profile_type;
+          profile.profile_type || user.user_metadata?.tipo_de_perfil || "";
 
 
         fullNameInput.value =
