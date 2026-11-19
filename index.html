@@ -1409,124 +1409,28 @@ h1,h2,h3,.logo,.menu-title{font-family:"Manrope","DM Sans",sans-serif}
 .nav-links [hidden],.menu-links [hidden]{display:none!important}
 @media(max-width:650px){.home-profile-link{width:34px;height:34px;flex-basis:34px}.nav-links{gap:12px}}
 </style>
-
-<style id="menu-close-x-fix">.menu-close{display:flex!important;align-items:center!important;justify-content:center!important;padding:0!important;line-height:1!important;font-family:Arial,sans-serif!important;font-size:25px!important;font-weight:400!important;text-align:center!important;transform:none!important}</style>
-
-
-<style id="header-final-fix">
-.site-header{width:100%;max-width:1180px;height:76px;min-height:76px;padding:0 28px;box-sizing:border-box;margin:0 auto;display:flex;align-items:center;gap:18px;background:#080f1d;border-bottom:1px solid rgba(68,100,155,.18)}
-.site-header .brand{display:block;font-family:"Manrope","DM Sans",Arial,sans-serif;font-size:22px;line-height:1;font-weight:850;letter-spacing:-.7px;white-space:nowrap;color:#f2f5fc;text-decoration:none}
-.site-header .brand span{color:#6f95ff}
-.site-header nav.header-nav{margin-left:auto;display:flex;align-items:center;justify-content:flex-end;gap:clamp(10px,2vw,22px);white-space:nowrap}
-.site-header nav.header-nav a{color:#aab7cc;text-decoration:none;font-size:13px;font-weight:700;padding:10px 0;position:relative;transition:color .2s}
-.site-header nav.header-nav a:hover,.site-header nav.header-nav a.active{color:#6f95ff}
-.site-header nav.header-nav a.active:after{content:"";position:absolute;left:0;right:0;bottom:-14px;height:2px;background:#6f95ff;border-radius:2px;animation:underlineArrive .24s ease-out both}
-.site-header nav.header-nav .login-link{padding:10px 19px;border:1px solid #4569ad;border-radius:999px;color:#82a5ff}
-.site-header nav.header-nav .profile-avatar-link{width:42px;height:42px;flex:0 0 42px;padding:2px;border:2px solid #638cff;border-radius:50%;background:#263957;display:grid;place-items:center;overflow:hidden;color:#fff;font-size:18px;font-weight:800;text-decoration:none}
-.site-header nav.header-nav .profile-avatar-link img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:none}
-.site-header nav.header-nav .profile-avatar-link img[src]:not([src=""]){display:block}
-.site-header nav.header-nav [hidden]{display:none!important}
-.site-header .shared-menu-button{width:42px;height:42px;flex:0 0 42px;margin-left:8px;border-radius:11px}
-.site-header .shared-menu-button span{width:18px}
-@media(max-width:600px){.site-header{padding:0 18px;gap:9px}.site-header .brand{font-size:21px}.site-header nav.header-nav{gap:10px}.site-header nav.header-nav a{font-size:12px}.site-header nav.header-nav .profile-avatar-link{width:40px;height:40px;flex-basis:40px}.site-header .shared-menu-button{width:40px;height:40px;flex-basis:40px;margin-left:5px}}
-@media(max-width:380px){.site-header{padding:0 13px;gap:7px}.site-header .brand{font-size:19px}.site-header nav.header-nav{gap:7px}.site-header nav.header-nav a{font-size:11px}.site-header nav.header-nav .profile-avatar-link{width:36px;height:36px;flex-basis:36px}.site-header .shared-menu-button{width:36px;height:36px;flex-basis:36px;margin-left:3px}}
-</style>
-<style id="header-consistency-fix">
-/* Header shared sizing and alignment */
-.site-header{width:100%!important;max-width:1180px!important;height:76px!important;min-height:76px!important;margin:0 auto!important;padding:0 28px!important;box-sizing:border-box!important;display:flex!important;align-items:center!important;gap:18px!important;background:#080f1d!important}
-.site-header .brand{font-family:"Manrope","DM Sans",Arial,sans-serif!important;font-size:22px!important;line-height:1!important;font-weight:850!important;letter-spacing:-.7px!important;white-space:nowrap!important}
-.site-header nav.header-nav,.site-header nav{margin-left:auto!important;display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:clamp(10px,2vw,22px)!important;white-space:nowrap!important}
-.site-header nav.header-nav a,.site-header nav a{position:relative!important;color:#aab7cc!important;font-family:"DM Sans",Arial,sans-serif!important;font-size:13px!important;font-weight:700!important;line-height:1!important;padding:10px 0!important;text-decoration:none!important}
-.site-header nav.header-nav a.active,.site-header nav a.active{color:#6f95ff!important}
-.site-header nav.header-nav a.active:after,.site-header nav a.active:after{content:""!important;position:absolute!important;left:0!important;right:0!important;bottom:-14px!important;height:2px!important;border-radius:2px!important;background:#6f95ff!important;transform:scaleX(1)!important;transform-origin:center!important;animation:headerUnderlineIn .22s ease-out!important}
-@keyframes headerUnderlineIn{from{transform:scaleX(.2);opacity:.3}to{transform:scaleX(1);opacity:1}}
-.site-header nav.header-nav .profile-avatar-link,.site-header nav .profile-avatar-link{width:42px!important;height:42px!important;flex:0 0 42px!important;padding:2px!important;border:2px solid #638cff!important;border-radius:50%!important;background:#263957!important;display:grid!important;place-items:center!important;overflow:hidden!important}
-.site-header .shared-menu-button,.site-header .jobs-menu-button{width:42px!important;height:42px!important;flex:0 0 42px!important;margin-left:8px!important;border-radius:11px!important}
-.site-header .shared-menu-button span,.site-header .jobs-menu-button span{width:18px!important}
+<style id="shared-header-sizing">
+header .container{width:100%;max-width:1180px;padding:0 28px;box-sizing:border-box}
+header nav{min-height:76px;height:76px;display:flex;align-items:center;gap:16px}
+header .logo{font-size:22px;line-height:1;font-weight:850;letter-spacing:-.7px;white-space:nowrap}
+header .nav-links{margin-left:auto;display:flex;align-items:center;justify-content:flex-end;gap:clamp(10px,2vw,22px);font-size:13px;white-space:nowrap}
+header .home-profile-link{width:42px;height:42px;flex:0 0 42px}
+header .menu-button{width:42px;height:42px;flex:0 0 42px;margin-left:8px;border-radius:11px}
+header .menu-button span{width:18px}
 @media(max-width:600px){
-.site-header{padding:0 18px!important;gap:9px!important}
-.site-header .brand{font-size:21px!important}
-.site-header nav.header-nav,.site-header nav{gap:10px!important}
-.site-header nav.header-nav a,.site-header nav a{font-size:12px!important}
-.site-header nav.header-nav .profile-avatar-link,.site-header nav .profile-avatar-link{width:40px!important;height:40px!important;flex-basis:40px!important}
-.site-header .shared-menu-button,.site-header .jobs-menu-button{width:40px!important;height:40px!important;flex-basis:40px!important;margin-left:5px!important}
+ header .container{padding:0 18px} header nav{gap:9px} header .logo{font-size:21px}
+ header .nav-links{gap:10px;font-size:12px}
+ header .home-profile-link{width:40px;height:40px;flex-basis:40px}
+ header .menu-button{width:40px;height:40px;flex-basis:40px;margin-left:5px}
 }
 @media(max-width:380px){
-.site-header{padding:0 12px!important;gap:6px!important}
-.site-header .brand{font-size:19px!important}
-.site-header nav.header-nav,.site-header nav{gap:7px!important}
-.site-header nav.header-nav a,.site-header nav a{font-size:11px!important}
-.site-header nav.header-nav .profile-avatar-link,.site-header nav .profile-avatar-link{width:36px!important;height:36px!important;flex-basis:36px!important}
-.site-header .shared-menu-button,.site-header .jobs-menu-button{width:36px!important;height:36px!important;flex-basis:36px!important;margin-left:3px!important}
+ header .container{padding:0 13px} header nav{gap:7px} header .logo{font-size:19px}
+ header .nav-links{gap:7px;font-size:11px}
+ header .home-profile-link{width:36px;height:36px;flex-basis:36px}
+ header .menu-button{width:36px;height:36px;flex-basis:36px;margin-left:3px}
 }
 </style>
-
-<style id="header-clean-final">
-/* Cabeçalho unificado: mesmas medidas nas duas páginas */
-.site-header{width:100%;max-width:none;height:76px;min-height:76px;padding:0 28px;margin:0;display:flex;align-items:center;gap:18px;background:#080f1d;border-bottom:1px solid rgba(68,100,155,.18);box-sizing:border-box}
-.site-header .brand{font-family:"Manrope","DM Sans",Arial,sans-serif;font-size:22px;line-height:1;font-weight:850;letter-spacing:-.7px;white-space:nowrap;flex:0 0 auto}
-.site-header .brand span{color:#6f95ff}
-.site-header nav.header-nav{margin-left:auto;display:flex;align-items:center;justify-content:flex-end;gap:22px;white-space:nowrap}
-.site-header nav.header-nav a{position:relative;padding:10px 0;color:#aab7cc;text-decoration:none;font-size:13px;font-weight:700;line-height:1;transition:color .2s}
-.site-header nav.header-nav a:hover,.site-header nav.header-nav a.active{color:#6f95ff}
-.site-header nav.header-nav a.active:after{content:"";position:absolute;left:0;right:0;bottom:-14px;height:2px;background:#6f95ff;border-radius:2px}
-.site-header nav.header-nav .login-link{padding:10px 16px;border:1px solid #4569ad;border-radius:12px;color:#82a5ff}
-.site-header nav.header-nav .login-link:after{display:none!important}
-.site-header nav.header-nav .profile-avatar-link{width:42px;height:42px;flex:0 0 42px;padding:2px;border:2px solid #638cff;border-radius:50%;background:#263957;display:grid;place-items:center;overflow:hidden;color:#fff;font-size:18px;font-weight:800;text-decoration:none}
-.site-header nav.header-nav .profile-avatar-link img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:none}
-.site-header nav.header-nav .profile-avatar-link img[src]:not([src=""]){display:block}
-.site-header nav.header-nav [hidden]{display:none!important}
-.site-header .shared-menu-button,.site-header .jobs-menu-button{width:42px;height:42px;flex:0 0 42px;margin-left:8px;border-radius:11px}
-.site-header .shared-menu-button span,.site-header .jobs-menu-button span{width:18px}
-@media(max-width:600px){.site-header{padding:0 18px;gap:9px}.site-header .brand{font-size:21px}.site-header nav.header-nav{gap:10px}.site-header nav.header-nav a{font-size:12px}.site-header nav.header-nav .login-link{padding:8px 12px;border-radius:10px}.site-header nav.header-nav .profile-avatar-link{width:40px;height:40px;flex-basis:40px}.site-header .shared-menu-button,.site-header .jobs-menu-button{width:40px;height:40px;flex-basis:40px;margin-left:5px}}
-@media(max-width:380px){.site-header{padding:0 13px;gap:7px}.site-header .brand{font-size:19px}.site-header nav.header-nav{gap:7px}.site-header nav.header-nav a{font-size:11px}.site-header nav.header-nav .login-link{padding:7px 10px}.site-header nav.header-nav .profile-avatar-link{width:36px;height:36px;flex-basis:36px}.site-header .shared-menu-button,.site-header .jobs-menu-button{width:36px;height:36px;flex-basis:36px;margin-left:3px}}
-</style>
-
-
-
-
-
-<style id="header-and-page-swipe-fix">
-.site-header{height:76px;min-height:76px;padding:0 28px;gap:18px}
-.site-header .brand{font-size:22px!important;line-height:1!important;font-weight:850!important;letter-spacing:-.7px!important;white-space:nowrap;flex:0 0 auto}
-.site-header nav.header-nav{margin-left:auto;display:flex;align-items:center;justify-content:flex-end;gap:clamp(12px,2vw,24px)}
-.site-header nav.header-nav a{font-size:14px!important;line-height:1.2;padding:10px 0;position:relative}
-.site-header nav.header-nav a.active{color:#6f95ff!important}
-.site-header nav.header-nav a.active:after{content:"";position:absolute;left:0;right:0;bottom:-13px;height:3px;border-radius:3px;background:#6f95ff;animation:navUnderline .22s ease-out both}
-@keyframes navUnderline{from{transform:scaleX(.25);opacity:.3}to{transform:scaleX(1);opacity:1}}
-@media(max-width:650px){.site-header{padding:0 20px;gap:12px}.site-header .brand{font-size:22px!important}.site-header nav.header-nav{gap:14px}.site-header nav.header-nav a{font-size:13px!important}}
-@media(max-width:390px){.site-header{padding:0 14px;gap:8px}.site-header .brand{font-size:19px!important}.site-header nav.header-nav{gap:9px}.site-header nav.header-nav a{font-size:11px!important}.site-header .shared-menu-button{width:36px;height:36px;flex-basis:36px;margin-left:2px}}
-body.page-enter{animation:pageEnter .22s ease-out}
-@keyframes pageEnter{from{opacity:.65;transform:translateX(var(--page-enter-x,0))}to{opacity:1;transform:translateX(0)}}
-</style>
-<script id="page-swipe-navigation">
-(function(){
- const isJobs=location.pathname.endsWith("vagas.html");
- const direction=sessionStorage.getItem("conecta-swipe-direction");
- sessionStorage.removeItem("conecta-swipe-direction");
- document.body.classList.add("page-enter");
- document.body.style.setProperty("--page-enter-x",direction==="left"?"12px":direction==="right"?"-12px":"0");
- let startX=0,startY=0,startTarget=null,tracking=false;
- document.addEventListener("touchstart",e=>{if(e.touches.length!==1)return;startX=e.touches[0].clientX;startY=e.touches[0].clientY;startTarget=e.target;tracking=true;},{passive:true});
- document.addEventListener("touchend",e=>{
-  if(!tracking||e.changedTouches.length!==1){tracking=false;return;}tracking=false;
-  if(document.body.classList.contains("menu-open")||document.querySelector(".side-menu.active,.jobs-side-menu.active"))return;
-  if(startTarget&&startTarget.closest("a,button,input,textarea,select,label,[contenteditable='true'],.filters,.profile-avatar-link"))return;
-  const dx=e.changedTouches[0].clientX-startX,dy=e.changedTouches[0].clientY-startY;
-  if(Math.abs(dx)<75||Math.abs(dy)>70||Math.abs(dx)<Math.abs(dy)*1.25)return;
-  if(!isJobs&&dx<0){sessionStorage.setItem("conecta-swipe-direction","left");location.href="vagas.html";}
-  else if(isJobs&&dx>0){sessionStorage.setItem("conecta-swipe-direction","right");location.href="index.html";}
- },{passive:true});
-})();
-</script>
-
-<style id="avatar-login-fix">
-.site-header nav.header-nav .login-link{border:0!important;background:transparent!important;border-radius:0!important;padding:10px 0!important;box-shadow:none!important}
-.site-header nav.header-nav .profile-avatar-link{position:relative!important;isolation:isolate!important}
-.site-header nav.header-nav .profile-avatar-link span{position:absolute!important;inset:0!important;display:grid!important;place-items:center!important;z-index:1!important}
-.site-header nav.header-nav .profile-avatar-link img{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important;border-radius:50%!important;z-index:2!important;display:none!important}
-.site-header nav.header-nav .profile-avatar-link img.avatar-loaded{display:block!important}
-</style>
+<style id="menu-close-x-fix">.menu-close{display:flex!important;align-items:center!important;justify-content:center!important;padding:0!important;line-height:1!important;font-family:Arial,sans-serif!important;font-size:25px!important;font-weight:400!important;text-align:center!important;transform:none!important}</style>
 </head>
 
 
@@ -1537,15 +1441,29 @@ body.page-enter{animation:pageEnter .22s ease-out}
      HEADER
 ========================= -->
 
-<header class="site-header">
-  <a class="brand" href="index.html">Conecta <span>ADM</span></a>
-  <nav class="header-nav">
-    <a href="index.html" class="active" id="homeNavLink">Início</a>
-    <a href="vagas.html" id="homeJobsLink" hidden>Vagas</a>
-    <a href="login.html" class="login-link" id="homeLoginLink">Entrar</a>
-    <a href="editar-perfil.html" class="profile-avatar-link" id="homeProfileLink" aria-label="Meu perfil" title="Meu perfil" hidden><span id="homeProfileInitial">?</span><img id="homeProfileImage" alt="Foto do perfil"></a>
-  </nav>
-  <button class="menu-button shared-menu-button" id="menuButton" type="button" aria-label="Abrir menu" aria-controls="sideMenu" aria-expanded="false"><span></span><span></span><span></span></button>
+<header>
+
+  <div class="container">
+
+    <nav>
+
+      <a class="logo" href="index.html">
+        Conecta <span>ADM</span>
+      </a>
+
+      <div class="nav-links" id="homeNavLinks">
+        <a href="index.html" class="active">Início</a>
+        <a href="vagas.html" id="homeJobsLink" hidden>Vagas</a>
+        <a href="login.html" class="nav-cta" id="homeLoginLink">Entrar</a>
+        <a href="editar-perfil.html" class="home-profile-link" id="homeProfileLink" aria-label="Meu perfil" title="Meu perfil" hidden><span id="homeProfileInitial">?</span><img id="homeProfileImage" alt="Foto do perfil"></a>
+      </div>
+
+      <button class="menu-button" id="menuButton" type="button" aria-label="Abrir menu" aria-controls="sideMenu" aria-expanded="false"><span></span><span></span><span></span></button>
+
+    </nav>
+
+  </div>
+
 </header>
 
 
@@ -1940,17 +1858,13 @@ document.querySelectorAll(".discovery-tab").forEach(button => {
     const initial=document.getElementById("homeProfileInitial");
     const image=document.getElementById("homeProfileImage");
     initial.textContent=displayName.charAt(0).toUpperCase()||"?";
-    initial.style.display="grid";
-    image.classList.remove("avatar-loaded");
-    image.removeAttribute("src");
-    image.onload=()=>{if(image.naturalWidth>0){image.classList.add("avatar-loaded");initial.style.display="none";}};
-    image.onerror=()=>{image.classList.remove("avatar-loaded");initial.style.display="grid";};
-    if(profile?.avatar_url){image.src=profile.avatar_url;}
+    if(profile?.avatar_url){
+      image.onload=()=>{image.style.display="block";initial.style.display="none";};
+      image.onerror=()=>{image.style.display="none";initial.style.display="grid";};
+      image.src=profile.avatar_url;
+    }
   }catch(error){console.error("Não foi possível atualizar o cabeçalho:",error);}
 })();
 </script>
-
-
-
 </body>
 </html>
