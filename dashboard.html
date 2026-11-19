@@ -56,7 +56,8 @@
     async function loadPanel(){
       try {
         const {data:{session},error:sessionError}=await client.auth.getSession();
-        if(sessionError || !session){window.location.replace("login.html");return;}
+        if(sessionError) throw sessionError;
+        if(!session){window.location.replace("login.html");return;}
         const {data:profile,error:profileError}=await client.from("profiles").select("*").eq("id",session.user.id).maybeSingle();
         if(profileError) throw profileError;
       const name=(profile?.full_name||session.user.user_metadata?.full_name||session.user.email||"usuário").trim();
