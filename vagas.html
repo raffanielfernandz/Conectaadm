@@ -486,7 +486,7 @@ function renderJobs(){
     return;
   }
   jobsList.innerHTML=filtered.map(job=>{
-    const canApply=profileType==="estudante" || profileType==="student";
+    const canApply=["estudante","student"].includes(String(profileType).toLowerCase());
     const own=job.created_by===currentUser.id;
     const kind=normalizeText(job.employment_type);
     const image = job.id==="ext-menegazzo-aprendiz"
