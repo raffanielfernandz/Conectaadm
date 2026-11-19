@@ -265,6 +265,28 @@ main{max-width:1120px;padding:0 28px 60px}
 .site-header .shared-menu-button,.site-header .jobs-menu-button{width:36px!important;height:36px!important;flex-basis:36px!important;margin-left:3px!important}
 }
 </style>
+
+<style id="header-clean-final">
+/* Cabeçalho unificado: mesmas medidas nas duas páginas */
+.site-header{width:100%;max-width:none;height:76px;min-height:76px;padding:0 28px;margin:0;display:flex;align-items:center;gap:18px;background:#080f1d;border-bottom:1px solid rgba(68,100,155,.18);box-sizing:border-box}
+.site-header .brand{font-family:"Manrope","DM Sans",Arial,sans-serif;font-size:22px;line-height:1;font-weight:850;letter-spacing:-.7px;white-space:nowrap;flex:0 0 auto}
+.site-header .brand span{color:#6f95ff}
+.site-header nav.header-nav{margin-left:auto;display:flex;align-items:center;justify-content:flex-end;gap:22px;white-space:nowrap}
+.site-header nav.header-nav a{position:relative;padding:10px 0;color:#aab7cc;text-decoration:none;font-size:13px;font-weight:700;line-height:1;transition:color .2s}
+.site-header nav.header-nav a:hover,.site-header nav.header-nav a.active{color:#6f95ff}
+.site-header nav.header-nav a.active:after{content:"";position:absolute;left:0;right:0;bottom:-14px;height:2px;background:#6f95ff;border-radius:2px}
+.site-header nav.header-nav .login-link{padding:10px 16px;border:1px solid #4569ad;border-radius:12px;color:#82a5ff}
+.site-header nav.header-nav .login-link:after{display:none!important}
+.site-header nav.header-nav .profile-avatar-link{width:42px;height:42px;flex:0 0 42px;padding:2px;border:2px solid #638cff;border-radius:50%;background:#263957;display:grid;place-items:center;overflow:hidden;color:#fff;font-size:18px;font-weight:800;text-decoration:none}
+.site-header nav.header-nav .profile-avatar-link img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:none}
+.site-header nav.header-nav .profile-avatar-link img[src]:not([src=""]){display:block}
+.site-header nav.header-nav [hidden]{display:none!important}
+.site-header .shared-menu-button,.site-header .jobs-menu-button{width:42px;height:42px;flex:0 0 42px;margin-left:8px;border-radius:11px}
+.site-header .shared-menu-button span,.site-header .jobs-menu-button span{width:18px}
+@media(max-width:600px){.site-header{padding:0 18px;gap:9px}.site-header .brand{font-size:21px}.site-header nav.header-nav{gap:10px}.site-header nav.header-nav a{font-size:12px}.site-header nav.header-nav .login-link{padding:8px 12px;border-radius:10px}.site-header nav.header-nav .profile-avatar-link{width:40px;height:40px;flex-basis:40px}.site-header .shared-menu-button,.site-header .jobs-menu-button{width:40px;height:40px;flex-basis:40px;margin-left:5px}}
+@media(max-width:380px){.site-header{padding:0 13px;gap:7px}.site-header .brand{font-size:19px}.site-header nav.header-nav{gap:7px}.site-header nav.header-nav a{font-size:11px}.site-header nav.header-nav .login-link{padding:7px 10px}.site-header nav.header-nav .profile-avatar-link{width:36px;height:36px;flex-basis:36px}.site-header .shared-menu-button,.site-header .jobs-menu-button{width:36px;height:36px;flex-basis:36px;margin-left:3px}}
+</style>
+
 </head>
 <body>
 <header class="site-header">
