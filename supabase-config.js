@@ -3,6 +3,9 @@ window.SUPABASE_PUBLISHABLE_KEY = "sb_publishable_AhzPGIgCD351W3sEuzY2KA_YZog8c3
 
 // Cliente único por página, mantendo a chave padrão de sessão do Supabase.
 window.getSupabaseClient = function(){
+  if(!window.supabase || typeof window.supabase.createClient !== "function"){
+    throw new Error("Supabase JS não foi carregado. Verifique a conexão e recarregue a página.");
+  }
   if(!window.__conectaSupabaseClient){
     window.__conectaSupabaseClient = window.supabase.createClient(
       window.SUPABASE_URL,
