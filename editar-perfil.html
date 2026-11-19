@@ -1002,10 +1002,19 @@
       avatarInitial.textContent = initial;
       avatarModalFallback.textContent = initial;
       if(url){
+        avatarImage.onload = () => {
+          avatarImage.style.display = "block";
+          avatarInitial.style.display = "none";
+        };
+        avatarImage.onerror = () => {
+          avatarImage.removeAttribute("src");
+          avatarImage.style.display = "none";
+          avatarInitial.style.display = "flex";
+        };
         avatarImage.src = url;
-        avatarImage.style.display = "block";
-        avatarInitial.style.display = "none";
       }else{
+        avatarImage.onload = null;
+        avatarImage.onerror = null;
         avatarImage.removeAttribute("src");
         avatarImage.style.display = "none";
         avatarInitial.style.display = "flex";
