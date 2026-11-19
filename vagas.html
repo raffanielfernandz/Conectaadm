@@ -552,7 +552,7 @@ async function init(){
   avatarInitial.textContent=avatarName.charAt(0).toUpperCase() || "?";
   if(profile?.avatar_url){
     avatarImage.onload=()=>{avatarImage.style.display="block";avatarInitial.style.display="none";};
-    avatarImage.onerror=()=>{avatarImage.style.display="none";avatarInitial.style.display="grid";};
+    avatarImage.onerror=()=>{avatarImage.removeAttribute("src");avatarImage.style.display="none";avatarInitial.style.display="grid";};
     avatarImage.src=profile.avatar_url;
   }
 
