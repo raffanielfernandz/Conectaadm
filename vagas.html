@@ -412,13 +412,22 @@ function renderProfile(profile){
   document.getElementById("profileName").textContent = name;
   document.getElementById("profileInitial").textContent = initial;
   const avatar = document.getElementById("profileAvatar");
+  const avatarFallback = document.getElementById("profileInitial");
+  avatar.onload = () => {
+    avatar.style.display = "block";
+    avatarFallback.style.display = "none";
+  };
+  avatar.onerror = () => {
+    avatar.removeAttribute("src");
+    avatar.style.display = "none";
+    avatarFallback.style.display = "block";
+  };
   if(profile.avatar_url){
     avatar.src = profile.avatar_url;
-    avatar.style.display = "block";
-    document.getElementById("profileInitial").style.display = "none";
   }else{
+    avatar.removeAttribute("src");
     avatar.style.display = "none";
-    document.getElementById("profileInitial").style.display = "block";
+    avatarFallback.style.display = "block";
   }
   const types = {student:"Estudante",estudante:"Estudante",empresa:"Empresa",company:"Empresa",institution:"Instituição",escola:"Instituição"};
   document.getElementById("profileTypeLabel").textContent = types[profileType] || "Membro Conecta ADM";
