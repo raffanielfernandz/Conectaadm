@@ -1428,6 +1428,10 @@ header .nav-links [hidden]{display:none!important}
 @keyframes underlineArrive{from{opacity:0;transform:translateX(var(--underline-shift,0))}to{opacity:1;transform:translateX(0)}}
 @media(max-width:600px){header .container{padding:0 18px}header nav{gap:9px}header .logo{font-size:21px}header .nav-links{gap:10px;font-size:12px}header .home-profile-link{width:40px;height:40px;flex-basis:40px}header .menu-button{width:40px;height:40px;flex-basis:40px;margin-left:5px}}
 @media(max-width:380px){header .container{padding:0 13px}header nav{gap:7px}header .logo{font-size:19px}header .nav-links{gap:7px;font-size:11px}header .home-profile-link{width:36px;height:36px;flex-basis:36px}header .menu-button{width:36px;height:36px;flex-basis:36px;margin-left:3px}}
+
+/* Remove branding and active-page underline as requested */
+.logo,.brand{display:none!important}
+header .nav-links a.active:after,.site-header nav a.active:after{display:none!important;content:none!important}
 </style>
 </head>
 
