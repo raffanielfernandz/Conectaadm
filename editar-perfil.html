@@ -1438,6 +1438,9 @@
               .storage
               .from("avatars")
               .getPublicUrl(filePath);
+            if(!publicUrlData?.publicUrl){
+              throw new Error("Não foi possível gerar o endereço da foto.");
+            }
             avatarUrlToSave = publicUrlData.publicUrl;
           }
 
