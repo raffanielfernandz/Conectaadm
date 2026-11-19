@@ -52,7 +52,7 @@
     </section>
   </main>
   <script>
-    const client=window.supabase.createClient(window.SUPABASE_URL,window.SUPABASE_PUBLISHABLE_KEY);
+    const client=window.getSupabaseClient();
     async function loadPanel(){
       const {data:{session}}=await client.auth.getSession();
       if(!session){window.location.replace("login.html");return;}
