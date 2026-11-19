@@ -314,7 +314,7 @@ main{max-width:1120px;padding:0 28px 60px}
 </section>
 </main>
 <script>
-const client = window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_PUBLISHABLE_KEY);
+const client = window.getSupabaseClient();
 const messageEl = document.getElementById("message");
 const jobsList = document.getElementById("jobsList");
 let currentUser = null;
