@@ -1414,24 +1414,22 @@ h1,h2,h3,.logo,.menu-title{font-family:"Manrope","DM Sans",sans-serif}
 
 
 <style id="header-final-fix">
-header .container{width:100%;max-width:1180px;padding:0 28px;box-sizing:border-box}
-header nav{height:76px;min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:18px}
-header .logo{font-family:"Manrope","DM Sans",Arial,sans-serif;font-size:22px;line-height:1;font-weight:850;letter-spacing:-.7px;white-space:nowrap}
-header .nav-links{margin-left:auto;display:flex;align-items:center;justify-content:flex-end;gap:clamp(10px,2vw,22px);font-size:13px;white-space:nowrap}
-header .nav-links a{position:relative}
-header .nav-links a.active{color:#6f95ff}
-header .nav-links a.active:after{content:"";position:absolute;left:0;right:0;bottom:-14px;height:2px;background:#6f95ff;border-radius:2px;animation:underlineArrive .24s ease-out both}
-header .home-profile-link{width:42px;height:42px;flex:0 0 42px}
-header .menu-button{width:42px;height:42px;flex:0 0 42px;margin-left:8px;border-radius:11px}
-header .menu-button span{width:18px}
-header .nav-links [hidden]{display:none!important}
-@keyframes underlineArrive{from{opacity:0;transform:translateX(var(--underline-shift,0))}to{opacity:1;transform:translateX(0)}}
-@media(max-width:600px){header .container{padding:0 18px}header nav{gap:9px}header .logo{font-size:21px}header .nav-links{gap:10px;font-size:12px}header .home-profile-link{width:40px;height:40px;flex-basis:40px}header .menu-button{width:40px;height:40px;flex-basis:40px;margin-left:5px}}
-@media(max-width:380px){header .container{padding:0 13px}header nav{gap:7px}header .logo{font-size:19px}header .nav-links{gap:7px;font-size:11px}header .home-profile-link{width:36px;height:36px;flex-basis:36px}header .menu-button{width:36px;height:36px;flex-basis:36px;margin-left:3px}}
-
-/* Remove branding and active-page underline as requested */
-.logo,.brand{display:none!important}
-header .nav-links a.active:after,.site-header nav a.active:after{display:none!important;content:none!important}
+.site-header{width:100%;max-width:1180px;height:76px;min-height:76px;padding:0 28px;box-sizing:border-box;margin:0 auto;display:flex;align-items:center;gap:18px;background:#080f1d;border-bottom:1px solid rgba(68,100,155,.18)}
+.site-header .brand{display:block;font-family:"Manrope","DM Sans",Arial,sans-serif;font-size:22px;line-height:1;font-weight:850;letter-spacing:-.7px;white-space:nowrap;color:#f2f5fc;text-decoration:none}
+.site-header .brand span{color:#6f95ff}
+.site-header nav.header-nav{margin-left:auto;display:flex;align-items:center;justify-content:flex-end;gap:clamp(10px,2vw,22px);white-space:nowrap}
+.site-header nav.header-nav a{color:#aab7cc;text-decoration:none;font-size:13px;font-weight:700;padding:10px 0;position:relative;transition:color .2s}
+.site-header nav.header-nav a:hover,.site-header nav.header-nav a.active{color:#6f95ff}
+.site-header nav.header-nav a.active:after{content:"";position:absolute;left:0;right:0;bottom:-14px;height:2px;background:#6f95ff;border-radius:2px;animation:underlineArrive .24s ease-out both}
+.site-header nav.header-nav .login-link{padding:10px 19px;border:1px solid #4569ad;border-radius:999px;color:#82a5ff}
+.site-header nav.header-nav .profile-avatar-link{width:42px;height:42px;flex:0 0 42px;padding:2px;border:2px solid #638cff;border-radius:50%;background:#263957;display:grid;place-items:center;overflow:hidden;color:#fff;font-size:18px;font-weight:800;text-decoration:none}
+.site-header nav.header-nav .profile-avatar-link img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:none}
+.site-header nav.header-nav .profile-avatar-link img[src]:not([src=""]){display:block}
+.site-header nav.header-nav [hidden]{display:none!important}
+.site-header .shared-menu-button{width:42px;height:42px;flex:0 0 42px;margin-left:8px;border-radius:11px}
+.site-header .shared-menu-button span{width:18px}
+@media(max-width:600px){.site-header{padding:0 18px;gap:9px}.site-header .brand{font-size:21px}.site-header nav.header-nav{gap:10px}.site-header nav.header-nav a{font-size:12px}.site-header nav.header-nav .profile-avatar-link{width:40px;height:40px;flex-basis:40px}.site-header .shared-menu-button{width:40px;height:40px;flex-basis:40px;margin-left:5px}}
+@media(max-width:380px){.site-header{padding:0 13px;gap:7px}.site-header .brand{font-size:19px}.site-header nav.header-nav{gap:7px}.site-header nav.header-nav a{font-size:11px}.site-header nav.header-nav .profile-avatar-link{width:36px;height:36px;flex-basis:36px}.site-header .shared-menu-button{width:36px;height:36px;flex-basis:36px;margin-left:3px}}
 </style>
 </head>
 
@@ -1443,29 +1441,15 @@ header .nav-links a.active:after,.site-header nav a.active:after{display:none!im
      HEADER
 ========================= -->
 
-<header>
-
-  <div class="container">
-
-    <nav>
-
-      <a class="logo" href="index.html">
-        Conecta <span>ADM</span>
-      </a>
-
-      <div class="nav-links" id="homeNavLinks">
-        <a href="index.html" class="active">Início</a>
-        <a href="vagas.html" id="homeJobsLink" hidden>Vagas</a>
-        <a href="login.html" class="nav-cta" id="homeLoginLink">Entrar</a>
-        <a href="editar-perfil.html" class="home-profile-link" id="homeProfileLink" aria-label="Meu perfil" title="Meu perfil" hidden><span id="homeProfileInitial">?</span><img id="homeProfileImage" alt="Foto do perfil"></a>
-      </div>
-
-      <button class="menu-button" id="menuButton" type="button" aria-label="Abrir menu" aria-controls="sideMenu" aria-expanded="false"><span></span><span></span><span></span></button>
-
-    </nav>
-
-  </div>
-
+<header class="site-header">
+  <a class="brand" href="index.html">Conecta <span>ADM</span></a>
+  <nav class="header-nav">
+    <a href="index.html" class="active" id="homeNavLink">Início</a>
+    <a href="vagas.html" id="homeJobsLink" hidden>Vagas</a>
+    <a href="login.html" class="login-link" id="homeLoginLink">Entrar</a>
+    <a href="editar-perfil.html" class="profile-avatar-link" id="homeProfileLink" aria-label="Meu perfil" title="Meu perfil" hidden><span id="homeProfileInitial">?</span><img id="homeProfileImage" alt="Foto do perfil"></a>
+  </nav>
+  <button class="menu-button shared-menu-button" id="menuButton" type="button" aria-label="Abrir menu" aria-controls="sideMenu" aria-expanded="false"><span></span><span></span><span></span></button>
 </header>
 
 
