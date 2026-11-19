@@ -1519,6 +1519,18 @@ body.page-enter{animation:pageEnter .22s ease-out}
  },{passive:true});
 })();
 </script>
+<style id="shared-header-final">
+.site-header{width:100%!important;max-width:none!important;height:76px!important;min-height:76px!important;margin:0!important;padding:0 clamp(16px,4vw,32px)!important;box-sizing:border-box!important;display:flex!important;align-items:center!important;gap:18px!important;background:#080f1d!important}
+.site-header .brand{font-family:"Manrope","DM Sans",Arial,sans-serif!important;font-size:22px!important;line-height:1!important;font-weight:850!important;letter-spacing:-.7px!important;white-space:nowrap!important}
+.site-header nav.header-nav{margin-left:auto!important;display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:clamp(12px,2vw,22px)!important;white-space:nowrap!important}
+.site-header nav.header-nav a{font-size:13px!important;font-weight:700!important;padding:10px 0!important}
+.site-header nav.header-nav .profile-avatar-link{width:42px!important;height:42px!important;flex:0 0 42px!important;padding:2px!important;border:2px solid #638cff!important;border-radius:50%!important;display:grid!important;place-items:center!important;overflow:hidden!important}
+.site-header nav.header-nav .profile-avatar-link img{width:100%!important;height:100%!important;object-fit:cover!important;border-radius:50%!important}
+.site-header .shared-menu-button,.jobs-menu-button.shared-menu-button{width:42px!important;height:42px!important;flex:0 0 42px!important;margin-left:4px!important;border-radius:11px!important}
+.site-header nav.header-nav [hidden],.site-header [hidden]{display:none!important}
+@media(max-width:600px){.site-header{padding:0 16px!important;gap:9px!important}.site-header .brand{font-size:21px!important}.site-header nav.header-nav{gap:10px!important}.site-header nav.header-nav a{font-size:12px!important}.site-header nav.header-nav .profile-avatar-link{width:40px!important;height:40px!important;flex-basis:40px!important}.site-header .shared-menu-button,.jobs-menu-button.shared-menu-button{width:40px!important;height:40px!important;flex-basis:40px!important;margin-left:4px!important}}
+@media(max-width:380px){.site-header{padding:0 12px!important;gap:7px!important}.site-header .brand{font-size:19px!important}.site-header nav.header-nav{gap:7px!important}.site-header nav.header-nav a{font-size:11px!important}.site-header nav.header-nav .profile-avatar-link{width:36px!important;height:36px!important;flex-basis:36px!important}.site-header .shared-menu-button,.jobs-menu-button.shared-menu-button{width:36px!important;height:36px!important;flex-basis:36px!important;margin-left:3px!important}}
+</style>
 </head>
 
 
@@ -1899,46 +1911,24 @@ document.querySelectorAll(".discovery-tab").forEach(button => {
 
 <script>
 (async function updateHomeNavigation(){
-  try{
-    const client=window.supabase.createClient(window.SUPABASE_URL,window.SUPABASE_PUBLISHABLE_KEY);
-    const {data:{session}}=await client.auth.getSession();
+  const client=window.supabase.createClient(window.SUPABASE_URL,window.SUPABASE_PUBLISHABLE_KEY);
+  const login=document.getElementById("homeLoginLink"), jobs=document.getElementById("homeJobsLink"), avatar=document.getElementById("homeProfileLink");
+  const sideJobs=document.getElementById("sideJobsLink"), sideProfile=document.getElementById("sideProfileLink"), sideLogin=document.getElementById("sideLoginLink"), sideRegister=document.getElementById("sideRegisterLink"), sideLogout=document.getElementById("sideLogoutLink");
+  const initial=document.getElementById("homeProfileInitial"), image=document.getElementById("homeProfileImage");
+  async function refresh(session){
     const loggedIn=!!session;
-    const login=document.getElementById("homeLoginLink");
-    const jobs=document.getElementById("homeJobsLink");
-    const avatar=document.getElementById("homeProfileLink");
-    const sideJobs=document.getElementById("sideJobsLink");
-    const sideProfile=document.getElementById("sideProfileLink");
-    const sideLogin=document.getElementById("sideLoginLink");
-    const sideRegister=document.getElementById("sideRegisterLink");
-    const sideLogout=document.getElementById("sideLogoutLink");
-    if(!loggedIn)return;
-    login.hidden=true;
-    jobs.hidden=false;
-    avatar.hidden=false;
-    sideJobs.hidden=false;
-    sideProfile.hidden=false;
-    sideLogin.hidden=true;
-    sideRegister.hidden=true;
-    sideLogout.hidden=false;
-    sideLogout.addEventListener("click",async()=>{
-      sideLogout.disabled=true;
-      sideLogout.textContent="Saindo...";
-      const {error}=await client.auth.signOut();
-      if(error){sideLogout.disabled=false;sideLogout.textContent="Sair da conta";alert("Não foi possível sair da conta. Tente novamente.");return;}
-      window.location.replace("index.html");
-    });
+    login.hidden=loggedIn; jobs.hidden=!loggedIn; avatar.hidden=!loggedIn;
+    sideJobs.hidden=!loggedIn; sideProfile.hidden=!loggedIn; sideLogin.hidden=loggedIn; sideRegister.hidden=loggedIn; sideLogout.hidden=!loggedIn;
+    if(!loggedIn){image.removeAttribute("src");image.style.display="none";initial.style.display="grid";initial.textContent="?";return;}
     const {data:profile}=await client.from("profiles").select("full_name,avatar_url").eq("id",session.user.id).maybeSingle();
-    const displayName=(profile?.full_name||session.user.user_metadata?.full_name||session.user.email||"Perfil").trim();
-    const initial=document.getElementById("homeProfileInitial");
-    const image=document.getElementById("homeProfileImage");
-    initial.textContent=displayName.charAt(0).toUpperCase()||"?";
-    if(profile?.avatar_url){
-      image.onload=()=>{image.style.display="block";initial.style.display="none";};
-      image.onerror=()=>{image.style.display="none";initial.style.display="grid";};
-      image.src=profile.avatar_url;
-    }
-  }catch(error){console.error("Não foi possível atualizar o cabeçalho:",error);}
-})();
+    const name=(profile?.full_name||session.user.user_metadata?.full_name||session.user.email||"Perfil").trim();
+    initial.textContent=name.charAt(0).toUpperCase()||"?"; initial.style.display="grid"; image.style.display="none"; image.removeAttribute("src");
+    if(profile?.avatar_url){image.onload=()=>{image.style.display="block";initial.style.display="none"};image.onerror=()=>{image.style.display="none";initial.style.display="grid"};image.src=profile.avatar_url;}
+  }
+  const {data:{session}}=await client.auth.getSession(); await refresh(session);
+  client.auth.onAuthStateChange((_event,session)=>{setTimeout(()=>refresh(session),0)});
+  sideLogout.addEventListener("click",async()=>{sideLogout.disabled=true;sideLogout.textContent="Saindo...";const {error}=await client.auth.signOut();if(error){sideLogout.disabled=false;sideLogout.textContent="Sair da conta";alert("Não foi possível sair da conta. Tente novamente.");return;}window.location.replace("index.html");});
+})();;
 </script>
 
 
