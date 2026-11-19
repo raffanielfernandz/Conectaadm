@@ -1525,7 +1525,7 @@ body.page-enter{animation:pageEnter .22s ease-out}
 .site-header nav.header-nav .profile-avatar-link{position:relative!important;isolation:isolate!important}
 .site-header nav.header-nav .profile-avatar-link span{position:absolute!important;inset:0!important;display:grid!important;place-items:center!important;z-index:1!important}
 .site-header nav.header-nav .profile-avatar-link img{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important;border-radius:50%!important;z-index:2!important;display:none!important}
-.site-header nav.header-nav .profile-avatar-link img[style*="display: block"]{display:block!important}
+.site-header nav.header-nav .profile-avatar-link img.avatar-loaded{display:block!important}
 </style>
 </head>
 
@@ -1941,10 +1941,10 @@ document.querySelectorAll(".discovery-tab").forEach(button => {
     const image=document.getElementById("homeProfileImage");
     initial.textContent=displayName.charAt(0).toUpperCase()||"?";
     initial.style.display="grid";
-    image.style.display="none";
+    image.classList.remove("avatar-loaded");
     image.removeAttribute("src");
-    image.onload=()=>{if(image.naturalWidth>0){image.style.display="block";initial.style.display="none";}};
-    image.onerror=()=>{image.style.display="none";initial.style.display="grid";};
+    image.onload=()=>{if(image.naturalWidth>0){image.classList.add("avatar-loaded");initial.style.display="none";}};
+    image.onerror=()=>{image.classList.remove("avatar-loaded");initial.style.display="grid";};
     if(profile?.avatar_url){image.src=profile.avatar_url;}
   }catch(error){console.error("Não foi possível atualizar o cabeçalho:",error);}
 })();
