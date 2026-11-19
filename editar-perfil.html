@@ -1291,16 +1291,13 @@
           await client.auth.getUser();
 
 
-        if(
-          userError ||
-          !user
-        ){
+        if(userError){
+          throw userError;
+        }
 
-          window.location.href =
-            "login.html";
-
+        if(!user){
+          window.location.href = "login.html";
           return;
-
         }
 
 
