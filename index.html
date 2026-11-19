@@ -1826,7 +1826,7 @@ document.querySelectorAll(".discovery-tab").forEach(button => {
 <script>
 (async function updateHomeNavigation(){
   try{
-    const client=window.supabase.createClient(window.SUPABASE_URL,window.SUPABASE_PUBLISHABLE_KEY);
+    const client=window.getSupabaseClient();
     const {data:{session}}=await client.auth.getSession();
     const loggedIn=!!session;
     const login=document.getElementById("homeLoginLink");
