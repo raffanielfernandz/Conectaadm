@@ -63,7 +63,8 @@
       const name=(profile?.full_name||session.user.user_metadata?.full_name||session.user.email||"usuário").trim();
       document.getElementById("userName").textContent=name.split(" ")[0];
       document.getElementById("initial").textContent=name.charAt(0).toUpperCase();
-      const type=profile?.profile_type||"";
+      const rawType=profile?.profile_type||session.user.user_metadata?.tipo_de_perfil||"";
+      const type=String(rawType).trim().toLowerCase();
       const labels={student:"Estudante",estudante:"Estudante",company:"Empresa",empresa:"Empresa",institution:"Instituição",escola:"Instituição"};
       document.getElementById("profileType").textContent=(labels[type]||"Sua conta")+" • Gerencie seu perfil e encontre novas oportunidades.";
       if(profile?.avatar_url){
