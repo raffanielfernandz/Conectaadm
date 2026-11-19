@@ -1498,7 +1498,8 @@
             "Perfil atualizado com sucesso!",
             "success"
           );
-
+          saveButton.disabled = false;
+          saveButton.textContent = "Salvar alterações";
 
         }catch(error){
 
