@@ -290,6 +290,40 @@ main{max-width:1120px;padding:0 28px 60px}
 
 
 
+
+<style id="header-and-page-swipe-fix">
+.site-header{height:76px;min-height:76px;padding:0 28px;gap:18px}
+.site-header .brand{font-size:22px!important;line-height:1!important;font-weight:850!important;letter-spacing:-.7px!important;white-space:nowrap;flex:0 0 auto}
+.site-header nav.header-nav{margin-left:auto;display:flex;align-items:center;justify-content:flex-end;gap:clamp(12px,2vw,24px)}
+.site-header nav.header-nav a{font-size:14px!important;line-height:1.2;padding:10px 0;position:relative}
+.site-header nav.header-nav a.active{color:#6f95ff!important}
+.site-header nav.header-nav a.active:after{content:"";position:absolute;left:0;right:0;bottom:-13px;height:3px;border-radius:3px;background:#6f95ff;animation:navUnderline .22s ease-out both}
+@keyframes navUnderline{from{transform:scaleX(.25);opacity:.3}to{transform:scaleX(1);opacity:1}}
+@media(max-width:650px){.site-header{padding:0 20px;gap:12px}.site-header .brand{font-size:22px!important}.site-header nav.header-nav{gap:14px}.site-header nav.header-nav a{font-size:13px!important}}
+@media(max-width:390px){.site-header{padding:0 14px;gap:8px}.site-header .brand{font-size:19px!important}.site-header nav.header-nav{gap:9px}.site-header nav.header-nav a{font-size:11px!important}.site-header .shared-menu-button{width:36px;height:36px;flex-basis:36px;margin-left:2px}}
+body.page-enter{animation:pageEnter .22s ease-out}
+@keyframes pageEnter{from{opacity:.65;transform:translateX(var(--page-enter-x,0))}to{opacity:1;transform:translateX(0)}}
+</style>
+<script id="page-swipe-navigation">
+(function(){
+ const isJobs=location.pathname.endsWith("vagas.html");
+ const direction=sessionStorage.getItem("conecta-swipe-direction");
+ sessionStorage.removeItem("conecta-swipe-direction");
+ document.body.classList.add("page-enter");
+ document.body.style.setProperty("--page-enter-x",direction==="left"?"12px":direction==="right"?"-12px":"0");
+ let startX=0,startY=0,startTarget=null,tracking=false;
+ document.addEventListener("touchstart",e=>{if(e.touches.length!==1)return;startX=e.touches[0].clientX;startY=e.touches[0].clientY;startTarget=e.target;tracking=true;},{passive:true});
+ document.addEventListener("touchend",e=>{
+  if(!tracking||e.changedTouches.length!==1){tracking=false;return;}tracking=false;
+  if(document.body.classList.contains("menu-open")||document.querySelector(".side-menu.active,.jobs-side-menu.active"))return;
+  if(startTarget&&startTarget.closest("a,button,input,textarea,select,label,[contenteditable='true'],.filters,.profile-avatar-link"))return;
+  const dx=e.changedTouches[0].clientX-startX,dy=e.changedTouches[0].clientY-startY;
+  if(Math.abs(dx)<75||Math.abs(dy)>70||Math.abs(dx)<Math.abs(dy)*1.25)return;
+  if(!isJobs&&dx<0){sessionStorage.setItem("conecta-swipe-direction","left");location.href="vagas.html";}
+  else if(isJobs&&dx>0){sessionStorage.setItem("conecta-swipe-direction","right");location.href="index.html";}
+ },{passive:true});
+})();
+</script>
 </head>
 <body>
 <header class="site-header">
@@ -685,26 +719,6 @@ init();
 </script>
 
 
-<script id="page-swipe-navigation">
-(function(){
- const isJobs=/vagas\.html$/.test(location.pathname);
- const direction=sessionStorage.getItem("conecta-swipe-direction");
- sessionStorage.removeItem("conecta-swipe-direction");
- const active=document.querySelector("header .nav-links a.active, .site-header nav a.active");
- if(active&&direction)active.style.setProperty("--underline-shift",direction==="left"?"18px":"-18px");
- let x=0,y=0,target=null;
- document.addEventListener("touchstart",e=>{if(e.touches.length!==1)return;x=e.touches[0].clientX;y=e.touches[0].clientY;target=e.target;},{passive:true});
- document.addEventListener("touchend",e=>{
-  if(!target||e.changedTouches.length!==1)return;
-  if(document.body.classList.contains("menu-open")||document.getElementById("sideMenu")?.classList.contains("active")||document.getElementById("jobsSideMenu")?.classList.contains("active"))return;
-  if(target.closest("a,button,input,textarea,select,label,[contenteditable='true'],.filters"))return;
-  const dx=e.changedTouches[0].clientX-x,dy=e.changedTouches[0].clientY-y;
-  if(Math.abs(dx)<80||Math.abs(dy)>65||Math.abs(dx)<Math.abs(dy)*1.3)return;
-  if(!isJobs&&dx<0){sessionStorage.setItem("conecta-swipe-direction","left");location.href="vagas.html";}
-  else if(isJobs&&dx>0){sessionStorage.setItem("conecta-swipe-direction","right");location.href="index.html";}
-  target=null;
- },{passive:true});
-})();
-</script>
+
 </body>
 </html>
