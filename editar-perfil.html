@@ -914,10 +914,7 @@
   <script>
 
     const client =
-      window.supabase.createClient(
-        window.SUPABASE_URL,
-        window.SUPABASE_PUBLISHABLE_KEY
-      );
+      window.getSupabaseClient();
 
 
     const loading =
