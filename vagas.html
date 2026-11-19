@@ -290,6 +290,14 @@ main{max-width:1120px;padding:0 28px 60px}
 
 
 
+
+<style id="avatar-login-fix">
+.site-header nav.header-nav .login-link{border:0!important;background:transparent!important;border-radius:0!important;padding:10px 0!important;box-shadow:none!important}
+.site-header nav.header-nav .profile-avatar-link{position:relative!important;isolation:isolate!important}
+.site-header nav.header-nav .profile-avatar-link span{position:absolute!important;inset:0!important;display:grid!important;place-items:center!important;z-index:1!important}
+.site-header nav.header-nav .profile-avatar-link img{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important;border-radius:50%!important;z-index:2!important;display:none!important}
+.site-header nav.header-nav .profile-avatar-link img[style*="display: block"]{display:block!important}
+</style>
 </head>
 <body>
 <header class="site-header">
@@ -610,11 +618,12 @@ async function init(){
   const avatarImage=document.getElementById("profileAvatarImage");
   const avatarName=(profile?.full_name || currentUser.user_metadata?.full_name || currentUser.email || "Perfil").trim();
   avatarInitial.textContent=avatarName.charAt(0).toUpperCase() || "?";
-  if(profile?.avatar_url){
-    avatarImage.onload=()=>{avatarImage.style.display="block";avatarInitial.style.display="none";};
-    avatarImage.onerror=()=>{avatarImage.style.display="none";avatarInitial.style.display="grid";};
-    avatarImage.src=profile.avatar_url;
-  }
+  avatarInitial.style.display="grid";
+  avatarImage.style.display="none";
+  avatarImage.removeAttribute("src");
+  avatarImage.onload=()=>{if(avatarImage.naturalWidth>0){avatarImage.style.display="block";avatarInitial.style.display="none";}};
+  avatarImage.onerror=()=>{avatarImage.style.display="none";avatarInitial.style.display="grid";};
+  if(profile?.avatar_url){avatarImage.src=profile.avatar_url;}
 
   if(profileType==="empresa" || profileType==="company") document.getElementById("publishPanel").classList.remove("hidden");
   document.getElementById("jobsSideProfile").hidden=false;
