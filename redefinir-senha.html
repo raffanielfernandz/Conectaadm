@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redefinir senha | Conecta ADM</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{min-height:100vh;display:grid;place-items:center;padding:20px;background:#080d17;color:#f4f7ff;font-family:Inter,Arial,sans-serif}
+    .card{width:min(460px,100%);padding:30px;border:1px solid #263854;border-radius:18px;background:#0d1422}
+    h1{font-size:1.8rem;margin-bottom:8px}
+    p{color:#aab4c7;line-height:1.5;margin-bottom:22px}
+    label{display:block;font-weight:600;margin:14px 0 7px}
+    input{width:100%;padding:13px;border:1px solid #30435f;border-radius:10px;background:#09111e;color:white;font:inherit}
+    input:focus{outline:2px solid #5d8cff;outline-offset:1px}
+    button{width:100%;margin-top:20px;padding:14px;border:0;border-radius:10px;background:#5d8cff;color:white;font:inherit;font-weight:800;cursor:pointer}
+    button:disabled{opacity:.6;cursor:not-allowed}
+    #message{margin-top:16px;color:#aab4c7;line-height:1.5}
+    a{display:block;margin-top:18px;text-align:center;color:#8faeff;text-decoration:none}
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1>Redefinir senha</h1>
+    <p>Escolha uma nova senha para sua conta Conecta ADM.</p>
+    <form id="resetForm">
+      <label for="password">Nova senha</label>
+      <input id="password" type="password" minlength="8" autocomplete="new-password" required>
+      <label for="confirmPassword">Confirmar nova senha</label>
+      <input id="confirmPassword" type="password" minlength="8" autocomplete="new-password" required>
+      <button id="submitButton" type="submit">Salvar nova senha</button>
+    </form>
+    <div id="message" role="status"></div>
+    <a href="login.html">Voltar para o login</a>
+  </main>
+  <script>
+    const client=window.getSupabaseClient();
+    const form=document.getElementById("resetForm");
+    const button=document.getElementById("submitButton");
+    const message=document.getElementById("message");
+
+    async function verifyRecoverySession(){
+      try{
+        const {data,error}=await client.auth.getSession();
+        if(error) throw error;
+        if(!data.session){
+          form.hidden=true;
+          message.textContent="Link inválido ou expirado. Solicite um novo e-mail de recuperação.";
+        }
+      }catch(error){
+        console.error("Erro ao verificar link de recuperação:",error);
+        form.hidden=true;
+        message.textContent="Não foi possível validar o link. Tente solicitar outro e-mail.";
+      }
+    }
+
+    form.addEventListener("submit",async event=>{
+      event.preventDefault();
+      const password=document.getElementById("password").value;
+      const confirmPassword=document.getElementById("confirmPassword").value;
+      if(password.length<8){
+        message.textContent="A senha precisa ter pelo menos 8 caracteres.";
+        return;
+      }
+      if(password!==confirmPassword){
+        message.textContent="As senhas não coincidem.";
+        return;
+      }
+      button.disabled=true;
+      button.textContent="Salvando...";
+      message.textContent="";
+      try{
+        const {error}=await client.auth.updateUser({password});
+        if(error) throw error;
+        message.textContent="Senha alterada com sucesso. Você já pode entrar com a nova senha.";
+        form.reset();
+        button.textContent="Senha salva";
+        button.disabled=true;
+      }catch(error){
+        console.error("Erro ao redefinir senha:",error);
+        message.textContent="Não foi possível alterar a senha. Solicite um novo link e tente novamente.";
+        button.disabled=false;
+        button.textContent="Salvar nova senha";
+      }
+    });
+
+    verifyRecoverySession();
+  </script>
+</body>
+</html>

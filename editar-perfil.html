@@ -202,7 +202,8 @@
     }
 
     input,
-    select{
+    select,
+    textarea{
 
       width:100%;
 
@@ -240,6 +241,8 @@
       cursor:not-allowed;
 
     }
+
+    textarea{width:100%;padding:13px 14px;border-radius:10px;border:1px solid #263853;background:#0a111e;color:white;outline:none;font:15px Arial,Helvetica,sans-serif;resize:vertical;min-height:100px;}
 
     select{
 
@@ -576,7 +579,9 @@
 
     }
 
-  </style>
+  
+    .personal-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px 14px;padding:16px;background:rgba(93,140,255,.045);border:1px solid #203452;border-radius:14px;margin:8px 0 22px}.personal-grid .field{margin:0}.personal-grid .wide{grid-column:1/-1}.personal-heading{font-size:16px;font-weight:700;color:#dce5f7;margin:4px 0}.personal-sub{font-size:13px;color:var(--muted);margin:-6px 0 12px}@media(max-width:520px){.personal-grid{grid-template-columns:1fr}.personal-grid .wide{grid-column:auto}}
+</style>
 
 </head>
 
@@ -686,6 +691,16 @@
           </div>
 
 
+
+          <div class="personal-heading">Informações adicionais</div>
+          <p class="personal-sub">Dados opcionais para complementar seu perfil.</p>
+          <div class="personal-grid">
+            <div class="field"><label for="birthDate">Data de nascimento</label><input id="birthDate" type="date"></div>
+            <div class="field"><label for="gender">Gênero</label><select id="gender"><option value="">Não informar</option><option>Masculino</option><option>Feminino</option><option>Outro</option></select></div>
+            <div class="field wide"><label for="address">Endereço</label><input id="address" placeholder="Rua, número, complemento"></div>
+            <div class="field"><label for="postalCode">CEP</label><input id="postalCode" placeholder="00000-000" maxlength="9" inputmode="numeric"></div>
+            
+          </div>
           <div class="field">
 
             <label for="state">
@@ -771,6 +786,9 @@
 
             </div>
 
+            <div class="field">
+              <a href="perfil-profissional.html" class="cancel" style="width:100%;min-height:46px">Criar meu currículo</a>
+            </div>
           </div>
 
 
@@ -942,6 +960,15 @@
     const phoneInput =
       document.getElementById("phone");
 
+    const personalFields = {
+      birthDate: document.getElementById("birthDate"),
+      gender: document.getElementById("gender"),
+
+      address: document.getElementById("address"),
+      postalCode: document.getElementById("postalCode"),
+      postalCode: document.getElementById("postalCode")
+    };
+
     const stateInput =
       document.getElementById("state");
 
@@ -1002,10 +1029,19 @@
       avatarInitial.textContent = initial;
       avatarModalFallback.textContent = initial;
       if(url){
+        avatarImage.onload = () => {
+          avatarImage.style.display = "block";
+          avatarInitial.style.display = "none";
+        };
+        avatarImage.onerror = () => {
+          avatarImage.removeAttribute("src");
+          avatarImage.style.display = "none";
+          avatarInitial.style.display = "flex";
+        };
         avatarImage.src = url;
-        avatarImage.style.display = "block";
-        avatarInitial.style.display = "none";
       }else{
+        avatarImage.onload = null;
+        avatarImage.onerror = null;
         avatarImage.removeAttribute("src");
         avatarImage.style.display = "none";
         avatarInitial.style.display = "flex";
@@ -1213,17 +1249,22 @@
     }
 
 
-    phoneInput.addEventListener(
-      "input",
-      () => {
-
-        phoneInput.value =
-          formatPhone(
-            phoneInput.value
-          );
-
-      }
-    );
+    phoneInput.addEventListener("input", () => { phoneInput.value = formatPhone(phoneInput.value); });
+    personalFields.postalCode.addEventListener("input", () => {
+      const digits = personalFields.postalCode.value.replace(/\D/g, "").slice(0, 8);
+      personalFields.postalCode.value = digits.length > 5 ? digits.slice(0, 5) + "-" + digits.slice(5) : digits;
+    });
+    personalFields.postalCode.addEventListener("blur", async () => {
+      const cep = personalFields.postalCode.value.replace(/\D/g, "");
+      if (cep.length !== 8) return;
+      try {
+        const response = await fetch("https://viacep.com.br/ws/" + cep + "/json/");
+        const result = await response.json();
+        if (result.erro) return;
+        cityInput.value = result.localidade || cityInput.value;
+        if (result.uf) stateInput.value = result.uf;
+      } catch (error) { console.warn("CEP lookup failed", error); }
+    });
 
 
     function showSpecificFields(type){
@@ -1235,19 +1276,19 @@
       institutionFields.classList.remove("active");
 
 
-      if(type === "student"){
+      if(type === "student" || type === "estudante"){
 
         studentFields.classList.add("active");
 
       }
 
-      else if(type === "empresa"){
+      else if(type === "empresa" || type === "company"){
 
         companyFields.classList.add("active");
 
       }
 
-      else if(type === "institution"){
+      else if(type === "institution" || type === "escola"){
 
         institutionFields.classList.add("active");
 
@@ -1282,16 +1323,13 @@
           await client.auth.getUser();
 
 
-        if(
-          userError ||
-          !user
-        ){
+        if(userError){
+          throw userError;
+        }
 
-          window.location.href =
-            "login.html";
-
+        if(!user){
+          window.location.href = "login.html";
           return;
-
         }
 
 
@@ -1317,7 +1355,7 @@
 
 
         profileType =
-          profile.profile_type;
+          profile.profile_type || user.user_metadata?.tipo_de_perfil || "";
 
 
         fullNameInput.value =
@@ -1349,6 +1387,10 @@
 
         schoolInput.value =
           profile.school || "";
+        const personal = user.user_metadata?.personal_details || {};
+        Object.entries(personalFields).forEach(([key,field])=>{field.value=personal[key]||"";});
+        personalFields.postalCode.value = personalFields.postalCode.value.replace(/^(\d{5})(\d{3})$/, "$1-$2");
+        
 
 
         companyNameInput.value =
@@ -1432,8 +1474,15 @@
               .storage
               .from("avatars")
               .getPublicUrl(filePath);
+            if(!publicUrlData?.publicUrl){
+              throw new Error("Não foi possível gerar o endereço da foto.");
+            }
             avatarUrlToSave = publicUrlData.publicUrl;
           }
+
+          const personalDetails = Object.fromEntries(Object.entries(personalFields).map(([key,field])=>[key,field.value.trim()]));
+          const { error: metadataError } = await client.auth.updateUser({data:{personal_details:personalDetails}});
+          if(metadataError) throw metadataError;
 
           const updatedData = {
 
@@ -1453,6 +1502,7 @@
 
             school:
               schoolInput.value.trim(),
+            // Supplementary professional data is kept locally and reused by the resume builder.
 
             company_name:
               companyNameInput.value.trim(),
@@ -1488,6 +1538,7 @@
           }
 
 
+          
           currentAvatarUrl = avatarUrlToSave;
           updateAvatarPreview(currentAvatarUrl, fullNameInput.value);
           avatarFileInput.value = "";
@@ -1498,7 +1549,8 @@
             "Perfil atualizado com sucesso!",
             "success"
           );
-
+          saveButton.disabled = false;
+          saveButton.textContent = "Salvar alterações";
 
         }catch(error){
 
@@ -1520,6 +1572,7 @@
 
       }
     );
+
 
 
     loadProfile();

@@ -88,30 +88,18 @@ button:hover,.external-link:hover{filter:brightness(1.1);transform:translateY(-1
 @media(max-width:480px){main{padding:16px 14px 45px}.profile-card{padding:15px;margin-bottom:25px}.profile-top{gap:11px}.avatar{width:58px;height:58px;flex-basis:58px}.profile-heading h2{font-size:16px}.profile-heading p{font-size:12px}.profile-info{gap:6px}.info-chip{font-size:11px}.top{padding:22px 17px;border-radius:16px}.top h1{font-size:30px}.top p{font-size:13px}.filters{padding:15px;gap:10px}.filters input,.filters select{padding:11px 10px;font-size:12px}.filter-footer{align-items:flex-start;flex-direction:column}.filter-footer button{width:100%}.job{padding:18px}.job h3{font-size:17px}.job-actions,.job-actions .external-link{width:100%;justify-content:center}}
 
 
-/* CARDS PADRONIZADOS COM IMAGENS */
-#jobsList{align-items:stretch}
-.job{padding:0;overflow:hidden;display:flex;flex-direction:column;gap:0}
-.job:before{z-index:2;left:0;right:0}
-.job-image-wrap{height:155px;overflow:hidden;background:#17243a}
-.job-image{display:block;width:100%;height:100%;object-fit:cover;transition:transform .35s}
-.job:hover .job-image{transform:scale(1.035)}
-.job-content{display:flex;flex:1;flex-direction:column;padding:19px}
-.job-tags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:10px}
-.job-tag{display:inline-flex;align-items:center;border:1px solid rgba(111,149,255,.3);border-radius:30px;padding:5px 10px;background:rgba(74,115,210,.18);color:#a9c0ff;font-size:11px;font-weight:800}
-.job-tag.secondary{background:rgba(255,255,255,.04);border-color:#31415d;color:#c1ccdc}
-.job .job-company{margin:0;color:#dce7ff;font-size:13px;font-weight:700}
-.job-facts{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:15px}
-.job-facts span{display:flex;flex-direction:column;gap:3px;padding:10px;border:1px solid #263956;border-radius:10px;background:rgba(5,13,26,.32);color:#c4d0e2;font-size:12px}
-.job-facts b,.job-description>b{color:#8faeff;font-size:10px;text-transform:uppercase;letter-spacing:.7px}
-.job-description{margin-top:14px}
-.job-description p{margin:4px 0 0;color:#b3c0d3;font-size:12px;line-height:1.65}
-.job-description.requirements{padding-top:12px;border-top:1px solid rgba(100,130,180,.18)}
-.job-actions{display:flex;flex-direction:column;align-items:stretch;gap:9px;margin-top:auto;padding-top:17px}
-.job-actions .external-link,.job-actions button{justify-content:center;text-align:center;width:100%;min-height:44px}
-.job-source{color:#7f91ad;font-size:10px}
-@media(max-width:480px){.job-image-wrap{height:145px}.job-content{padding:16px}.job-facts{grid-template-columns:1fr 1fr}.job-description p{font-size:12px}}
-
-
+/* Cards com ilustrações vetoriais estáveis */
+.job-image-wrap{height:100%;min-height:198px;position:relative;border-radius:14px;overflow:hidden;background:#172946}.job-image-wrap .job-image{width:100%;height:100%;min-height:198px;object-fit:cover;display:block}.job-image-wrap .job-visual{display:none;position:absolute;inset:0;height:100%;min-height:198px;border-radius:0}.job-visual{height:100%;min-height:198px;border-radius:13px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;overflow:hidden;background:radial-gradient(circle at 50% 25%,rgba(111,149,255,.22),transparent 55%),linear-gradient(145deg,#172946,#0b1729);color:#9bb7ff}
+.job-visual svg{width:min(86%,125px);height:auto;stroke:currentColor;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 8px 18px rgba(0,0,0,.2))}
+.job-visual .visual-orbit{fill:rgba(111,149,255,.07);stroke:rgba(111,149,255,.18);stroke-width:1}
+.job-visual span{font-size:10px;text-transform:uppercase;letter-spacing:1px;font-weight:800;color:#819edc}
+.visual-shield{background:radial-gradient(circle at 50% 25%,rgba(101,214,164,.16),transparent 55%),linear-gradient(145deg,#14283a,#0b1729);color:#7fe0b3}
+.visual-building{background:radial-gradient(circle at 50% 25%,rgba(255,190,110,.15),transparent 55%),linear-gradient(145deg,#2b2634,#0b1729);color:#ffcf91}
+.visual-megaphone{background:radial-gradient(circle at 50% 25%,rgba(255,130,170,.15),transparent 55%),linear-gradient(145deg,#2b1d36,#0b1729);color:#ff9fc4}
+.visual-box{background:radial-gradient(circle at 50% 25%,rgba(102,206,255,.16),transparent 55%),linear-gradient(145deg,#142b3a,#0b1729);color:#8edaff}
+.visual-headset{background:radial-gradient(circle at 50% 25%,rgba(191,160,255,.16),transparent 55%),linear-gradient(145deg,#24213a,#0b1729);color:#c0a6ff}
+.visual-medical{background:radial-gradient(circle at 50% 25%,rgba(255,130,130,.16),transparent 55%),linear-gradient(145deg,#30212d,#0b1729);color:#ffaaa8}
+.visual-document{background:radial-gradient(circle at 50% 25%,rgba(111,149,255,.18),transparent 55%),linear-gradient(145deg,#172946,#0b1729);color:#9bb7ff}
 /* Layout inspirado na referência visual enviada */
 .profile-card{display:none!important}
 .site-header{width:100%;max-width:1180px;height:76px;box-sizing:border-box;margin:0 auto;padding:0 28px;display:flex;align-items:center;justify-content:space-between;gap:22px}
@@ -235,6 +223,64 @@ main{max-width:1120px;padding:0 28px 60px}
 }
 </style>
 <style id="menu-close-x-fix">.jobs-menu-head button{display:flex!important;align-items:center!important;justify-content:center!important;padding:0!important;line-height:1!important;font-family:Arial,sans-serif!important;font-size:25px!important;font-weight:400!important;text-align:center!important;transform:none!important}</style>
+
+<style id="jobs-card-layout-fix">
+#jobsList .job{display:grid;grid-template-columns:190px minmax(0,1fr);gap:20px;align-items:stretch;padding:16px}
+#jobsList .job-image-wrap{height:auto;min-height:220px}
+#jobsList .job-content{display:flex;flex-direction:column;min-width:0}
+#jobsList .job-content .job-actions{margin-top:auto}
+#jobsList .job-tag{display:inline-flex;align-self:flex-start;padding:7px 12px;border:1px solid #344b78;border-radius:999px;background:#1a2b4b;color:#a9c0ff;font-weight:700;font-size:12px;margin:0 0 9px}
+#jobsList .job-image{min-height:220px}
+@media(max-width:620px){#jobsList .job{grid-template-columns:112px minmax(0,1fr);gap:13px;padding:13px}#jobsList .job-image-wrap,#jobsList .job-image{min-height:190px}#jobsList .job h3{font-size:16px}#jobsList .job>p{font-size:12px;line-height:1.5}#jobsList .job-actions .external-link{width:100%;justify-content:center;padding:10px 8px;font-size:12px}}
+</style><style id="compact-job-cards">
+#jobsList{display:flex;flex-direction:column;gap:16px}
+#jobsList .job{display:grid!important;grid-template-columns:150px minmax(0,1fr)!important;align-items:stretch!important;gap:18px!important;min-height:0!important;height:auto!important;padding:12px!important}
+#jobsList .job-image-wrap{width:150px!important;height:210px!important;min-height:0!important;max-height:210px!important;align-self:start}
+#jobsList .job-image-wrap .job-image{width:100%!important;height:210px!important;min-height:0!important;max-height:210px!important;object-fit:cover!important}
+#jobsList .job-image-wrap .job-visual{height:210px!important;min-height:0!important}
+#jobsList .job-content{display:flex!important;flex-direction:column!important;align-items:flex-start!important;min-width:0!important;padding:4px 4px 4px 0!important}
+#jobsList .job h3{font-size:17px!important;line-height:1.3!important;margin:4px 0 7px!important}
+#jobsList .job .meta{font-size:12px!important;line-height:1.45!important}
+#jobsList .job>p{font-size:13px!important;line-height:1.5!important;margin:8px 0 0!important;display:-webkit-box!important;-webkit-line-clamp:4!important;-webkit-box-orient:vertical!important;overflow:hidden!important}
+#jobsList .job-actions{width:100%!important;margin-top:14px!important;padding:0!important}
+#jobsList .job-actions .external-link{font-size:12px!important;padding:11px 14px!important}
+#jobsList .job-tag{font-size:11px!important;padding:6px 10px!important;margin-bottom:4px}
+@media(max-width:620px){
+ #jobsList .job{grid-template-columns:108px minmax(0,1fr)!important;gap:12px!important;padding:9px!important}
+ #jobsList .job-image-wrap{width:108px!important;height:168px!important;min-height:0!important;max-height:168px!important}
+ #jobsList .job-image-wrap .job-image,#jobsList .job-image-wrap .job-visual{height:168px!important;min-height:0!important;max-height:168px!important}
+ #jobsList .job h3{font-size:14px!important;line-height:1.3!important}
+ #jobsList .job .meta{font-size:10px!important}
+ #jobsList .job>p{font-size:11px!important;line-height:1.45!important;-webkit-line-clamp:3!important}
+ #jobsList .job-actions .external-link{width:100%;justify-content:center;font-size:10px!important;padding:9px 6px!important}
+ #jobsList .job-tag{font-size:9px!important;padding:5px 7px!important}
+}
+</style><style id="restore-job-card-reference">
+/* Restore the compact horizontal vacancy cards from the earlier layout */
+#jobsList{display:flex!important;flex-direction:column!important;gap:16px!important}
+#jobsList .job{display:grid!important;grid-template-columns:190px minmax(0,1fr)!important;gap:20px!important;align-items:stretch!important;min-height:0!important;height:auto!important;padding:12px!important}
+#jobsList .job-image-wrap{width:100%!important;height:220px!important;min-height:220px!important;max-height:220px!important;align-self:stretch!important}
+#jobsList .job-image-wrap .job-image,#jobsList .job-image-wrap .job-visual{width:100%!important;height:220px!important;min-height:220px!important;max-height:220px!important;object-fit:cover!important}
+#jobsList .job-content{display:flex!important;flex-direction:column!important;align-items:stretch!important;min-width:0!important;padding:5px 6px 5px 0!important}
+#jobsList .job-tag{align-self:flex-start!important;display:inline-flex!important;margin:0 0 7px!important;padding:6px 11px!important;font-size:11px!important}
+#jobsList .job h3{font-size:17px!important;line-height:1.3!important;margin:0 0 6px!important}
+#jobsList .job .meta{font-size:12px!important;line-height:1.45!important}
+#jobsList .job>p{display:-webkit-box!important;-webkit-line-clamp:3!important;-webkit-box-orient:vertical!important;overflow:hidden!important;font-size:12px!important;line-height:1.5!important;margin:9px 0 12px!important}
+#jobsList .job-actions{width:100%!important;margin-top:auto!important;padding:0!important}
+#jobsList .job-actions .external-link{width:100%!important;min-height:42px!important;display:flex!important;justify-content:center!important;align-items:center!important;font-size:12px!important;padding:10px 14px!important}
+@media(max-width:620px){
+ #jobsList .job{grid-template-columns:125px minmax(0,1fr)!important;gap:12px!important;padding:9px!important}
+ #jobsList .job-image-wrap,#jobsList .job-image-wrap .job-image,#jobsList .job-image-wrap .job-visual{width:125px!important;height:190px!important;min-height:190px!important;max-height:190px!important}
+ #jobsList .job h3{font-size:15px!important;line-height:1.3!important}
+ #jobsList .job .meta{font-size:11px!important}
+ #jobsList .job>p{font-size:11px!important;-webkit-line-clamp:3!important;margin:7px 0 10px!important}
+ #jobsList .job-actions .external-link{min-height:38px!important;font-size:11px!important;padding:9px 6px!important}
+}
+@media(max-width:390px){
+ #jobsList .job{grid-template-columns:110px minmax(0,1fr)!important;gap:10px!important}
+ #jobsList .job-image-wrap,#jobsList .job-image-wrap .job-image,#jobsList .job-image-wrap .job-visual{width:110px!important;height:180px!important;min-height:180px!important;max-height:180px!important}
+}
+</style>
 </head>
 <body>
 <header class="site-header">
@@ -247,6 +293,7 @@ main{max-width:1120px;padding:0 28px 60px}
   <div class="jobs-menu-head"><strong>Conecta <span>ADM</span></strong><button type="button" id="jobsMenuClose" aria-label="Fechar menu">×</button></div>
   <nav class="jobs-menu-links">
     <a href="index.html">Início</a><a href="vagas.html">Oportunidades</a><a href="index.html#sobre">Sobre o projeto</a><a href="editar-perfil.html" id="jobsSideProfile" hidden>Meu perfil</a>
+    <a href="vagas-para-mim.html">Vagas para mim</a>
     <a href="login.html" id="jobsSideLogin">Entrar</a><a href="cadastro.html" id="jobsSideRegister">Criar conta</a>
     <button type="button" id="jobsSideLogout" hidden>Sair da conta</button>
   </nav>
@@ -320,6 +367,8 @@ const jobsList = document.getElementById("jobsList");
 let currentUser = null;
 let profileType = "";
 let allJobs = [];
+let personalizedMode = new URLSearchParams(location.search).get("mode")==="personalizadas";
+let professionalProfile = {};
 
 // Vagas externas da região verificadas em 17/11/2026.
 // A candidatura é concluída no site de origem.
@@ -331,7 +380,7 @@ jobsMenuButton.addEventListener("click",()=>{jobsSideMenu.classList.add("active"
 document.getElementById("jobsMenuClose").addEventListener("click",closeJobsMenu);
 jobsMenuOverlay.addEventListener("click",closeJobsMenu);
 jobsSideMenu.querySelectorAll("a").forEach(a=>a.addEventListener("click",closeJobsMenu));
-document.getElementById("jobsSideLogout").addEventListener("click",async()=>{const button=document.getElementById("jobsSideLogout");button.disabled=true;button.textContent="Saindo...";const {error}=await client.auth.signOut();if(error){button.disabled=false;button.textContent="Sair da conta";showMessage("Não foi possível sair da conta. Tente novamente.");return;}window.location.replace("index.html");});
+document.getElementById("jobsSideLogout").addEventListener("click",async()=>{const button=document.getElementById("jobsSideLogout");button.disabled=true;button.textContent="Saindo...";try{const {error}=await client.auth.signOut();if(error)throw error;window.location.replace("index.html");}catch(error){console.error("Erro ao encerrar sessão:",error);button.disabled=false;button.textContent="Sair da conta";showMessage("Não foi possível sair da conta. Tente novamente.");}});
 
 const localExternalJobs = [
   {
@@ -400,228 +449,195 @@ const localExternalJobs = [
     source_url: "https://irssl.gupy.io/job/eyJqb2JJZCI6MTI2ODgwOTMsInNvdXJjZSI6Imd1cHlfcG9ydGFsIn0=?jobBoardSource=gupy_portal",
     source_name: "Gupy / Hospital Regional"
   }
+  ,
+  {
+    id:"ext-cix-cajati",
+    title:"Atendente Multitarefas",
+    company_name:"CiX Citizen Experience",
+    description:"Atendimento e atividades operacionais em unidade de atendimento.",
+    requirements:"Anúncio recente em Cajati. Consulte o portal para confirmar requisitos, jornada e disponibilidade.",
+    location:"Cajati, SP",
+    work_mode:"Presencial",
+    employment_type:"CLT",
+    salary:"Até R$ 2.000 + benefícios (anúncio)",
+    source_url:"https://agenciasertao.com/empregos/cajati-sp",
+    source_name:"Agência Sertão"
+  },
+  {
+    id:"ext-tirolez-producao",
+    title:"Auxiliar de Produção - Fabricação e Envase",
+    company_name:"Tirolez",
+    description:"Oportunidade de produção e envase anunciada para a unidade de Sete Barras.",
+    requirements:"Confira requisitos e candidatura no anúncio atualizado.",
+    location:"Sete Barras, SP",
+    work_mode:"Presencial",
+    employment_type:"CLT",
+    salary:"Não informado",
+    source_url:"https://br.linkedin.com/jobs/vagas-em-registro",
+    source_name:"LinkedIn"
+  },
+  {
+    id:"ext-tirolez-operador",
+    title:"Operador de Produção II - Embalagem Primária",
+    company_name:"Tirolez",
+    description:"Atuação na área de embalagem primária de produtos.",
+    requirements:"Confira requisitos, turnos e candidatura no anúncio.",
+    location:"Sete Barras, SP",
+    work_mode:"Presencial",
+    employment_type:"CLT",
+    salary:"Não informado",
+    source_url:"https://br.linkedin.com/jobs/vagas-em-registro",
+    source_name:"LinkedIn"
+  },
+  {
+    id:"ext-tirolez-seguranca",
+    title:"Técnico(a) de Segurança do Trabalho",
+    company_name:"Tirolez",
+    description:"Oportunidade na área de segurança do trabalho anunciada para Sete Barras.",
+    requirements:"Formação e requisitos técnicos devem ser conferidos no anúncio.",
+    location:"Sete Barras, SP",
+    work_mode:"Presencial",
+    employment_type:"CLT",
+    salary:"Não informado",
+    source_url:"https://br.linkedin.com/jobs/vagas-em-registro",
+    source_name:"LinkedIn"
+  },
+  {
+    id:"ext-estagio-eng-civil",
+    title:"Estágio em Engenharia Civil",
+    company_name:"ESPRO",
+    description:"Estágio na área de Engenharia Civil anunciado em Registro.",
+    requirements:"Confira curso exigido, jornada, bolsa e candidatura na página de vagas.",
+    location:"Registro, SP",
+    work_mode:"Presencial",
+    employment_type:"Estágio",
+    salary:"Não informado",
+    source_url:"https://candidatos.jobbol.com.br/regioes/registro-sp",
+    source_name:"Jobbol"
+  },
+  {
+    id:"ext-estagio-marketing",
+    title:"Estagiário de Marketing",
+    company_name:"RHF Talentos - Vale do Ribeira",
+    description:"Apoio à criação de conteúdos e atividades de marketing; anúncio menciona redes sociais e ferramentas digitais.",
+    requirements:"Anúncio informa bolsa de R$ 800, vale-transporte e seguro de vida, jornada de 6 horas e requisitos relacionados à área. Confirme idade, curso e disponibilidade no anúncio.",
+    location:"Registro, SP",
+    work_mode:"Presencial",
+    employment_type:"Estágio",
+    salary:"R$ 800 + benefícios (anúncio)",
+    source_url:"https://www.empregos.com.br/vagas/oportunidades-em-juquia-sp",
+    source_name:"Empregos.com.br"
+  },
+  {
+    id:"ext-pagbank-tecnico",
+    title:"Técnico de Campo",
+    company_name:"PagBank",
+    description:"Oportunidade de atuação técnica em Registro.",
+    requirements:"Consulte o anúncio para requisitos, atividades, jornada e candidatura.",
+    location:"Registro, SP",
+    work_mode:"Presencial",
+    employment_type:"CLT",
+    salary:"Não informado",
+    source_url:"https://br.linkedin.com/jobs/vagas-em-registro",
+    source_name:"LinkedIn"
+  },
+  {
+    id:"ext-pagbank-logistica",
+    title:"Assistente de Atendimento Logístico",
+    company_name:"PagBank",
+    description:"Oportunidade de atendimento e suporte às rotinas logísticas em Registro.",
+    requirements:"Consulte o anúncio para requisitos e detalhes da função.",
+    location:"Registro, SP",
+    work_mode:"Presencial",
+    employment_type:"CLT",
+    salary:"Não informado",
+    source_url:"https://br.linkedin.com/jobs/vagas-em-registro",
+    source_name:"LinkedIn"
+  },
+  {
+    id:"ext-magal-assistente",
+    title:"Assistente de Loja",
+    company_name:"Magazine Luiza",
+    description:"Oportunidade de atendimento e suporte às rotinas de loja.",
+    requirements:"Confira requisitos, jornada e candidatura no anúncio.",
+    location:"Registro, SP",
+    work_mode:"Presencial",
+    employment_type:"CLT",
+    salary:"Não informado",
+    source_url:"https://br.linkedin.com/jobs/vagas-em-registro",
+    source_name:"LinkedIn"
+  }
 ];
 
-function showMessage(text){messageEl.textContent=text;messageEl.classList.remove("hidden")}
-function escapeHTML(value){return String(value ?? "").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))}
+function jobPhoto(job){
+ const photos={
+ "ext-menegazzo-aprendiz":"photo-1586528116311-ad8dd3c8310d",
+ "ext-aguia-aprendiz":"photo-1551836022-d5d88e9218df",
+ "ext-iereg-estagio":"photo-1497366754035-f200968a6e72",
+ "ext-bbl-aprendiz":"photo-1521737711867-e3b97375f902",
+ "ext-hospital-aux-admin":"photo-1576091160550-2173dba999ef",
+ "ext-cix-cajati":"photo-1556761175-b413da4baf72",
+ "ext-tirolez-producao":"photo-1581091226825-a6a2a5aee158",
+ "ext-tirolez-operador":"photo-1567789884554-0b844b597180",
+ "ext-tirolez-seguranca":"photo-1504307651254-35680f356dfd",
+ "ext-estagio-eng-civil":"photo-1503387762-592deb58ef4e",
+ "ext-estagio-marketing":"photo-1552664730-d307ca884978",
+ "ext-pagbank-tecnico":"photo-1516321318423-f06f85e504b3",
+ "ext-pagbank-logistica":"photo-1556761175-b413da4baf72",
+ "ext-magal-assistente":"photo-1441986300917-64674bd600d8"
+ };
+ const id=photos[job.id]||"photo-1497366754035-f200968a6e72";
+ return "https://images.unsplash.com/"+id+"?auto=format&fit=crop&w=700&q=85";
+}
 
-
-function renderProfile(profile){
-  const name = profile.full_name || currentUser.user_metadata?.full_name || "Seu perfil";
-  const initial = name.trim().charAt(0).toUpperCase() || "?";
-  document.getElementById("profileName").textContent = name;
-  document.getElementById("profileInitial").textContent = initial;
-  const avatar = document.getElementById("profileAvatar");
-  if(profile.avatar_url){
-    avatar.src = profile.avatar_url;
-    avatar.style.display = "block";
-    document.getElementById("profileInitial").style.display = "none";
-  }else{
-    avatar.style.display = "none";
-    document.getElementById("profileInitial").style.display = "block";
+function escapeHtml(value){return String(value||"").replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char]));}
+function renderJobs(list){
+ jobsList.innerHTML="";
+ if(!list.length){jobsList.innerHTML='<p>Nenhuma vaga encontrada com esses filtros.</p>';return;}
+ list.forEach(job=>{
+  const card=document.createElement("article");card.className="job job-horizontal";
+  card.innerHTML=`<div class="job-image-wrap"><img class="job-image" src="${jobPhoto(job)}" alt="Imagem ilustrativa de ${escapeHtml(job.title)}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="job-visual visual-document"><svg viewBox="0 0 100 100" aria-hidden="true"><circle class="visual-orbit" cx="50" cy="50" r="42"/><rect x="29" y="20" width="42" height="58" rx="7"/><path d="M39 38h22M39 49h22M39 60h15"/></svg><span>${escapeHtml(job.employment_type||"Oportunidade")}</span></div></div><div class="job-content"><div class="job-tags"><span class="job-tag">${escapeHtml(job.work_mode||"")}</span></div><h3>${escapeHtml(job.title)}</h3><p class="job-company"><strong>${escapeHtml(job.company_name)}</strong></p><p class="job-location">⌖ ${escapeHtml(job.location)} · ${escapeHtml(job.employment_type)}</p><div class="job-bottom"><div class="job-requirement"><strong>Requisitos:</strong> ${escapeHtml(job.requirements||"Consulte o anúncio para detalhes.")}</div><div class="job-actions"><a class="external-link" href="${escapeHtml(job.source_url)}" target="_blank" rel="noopener noreferrer">Consultar no portal</a></div></div></div>`;
+  jobsList.appendChild(card);
+ });
+}
+function applyFilters(){
+ const keyword=document.getElementById("keywordFilter").value.trim().toLowerCase();
+ const city=document.getElementById("cityFilter").value;
+ const type=document.getElementById("typeFilter").value;
+ const mode=document.getElementById("modeFilter").value;
+ const filtered=allJobs.filter(job=>(!keyword||[job.title,job.company_name,job.description,job.requirements].join(" ").toLowerCase().includes(keyword))&&(!city||job.location===city)&&(!type||String(job.employment_type||"").toLowerCase().includes(type))&&(!mode||String(job.work_mode||"").toLowerCase().includes(mode)));
+ document.getElementById("filterCount").textContent=filtered.length+" oportunidade(s)";
+ renderJobs(filtered);
+}
+function showMessage(text){messageEl.textContent=text;messageEl.classList.remove("hidden");}
+async function initJobs(){
+ try{
+  const {data:{session},error}=await client.auth.getSession();
+  if(error)console.warn("Não foi possível verificar sessão:",error);
+  currentUser=session?.user||null;
+  if(currentUser){
+   document.getElementById("jobsNavLink").hidden=false;
+   document.getElementById("jobsLoginLink").hidden=true;
+   document.getElementById("profileAvatarLink").hidden=false;
+   document.getElementById("jobsSideProfile").hidden=false;
+   document.getElementById("jobsSideLogin").hidden=true;
+   document.getElementById("jobsSideRegister").hidden=true;
+   document.getElementById("jobsSideLogout").hidden=false;
+   const {data:profile}=await client.from("profiles").select("full_name,avatar_url,city,state").eq("id",currentUser.id).maybeSingle();
+   const img=document.getElementById("profileAvatarImage"),initial=document.getElementById("profileAvatarInitial");
+   const name=profile?.full_name||currentUser.user_metadata?.full_name||currentUser.email||"";
+   initial.textContent=(name.trim()[0]||"?").toUpperCase();
+   if(profile?.avatar_url){img.onload=()=>{img.style.display="block";initial.style.display="none";};img.onerror=()=>{img.style.display="none";initial.style.display="grid";};img.src=profile.avatar_url;}
   }
-  const types = {student:"Estudante",estudante:"Estudante",empresa:"Empresa",company:"Empresa",institution:"Instituição",escola:"Instituição"};
-  document.getElementById("profileTypeLabel").textContent = types[profileType] || "Membro Conecta ADM";
-  const details = [];
-  const cityState = [profile.city, profile.state].filter(Boolean).join(" - ");
-  if(cityState) details.push(cityState);
-  if(profile.school) details.push("Estuda em " + profile.school);
-  if(profile.company_name) details.push(profile.company_name);
-  if(profile.segment) details.push("Segmento: " + profile.segment);
-  if(profile.institution_name) details.push(profile.institution_name);
-  if(profile.institution_type) details.push(profile.institution_type);
-  document.getElementById("profileInfo").innerHTML = details.length
-    ? details.map(item => '<span class="info-chip">' + escapeHTML(item) + '</span>').join("")
-    : '<span class="info-chip">Adicione suas informações em Editar perfil</span>';
+  allJobs=localExternalJobs.slice();
+  const citySelect=document.getElementById("cityFilter");
+  [...new Set(allJobs.map(j=>j.location).filter(Boolean))].sort().forEach(city=>{const option=document.createElement("option");option.value=city;option.textContent=city;citySelect.appendChild(option);});
+  ["keywordFilter","cityFilter","typeFilter","modeFilter"].forEach(id=>document.getElementById(id).addEventListener("input",applyFilters));
+  document.getElementById("clearFilters").addEventListener("click",()=>{document.getElementById("keywordFilter").value="";citySelect.value="";document.getElementById("typeFilter").value="";document.getElementById("modeFilter").value="";applyFilters();});
+  applyFilters();
+ }catch(error){console.error("Erro ao carregar vagas:",error);document.getElementById("filterCount").textContent="Não foi possível carregar as vagas.";jobsList.innerHTML="<p>Ocorreu um erro ao carregar as oportunidades. Atualize a página.</p>";}
 }
-
-function normalizeText(value){
-  return String(value || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
-}
-
-function populateCityFilter(){
-  const select = document.getElementById("cityFilter");
-  const selected = select.value;
-  const cities = [...new Set(allJobs.map(job => {
-    const location = String(job.location || "").trim();
-    if(!location) return "";
-    if(normalizeText(location).includes("remoto")) return "Remoto";
-    return location.split(",")[0].trim();
-  }).filter(Boolean))].sort((a,b)=>a.localeCompare(b,"pt-BR"));
-  select.innerHTML = '<option value="">Todas as cidades</option>';
-  cities.forEach(city => {
-    const option = document.createElement("option");
-    option.value = city;
-    option.textContent = city;
-    select.appendChild(option);
-  });
-  if(cities.includes(selected)) select.value = selected;
-}
-
-function renderJobs(){
-  const keyword = normalizeText(document.getElementById("mainKeyword").value);
-  const city = normalizeText(document.getElementById("cityFilter").value);
-  const type = normalizeText(document.getElementById("typeFilter").value);
-  const mode = normalizeText(document.getElementById("modeFilter").value);
-  const filtered = allJobs.filter(job => {
-    const searchable = normalizeText([job.title,job.company_name,job.description,job.requirements,job.location,job.employment_type,job.work_mode].join(" "));
-    const jobCity = normalizeText(String(job.location || "").toLowerCase().includes("remoto") ? "Remoto" : String(job.location || "").split(",")[0]);
-    return (!keyword || searchable.includes(keyword)) &&
-      (!city || jobCity === city) &&
-      (!type || normalizeText(job.employment_type) === type) &&
-      (!mode || normalizeText(job.work_mode) === mode);
-  });
-  document.getElementById("filterCount").textContent = filtered.length + (filtered.length === 1 ? " vaga encontrada" : " vagas encontradas");
-  if(!filtered.length){
-    jobsList.innerHTML = "<p>Nenhuma vaga encontrada com esses filtros. Tente mudar os critérios.</p>";
-    return;
-  }
-  jobsList.innerHTML=filtered.map(job=>{
-    const canApply=profileType==="estudante" || profileType==="student";
-    const own=job.created_by===currentUser.id;
-    const kind=normalizeText(job.employment_type);
-    const image = job.id==="ext-menegazzo-aprendiz"
-      ? "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1100&q=85"
-      : job.id==="ext-aguia-aprendiz"
-      ? "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1100&q=85"
-      : job.id==="ext-iereg-estagio"
-      ? "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1100&q=85"
-      : job.id==="ext-bbl-aprendiz"
-      ? "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1100&q=85"
-      : job.id==="ext-hospital-aux-admin"
-      ? "https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=1100&q=85"
-      : kind.includes("aprendiz")
-      ? "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1100&q=85"
-      : kind.includes("estagio")
-      ? "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1100&q=85"
-      : "https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1100&q=85";
-    const company=job.company_name || "Empresa anunciante";
-    const requirements=job.requirements || "Consulte os requisitos no anúncio da empresa.";
-    const action=job.source_url
-      ? `<a class="external-link" href="${escapeHTML(job.source_url)}" target="_blank" rel="noopener noreferrer">Ver vaga e candidatar-se</a>`
-      : (canApply && !own ? `<button type="button" data-apply="${escapeHTML(job.id)}">Candidatar-me</button>` : "");
-    return `<article class="job job-horizontal">
-      <div class="job-image-wrap"><img class="job-image" src="${image}" alt="Imagem ilustrativa de ${escapeHTML(job.employment_type || "oportunidade")}" loading="lazy"></div>
-      <div class="job-content">
-        <div class="job-tags"><span class="job-tag">${escapeHTML(job.work_mode || "Modalidade não informada")}</span></div>
-        <h3>${escapeHTML(job.title)}</h3>
-        <p class="job-company">${escapeHTML(company)}</p>
-        <p class="job-location">⌖ &nbsp;${escapeHTML(job.location || "Local não informado")}</p>
-        <div class="job-bottom"><span class="job-requirement">Requisitos: ${escapeHTML(requirements.length>76?requirements.slice(0,76)+"…":requirements)}</span>
-          <div class="job-actions">${action ? action.replace("Ver vaga e candidatar-se","Ver detalhes") : ""}</div>
-        </div>
-      </div>
-    </article>`;
-  }).join("");
-}
-
-async function loadJobs(){
-  const {data,error}=await client.from("jobs").select("id,created_by,title,description,location,work_mode,employment_type,salary,requirements,created_at").eq("status","active").order("created_at",{ascending:false});
-  if(error){jobsList.innerHTML="<p>Não foi possível carregar as vagas. Atualize a página e tente novamente.</p>";console.error(error);return}
-  const today = new Date().toISOString().slice(0,10);
-  allJobs=[...localExternalJobs, ...(data || []).filter(job => !job.expires_at || job.expires_at >= today)];
-  populateCityFilter();
-  renderJobs();
-}
-async function init(){
-  const {data:{session},error:sessionError}=await client.auth.getSession();
-  const loginLink=document.getElementById("jobsLoginLink");
-  const jobsLink=document.getElementById("jobsNavLink");
-  const avatarLink=document.getElementById("profileAvatarLink");
-  if(session){
-    loginLink.hidden=true;
-    jobsLink.hidden=false;
-    avatarLink.hidden=false;
-  }else{
-    loginLink.hidden=false;
-    jobsLink.hidden=true;
-    avatarLink.hidden=true;
-    showMessage("Entre na sua conta para visualizar as oportunidades.");
-    jobsList.innerHTML='<p><a href="login.html">Ir para o login</a></p>';
-    return;
-  }
-  if(sessionError){showMessage("Não foi possível verificar sua sessão. Atualize a página.");return}
-  currentUser=session.user;
-  const {data:profile,error}=await client.from("profiles").select("*").eq("id",currentUser.id).maybeSingle();
-  if(error){showMessage("Não foi possível identificar seu tipo de perfil.");console.error(error);return}
-  profileType=profile?.profile_type || currentUser.user_metadata?.tipo_de_perfil || "";
-
-  const avatarInitial=document.getElementById("profileAvatarInitial");
-  const avatarImage=document.getElementById("profileAvatarImage");
-  const avatarName=(profile?.full_name || currentUser.user_metadata?.full_name || currentUser.email || "Perfil").trim();
-  avatarInitial.textContent=avatarName.charAt(0).toUpperCase() || "?";
-  if(profile?.avatar_url){
-    avatarImage.onload=()=>{avatarImage.style.display="block";avatarInitial.style.display="none";};
-    avatarImage.onerror=()=>{avatarImage.style.display="none";avatarInitial.style.display="grid";};
-    avatarImage.src=profile.avatar_url;
-  }
-
-  if(profileType==="empresa" || profileType==="company") document.getElementById("publishPanel").classList.remove("hidden");
-  document.getElementById("jobsSideProfile").hidden=false;
-  document.getElementById("jobsSideLogin").hidden=true;
-  document.getElementById("jobsSideRegister").hidden=true;
-  document.getElementById("jobsSideLogout").hidden=false;
-  await loadJobs();
-}
-
-
-
-const filtersPanel=document.querySelector(".filters");
-const mainKeyword=document.getElementById("mainKeyword");
-const keywordFilter=document.getElementById("keywordFilter");
-document.getElementById("toggleFilters").addEventListener("click",()=>{
-  const isCollapsed=filtersPanel.classList.toggle("collapsed");
-  document.getElementById("toggleFilters").setAttribute("aria-expanded",String(!isCollapsed));
-});
-mainKeyword.addEventListener("input",()=>{keywordFilter.value=mainKeyword.value;renderJobs();});
-keywordFilter.addEventListener("input",()=>{mainKeyword.value=keywordFilter.value;renderJobs();});
-["cityFilter","typeFilter","modeFilter"].forEach(id=>document.getElementById(id).addEventListener("change",renderJobs));
-document.getElementById("clearFilters").addEventListener("click",()=>{
-  mainKeyword.value="";keywordFilter.value="";
-  document.getElementById("cityFilter").value="";
-  document.getElementById("typeFilter").value="";
-  document.getElementById("modeFilter").value="";
-  renderJobs();
-});
-
-document.getElementById("jobForm").addEventListener("submit",async e=>{
-  e.preventDefault();
-  const button=document.getElementById("publishButton");button.disabled=true;button.textContent="Publicando...";
-  const f=new FormData(e.currentTarget);
-  const payload={created_by:currentUser.id,title:String(f.get("title")).trim(),description:String(f.get("description")).trim(),location:String(f.get("location")).trim(),work_mode:f.get("work_mode"),employment_type:f.get("employment_type"),salary:String(f.get("salary")).trim(),requirements:String(f.get("requirements")).trim(),status:"active"};
-  const {error}=await client.from("jobs").insert(payload);
-  button.disabled=false;button.textContent="Publicar vaga";
-  if(error){showMessage("Não foi possível publicar. Confira se seu perfil está cadastrado como empresa.");console.error(error);return}
-  e.currentTarget.reset();showMessage("Vaga publicada com sucesso!");await loadJobs();
-});
-
-jobsList.addEventListener("click",async e=>{
-  const button=e.target.closest("[data-apply]");if(!button)return;
-  button.disabled=true;
-  const {error}=await client.from("applications").insert({job_id:button.dataset.apply,student_id:currentUser.id});
-  if(error){showMessage(error.code==="23505"?"Você já se candidatou a esta vaga.":"Não foi possível enviar sua candidatura. Confira se seu perfil está como estudante.");console.error(error);button.disabled=false;return}
-  showMessage("Candidatura enviada com sucesso!");button.textContent="Candidatura enviada";
-});
-
-document.getElementById("shareProfile")?.addEventListener("click",async()=>{
-  const name = document.getElementById("profileName").textContent;
-  const details = Array.from(document.querySelectorAll("#profileInfo .info-chip")).map(el=>el.textContent).join(" • ");
-  const shareText = name + " | " + document.getElementById("profileTypeLabel").textContent + (details ? "\n" + details : "") + "\nPerfil no Conecta ADM";
-  try{
-    if(navigator.share){
-      await navigator.share({title:"Perfil no Conecta ADM",text:shareText});
-    }else if(navigator.clipboard && window.isSecureContext){
-      await navigator.clipboard.writeText(shareText);
-      showMessage("Informações do perfil copiadas para compartilhar.");
-    }else{
-      window.prompt("Copie as informações do seu perfil:",shareText);
-    }
-  }catch(error){
-    if(error.name!=="AbortError") showMessage("Não foi possível compartilhar agora.");
-  }
-});
-
-init();
+initJobs();
 </script>
 </body>
 </html>
