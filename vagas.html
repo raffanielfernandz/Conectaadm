@@ -371,6 +371,7 @@ let professionalProfile = {};
 
 // Vagas externas da região verificadas em 17/11/2026.
 // A candidatura é concluída no site de origem.
+const toggleFiltersButton=document.getElementById("toggleFilters");const filtersPanel=document.querySelector(".filters");toggleFiltersButton.addEventListener("click",()=>{filtersPanel.classList.toggle("collapsed");toggleFiltersButton.setAttribute("aria-expanded",String(!filtersPanel.classList.contains("collapsed")));});
 const jobsMenuButton=document.getElementById("jobsMenuButton");
 const jobsSideMenu=document.getElementById("jobsSideMenu");
 const jobsMenuOverlay=document.getElementById("jobsMenuOverlay");
