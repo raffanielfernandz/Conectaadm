@@ -1843,38 +1843,6 @@ document.addEventListener(
   }
 );
 
-const discoveryProfiles = {
-  student: {
-    text: "Para estudantes: encontre oportunidades, organize seu perfil e dê os próximos passos na carreira.",
-    image: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1000&q=85",
-    alt: "Estudantes trabalhando juntos",
-    caption: "Conecte-se a novas possibilidades"
-  },
-  company: {
-    text: "Para empresas: apresente oportunidades e aproxime sua organização de novos talentos.",
-    image: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1000&q=85",
-    alt: "Ambiente profissional de uma empresa",
-    caption: "Encontre pessoas para crescer junto"
-  },
-  institution: {
-    text: "Para instituições: fortaleça a ligação entre formação, estudantes e o mercado de trabalho.",
-    image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1000&q=85",
-    alt: "Estudantes em ambiente de aprendizagem",
-    caption: "Aproxime educação e oportunidades"
-  }
-};
-document.querySelectorAll(".discovery-tab").forEach(button => {
-  button.addEventListener("click", () => {
-    const profile = discoveryProfiles[button.dataset.profile];
-    if (!profile) return;
-    document.querySelectorAll(".discovery-tab").forEach(tab => tab.classList.toggle("active", tab === button));
-    document.getElementById("discoveryText").textContent = profile.text;
-    const image = document.getElementById("discoveryImage");
-    image.src = profile.image;
-    image.alt = profile.alt;
-    document.getElementById("discoveryCaption").textContent = profile.caption;
-  });
-});
 
 
 </script>
