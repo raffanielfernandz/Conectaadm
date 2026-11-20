@@ -88,30 +88,18 @@ button:hover,.external-link:hover{filter:brightness(1.1);transform:translateY(-1
 @media(max-width:480px){main{padding:16px 14px 45px}.profile-card{padding:15px;margin-bottom:25px}.profile-top{gap:11px}.avatar{width:58px;height:58px;flex-basis:58px}.profile-heading h2{font-size:16px}.profile-heading p{font-size:12px}.profile-info{gap:6px}.info-chip{font-size:11px}.top{padding:22px 17px;border-radius:16px}.top h1{font-size:30px}.top p{font-size:13px}.filters{padding:15px;gap:10px}.filters input,.filters select{padding:11px 10px;font-size:12px}.filter-footer{align-items:flex-start;flex-direction:column}.filter-footer button{width:100%}.job{padding:18px}.job h3{font-size:17px}.job-actions,.job-actions .external-link{width:100%;justify-content:center}}
 
 
-/* CARDS PADRONIZADOS COM IMAGENS */
-#jobsList{align-items:stretch}
-.job{padding:0;overflow:hidden;display:flex;flex-direction:column;gap:0}
-.job:before{z-index:2;left:0;right:0}
-.job-image-wrap{height:155px;overflow:hidden;background:#17243a}
-.job-image{display:block;width:100%;height:100%;object-fit:cover;transition:transform .35s}
-.job:hover .job-image{transform:scale(1.035)}
-.job-content{display:flex;flex:1;flex-direction:column;padding:19px}
-.job-tags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:10px}
-.job-tag{display:inline-flex;align-items:center;border:1px solid rgba(111,149,255,.3);border-radius:30px;padding:5px 10px;background:rgba(74,115,210,.18);color:#a9c0ff;font-size:11px;font-weight:800}
-.job-tag.secondary{background:rgba(255,255,255,.04);border-color:#31415d;color:#c1ccdc}
-.job .job-company{margin:0;color:#dce7ff;font-size:13px;font-weight:700}
-.job-facts{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:15px}
-.job-facts span{display:flex;flex-direction:column;gap:3px;padding:10px;border:1px solid #263956;border-radius:10px;background:rgba(5,13,26,.32);color:#c4d0e2;font-size:12px}
-.job-facts b,.job-description>b{color:#8faeff;font-size:10px;text-transform:uppercase;letter-spacing:.7px}
-.job-description{margin-top:14px}
-.job-description p{margin:4px 0 0;color:#b3c0d3;font-size:12px;line-height:1.65}
-.job-description.requirements{padding-top:12px;border-top:1px solid rgba(100,130,180,.18)}
-.job-actions{display:flex;flex-direction:column;align-items:stretch;gap:9px;margin-top:auto;padding-top:17px}
-.job-actions .external-link,.job-actions button{justify-content:center;text-align:center;width:100%;min-height:44px}
-.job-source{color:#7f91ad;font-size:10px}
-@media(max-width:480px){.job-image-wrap{height:145px}.job-content{padding:16px}.job-facts{grid-template-columns:1fr 1fr}.job-description p{font-size:12px}}
-
-
+/* Cards com ilustrações vetoriais estáveis */
+.job-visual{height:100%;min-height:198px;border-radius:13px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;overflow:hidden;background:radial-gradient(circle at 50% 25%,rgba(111,149,255,.22),transparent 55%),linear-gradient(145deg,#172946,#0b1729);color:#9bb7ff}
+.job-visual svg{width:min(86%,125px);height:auto;stroke:currentColor;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 8px 18px rgba(0,0,0,.2))}
+.job-visual .visual-orbit{fill:rgba(111,149,255,.07);stroke:rgba(111,149,255,.18);stroke-width:1}
+.job-visual span{font-size:10px;text-transform:uppercase;letter-spacing:1px;font-weight:800;color:#819edc}
+.visual-shield{background:radial-gradient(circle at 50% 25%,rgba(101,214,164,.16),transparent 55%),linear-gradient(145deg,#14283a,#0b1729);color:#7fe0b3}
+.visual-building{background:radial-gradient(circle at 50% 25%,rgba(255,190,110,.15),transparent 55%),linear-gradient(145deg,#2b2634,#0b1729);color:#ffcf91}
+.visual-megaphone{background:radial-gradient(circle at 50% 25%,rgba(255,130,170,.15),transparent 55%),linear-gradient(145deg,#2b1d36,#0b1729);color:#ff9fc4}
+.visual-box{background:radial-gradient(circle at 50% 25%,rgba(102,206,255,.16),transparent 55%),linear-gradient(145deg,#142b3a,#0b1729);color:#8edaff}
+.visual-headset{background:radial-gradient(circle at 50% 25%,rgba(191,160,255,.16),transparent 55%),linear-gradient(145deg,#24213a,#0b1729);color:#c0a6ff}
+.visual-medical{background:radial-gradient(circle at 50% 25%,rgba(255,130,130,.16),transparent 55%),linear-gradient(145deg,#30212d,#0b1729);color:#ffaaa8}
+.visual-document{background:radial-gradient(circle at 50% 25%,rgba(111,149,255,.18),transparent 55%),linear-gradient(145deg,#172946,#0b1729);color:#9bb7ff}
 /* Layout inspirado na referência visual enviada */
 .profile-card{display:none!important}
 .site-header{width:100%;max-width:1180px;height:76px;box-sizing:border-box;margin:0 auto;padding:0 28px;display:flex;align-items:center;justify-content:space-between;gap:22px}
@@ -612,35 +600,35 @@ function renderJobs(){
     const own=job.created_by===currentUser.id;
     const kind=normalizeText(job.employment_type);
     const titleText=normalizeText((job.title||"")+" "+(job.company_name||""));
-    const imagePool=[
-      "https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1100&q=85",
-      "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1100&q=85",
-      "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1100&q=85",
-      "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1100&q=85",
-      "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1100&q=85",
-      "https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=1100&q=85",
-      "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1100&q=85",
-      "https://images.unsplash.com/photo-1522071480328-5b5a6c8a3a2?auto=format&fit=crop&w=1100&q=85",
-      "https://images.unsplash.com/photo-150438 낀?auto=format&fit=crop&w=1100&q=85"
-    ];
-    const image=titleText.includes("engenharia")||titleText.includes("tecnico de campo")
-      ? imagePool[3]
-      : titleText.includes("marketing")||titleText.includes("comunicacao")
-      ? imagePool[6]
-      : titleText.includes("logistica")||titleText.includes("estoque")
-      ? imagePool[4]
-      : titleText.includes("saude")||titleText.includes("hospital")
-      ? imagePool[5]
-      : titleText.includes("administr")||titleText.includes("aprendiz")
-      ? imagePool[(job.id==="ext-menegazzo-aprendiz"?1:job.id==="ext-aguia-aprendiz"?2:job.id==="ext-bbl-aprendiz"?7:0)]
-      : imagePool[index%imagePool.length];
-    const company=job.company_name || "Empresa anunciante";
+    function jobVisual(title){
+  const t=String(title||"").toLowerCase();
+  let kind="briefcase",label="Oportunidade";
+  if(t.includes("segurança")){kind="shield";label="Segurança";}
+  else if(t.includes("engenharia")||t.includes("civil")){kind="building";label="Construção";}
+  else if(t.includes("marketing")||t.includes("comunica")){kind="megaphone";label="Comunicação";}
+  else if(t.includes("logíst")||t.includes("estoque")||t.includes("campo")){kind="box";label="Logística";}
+  else if(t.includes("atendimento")||t.includes("cliente")){kind="headset";label="Atendimento";}
+  else if(t.includes("saúde")||t.includes("hospital")||t.includes("farm")){kind="medical";label="Saúde";}
+  else if(t.includes("administr")||t.includes("aprendiz")){kind="document";label="Administrativo";}
+  const paths={
+    briefcase:'<rect x="28" y="39" width="44" height="31" rx="7"/><path d="M40 39v-7h20v7M28 49h44M47 49v7h6v-7"/>',
+    shield:'<path d="M50 22 76 32v19c0 18-12 28-26 35-14-7-26-17-26-35V32z"/><path d="m38 51 8 8 17-19"/>',
+    building:'<path d="M25 78V30l25-13 25 13v48z"/><path d="M39 40h8v8h-8zM55 40h8v8h-8zM39 56h8v8h-8zM55 56h8v8h-8zM46 78V67h8v11"/>',
+    megaphone:'<path d="M26 47h18l32-17v40L44 54H26z"/><path d="m36 55 7 20h12l-8-19M82 40l9-5M82 58l9 5"/>',
+    box:'<path d="m50 20 29 16v34L50 86 21 70V36z"/><path d="M21 36 50 53l29-17M50 53v33M36 28l29 17"/>',
+    headset:'<path d="M25 51v-5a25 25 0 0 1 50 0v5"/><rect x="21" y="48" width="14" height="23" rx="6"/><rect x="65" y="48" width="14" height="23" rx="6"/><path d="M72 72c-4 8-13 10-23 10"/>',
+    medical:'<rect x="24" y="25" width="52" height="54" rx="8"/><path d="M50 38v28M36 52h28"/>',
+    document:'<rect x="30" y="20" width="40" height="60" rx="6"/><path d="M40 38h20M40 49h20M40 60h13"/>'
+  };
+  return '<div class="job-visual visual-'+kind+'" role="img" aria-label="Ilustração de '+label+'"><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="40" class="visual-orbit"/>'+paths[kind]+'</svg><span>'+label+'</span></div>';
+}
+const company=job.company_name || "Empresa anunciante";
     const requirements=job.requirements || "Consulte os requisitos no anúncio da empresa.";
     const action=job.source_url
       ? `<a class="external-link" href="${escapeHTML(job.source_url)}" target="_blank" rel="noopener noreferrer">Ver vaga e candidatar-se</a>`
       : (canApply && !own ? `<button type="button" data-apply="${escapeHTML(job.id)}">Candidatar-me</button>` : "");
     return `<article class="job job-horizontal">
-      <div class="job-image-wrap"><img class="job-image" src="${image}" alt="Imagem ilustrativa de ${escapeHTML(job.employment_type || "oportunidade")}" loading="lazy"></div>
+      ${jobVisual(job.title)}
       <div class="job-content">
         <div class="job-tags"><span class="job-tag">${escapeHTML(job.work_mode || "Modalidade não informada")}</span></div>
         <h3>${escapeHTML(job.title)}</h3>
