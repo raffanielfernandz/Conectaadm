@@ -7,6 +7,23 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="supabase-config.js"></script>
   <style>
+:root{--bg:#070b14;--panel:#101a2c;--line:#273b5b;--text:#f4f7fb;--muted:#aebbd0;--blue:#7095ff}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 12% 0,rgba(72,111,207,.15),transparent 30%),radial-gradient(ellipse at 85% 60%,rgba(62,88,170,.1),transparent 30%),#080f1d;color:var(--text);font-family:Inter,Arial,sans-serif}a{color:inherit;text-decoration:none}
+header{height:78px;border-bottom:1px solid #1b2b45;background:rgba(8,15,29,.85);backdrop-filter:blur(16px);display:flex;align-items:center;justify-content:space-between;padding:0 max(24px,calc((100% - 1240px)/2));position:sticky;top:0;z-index:5}.brand{font-size:24px;font-weight:850;letter-spacing:-.8px}.brand span{color:#6f95ff}.header-actions{display:flex;align-items:center;gap:16px}.avatar{width:46px;height:46px;border:2px solid #638cff;border-radius:50%;display:grid;place-items:center;overflow:hidden;background:#263957;font-weight:800}.avatar img{width:100%;height:100%;object-fit:cover;display:none}.logout{border:1px solid #2c4162;background:#101b2e;padding:10px 17px;border-radius:10px;color:#a8bded;font:inherit;cursor:pointer;transition:.2s}.logout:hover{border-color:#638cff;color:#fff}
+main{width:min(1240px,92%);margin:42px auto 80px}.welcome{padding:clamp(28px,5vw,55px);border:1px solid #263b5d;border-radius:30px;background:linear-gradient(135deg,rgba(20,35,58,.98),rgba(10,18,31,.98));box-shadow:0 30px 70px rgba(0,0,0,.2);position:relative;overflow:hidden}.welcome:before{content:"";position:absolute;width:500px;height:500px;right:-200px;top:-270px;border-radius:50%;background:radial-gradient(circle,rgba(98,139,255,.18),transparent 70%);pointer-events:none}.welcome-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(270px,.75fr);gap:25px;align-items:center}.eyebrow{color:#91adff;font-size:12px;font-weight:850;letter-spacing:1.8px}.h1{font-size:clamp(32px,4.2vw,52px);margin:12px 0;letter-spacing:-1.5px;line-height:1.12}.muted{color:#aebbd0;line-height:1.7;font-size:17px;max-width:680px}.hero-illustration{border:1px solid #2a4166;border-radius:22px;background:linear-gradient(145deg,#142743,#0d182a);padding:12px;overflow:hidden}.hero-illustration svg{display:block;width:100%;height:auto}.quick-label{margin:36px 0 14px;font-size:13px;color:#b9c8df;letter-spacing:1px;text-transform:uppercase;font-weight:800}.actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.action{min-height:235px;padding:25px;border:1px solid #2a4064;border-radius:22px;background:linear-gradient(145deg,#101d32,#0b1628);transition:transform .22s,border-color .22s,background .22s;display:flex;flex-direction:column;position:relative;overflow:hidden}.action:after{content:"";position:absolute;width:170px;height:170px;right:-85px;top:-85px;border-radius:50%;background:rgba(98,139,255,.06);transition:transform .25s}.action:hover:after{transform:scale(1.35)}.action:hover{border-color:#648cff;transform:translateY(-5px);background:linear-gradient(145deg,#142542,#0c1729)}.action-icon{width:68px;height:68px;border-radius:20px;display:grid;place-items:center;background:linear-gradient(145deg,#1b3155,#12213a);border:1px solid #35517c;color:#8eacff;margin-bottom:22px;box-shadow:0 8px 24px rgba(0,0,0,.2)}.action-icon svg{width:36px;height:36px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}.action strong{display:block;font-size:20px;margin-bottom:9px}.action span{font-size:14px;color:#aebbd0;line-height:1.6}.action .action-arrow{margin-top:auto;padding-top:16px;color:#89a8ff;font-size:14px;font-weight:700}.primary{display:inline-flex;margin-top:28px;padding:15px 23px;border-radius:12px;background:linear-gradient(110deg,#648cff,#416fe6);color:#071225;font-weight:850;box-shadow:0 12px 30px rgba(61,111,232,.18);transition:.2s}.primary:hover{transform:translateY(-2px);filter:brightness(1.06)}#status{color:#aebbd0;line-height:1.5;margin-top:18px}
+@media(min-width:1100px){main{margin:60px auto 90px}.welcome{padding:55px}.actions{gap:22px}.action{min-height:270px;padding:30px}}
+@media(max-width:900px){.welcome-head{grid-template-columns:1fr}.hero-illustration{max-width:500px}.actions{grid-template-columns:repeat(2,minmax(0,1fr))}.action:last-child{grid-column:1/-1;min-height:auto}}
+@media(max-width:600px){header{height:72px;padding:0 18px}.brand{font-size:20px}.header-actions{gap:12px}.avatar{width:42px;height:42px}.logout{padding:8px 13px}main{margin:26px auto 45px;width:calc(100% - 28px)}.welcome{padding:24px 20px;border-radius:22px}.h1{font-size:32px;letter-spacing:-1px}.muted{font-size:15px}.hero-illustration{border-radius:16px}.quick-label{margin-top:26px}.actions{grid-template-columns:1fr;gap:12px;margin-top:18px}.action,.action:last-child{grid-column:auto;min-height:auto;padding:19px;border-radius:16px;display:grid;grid-template-columns:50px 1fr;column-gap:15px}.action-icon{width:50px;height:50px;grid-row:1/3;margin:0;border-radius:15px}.action-icon svg{width:28px;height:28px}.action strong{align-self:end;font-size:17px}.action span{align-self:start;font-size:13px}.action .action-arrow{grid-column:2;margin-top:0;padding-top:8px}.primary{width:100%;justify-content:center;margin-top:22px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+</style>html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meu painel | Conecta ADM</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <style>
 *{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 15% 0,rgba(72,111,207,.13),transparent 32%),#080f1d;color:#f4f7fb;font-family:Inter,Arial,sans-serif}a{color:inherit;text-decoration:none}header{height:82px;border-bottom:1px solid #1b2b45;background:rgba(8,15,29,.88);backdrop-filter:blur(14px);display:flex;align-items:center;justify-content:space-between;padding:0 max(28px,calc((100% - 1180px)/2));position:sticky;top:0;z-index:5}.brand{font-size:24px;font-weight:850;letter-spacing:-.8px}.brand span{color:#6f95ff}.header-actions{display:flex;align-items:center;gap:18px}.avatar{width:46px;height:46px;border:2px solid #638cff;border-radius:50%;display:grid;place-items:center;overflow:hidden;background:#263957;font-weight:800}.avatar img{width:100%;height:100%;object-fit:cover;display:none}.logout{border:1px solid #2c4162;background:#101b2e;padding:10px 17px;border-radius:10px;color:#a8bded;font:inherit;cursor:pointer;transition:.2s}.logout:hover{border-color:#638cff;color:#fff}
 main{width:min(1180px,92%);margin:45px auto 75px}.welcome{padding:clamp(28px,5vw,52px);border:1px solid #263b5d;border-radius:28px;background:linear-gradient(135deg,rgba(20,35,58,.98),rgba(10,18,31,.98));box-shadow:0 30px 70px rgba(0,0,0,.2);position:relative;overflow:hidden}.welcome:before{content:"";position:absolute;width:420px;height:420px;right:-180px;top:-230px;border-radius:50%;background:radial-gradient(circle,rgba(98,139,255,.17),transparent 70%);pointer-events:none}.eyebrow{color:#91adff;font-size:12px;font-weight:850;letter-spacing:1.8px}.h1{font-size:clamp(32px,4.2vw,48px);margin:12px 0 12px;letter-spacing:-1.5px;line-height:1.12}.muted{color:#aebbd0;line-height:1.7;font-size:17px;max-width:680px}.actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:40px}.action{min-height:230px;padding:30px;border:1px solid #2a4064;border-radius:22px;background:linear-gradient(145deg,#101d32,#0b1628);transition:transform .22s,border-color .22s,background .22s;display:flex;flex-direction:column;justify-content:flex-start;position:relative;overflow:hidden}.action:after{content:"";position:absolute;width:170px;height:170px;right:-85px;top:-85px;border-radius:50%;background:rgba(98,139,255,.06);transition:transform .25s}.action:hover:after{transform:scale(1.35)}.action:hover{border-color:#648cff;transform:translateY(-4px);background:linear-gradient(145deg,#142542,#0c1729)}.action-icon{width:58px;height:58px;border-radius:17px;display:grid;place-items:center;background:linear-gradient(145deg,#1b3155,#12213a);border:1px solid #35517c;color:#8eacff;font-size:25px;margin-bottom:25px;box-shadow:0 8px 24px rgba(0,0,0,.2)}.action strong{display:block;font-size:18px;margin-bottom:9px}.action span{font-size:14px;color:#aebbd0;line-height:1.6}.primary{display:inline-flex;margin-top:28px;padding:15px 23px;border-radius:12px;background:linear-gradient(110deg,#648cff,#416fe6);color:#071225;font-weight:850;box-shadow:0 12px 30px rgba(61,111,232,.18);transition:.2s}.primary:hover{transform:translateY(-2px);filter:brightness(1.06)}#status{color:#aebbd0;line-height:1.5;margin-top:18px}
 @media(min-width:1100px){main{margin:65px auto 90px}.welcome{padding:58px}.actions{gap:24px}.action{min-height:250px;padding:32px}.action strong{font-size:20px}.action span{font-size:15px}.primary{margin-top:35px}}@media(max-width:900px){.actions{grid-template-columns:repeat(2,minmax(0,1fr))}.action:last-child{grid-column:1/-1;min-height:auto}}
@@ -23,19 +40,41 @@ main{width:min(1180px,92%);margin:45px auto 75px}.welcome{padding:clamp(28px,5vw
   </header>
   <main>
     <section class="welcome">
-      <span class="eyebrow">ÁREA DO USUÁRIO</span>
-      <h1 class="h1">Bem-vindo(a), <span id="userName">...</span></h1>
-      <p class="muted" id="profileType">Estamos preparando seu espaço no Conecta ADM.</p>
-      <div class="actions">
-        <a class="action" href="editar-perfil.html"><span class="action-icon">◉</span><strong>Meu perfil</strong><span>Atualize seus dados, foto e informações profissionais.</span></a>
-        <a class="action" href="vagas.html"><span class="action-icon">⌕</span><strong>Explorar oportunidades</strong><span>Encontre vagas de emprego e estágio em Registro e região.</span></a>
-        <a class="action" href="vagas-para-mim.html"><span class="action-icon">↗</span><strong>Vagas para mim</strong><span>Veja oportunidades selecionadas com base nas informações do seu perfil.</span></a>
+      <div class="welcome-head">
+        <div>
+          <span class="eyebrow">ÁREA DO USUÁRIO</span>
+          <h1 class="h1">Bem-vindo(a), <span id="userName">...</span></h1>
+          <p class="muted" id="profileType">Seu próximo passo profissional começa por aqui. Organize seu perfil e descubra oportunidades.</p>
+        </div>
+        <div class="hero-illustration" aria-label="Ilustração de currículo e oportunidades">
+          <svg viewBox="0 0 520 300" role="img" aria-label="Currículo, gráfico de crescimento e busca de vagas">
+            <defs><linearGradient id="panel" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#294873"/><stop offset="1" stop-color="#14243d"/></linearGradient></defs>
+            <circle cx="420" cy="65" r="120" fill="#7195ff" opacity=".08"/><circle cx="55" cy="250" r="120" fill="#7195ff" opacity=".08"/>
+            <rect x="92" y="35" width="220" height="235" rx="18" fill="#0b1527" stroke="#526b96" stroke-width="2"/><rect x="110" y="55" width="184" height="195" rx="10" fill="url(#panel)"/>
+            <circle cx="154" cy="104" r="24" fill="#9cb8ff"/><rect x="192" y="88" width="80" height="12" rx="6" fill="#dce7ff"/><rect x="192" y="109" width="60" height="8" rx="4" fill="#9db6ec" opacity=".6"/>
+            <rect x="128" y="147" width="148" height="8" rx="4" fill="#b6caff" opacity=".65"/><rect x="128" y="165" width="120" height="8" rx="4" fill="#b6caff" opacity=".4"/><rect x="128" y="183" width="138" height="8" rx="4" fill="#b6caff" opacity=".4"/>
+            <rect x="128" y="207" width="55" height="25" rx="7" fill="#6b91ff"/><rect x="191" y="207" width="75" height="25" rx="7" fill="#203b64"/>
+            <rect x="340" y="135" width="120" height="92" rx="16" fill="#162843" stroke="#425c83"/><path d="M362 204v-30M382 204v-48M402 204v-38M422 204v-60" stroke="#86a7ff" stroke-width="12" stroke-linecap="round"/><path d="M360 150l20-10 18 6 25-26 24 6" stroke="#c0d0ff" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="370" cy="75" r="33" fill="#7195ff"/><circle cx="370" cy="75" r="17" fill="none" stroke="#f4f7ff" stroke-width="5"/><path d="M383 88l16 16" stroke="#f4f7ff" stroke-width="5" stroke-linecap="round"/>
+          </svg>
+        </div>
       </div>
-      <a class="primary" href="vagas.html">Ver oportunidades</a>
+      <div class="quick-label">O que você quer fazer?</div>
+      <div class="actions">
+        <a class="action" href="editar-perfil.html">
+          <span class="action-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.5-6 8-6s8 2 8 6"/></svg></span><strong>Meu perfil</strong><span>Atualize seus dados, foto e informações profissionais.</span><span class="action-arrow">Editar perfil →</span>
+        </a>
+        <a class="action" href="vagas.html">
+          <span class="action-icon"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg></span><strong>Explorar oportunidades</strong><span>Pesquise empregos, estágios e aprendiz em Registro e região.</span><span class="action-arrow">Encontrar vagas →</span>
+        </a>
+        <a class="action" href="vagas-para-mim.html">
+          <span class="action-icon"><svg viewBox="0 0 24 24"><path d="M3 20h18M6 16V9m5 7V5m5 11v-8"/><path d="m4 7 5-3 5 4 6-5"/></svg></span><strong>Vagas para mim</strong><span>Veja oportunidades compatíveis com seu perfil e currículo.</span><span class="action-arrow">Ver recomendações →</span>
+        </a>
+      </div>
+      <a class="primary" href="vagas.html">Ver todas as oportunidades</a>
       <p id="status" role="status"></p>
     </section>
-  </main>
-  <script>
+  </main>  <script>
     const client=window.getSupabaseClient();
     async function loadPanel(){
       try {
