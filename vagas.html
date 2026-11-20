@@ -486,7 +486,7 @@ function renderJobs(){
   });
   document.getElementById("filterCount").textContent = filtered.length + (filtered.length === 1 ? " vaga encontrada" : " vagas encontradas");
   if(!filtered.length){
-    jobsList.innerHTML = personalizedMode ? "<p>Ainda não encontramos vagas que combinem com as informações do seu perfil. Complete suas habilidades, curso e experiência em <a href=\\"editar-perfil.html\\">Meu perfil</a> para melhorar as recomendações.</p>" : "<p>Nenhuma vaga encontrada com esses filtros. Tente mudar os critérios.</p>";
+    jobsList.innerHTML = personalizedMode ? "<p>Ainda não encontramos vagas que combinem com as informações do seu perfil. Complete suas habilidades, curso e experiência em <a href=\"editar-perfil.html\">Meu perfil</a> para melhorar as recomendações.</p>" : "<p>Nenhuma vaga encontrada com esses filtros. Tente mudar os critérios.</p>";
     return;
   }
   jobsList.innerHTML=filtered.map(job=>{
