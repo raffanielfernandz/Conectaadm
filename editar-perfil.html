@@ -579,7 +579,9 @@
 
     }
 
-  </style>
+  
+    .personal-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px 14px;padding:16px;background:rgba(93,140,255,.045);border:1px solid #203452;border-radius:14px;margin:8px 0 22px}.personal-grid .field{margin:0}.personal-grid .wide{grid-column:1/-1}.personal-heading{font-size:16px;font-weight:700;color:#dce5f7;margin:4px 0}.personal-sub{font-size:13px;color:var(--muted);margin:-6px 0 12px}@media(max-width:520px){.personal-grid{grid-template-columns:1fr}.personal-grid .wide{grid-column:auto}}
+</style>
 
 </head>
 
@@ -689,6 +691,19 @@
           </div>
 
 
+
+          <div class="personal-heading">Informações pessoais para currículo</div>
+          <p class="personal-sub">Esses dados ficam salvos na sua conta e podem ser usados nos currículos.</p>
+          <div class="personal-grid">
+            <div class="field"><label for="birthDate">Data de nascimento</label><input id="birthDate" type="date"></div>
+            <div class="field"><label for="gender">Gênero</label><select id="gender"><option value="">Não informar</option><option>Masculino</option><option>Feminino</option><option>Outro</option></select></div>
+            <div class="field"><label for="nationality">Nacionalidade</label><input id="nationality" placeholder="Ex.: Brasileira"></div>
+            <div class="field"><label for="maritalStatus">Estado civil</label><select id="maritalStatus"><option value="">Não informar</option><option>Solteiro(a)</option><option>Casado(a)</option><option>Divorciado(a)</option><option>Viúvo(a)</option><option>União estável</option></select></div>
+            <div class="field wide"><label for="address">Endereço</label><input id="address" placeholder="Rua, número, complemento"></div>
+            <div class="field"><label for="postalCode">CEP</label><input id="postalCode" placeholder="00000-000" maxlength="9"></div>
+            <div class="field"><label for="homePhone">Telefone residencial</label><input id="homePhone" placeholder="(11) 0000-0000"></div>
+            <div class="field wide"><label for="socialLinks">Redes sociais / links</label><input id="socialLinks" placeholder="LinkedIn, portfólio, etc."></div>
+          </div>
           <div class="field">
 
             <label for="state">
@@ -1361,6 +1376,8 @@
 
         schoolInput.value =
           profile.school || "";
+        const personal = user.user_metadata?.personal_details || {};
+        Object.entries(personalFields).forEach(([key,field])=>{field.value=personal[key]||"";});
         
 
 
@@ -1450,6 +1467,10 @@
             }
             avatarUrlToSave = publicUrlData.publicUrl;
           }
+
+          const personalDetails = Object.fromEntries(Object.entries(personalFields).map(([key,field])=>[key,field.value.trim()]));
+          const { error: metadataError } = await client.auth.updateUser({data:{personal_details:personalDetails}});
+          if(metadataError) throw metadataError;
 
           const updatedData = {
 
