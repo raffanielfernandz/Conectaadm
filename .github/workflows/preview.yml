@@ -3,6 +3,7 @@ name: Preview site
 on:
   push:
     branches:
+      - main
       - fix/stability-cleanup
   workflow_dispatch:
 
