@@ -321,6 +321,8 @@ const jobsList = document.getElementById("jobsList");
 let currentUser = null;
 let profileType = "";
 let allJobs = [];
+let personalizedMode = new URLSearchParams(location.search).get("mode")==="personalizadas";
+let professionalProfile = {};
 
 // Vagas externas da região verificadas em 17/11/2026.
 // A candidatura é concluída no site de origem.
@@ -469,11 +471,12 @@ function populateCityFilter(){
 }
 
 function renderJobs(){
+  const personalizedJobs = personalizedMode ? getPersonalizedJobs() : allJobs;
   const keyword = normalizeText(document.getElementById("mainKeyword").value);
   const city = normalizeText(document.getElementById("cityFilter").value);
   const type = normalizeText(document.getElementById("typeFilter").value);
   const mode = normalizeText(document.getElementById("modeFilter").value);
-  const filtered = allJobs.filter(job => {
+  const filtered = personalizedJobs.filter(job => {
     const searchable = normalizeText([job.title,job.company_name,job.description,job.requirements,job.location,job.employment_type,job.work_mode].join(" "));
     const jobCity = normalizeText(String(job.location || "").toLowerCase().includes("remoto") ? "Remoto" : String(job.location || "").split(",")[0]);
     return (!keyword || searchable.includes(keyword)) &&
@@ -483,7 +486,7 @@ function renderJobs(){
   });
   document.getElementById("filterCount").textContent = filtered.length + (filtered.length === 1 ? " vaga encontrada" : " vagas encontradas");
   if(!filtered.length){
-    jobsList.innerHTML = "<p>Nenhuma vaga encontrada com esses filtros. Tente mudar os critérios.</p>";
+    jobsList.innerHTML = personalizedMode ? "<p>Ainda não encontramos vagas que combinem com as informações do seu perfil. Complete suas habilidades, curso e experiência em <a href=\\"editar-perfil.html\\">Meu perfil</a> para melhorar as recomendações.</p>" : "<p>Nenhuma vaga encontrada com esses filtros. Tente mudar os critérios.</p>";
     return;
   }
   jobsList.innerHTML=filtered.map(job=>{
@@ -525,6 +528,25 @@ function renderJobs(){
   }).join("");
 }
 
+function getPersonalizedJobs(){
+  if(!personalizedMode)return allJobs;
+  const profileText=normalizeText([professionalProfile.course,professionalProfile.education,professionalProfile.skills,professionalProfile.experience,professionalProfile.summary].join(" "));
+  const isStudent=["estudante","student"].includes(normalizeText(profileType));
+  const isHighSchool=profileText.includes("ensino medio")||profileText.includes("medio cursando");
+  const isAdmin=profileText.includes("administr")||profileText.includes("excel")||profileText.includes("planilha")||profileText.includes("financeiro");
+  const ranked=allJobs.map(job=>{
+    const text=normalizeText([job.title,job.company_name,job.description,job.requirements,job.employment_type].join(" "));
+    let score=0;
+    const terms=profileText.split(/[^a-z0-9]+/).filter(t=>t.length>=4&&!["curso","cursando","experiencia","profissional","habilidades","ensino","medio"].includes(t));
+    terms.forEach(term=>{if(text.includes(term))score+=2;});
+    if(isStudent&&(/aprendiz|estagio/.test(text)))score+=3;
+    if(isHighSchool&&(/aprendiz|estagio/.test(text)))score+=2;
+    if(isAdmin&&(/administr|document|planilha|excel|relatorio|controle/.test(text)))score+=2;
+    if(!isHighSchool&&/ensino medio completo/.test(text))score-=2;
+    return {job,score};
+  }).filter(item=>item.score>0).sort((a,b)=>b.score-a.score);
+  return ranked.map(item=>item.job);
+}
 async function loadJobs(){
   // Exibe somente as vagas externas cadastradas nesta página.
   const now = new Date();
@@ -534,6 +556,8 @@ async function loadJobs(){
     String(now.getDate()).padStart(2, "0")
   ].join("-");
   allJobs=localExternalJobs.filter(job => !job.expires_at || job.expires_at >= today);
+  try{professionalProfile=JSON.parse(localStorage.getItem("conecta_professional_profile")||"{}")}catch{professionalProfile={}}
+  if(personalizedMode){const heading=document.querySelector(".top h1");if(heading)heading.textContent="Vagas para mim";const intro=document.querySelector(".top p");if(intro)intro.textContent="Oportunidades selecionadas com base nas informações do seu perfil e interesses.";}
   populateCityFilter();
   renderJobs();
 }
