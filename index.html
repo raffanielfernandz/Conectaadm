@@ -1431,6 +1431,9 @@ header .menu-button span{width:18px}
 }
 </style>
 <style id="menu-close-x-fix">.menu-close{display:flex!important;align-items:center!important;justify-content:center!important;padding:0!important;line-height:1!important;font-family:Arial,sans-serif!important;font-size:25px!important;font-weight:400!important;text-align:center!important;transform:none!important}</style>
+<style id="about-security-enhancement">
+.about-strip{padding:70px 0;background:linear-gradient(180deg,#0a1220,#0b1322);border-top:1px solid #17263d}.about-strip-inner{display:block}.about-intro{max-width:760px;margin-bottom:35px}.about-intro h2,.security-heading h2{font:800 clamp(2rem,4vw,3rem)/1.12 "Manrope",sans-serif;letter-spacing:-1.5px;margin:8px 0 17px}.about-intro p,.security-heading p{color:var(--muted);font-size:.95rem;line-height:1.8;max-width:720px}.about-details{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.about-detail-card{padding:25px;border:1px solid #1c2b46;border-radius:16px;background:linear-gradient(145deg,#111d31,#0d1525)}.about-detail-number{display:block;color:var(--blue);font-size:.76rem;font-weight:850;letter-spacing:1px;margin-bottom:13px}.about-detail-card h3{font:750 1.05rem "Manrope",sans-serif;margin-bottom:9px}.about-detail-card p{color:var(--muted);font-size:.85rem;line-height:1.75}.security-anchor{padding:70px 0;background:#080f1d;border-top:1px solid #17263d;border-bottom:1px solid #17263d}.security-content{display:block}.security-heading{max-width:760px;margin-bottom:32px}.security-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.security-card{padding:24px;border:1px solid #1c2b46;border-radius:16px;background:#0d1525}.security-icon{width:38px;height:38px;display:grid;place-items:center;border-radius:11px;background:rgba(93,140,255,.1);border:1px solid #263c62;color:#8daaff;font-size:1.2rem;margin-bottom:16px}.security-card h3{font:750 1rem "Manrope",sans-serif;margin-bottom:8px}.security-card p{color:var(--muted);font-size:.84rem;line-height:1.75}.security-note{margin-top:22px;padding:15px 18px;border-left:3px solid var(--blue);border-radius:0 10px 10px 0;background:rgba(93,140,255,.045);color:#8494ad;font-size:.78rem;line-height:1.7}@media(max-width:800px){.about-details,.security-grid{grid-template-columns:1fr}.about-detail-card,.security-card{padding:21px}.about-strip{padding:48px 0}.security-anchor{padding:48px 0}}
+</style>
 </head>
 
 
@@ -1661,16 +1664,29 @@ header .menu-button span{width:18px}
 
   <section class="about-strip" id="projeto">
     <div class="container about-strip-inner">
-      <div>
+      <div class="about-intro">
         <span class="section-label">Sobre o projeto</span>
-        <h2>Uma plataforma, várias possibilidades.</h2>
+        <h2>Uma ideia criada por estudantes, para abrir caminhos.</h2>
+        <p>O Conecta ADM nasceu de um grupo de estudantes que percebeu como pode ser difícil encontrar oportunidades de emprego, estágio e aprendizagem na região.</p>
       </div>
-      <p>O Conecta ADM aproxima estudantes, empresas e instituições, facilitando o acesso a oportunidades e novas conexões profissionais.</p>
+      <div class="about-details">
+        <article class="about-detail-card"><span class="about-detail-number">01</span><h3>Nosso objetivo</h3><p>Facilitar o acesso a oportunidades e aproximar quem está buscando seu primeiro emprego ou uma nova experiência profissional das empresas que estão contratando.</p></article>
+        <article class="about-detail-card"><span class="about-detail-number">02</span><h3>O que queremos conectar</h3><p>Estudantes, empresas e instituições, fortalecendo a relação entre educação e mercado de trabalho e valorizando oportunidades em Registro e região.</p></article>
+        <article class="about-detail-card"><span class="about-detail-number">03</span><h3>Por que estamos fazendo isso</h3><p>Queremos que buscar uma oportunidade seja mais simples, organizado e acessível, especialmente para quem está começando sua trajetória profissional.</p></article>
+      </div>
     </div>
   </section>
 
-  <section class="security-anchor" id="seguranca" aria-label="Segurança da plataforma">
-    <div class="container"><p>O Conecta ADM utiliza autenticação e controle de acesso para proteger as contas e organizar as informações dos usuários.</p></div>
+  <section class="security-anchor" id="seguranca" aria-label="Segurança e privacidade">
+    <div class="container security-content">
+      <div class="security-heading"><span class="section-label">Segurança e privacidade</span><h2>Seus dados merecem cuidado.</h2><p>O Conecta ADM utiliza autenticação e controles de acesso para ajudar a proteger as contas e as informações cadastradas.</p></div>
+      <div class="security-grid">
+        <article class="security-card"><span class="security-icon" aria-hidden="true">✉</span><h3>Email protegido</h3><p>Seu email é utilizado para identificação da conta e comunicação relacionada ao acesso. Ele não fica exposto nas páginas públicas de oportunidades.</p></article>
+        <article class="security-card"><span class="security-icon" aria-hidden="true">☎</span><h3>Telefone e contato</h3><p>Seu número de telefone faz parte das informações do perfil e não é exibido publicamente nas páginas de vagas do Conecta ADM.</p></article>
+        <article class="security-card"><span class="security-icon" aria-hidden="true">⌑</span><h3>Acesso à conta</h3><p>As funções de perfil e conta exigem autenticação. Mantenha sua senha em segurança e não compartilhe seu acesso com outras pessoas.</p></article>
+      </div>
+      <p class="security-note">O projeto ainda está em desenvolvimento. Cadastre apenas informações necessárias e evite compartilhar dados sensíveis.</p>
+    </div>
   </section>
 
 </main>
