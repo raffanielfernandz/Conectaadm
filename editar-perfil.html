@@ -699,9 +699,7 @@
             <div class="field"><label for="gender">Gênero</label><select id="gender"><option value="">Não informar</option><option>Masculino</option><option>Feminino</option><option>Outro</option></select></div>
             <div class="field wide"><label for="address">Endereço</label><input id="address" placeholder="Rua, número, complemento"></div>
             <div class="field"><label for="postalCode">CEP</label><input id="postalCode" placeholder="00000-000" maxlength="9" inputmode="numeric"></div>
-            <div class="field"><label for="neighborhood">Bairro</label><input id="neighborhood" placeholder="Bairro"></div>
-            <div class="field"><label for="homePhone">Telefone residencial</label><input id="homePhone" placeholder="(11) 0000-0000" maxlength="15" inputmode="numeric"></div>
-            <div class="field wide"><label for="socialLinks">Redes sociais / links</label><input id="socialLinks" placeholder="LinkedIn, portfólio, etc."></div>
+            
           </div>
           <div class="field">
 
@@ -965,11 +963,10 @@
     const personalFields = {
       birthDate: document.getElementById("birthDate"),
       gender: document.getElementById("gender"),
-      neighborhood: document.getElementById("neighborhood"),
+
       address: document.getElementById("address"),
       postalCode: document.getElementById("postalCode"),
-      homePhone: document.getElementById("homePhone"),
-      socialLinks: document.getElementById("socialLinks")
+      postalCode: document.getElementById("postalCode")
     };
 
     const stateInput =
@@ -1253,7 +1250,6 @@
 
 
     phoneInput.addEventListener("input", () => { phoneInput.value = formatPhone(phoneInput.value); });
-    personalFields.homePhone.addEventListener("input", () => { personalFields.homePhone.value = formatPhone(personalFields.homePhone.value); });
     personalFields.postalCode.addEventListener("input", () => {
       const digits = personalFields.postalCode.value.replace(/\D/g, "").slice(0, 8);
       personalFields.postalCode.value = digits.length > 5 ? digits.slice(0, 5) + "-" + digits.slice(5) : digits;
@@ -1266,7 +1262,6 @@
         const result = await response.json();
         if (result.erro) return;
         cityInput.value = result.localidade || cityInput.value;
-        personalFields.neighborhood.value = result.bairro || "";
         if (result.uf) stateInput.value = result.uf;
       } catch (error) { console.warn("CEP lookup failed", error); }
     });
