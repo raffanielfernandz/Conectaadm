@@ -1445,7 +1445,7 @@ header .menu-button span{width:18px}
 .benefits-heading{max-width:800px}
 .security-content{display:block}
 .security-heading{max-width:800px;margin-bottom:28px}
-.security-photo{height:240px;margin-top:25px;border-radius:18px;border:1px solid #263b5d;background:linear-gradient(90deg,rgba(8,15,29,.45),rgba(8,15,29,.15)),url("https://images.unsplash.com/photo-155676 k?auto=format&fit=crop&w=1400&q=85") center/cover}
+.security-photo{height:240px;margin-top:25px;border-radius:18px;border:1px solid #263b5d;background:linear-gradient(90deg,rgba(8,15,29,.45),rgba(8,15,29,.15)),url("https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1400&q=85") center/cover}
 .security-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
 @media(max-width:800px){.about-details,.security-grid{grid-template-columns:1fr}.about-photo-grid{grid-template-columns:1fr 1fr}.about-photo-grid img{height:175px}.about-photo-grid img:nth-child(2){height:155px;margin-top:18px}.security-photo{height:190px}}
 @media(max-width:600px){.about-photo-grid{gap:10px}.about-photo-grid img{height:145px}.about-photo-grid img:nth-child(2){height:130px;margin-top:12px}.benefits-section{padding:45px 0}}
@@ -1878,7 +1878,7 @@ document.querySelectorAll(".discovery-tab").forEach(button => {
 
 </script>
 <script>
-const scrollProgress=document.getElementById("scrollProgress");const backTop=document.getElementById("backTop");function updateScrollUI(){const max=document.documentElement.scrollHeight-window.innerHeight;scrollProgress.style.width=(max>0?window.scrollY/max*100:0)+"%";backTop.classList.toggle("visible",window.scrollY>500)}window.addEventListener("scroll",updateScrollUI,{passive:true});updateScrollUI();backTop.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
+document.addEventListener("DOMContentLoaded",()=>{const scrollProgress=document.getElementById("scrollProgress");const backTop=document.getElementById("backTop");function updateScrollUI(){const max=document.documentElement.scrollHeight-window.innerHeight;scrollProgress.style.width=(max>0?window.scrollY/max*100:0)+"%";backTop.classList.toggle("visible",window.scrollY>500)}window.addEventListener("scroll",updateScrollUI,{passive:true});updateScrollUI();backTop.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));});
 </script>
 
 <script>
