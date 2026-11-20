@@ -89,7 +89,7 @@ button:hover,.external-link:hover{filter:brightness(1.1);transform:translateY(-1
 
 
 /* Cards com ilustrações vetoriais estáveis */
-.job-visual{height:100%;min-height:198px;border-radius:13px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;overflow:hidden;background:radial-gradient(circle at 50% 25%,rgba(111,149,255,.22),transparent 55%),linear-gradient(145deg,#172946,#0b1729);color:#9bb7ff}
+.job-image-wrap{height:100%;min-height:198px;position:relative;border-radius:14px;overflow:hidden;background:#172946}.job-image-wrap .job-image{width:100%;height:100%;min-height:198px;object-fit:cover;display:block}.job-image-wrap .job-visual{display:none;position:absolute;inset:0;height:100%;min-height:198px;border-radius:0}.job-visual{height:100%;min-height:198px;border-radius:13px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;overflow:hidden;background:radial-gradient(circle at 50% 25%,rgba(111,149,255,.22),transparent 55%),linear-gradient(145deg,#172946,#0b1729);color:#9bb7ff}
 .job-visual svg{width:min(86%,125px);height:auto;stroke:currentColor;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 8px 18px rgba(0,0,0,.2))}
 .job-visual .visual-orbit{fill:rgba(111,149,255,.07);stroke:rgba(111,149,255,.18);stroke-width:1}
 .job-visual span{font-size:10px;text-transform:uppercase;letter-spacing:1px;font-weight:800;color:#819edc}
@@ -511,7 +511,26 @@ const localExternalJobs = [
   }
 ];
 
-function showMessage(text){messageEl.textContent=text;messageEl.classList.remove("hidden")}
+function jobPhoto(job){
+ const photos={
+ "ext-menegazzo-aprendiz":"photo-1497366754035-f200968a6e72",
+ "ext-aguia-aprendiz":"photo-1497366811353-6870744d04b2",
+ "ext-iereg-estagio":"photo-1454165804606-c3d57bc86b40",
+ "ext-bbl-aprendiz":"photo-1521737711867-e3b97375f902",
+ "ext-hospital-aux-admin":"photo-1576091160399-112ba8b25d1d",
+ "ext-cix-cajati":"photo-1556761175-b413da4baf72",
+ "ext-tirolez-producao":"photo-1581091226825-a6a2a5aee158",
+ "ext-tirolez-operador":"photo-1567789884554-0b844b597180",
+ "ext-tirolez-seguranca":"photo-1504307651254-35680f356dfd",
+ "ext-estagio-eng-civil":"photo-1503387762-592deb58ef4e",
+ "ext-estagio-marketing":"photo-1552664730-d307ca884978",
+ "ext-pagbank-tecnico":"photo-1516321318423-f06f85e504b3",
+ "ext-pagbank-logistica":"photo-1586528116311-ad8dd3c8310d",
+ "ext-magal-assistente":"photo-1441986300917-64674bd600d8"
+ };
+ const id=photos[job.id];return id?"https://images.unsplash.com/"+id+"?auto=format&fit=crop&w=700&q=80":"";
+}
+\nfunction showMessage(text){messageEl.textContent=text;messageEl.classList.remove("hidden")}
 function escapeHTML(value){return String(value ?? "").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))}
 
 
@@ -628,7 +647,7 @@ const company=job.company_name || "Empresa anunciante";
       ? `<a class="external-link" href="${escapeHTML(job.source_url)}" target="_blank" rel="noopener noreferrer">Ver vaga e candidatar-se</a>`
       : (canApply && !own ? `<button type="button" data-apply="${escapeHTML(job.id)}">Candidatar-me</button>` : "");
     return `<article class="job job-horizontal">
-      ${jobVisual(job.title)}
+      <div class="job-image-wrap"><img class="job-image" src="${jobPhoto(job)}" alt="Imagem ilustrativa de ${escapeHTML(job.title)}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">${jobVisual(job.title)}</div>
       <div class="job-content">
         <div class="job-tags"><span class="job-tag">${escapeHTML(job.work_mode || "Modalidade não informada")}</span></div>
         <h3>${escapeHTML(job.title)}</h3>
