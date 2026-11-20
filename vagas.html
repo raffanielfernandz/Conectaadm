@@ -223,7 +223,16 @@ main{max-width:1120px;padding:0 28px 60px}
 }
 </style>
 <style id="menu-close-x-fix">.jobs-menu-head button{display:flex!important;align-items:center!important;justify-content:center!important;padding:0!important;line-height:1!important;font-family:Arial,sans-serif!important;font-size:25px!important;font-weight:400!important;text-align:center!important;transform:none!important}</style>
-</head>
+
+<style id="jobs-card-layout-fix">
+#jobsList .job{display:grid;grid-template-columns:190px minmax(0,1fr);gap:20px;align-items:stretch;padding:16px}
+#jobsList .job-image-wrap{height:auto;min-height:220px}
+#jobsList .job-content{display:flex;flex-direction:column;min-width:0}
+#jobsList .job-content .job-actions{margin-top:auto}
+#jobsList .job-tag{display:inline-flex;align-self:flex-start;padding:7px 12px;border:1px solid #344b78;border-radius:999px;background:#1a2b4b;color:#a9c0ff;font-weight:700;font-size:12px;margin:0 0 9px}
+#jobsList .job-image{min-height:220px}
+@media(max-width:620px){#jobsList .job{grid-template-columns:112px minmax(0,1fr);gap:13px;padding:13px}#jobsList .job-image-wrap,#jobsList .job-image{min-height:190px}#jobsList .job h3{font-size:16px}#jobsList .job>p{font-size:12px;line-height:1.5}#jobsList .job-actions .external-link{width:100%;justify-content:center;padding:10px 8px;font-size:12px}}
+</style></head>
 <body>
 <header class="site-header">
   <a class="brand" href="index.html">Conecta <span>ADM</span></a>
