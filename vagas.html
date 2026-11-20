@@ -530,4 +530,54 @@ function jobPhoto(job){
  };
  const id=photos[job.id]||"photo-1497366754035-f200968a6e72";
  return "https://images.unsplash.com/"+id+"?auto=format&fit=crop&w=700&q=85";
-}>
+}
+
+function escapeHtml(value){return String(value||"").replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char]));}
+function renderJobs(list){
+ jobsList.innerHTML="";
+ if(!list.length){jobsList.innerHTML='<p>Nenhuma vaga encontrada com esses filtros.</p>';return;}
+ list.forEach(job=>{
+  const card=document.createElement("article");card.className="job";
+  card.innerHTML=`<div class="job-image-wrap"><img class="job-image" src="${jobPhoto(job)}" alt="Imagem ilustrativa de ${escapeHtml(job.title)}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="job-visual visual-document"><svg viewBox="0 0 100 100" aria-hidden="true"><circle class="visual-orbit" cx="50" cy="50" r="42"/><rect x="29" y="20" width="42" height="58" rx="7"/><path d="M39 38h22M39 49h22M39 60h15"/></svg><span>${escapeHtml(job.employment_type||"Oportunidade")}</span></div></div><div class="job-content"><span class="job-tag">${escapeHtml(job.work_mode||"")}</span><h3>${escapeHtml(job.title)}</h3><div class="meta"><strong>${escapeHtml(job.company_name)}</strong><br>⌖ ${escapeHtml(job.location)} · ${escapeHtml(job.employment_type)}</div><p><strong>Requisitos:</strong> ${escapeHtml(job.requirements||"Consulte o anúncio para detalhes.")}</p><div class="job-actions"><a class="external-link" href="${escapeHtml(job.source_url)}" target="_blank" rel="noopener noreferrer">Consultar no portal</a></div></div>`;
+  jobsList.appendChild(card);
+ });
+}
+function applyFilters(){
+ const keyword=document.getElementById("keywordFilter").value.trim().toLowerCase();
+ const city=document.getElementById("cityFilter").value;
+ const type=document.getElementById("typeFilter").value;
+ const mode=document.getElementById("modeFilter").value;
+ const filtered=allJobs.filter(job=>(!keyword||[job.title,job.company_name,job.description,job.requirements].join(" ").toLowerCase().includes(keyword))&&(!city||job.location===city)&&(!type||String(job.employment_type||"").toLowerCase().includes(type))&&(!mode||String(job.work_mode||"").toLowerCase().includes(mode)));
+ document.getElementById("filterCount").textContent=filtered.length+" oportunidade(s)";
+ renderJobs(filtered);
+}
+function showMessage(text){messageEl.textContent=text;messageEl.classList.remove("hidden");}
+async function initJobs(){
+ try{
+  const {data:{session},error}=await client.auth.getSession();
+  if(error)console.warn("Não foi possível verificar sessão:",error);
+  currentUser=session?.user||null;
+  if(currentUser){
+   document.getElementById("jobsNavLink").hidden=false;
+   document.getElementById("jobsLoginLink").hidden=true;
+   document.getElementById("profileAvatarLink").hidden=false;
+   document.getElementById("jobsSideProfile").hidden=false;
+   document.getElementById("jobsSideLogout").hidden=false;
+   const {data:profile}=await client.from("profiles").select("full_name,avatar_url,city,state").eq("id",currentUser.id).maybeSingle();
+   const img=document.getElementById("profileAvatarImage"),initial=document.getElementById("profileAvatarInitial");
+   const name=profile?.full_name||currentUser.user_metadata?.full_name||currentUser.email||"";
+   initial.textContent=(name.trim()[0]||"?").toUpperCase();
+   if(profile?.avatar_url){img.onload=()=>{img.style.display="block";initial.style.display="none";};img.onerror=()=>{img.style.display="none";initial.style.display="grid";};img.src=profile.avatar_url;}
+  }
+  allJobs=localExternalJobs.slice();
+  const citySelect=document.getElementById("cityFilter");
+  [...new Set(allJobs.map(j=>j.location).filter(Boolean))].sort().forEach(city=>{const option=document.createElement("option");option.value=city;option.textContent=city;citySelect.appendChild(option);});
+  ["keywordFilter","cityFilter","typeFilter","modeFilter"].forEach(id=>document.getElementById(id).addEventListener("input",applyFilters));
+  document.getElementById("clearFilters").addEventListener("click",()=>{document.getElementById("keywordFilter").value="";citySelect.value="";document.getElementById("typeFilter").value="";document.getElementById("modeFilter").value="";applyFilters();});
+  applyFilters();
+ }catch(error){console.error("Erro ao carregar vagas:",error);document.getElementById("filterCount").textContent="Não foi possível carregar as vagas.";jobsList.innerHTML="<p>Ocorreu um erro ao carregar as oportunidades. Atualize a página.</p>";}
+}
+initJobs();
+</script>
+</body>
+</html>
