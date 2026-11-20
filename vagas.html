@@ -247,7 +247,7 @@ main{max-width:1120px;padding:0 28px 60px}
   <div class="jobs-menu-head"><strong>Conecta <span>ADM</span></strong><button type="button" id="jobsMenuClose" aria-label="Fechar menu">×</button></div>
   <nav class="jobs-menu-links">
     <a href="index.html">Início</a><a href="vagas.html">Oportunidades</a><a href="index.html#sobre">Sobre o projeto</a><a href="editar-perfil.html" id="jobsSideProfile" hidden>Meu perfil</a>
-    <a href="perfil-profissional.html">Meu perfil profissional</a>
+    <a href="vagas.html?mode=personalizadas">Vagas para mim</a>
     <a href="login.html" id="jobsSideLogin">Entrar</a><a href="cadastro.html" id="jobsSideRegister">Criar conta</a>
     <button type="button" id="jobsSideLogout" hidden>Sair da conta</button>
   </nav>
@@ -575,9 +575,11 @@ async function init(){
     loginLink.hidden=false;
     jobsLink.hidden=true;
     avatarLink.hidden=true;
-    showMessage("Entre na sua conta para visualizar as oportunidades.");
-    jobsList.innerHTML='<p><a href="login.html">Ir para o login</a></p>';
-    return;
+    if(!personalizedMode){
+      showMessage("Entre na sua conta para visualizar as oportunidades.");
+      jobsList.innerHTML='<p><a href="login.html">Ir para o login</a></p>';
+      return;
+    }
   }
   currentUser=session.user;
   currentUser=session.user;
