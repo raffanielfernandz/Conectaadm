@@ -639,7 +639,7 @@ function renderJobs(){
         <p class="job-company">${escapeHTML(company)}</p>
         <p class="job-location">⌖ &nbsp;${escapeHTML(job.location || "Local não informado")}</p>
         <div class="job-bottom"><span class="job-requirement">Requisitos: ${escapeHTML(requirements.length>76?requirements.slice(0,76)+"…":requirements)}</span>
-          <div class="job-actions">${action ? action.replace("Ver vaga e candidatar-se","Ver detalhes") : ""}</div>
+          <div class="job-actions">${action ? action.replace("Ver vaga e candidatar-se","Consultar no portal") : ""}</div>
         </div>
       </div>
     </article>`;
