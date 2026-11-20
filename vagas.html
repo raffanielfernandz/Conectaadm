@@ -268,6 +268,15 @@ main{max-width:1120px;padding:0 28px 60px}
  #jobsList .job{grid-template-columns:105px minmax(0,1fr)!important;gap:11px!important}
  #jobsList .job-image-wrap,#jobsList .job-image-wrap .job-image,#jobsList .job-image-wrap .job-visual{width:105px!important;height:168px!important;min-height:168px!important;max-height:168px!important}
 }
+/* Mobile: image stretches from the card's top to bottom */
+@media(max-width:620px){
+ #jobsList .job{align-items:stretch!important}
+ #jobsList .job-image-wrap{width:112px!important;height:auto!important;min-height:0!important;max-height:none!important;align-self:stretch!important}
+ #jobsList .job-image-wrap .job-image,#jobsList .job-image-wrap .job-visual{width:100%!important;height:100%!important;min-height:0!important;max-height:none!important;object-fit:cover!important}
+}
+@media(max-width:390px){
+ #jobsList .job-image-wrap{width:105px!important}
+}
 </style>
 
 
