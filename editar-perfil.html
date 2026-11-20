@@ -202,7 +202,8 @@
     }
 
     input,
-    select{
+    select,
+    textarea{
 
       width:100%;
 
@@ -240,6 +241,8 @@
       cursor:not-allowed;
 
     }
+
+    textarea{width:100%;padding:13px 14px;border-radius:10px;border:1px solid #263853;background:#0a111e;color:white;outline:none;font:15px Arial,Helvetica,sans-serif;resize:vertical;min-height:100px;}
 
     select{
 
@@ -771,6 +774,13 @@
 
             </div>
 
+            <div class="field"><label for="course">Curso / área de interesse</label><input id="course" placeholder="Ex.: Administração"></div>
+            <div class="field"><label for="education">Escolaridade atual</label><select id="education"><option value="">Selecione</option><option>Ensino fundamental</option><option>Ensino médio cursando</option><option>Ensino médio completo</option><option>Ensino técnico cursando</option><option>Ensino técnico completo</option><option>Graduação cursando</option><option>Graduação completa</option></select></div>
+            <div class="field"><label for="skills">Habilidades</label><textarea id="skills" placeholder="Organização, atendimento, Excel, comunicação..." rows="4"></textarea></div>
+            <div class="field"><label for="availability">Disponibilidade</label><input id="availability" placeholder="Ex.: manhã, tarde, meio período"></div>
+            <div class="field"><label for="experience">Experiência profissional</label><textarea id="experience" placeholder="Experiências, estágios, projetos ou atividades voluntárias" rows="4"></textarea></div>
+            <div class="field"><label for="summary">Resumo profissional</label><textarea id="summary" placeholder="Conte um pouco sobre você e seus objetivos" rows="4"></textarea></div>
+            <div class="field"><a class="cancel" href="perfil-profissional.html" style="width:100%;min-height:48px;background:linear-gradient(135deg,var(--blue),var(--blue2));border:0;color:white">Criar meu currículo</a></div>
           </div>
 
 
@@ -1355,6 +1365,11 @@
 
         schoolInput.value =
           profile.school || "";
+        const professional = JSON.parse(localStorage.getItem("conecta_professional_profile") || "{}");
+        ["course","education","skills","availability","experience","summary"].forEach(id=>{
+          const field=document.getElementById(id);
+          if(field) field.value=professional[id]||"";
+        });
 
 
         companyNameInput.value =
@@ -1462,6 +1477,7 @@
 
             school:
               schoolInput.value.trim(),
+            // Supplementary professional data is kept locally and reused by the resume builder.
 
             company_name:
               companyNameInput.value.trim(),
@@ -1497,6 +1513,14 @@
           }
 
 
+          localStorage.setItem("conecta_professional_profile", JSON.stringify({
+            course:document.getElementById("course")?.value.trim()||"",
+            education:document.getElementById("education")?.value||"",
+            skills:document.getElementById("skills")?.value.trim()||"",
+            availability:document.getElementById("availability")?.value.trim()||"",
+            experience:document.getElementById("experience")?.value.trim()||"",
+            summary:document.getElementById("summary")?.value.trim()||""
+          }));
           currentAvatarUrl = avatarUrlToSave;
           updateAvatarPreview(currentAvatarUrl, fullNameInput.value);
           avatarFileInput.value = "";
