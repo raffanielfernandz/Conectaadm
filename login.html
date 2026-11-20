@@ -23,13 +23,13 @@
   <style>
 :root{--bg:#070b14;--card:#0e1728;--line:#263957;--blue:#638cff;--text:#f4f7ff;--muted:#a3b1c7}
 *{box-sizing:border-box}html,body{min-height:100%}body{margin:0;font-family:Inter,Arial,sans-serif;color:var(--text);background:radial-gradient(ellipse at 15% 10%,rgba(75,113,210,.18),transparent 35%),radial-gradient(ellipse at 90% 80%,rgba(81,55,155,.12),transparent 35%),var(--bg);display:flex;align-items:center;justify-content:center;padding:34px}
-.container{width:min(1050px,100%);display:grid;grid-template-columns:minmax(0,1fr) minmax(400px,470px);gap:64px;align-items:center}
+.container{width:min(1120px,100%);display:grid;grid-template-columns:minmax(0,1fr) minmax(400px,480px);gap:clamp(35px,6vw,80px);align-items:center}.container>.logo-area{display:none}
 .logo-area{text-align:left;margin:0}.logo{display:inline-flex;align-items:center;gap:13px;font-size:27px;font-weight:850;letter-spacing:-.7px}.logo-icon{width:48px;height:48px;display:grid;place-items:center;border-radius:15px;background:linear-gradient(135deg,#6e98ff,#3d6fe8);box-shadow:0 12px 32px rgba(61,111,232,.28);font-size:20px;font-weight:900}
 .intro{max-width:490px}.intro-kicker{font-size:12px;font-weight:800;letter-spacing:2px;color:#89a8ff;text-transform:uppercase;margin:42px 0 16px}.intro h2{font-size:clamp(34px,4.4vw,54px);line-height:1.1;letter-spacing:-1.7px;margin:0 0 18px}.intro p{font-size:17px;line-height:1.75;color:var(--muted);max-width:470px}.intro-features{display:grid;gap:12px;margin-top:30px}.intro-feature{display:flex;align-items:center;gap:13px;color:#d4def1;font-size:14px}.feature-mark{width:35px;height:35px;border:1px solid #2b4268;border-radius:11px;background:#111f37;color:#8eacff;display:grid;place-items:center;font-weight:800}
 .card{background:linear-gradient(145deg,rgba(19,31,52,.98),rgba(9,16,29,.98));border:1px solid var(--line);border-radius:25px;padding:38px;box-shadow:0 30px 80px rgba(0,0,0,.32);position:relative;overflow:hidden}.card:before{content:"";position:absolute;width:300px;height:300px;right:-160px;top:-190px;background:radial-gradient(circle,rgba(93,140,255,.2),transparent 70%);pointer-events:none}
-h1{font-size:32px;line-height:1.2;margin:0 0 8px;letter-spacing:-.8px}.subtitle{color:var(--muted);font-size:15px;margin:0 0 30px}.field{margin-bottom:20px}label{display:block;margin-bottom:8px;font-size:14px;font-weight:700;color:#dce5f7}input{width:100%;padding:15px 16px;border-radius:12px;border:1px solid #2b3d5b;background:#080f1d;color:var(--text);font-size:15px;outline:none;transition:.2s}input::placeholder{color:#687a94}input:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(99,140,255,.13)}.forgot{display:block;text-align:right;margin:-5px 0 22px;color:#91adff;font-size:13px;text-decoration:none}.forgot:hover{text-decoration:underline}
+h1{font-size:32px;line-height:1.2;margin:0 0 8px;letter-spacing:-.8px}.subtitle{color:var(--muted);font-size:15px;margin:0 0 30px}.field{margin-bottom:20px}label{display:block;margin-bottom:8px;font-size:14px;font-weight:700;color:#dce5f7}input{width:100%;padding:15px 16px;border-radius:12px;border:1px solid #2b3d5b;background:#080f1d;color:var(--text);font-size:15px;outline:none;transition:.2s}.password-wrap{position:relative}.password-wrap input{padding-right:56px}.toggle-password{position:absolute;right:10px;top:50%;transform:translateY(-50%);width:38px;height:38px;padding:0;border:0;background:transparent;box-shadow:none;color:#93a9d0;display:grid;place-items:center}.toggle-password:hover{transform:translateY(-50%);filter:none;background:#16233a}.toggle-password svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}input::placeholder{color:#687a94}input:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(99,140,255,.13)}.forgot{display:block;text-align:right;margin:-5px 0 22px;color:#91adff;font-size:13px;text-decoration:none}.forgot:hover{text-decoration:underline}
 button{width:100%;padding:15px;border-radius:12px;border:1px solid #4775e8;background:linear-gradient(120deg,#648cff,#416fe6);color:white;font-size:16px;font-weight:800;cursor:pointer;box-shadow:0 12px 28px rgba(61,111,232,.2);transition:.2s}button:hover{transform:translateY(-2px);filter:brightness(1.06)}button:disabled{opacity:.6;cursor:not-allowed;transform:none}#message{margin-top:16px;text-align:center;font-size:14px;line-height:1.5;color:var(--muted)}.register{margin-top:26px;padding-top:22px;border-top:1px solid #1a2942;text-align:center;color:var(--muted);font-size:14px}.register a{color:#91adff;text-decoration:none;font-weight:750}.register a:hover{text-decoration:underline}.back-home{display:block;text-align:center;margin-top:19px;color:#8190a7;font-size:13px;text-decoration:none}.back-home:hover{color:#d0dcf2}
-@media(max-width:850px){body{padding:24px}.container{grid-template-columns:minmax(0,480px);justify-content:center;gap:22px}.intro{display:none}.logo-area{text-align:center;margin-bottom:0}.card{padding:34px}.container{max-width:480px}}
+@media(max-width:900px){body{padding:24px}.container{grid-template-columns:minmax(0,480px);justify-content:center;gap:22px}.intro{display:none}.container>.logo-area{display:block;text-align:center;margin-bottom:0}.card{padding:34px}.container{max-width:480px}}@media(min-width:901px){.card{padding:clamp(30px,4vw,42px)}.intro-kicker{margin-top:30px}.intro-features{gap:15px}.intro-feature{font-size:15px}}
 @media(max-width:500px){body{padding:18px 14px}.card{padding:25px 21px;border-radius:19px}.logo{font-size:23px}.logo-icon{width:41px;height:41px;border-radius:13px}h1{font-size:28px}.subtitle{font-size:14px;margin-bottom:24px}input{padding:14px}button{padding:14px}}
 @media(max-width:360px){body{padding:12px}.card{padding:21px 17px}h1{font-size:25px}}
 </style>
@@ -112,13 +112,13 @@ button{width:100%;padding:15px;border-radius:12px;border:1px solid #4775e8;backg
             Senha
           </label>
 
-          <input
+          <div class="password-wrap"><input
             id="password"
             type="password"
             placeholder="Sua senha"
             autocomplete="current-password"
             required
-          >
+          ><button class="toggle-password" type="button" id="togglePassword" aria-label="Mostrar senha" title="Mostrar senha"><svg viewBox="0 0 24 24" id="eyeIcon"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
 
         </div>
 
@@ -189,6 +189,9 @@ button{width:100%;padding:15px;border-radius:12px;border:1px solid #4775e8;backg
   <script>
 
     const client = window.getSupabaseClient();
+    const passwordInput=document.getElementById("password");
+    const togglePassword=document.getElementById("togglePassword");
+    togglePassword.addEventListener("click",()=>{const visible=passwordInput.type==="password";passwordInput.type=visible?"text":"password";togglePassword.setAttribute("aria-label",visible?"Ocultar senha":"Mostrar senha");togglePassword.title=visible?"Ocultar senha":"Mostrar senha";document.getElementById("eyeIcon").innerHTML=visible?'<path d="M3 3l18 18"/><path d="M10.6 10.6a2 2 0 0 0 2.8 2.8"/><path d="M9.9 5.2A10.8 10.8 0 0 1 12 5c6.5 0 10 7 10 7a14 14 0 0 1-3.2 4.1"/><path d="M6.2 6.2C3.5 8.1 2 12 2 12s3.5 7 10 7a10 10 0 0 0 4-.8"/>':'<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/>';});
 
 
     const form =
