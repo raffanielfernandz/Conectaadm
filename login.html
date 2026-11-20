@@ -22,19 +22,42 @@
 
   <style>
 :root{--bg:#070b14;--panel:#0e1728;--line:#263957;--blue:#638cff;--text:#f4f7ff;--muted:#a3b1c7}
-*{box-sizing:border-box}html,body{min-height:100%}body{margin:0;font-family:Inter,Arial,sans-serif;color:var(--text);background:radial-gradient(ellipse at 15% 10%,rgba(75,113,210,.2),transparent 35%),radial-gradient(ellipse at 90% 80%,rgba(81,55,155,.14),transparent 35%),var(--bg);padding:clamp(16px,3vw,40px)}
-.container{width:min(1220px,100%);min-height:calc(100vh - 32px);margin:auto;display:grid;grid-template-columns:minmax(0,1.08fr) minmax(380px,.82fr);gap:clamp(28px,5vw,72px);align-items:center}
-.logo-area{text-align:center;margin-bottom:22px}.logo{display:inline-flex;align-items:center;gap:13px;font-size:26px;font-weight:850;letter-spacing:-.7px}.logo-icon{width:48px;height:48px;display:grid;place-items:center;border-radius:15px;background:linear-gradient(135deg,#6e98ff,#3d6fe8);box-shadow:0 12px 32px rgba(61,111,232,.28);font-size:20px;font-weight:900}
-.intro{position:relative;min-height:590px;display:flex;flex-direction:column;justify-content:center;padding:38px 20px 38px 0}.intro-kicker{font-size:12px;font-weight:800;letter-spacing:2px;color:#89a8ff;text-transform:uppercase;margin:20px 0 16px}.intro h2{font-size:clamp(36px,4.5vw,60px);line-height:1.06;letter-spacing:-2px;margin:0 0 18px;max-width:620px}.intro p{font-size:17px;line-height:1.75;color:var(--muted);max-width:500px}
-.hero-art{position:relative;max-width:600px;margin:22px 0 16px;min-height:250px;border:1px solid #263b5d;border-radius:28px;background:linear-gradient(135deg,#101d32,#0a1425);overflow:hidden;box-shadow:0 25px 60px rgba(0,0,0,.22)}
-.hero-art svg{width:100%;height:auto;display:block}.float-chip{position:absolute;display:flex;align-items:center;gap:9px;padding:10px 14px;border:1px solid #344b70;border-radius:14px;background:rgba(10,20,36,.88);box-shadow:0 10px 30px rgba(0,0,0,.25);color:#dce6ff;font-size:13px;animation:float 4s ease-in-out infinite}.chip-one{right:8%;top:12%}.chip-two{left:8%;bottom:12%;animation-delay:1s}.chip-dot{width:9px;height:9px;border-radius:50%;background:#79a0ff;box-shadow:0 0 14px #79a0ff}
-.card{background:linear-gradient(145deg,rgba(19,31,52,.98),rgba(9,16,29,.98));border:1px solid var(--line);border-radius:26px;padding:clamp(25px,3.5vw,42px);box-shadow:0 30px 80px rgba(0,0,0,.32);position:relative;overflow:hidden}.card:before{content:"";position:absolute;width:300px;height:300px;right:-160px;top:-190px;background:radial-gradient(circle,rgba(93,140,255,.2),transparent 70%);pointer-events:none}
-h1{font-size:clamp(28px,3vw,36px);line-height:1.2;margin:0 0 8px;letter-spacing:-.8px}.subtitle{color:var(--muted);font-size:15px;margin:0 0 30px}.field{margin-bottom:20px}label{display:block;margin-bottom:8px;font-size:14px;font-weight:700;color:#dce5f7}input{width:100%;padding:15px 16px;border-radius:12px;border:1px solid #2b3d5b;background:#080f1d;color:var(--text);font-size:15px;outline:none;transition:.2s}.password-wrap{position:relative}.password-wrap input{padding-right:56px}.toggle-password{position:absolute;right:10px;top:50%;transform:translateY(-50%);width:38px;height:38px;padding:0;border:0;background:transparent;box-shadow:none;color:#93a9d0;display:grid;place-items:center}.toggle-password:hover{transform:translateY(-50%);filter:none;background:#16233a}.toggle-password svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}input::placeholder{color:#687a94}input:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(99,140,255,.13)}.forgot{display:block;text-align:right;margin:-5px 0 22px;color:#91adff;font-size:13px;text-decoration:none}.forgot:hover{text-decoration:underline}
-button{width:100%;padding:15px;border-radius:12px;border:1px solid #4775e8;background:linear-gradient(120deg,#648cff,#416fe6);color:white;font-size:16px;font-weight:800;cursor:pointer;box-shadow:0 12px 28px rgba(61,111,232,.2);transition:.2s}button:hover{transform:translateY(-2px);filter:brightness(1.06)}button:disabled{opacity:.6;cursor:not-allowed;transform:none}#message{margin-top:16px;text-align:center;font-size:14px;line-height:1.5;color:var(--muted)}.register{margin-top:26px;padding-top:22px;border-top:1px solid #1a2942;text-align:center;color:var(--muted);font-size:14px}.register a{color:#91adff;text-decoration:none;font-weight:750}.register a:hover{text-decoration:underline}.back-home{display:block;text-align:center;margin-top:19px;color:#8190a7;font-size:13px;text-decoration:none}.back-home:hover{color:#d0dcf2}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
-@media(max-width:900px){body{padding:22px}.container{grid-template-columns:minmax(0,480px);justify-content:center;gap:22px;min-height:auto;max-width:480px}.intro{min-height:0;padding:12px 0 0}.intro .logo-area{display:none}.intro-kicker{margin:0 0 12px}.intro h2{font-size:clamp(30px,8vw,42px);letter-spacing:-1px}.intro p{font-size:15px;line-height:1.6}.hero-art{min-height:0;margin:18px 0 0;border-radius:20px}.float-chip{font-size:11px;padding:8px 10px}.container>.logo-area{display:none}.card{padding:34px}}
-@media(min-width:901px){.container>.logo-area{display:none}}
-@media(max-width:500px){body{padding:18px 14px}.container{gap:18px}.intro{padding-top:4px}.intro h2{font-size:32px}.intro p{font-size:14px}.hero-art{margin-top:14px}.card{padding:25px 21px;border-radius:19px}.logo{font-size:23px}.logo-icon{width:41px;height:41px;border-radius:13px}h1{font-size:28px}.subtitle{font-size:14px;margin-bottom:24px}input{padding:14px}button{padding:14px}}
+*{box-sizing:border-box}
+html,body{min-height:100%}
+body{margin:0;font-family:Inter,Arial,sans-serif;color:var(--text);background:radial-gradient(ellipse at 12% 8%,rgba(75,113,210,.24),transparent 38%),radial-gradient(ellipse at 88% 82%,rgba(81,55,155,.2),transparent 38%),linear-gradient(145deg,#070b14,#0a1020 55%,#080b15);padding:clamp(18px,4vw,40px);min-height:100vh;display:grid;place-items:center;position:relative;overflow-x:hidden}
+body:before,body:after{content:"";position:fixed;pointer-events:none;z-index:0;border:1px solid rgba(113,148,230,.11);border-radius:50%}
+body:before{width:460px;height:460px;top:-220px;right:-130px;box-shadow:0 0 0 45px rgba(113,148,230,.025),0 0 0 90px rgba(113,148,230,.018)}
+body:after{width:380px;height:380px;bottom:-230px;left:-110px;box-shadow:0 0 0 55px rgba(113,148,230,.025),0 0 0 110px rgba(113,148,230,.018)}
+.container{position:relative;z-index:1;width:min(460px,100%);margin:auto}
+.logo-area{text-align:center;margin-bottom:28px}
+.logo{display:inline-flex;align-items:center;gap:13px;font-size:26px;font-weight:850;letter-spacing:-.7px}
+.logo-icon{width:48px;height:48px;display:grid;place-items:center;border-radius:15px;background:linear-gradient(135deg,#6e98ff,#3d6fe8);box-shadow:0 12px 32px rgba(61,111,232,.3);font-size:20px;font-weight:900}
+.card{background:linear-gradient(145deg,rgba(19,31,52,.98),rgba(9,16,29,.98));border:1px solid var(--line);border-radius:26px;padding:clamp(25px,5vw,42px);box-shadow:0 30px 80px rgba(0,0,0,.34);position:relative;overflow:hidden}
+.card:before{content:"";position:absolute;width:320px;height:320px;right:-190px;top:-210px;background:radial-gradient(circle,rgba(93,140,255,.22),transparent 70%);pointer-events:none}
+h1{font-size:clamp(28px,5vw,36px);line-height:1.2;margin:0 0 8px;letter-spacing:-.8px}
+.subtitle{color:var(--muted);font-size:15px;margin:0 0 30px}
+.field{margin-bottom:20px}
+label{display:block;margin-bottom:8px;font-size:14px;font-weight:700;color:#dce5f7}
+input{width:100%;padding:15px 16px;border-radius:12px;border:1px solid #2b3d5b;background:#080f1d;color:var(--text);font-size:15px;outline:none;transition:.2s}
+.password-wrap{position:relative}
+.password-wrap input{padding-right:56px}
+.toggle-password{position:absolute;right:10px;top:50%;transform:translateY(-50%);width:38px;height:38px;padding:0;border:0;background:transparent;box-shadow:none;color:#93a9d0;display:grid;place-items:center}
+.toggle-password:hover{transform:translateY(-50%);filter:none;background:#16233a}
+.toggle-password svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+input::placeholder{color:#687a94}
+input:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(99,140,255,.13)}
+.forgot{display:block;text-align:right;margin:-5px 0 22px;color:#91adff;font-size:13px;text-decoration:none}
+.forgot:hover{text-decoration:underline}
+button{width:100%;padding:15px;border-radius:12px;border:1px solid #4775e8;background:linear-gradient(120deg,#648cff,#416fe6);color:white;font-size:16px;font-weight:800;cursor:pointer;box-shadow:0 12px 28px rgba(61,111,232,.2);transition:.2s}
+button:hover{transform:translateY(-2px);filter:brightness(1.06)}
+button:disabled{opacity:.6;cursor:not-allowed;transform:none}
+#message{margin-top:16px;text-align:center;font-size:14px;line-height:1.5;color:var(--muted)}
+.register{margin-top:26px;padding-top:22px;border-top:1px solid #1a2942;text-align:center;color:var(--muted);font-size:14px}
+.register a{color:#91adff;text-decoration:none;font-weight:750}
+.register a:hover{text-decoration:underline}
+.back-home{display:block;text-align:center;margin-top:19px;color:#8190a7;font-size:13px;text-decoration:none}
+.back-home:hover{color:#d0dcf2}
+@media(max-width:500px){body{padding:20px 14px}.container{max-width:440px}.logo-area{margin-bottom:22px}.logo{font-size:23px}.logo-icon{width:41px;height:41px;border-radius:13px}.card{padding:25px 21px;border-radius:20px}h1{font-size:28px}.subtitle{font-size:14px;margin-bottom:24px}input{padding:14px}button{padding:14px}}
 @media(max-width:360px){body{padding:12px}.card{padding:21px 17px}h1{font-size:25px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
 </style></head>
@@ -44,27 +67,7 @@ button{width:100%;padding:15px;border-radius:12px;border:1px solid #4775e8;backg
 
 
   <div class="container">
-    <section class="intro" aria-label="Apresentação do Conecta ADM">
-      <div class="logo-area"><div class="logo"><div class="logo-icon">C</div><span>Conecta ADM</span></div></div>
-      <p class="intro-kicker">Seu próximo passo começa aqui</p>
-      <h2>Oportunidades que conectam você ao futuro.</h2>
-      <p>Encontre vagas, organize suas informações profissionais e descubra oportunidades que combinam com seu perfil.</p>
-      <div class="hero-art" aria-label="Ilustração de busca por oportunidades">
-        <svg viewBox="0 0 620 300" role="img" aria-label="Estudante usando computador e explorando oportunidades">
-          <defs><linearGradient id="desk" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#20395f"/><stop offset="1" stop-color="#101b2e"/></linearGradient><linearGradient id="screen" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#759bff"/><stop offset="1" stop-color="#3c65cf"/></linearGradient></defs>
-          <circle cx="500" cy="30" r="150" fill="#5d84f4" opacity=".08"/><circle cx="90" cy="250" r="130" fill="#6b91ff" opacity=".08"/>
-          <rect x="60" y="40" width="290" height="190" rx="18" fill="#1a2a45" stroke="#526c99" stroke-width="3"/><rect x="75" y="55" width="260" height="160" rx="9" fill="url(#screen)"/>
-          <rect x="92" y="75" width="120" height="18" rx="6" fill="#dce7ff" opacity=".9"/><rect x="92" y="108" width="220" height="10" rx="5" fill="#dce7ff" opacity=".55"/><rect x="92" y="128" width="180" height="10" rx="5" fill="#dce7ff" opacity=".4"/>
-          <rect x="92" y="160" width="80" height="35" rx="9" fill="#12233e" opacity=".85"/><rect x="183" y="160" width="80" height="35" rx="9" fill="#12233e" opacity=".65"/>
-          <path d="M40 235h330l-30 20H70z" fill="#435a7e"/><path d="M160 255h90v12h-90z" fill="#263c5c"/>
-          <circle cx="420" cy="115" r="43" fill="#a6c2ff"/><path d="M380 110c2-42 70-54 83 1-13-10-28-19-43-17-13 2-24 8-40 16" fill="#263b5d"/>
-          <path d="M370 160c24-20 77-20 102 0l34 90H345z" fill="#5477d5"/><path d="M402 155l18 27 20-27" fill="#dce6ff"/><path d="M420 182l-16 30 16 30 16-30z" fill="#dce6ff" opacity=".75"/>
-          <rect x="490" y="170" width="78" height="58" rx="12" fill="#182a46" stroke="#526c99"/><path d="M507 190h43M507 202h30M507 214h36" stroke="#8faaff" stroke-width="5" stroke-linecap="round"/>
-        </svg>
-        <div class="float-chip chip-one"><span class="chip-dot"></span> Novas oportunidades</div>
-        <div class="float-chip chip-two">CV&nbsp; Currículo pronto</div>
-      </div>
-      </section>
+ion>
 
 
     <!-- LOGO -->
