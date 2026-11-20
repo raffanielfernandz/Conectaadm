@@ -1526,6 +1526,7 @@ header .menu-button span{width:18px}
 
     <a href="vagas.html" id="sideJobsLink" hidden>Oportunidades</a>
     <a href="editar-perfil.html" id="sideProfileLink" hidden>Meu perfil</a>
+    <a href="vagas.html?mode=personalizadas" id="sidePersonalJobsLink" hidden>Vagas para mim</a>
     <a href="login.html" class="menu-login" id="sideLoginLink">Entrar</a>
     <a href="cadastro.html" class="menu-register" id="sideRegisterLink">Criar conta</a>
     <button type="button" class="menu-logout" id="sideLogoutLink" hidden>Sair da conta</button>
@@ -1834,6 +1835,7 @@ document.querySelectorAll(".discovery-tab").forEach(button => {
     const avatar=document.getElementById("homeProfileLink");
     const sideJobs=document.getElementById("sideJobsLink");
     const sideProfile=document.getElementById("sideProfileLink");
+    const sidePersonalJobs=document.getElementById("sidePersonalJobsLink");
     const sideLogin=document.getElementById("sideLoginLink");
     const sideRegister=document.getElementById("sideRegisterLink");
     const sideLogout=document.getElementById("sideLogoutLink");
@@ -1860,7 +1862,9 @@ document.querySelectorAll(".discovery-tab").forEach(button => {
         alert("Não foi possível sair da conta. Tente novamente.");
       }
     });
-    const {data:profile}=await client.from("profiles").select("full_name,avatar_url").eq("id",session.user.id).maybeSingle();
+    const {data:profile}=await client.from("profiles").select("*").eq("id",session.user.id).maybeSingle();
+    const profileType=String(profile?.profile_type||session.user.user_metadata?.profile_type||session.user.user_metadata?.tipo_de_perfil||"").toLowerCase();
+    if(["student","estudante"].includes(profileType))sidePersonalJobs.hidden=false;
     const displayName=(profile?.full_name||session.user.user_metadata?.full_name||session.user.email||"Perfil").trim();
     const initial=document.getElementById("homeProfileInitial");
     const image=document.getElementById("homeProfileImage");
