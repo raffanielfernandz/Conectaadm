@@ -232,6 +232,29 @@ main{max-width:1120px;padding:0 28px 60px}
 #jobsList .job-tag{display:inline-flex;align-self:flex-start;padding:7px 12px;border:1px solid #344b78;border-radius:999px;background:#1a2b4b;color:#a9c0ff;font-weight:700;font-size:12px;margin:0 0 9px}
 #jobsList .job-image{min-height:220px}
 @media(max-width:620px){#jobsList .job{grid-template-columns:112px minmax(0,1fr);gap:13px;padding:13px}#jobsList .job-image-wrap,#jobsList .job-image{min-height:190px}#jobsList .job h3{font-size:16px}#jobsList .job>p{font-size:12px;line-height:1.5}#jobsList .job-actions .external-link{width:100%;justify-content:center;padding:10px 8px;font-size:12px}}
+</style><style id="compact-job-cards">
+#jobsList{display:flex;flex-direction:column;gap:16px}
+#jobsList .job{display:grid!important;grid-template-columns:150px minmax(0,1fr)!important;align-items:stretch!important;gap:18px!important;min-height:0!important;height:auto!important;padding:12px!important}
+#jobsList .job-image-wrap{width:150px!important;height:210px!important;min-height:0!important;max-height:210px!important;align-self:start}
+#jobsList .job-image-wrap .job-image{width:100%!important;height:210px!important;min-height:0!important;max-height:210px!important;object-fit:cover!important}
+#jobsList .job-image-wrap .job-visual{height:210px!important;min-height:0!important}
+#jobsList .job-content{display:flex!important;flex-direction:column!important;align-items:flex-start!important;min-width:0!important;padding:4px 4px 4px 0!important}
+#jobsList .job h3{font-size:17px!important;line-height:1.3!important;margin:4px 0 7px!important}
+#jobsList .job .meta{font-size:12px!important;line-height:1.45!important}
+#jobsList .job>p{font-size:13px!important;line-height:1.5!important;margin:8px 0 0!important;display:-webkit-box!important;-webkit-line-clamp:4!important;-webkit-box-orient:vertical!important;overflow:hidden!important}
+#jobsList .job-actions{width:100%!important;margin-top:14px!important;padding:0!important}
+#jobsList .job-actions .external-link{font-size:12px!important;padding:11px 14px!important}
+#jobsList .job-tag{font-size:11px!important;padding:6px 10px!important;margin-bottom:4px}
+@media(max-width:620px){
+ #jobsList .job{grid-template-columns:108px minmax(0,1fr)!important;gap:12px!important;padding:9px!important}
+ #jobsList .job-image-wrap{width:108px!important;height:168px!important;min-height:0!important;max-height:168px!important}
+ #jobsList .job-image-wrap .job-image,#jobsList .job-image-wrap .job-visual{height:168px!important;min-height:0!important;max-height:168px!important}
+ #jobsList .job h3{font-size:14px!important;line-height:1.3!important}
+ #jobsList .job .meta{font-size:10px!important}
+ #jobsList .job>p{font-size:11px!important;line-height:1.45!important;-webkit-line-clamp:3!important}
+ #jobsList .job-actions .external-link{width:100%;justify-content:center;font-size:10px!important;padding:9px 6px!important}
+ #jobsList .job-tag{font-size:9px!important;padding:5px 7px!important}
+}
 </style></head>
 <body>
 <header class="site-header">
@@ -571,6 +594,8 @@ async function initJobs(){
    document.getElementById("jobsLoginLink").hidden=true;
    document.getElementById("profileAvatarLink").hidden=false;
    document.getElementById("jobsSideProfile").hidden=false;
+   document.getElementById("jobsSideLogin").hidden=true;
+   document.getElementById("jobsSideRegister").hidden=true;
    document.getElementById("jobsSideLogout").hidden=false;
    const {data:profile}=await client.from("profiles").select("full_name,avatar_url,city,state").eq("id",currentUser.id).maybeSingle();
    const img=document.getElementById("profileAvatarImage"),initial=document.getElementById("profileAvatarInitial");
