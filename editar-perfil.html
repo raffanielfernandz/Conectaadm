@@ -692,16 +692,15 @@
 
 
 
-          <div class="personal-heading">Informações pessoais para currículo</div>
-          <p class="personal-sub">Esses dados ficam salvos na sua conta e podem ser usados nos currículos.</p>
+          <div class="personal-heading">Informações adicionais</div>
+          <p class="personal-sub">Dados opcionais para complementar seu perfil.</p>
           <div class="personal-grid">
             <div class="field"><label for="birthDate">Data de nascimento</label><input id="birthDate" type="date"></div>
             <div class="field"><label for="gender">Gênero</label><select id="gender"><option value="">Não informar</option><option>Masculino</option><option>Feminino</option><option>Outro</option></select></div>
-            <div class="field"><label for="nationality">Nacionalidade</label><input id="nationality" placeholder="Ex.: Brasileira"></div>
-            <div class="field"><label for="maritalStatus">Estado civil</label><select id="maritalStatus"><option value="">Não informar</option><option>Solteiro(a)</option><option>Casado(a)</option><option>Divorciado(a)</option><option>Viúvo(a)</option><option>União estável</option></select></div>
             <div class="field wide"><label for="address">Endereço</label><input id="address" placeholder="Rua, número, complemento"></div>
-            <div class="field"><label for="postalCode">CEP</label><input id="postalCode" placeholder="00000-000" maxlength="9"></div>
-            <div class="field"><label for="homePhone">Telefone residencial</label><input id="homePhone" placeholder="(11) 0000-0000"></div>
+            <div class="field"><label for="postalCode">CEP</label><input id="postalCode" placeholder="00000-000" maxlength="9" inputmode="numeric"></div>
+            <div class="field"><label for="neighborhood">Bairro</label><input id="neighborhood" placeholder="Bairro"></div>
+            <div class="field"><label for="homePhone">Telefone residencial</label><input id="homePhone" placeholder="(11) 0000-0000" maxlength="15" inputmode="numeric"></div>
             <div class="field wide"><label for="socialLinks">Redes sociais / links</label><input id="socialLinks" placeholder="LinkedIn, portfólio, etc."></div>
           </div>
           <div class="field">
@@ -966,8 +965,7 @@
     const personalFields = {
       birthDate: document.getElementById("birthDate"),
       gender: document.getElementById("gender"),
-      nationality: document.getElementById("nationality"),
-      maritalStatus: document.getElementById("maritalStatus"),
+      neighborhood: document.getElementById("neighborhood"),
       address: document.getElementById("address"),
       postalCode: document.getElementById("postalCode"),
       homePhone: document.getElementById("homePhone"),
@@ -1254,17 +1252,24 @@
     }
 
 
-    phoneInput.addEventListener(
-      "input",
-      () => {
-
-        phoneInput.value =
-          formatPhone(
-            phoneInput.value
-          );
-
-      }
-    );
+    phoneInput.addEventListener("input", () => { phoneInput.value = formatPhone(phoneInput.value); });
+    personalFields.homePhone.addEventListener("input", () => { personalFields.homePhone.value = formatPhone(personalFields.homePhone.value); });
+    personalFields.postalCode.addEventListener("input", () => {
+      const digits = personalFields.postalCode.value.replace(/\D/g, "").slice(0, 8);
+      personalFields.postalCode.value = digits.length > 5 ? digits.slice(0, 5) + "-" + digits.slice(5) : digits;
+    });
+    personalFields.postalCode.addEventListener("blur", async () => {
+      const cep = personalFields.postalCode.value.replace(/\D/g, "");
+      if (cep.length !== 8) return;
+      try {
+        const response = await fetch("https://viacep.com.br/ws/" + cep + "/json/");
+        const result = await response.json();
+        if (result.erro) return;
+        cityInput.value = result.localidade || cityInput.value;
+        personalFields.neighborhood.value = result.bairro || "";
+        if (result.uf) stateInput.value = result.uf;
+      } catch (error) { console.warn("CEP lookup failed", error); }
+    });
 
 
     function showSpecificFields(type){
@@ -1389,6 +1394,7 @@
           profile.school || "";
         const personal = user.user_metadata?.personal_details || {};
         Object.entries(personalFields).forEach(([key,field])=>{field.value=personal[key]||"";});
+        personalFields.postalCode.value = personalFields.postalCode.value.replace(/^(\d{5})(\d{3})$/, "$1-$2");
         
 
 
