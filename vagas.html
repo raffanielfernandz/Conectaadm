@@ -607,25 +607,33 @@ function renderJobs(){
     jobsList.innerHTML = personalizedMode ? "<p>Ainda não encontramos vagas que combinem com as informações do seu perfil. Complete suas habilidades, curso e experiência em <a href=\"editar-perfil.html\">Meu perfil</a> para melhorar as recomendações.</p>" : "<p>Nenhuma vaga encontrada com esses filtros. Tente mudar os critérios.</p>";
     return;
   }
-  jobsList.innerHTML=filtered.map(job=>{
+  jobsList.innerHTML=filtered.map((job,index)=>{
     const canApply=["estudante","student"].includes(String(profileType).toLowerCase());
     const own=job.created_by===currentUser.id;
     const kind=normalizeText(job.employment_type);
-    const image = job.id==="ext-menegazzo-aprendiz"
-      ? "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1100&q=85"
-      : job.id==="ext-aguia-aprendiz"
-      ? "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1100&q=85"
-      : job.id==="ext-iereg-estagio"
-      ? "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1100&q=85"
-      : job.id==="ext-bbl-aprendiz"
-      ? "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1100&q=85"
-      : job.id==="ext-hospital-aux-admin"
-      ? "https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=1100&q=85"
-      : kind.includes("aprendiz")
-      ? "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1100&q=85"
-      : kind.includes("estagio")
-      ? "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1100&q=85"
-      : "https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1100&q=85";
+    const titleText=normalizeText((job.title||"")+" "+(job.company_name||""));
+    const imagePool=[
+      "https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1100&q=85",
+      "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1100&q=85",
+      "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1100&q=85",
+      "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1100&q=85",
+      "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1100&q=85",
+      "https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=1100&q=85",
+      "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1100&q=85",
+      "https://images.unsplash.com/photo-1522071480328-5b5a6c8a3a2?auto=format&fit=crop&w=1100&q=85",
+      "https://images.unsplash.com/photo-150438 낀?auto=format&fit=crop&w=1100&q=85"
+    ];
+    const image=titleText.includes("engenharia")||titleText.includes("tecnico de campo")
+      ? imagePool[3]
+      : titleText.includes("marketing")||titleText.includes("comunicacao")
+      ? imagePool[6]
+      : titleText.includes("logistica")||titleText.includes("estoque")
+      ? imagePool[4]
+      : titleText.includes("saude")||titleText.includes("hospital")
+      ? imagePool[5]
+      : titleText.includes("administr")||titleText.includes("aprendiz")
+      ? imagePool[(job.id==="ext-menegazzo-aprendiz"?1:job.id==="ext-aguia-aprendiz"?2:job.id==="ext-bbl-aprendiz"?7:0)]
+      : imagePool[index%imagePool.length];
     const company=job.company_name || "Empresa anunciante";
     const requirements=job.requirements || "Consulte os requisitos no anúncio da empresa.";
     const action=job.source_url
