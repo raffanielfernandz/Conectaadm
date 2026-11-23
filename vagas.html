@@ -242,6 +242,11 @@ main{max-width:1120px;padding:0 28px 60px}
 
 
 
+<style id="job-image-fallback-fix">
+#jobsList .job-image-wrap{position:relative!important;overflow:hidden!important}
+#jobsList .job-image-wrap .job-image{display:block!important;width:100%!important;height:100%!important;object-fit:cover!important}
+#jobsList .job-image-wrap .job-visual{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;min-height:0!important;max-height:none!important;display:none;align-items:center!important;justify-content:center!important}
+</style>
 <style id="compact-vacancy-card-restoration">
 /* Cards de vagas: proporção compacta, imagem fixa e texto ao lado */
 #jobsList{display:flex!important;flex-direction:column!important;gap:16px!important}
@@ -596,7 +601,7 @@ function renderJobs(list){
  if(!list.length){jobsList.innerHTML='<p>Nenhuma vaga encontrada com esses filtros.</p>';return;}
  list.forEach(job=>{
   const card=document.createElement("article");card.className="job job-horizontal";
-  card.innerHTML=`<div class="job-image-wrap"><img class="job-image" src="${jobPhoto(job)}" alt="Imagem ilustrativa de ${escapeHtml(job.title)}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="job-visual visual-document"><svg viewBox="0 0 100 100" aria-hidden="true"><circle class="visual-orbit" cx="50" cy="50" r="42"/><rect x="29" y="20" width="42" height="58" rx="7"/><path d="M39 38h22M39 49h22M39 60h15"/></svg><span>${escapeHtml(job.employment_type||"Oportunidade")}</span></div></div><div class="job-content"><div class="job-tags"><span class="job-tag">${escapeHtml(job.work_mode||"")}</span></div><h3>${escapeHtml(job.title)}</h3><p class="job-company"><strong>${escapeHtml(job.company_name)}</strong></p><p class="job-location">⌖ ${escapeHtml(job.location)} · ${escapeHtml(job.employment_type)}</p><div class="job-bottom"><div class="job-requirement"><strong>Requisitos:</strong> ${escapeHtml(job.requirements||"Consulte o anúncio para detalhes.")}</div><div class="job-actions"><a class="external-link" href="${escapeHtml(job.source_url)}" target="_blank" rel="noopener noreferrer">Consultar no portal</a></div></div></div>`;
+  card.innerHTML=`<div class="job-image-wrap"><img class="job-image" src="${jobPhoto(job)}" alt="Imagem ilustrativa de ${escapeHtml(job.title)}" loading="lazy" onerror="this.remove();this.parentElement.querySelector('.job-visual').style.display='flex'"><div class="job-visual visual-document"><svg viewBox="0 0 100 100" aria-hidden="true"><circle class="visual-orbit" cx="50" cy="50" r="42"/><rect x="29" y="20" width="42" height="58" rx="7"/><path d="M39 38h22M39 49h22M39 60h15"/></svg><span>${escapeHtml(job.employment_type||"Oportunidade")}</span></div></div><div class="job-content"><div class="job-tags"><span class="job-tag">${escapeHtml(job.work_mode||"")}</span></div><h3>${escapeHtml(job.title)}</h3><p class="job-company"><strong>${escapeHtml(job.company_name)}</strong></p><p class="job-location">⌖ ${escapeHtml(job.location)} · ${escapeHtml(job.employment_type)}</p><div class="job-bottom"><div class="job-requirement"><strong>Requisitos:</strong> ${escapeHtml(job.requirements||"Consulte o anúncio para detalhes.")}</div><div class="job-actions"><a class="external-link" href="${escapeHtml(job.source_url)}" target="_blank" rel="noopener noreferrer">Consultar no portal</a></div></div></div>`;
   jobsList.appendChild(card);
  });
 }
