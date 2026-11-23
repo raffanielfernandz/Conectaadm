@@ -620,6 +620,7 @@ async function initJobs(){
   const {data:{session},error}=await client.auth.getSession();
   if(error)console.warn("Não foi possível verificar sessão:",error);
   currentUser=session?.user||null;
+  if(!currentUser){location.replace("login.html");return;}
   if(currentUser){
    document.getElementById("jobsNavLink").hidden=false;
    document.getElementById("jobsLoginLink").hidden=true;
