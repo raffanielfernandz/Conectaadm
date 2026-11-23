@@ -1465,7 +1465,7 @@ header .menu-button span{width:18px}
 .about-photo-grid img:hover{transform:scale(1.025);filter:saturate(1.15)}
 .discovery-image{border:1px solid #263b5d;box-shadow:0 15px 40px rgba(0,0,0,.22)}
 .discovery-tab{min-height:42px}
-.scroll-progress{position:fixed;top:0;left:0;width:0;height:3px;background:linear-gradient(90deg,#5d8cff,#a1b7ff);z-index:1200;box-shadow:0 0 12px rgba(93,140,255,.5)}
+
 .back-top{position:fixed;right:18px;bottom:22px;width:46px;height:46px;border-radius:14px;border:1px solid #36558a;background:#132440;color:#dce7ff;font-size:1.4rem;cursor:pointer;opacity:0;visibility:hidden;transform:translateY(10px);transition:.25s;z-index:800;box-shadow:0 10px 30px rgba(0,0,0,.3)}
 .back-top.visible{opacity:1;visibility:visible;transform:translateY(0)}
 .back-top:hover{background:#244273;transform:translateY(-3px)}
@@ -1847,7 +1847,7 @@ document.addEventListener(
 
 </script>
 <script>
-document.addEventListener("DOMContentLoaded",()=>{const scrollProgress=document.getElementById("scrollProgress");const backTop=document.getElementById("backTop");function updateScrollUI(){const max=document.documentElement.scrollHeight-window.innerHeight;scrollProgress.style.width=(max>0?window.scrollY/max*100:0)+"%";backTop.classList.toggle("visible",window.scrollY>500)}window.addEventListener("scroll",updateScrollUI,{passive:true});updateScrollUI();backTop.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));});
+document.addEventListener("DOMContentLoaded",()=>{const backTop=document.getElementById("backTop");function updateScrollUI(){backTop.classList.toggle("visible",window.scrollY>500)}window.addEventListener("scroll",updateScrollUI,{passive:true});updateScrollUI();backTop.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));});
 </script>
 
 <script>
@@ -1903,6 +1903,6 @@ document.addEventListener("DOMContentLoaded",()=>{const scrollProgress=document.
   }catch(error){console.error("Não foi possível atualizar o cabeçalho:",error);}
 })();
 </script>
-<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div><button class="back-top" id="backTop" type="button" aria-label="Voltar ao topo">↑</button>
+<button class="back-top" id="backTop" type="button" aria-label="Voltar ao topo">↑</button>
 </body>
 </html>
